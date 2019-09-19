@@ -5,10 +5,10 @@ $(function(){
 function requetes(event){
     event.preventDefault();
    var requete = $(this).attr('href').split('.')[0];
-   var envoyerData = {
+   /*var envoyerData = {
        'requete' :  requete
-   };
-   $.post('?rq='+requete, envoyerData,  gererDonnes(requete));
+   };*/
+   $.post('?rq='+requete,  gererDonnes);
 }
 function evenements() {
     $('a').on('click', requetes);
