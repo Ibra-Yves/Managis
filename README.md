@@ -2,7 +2,7 @@
 
 ## But du projet :
 
-Il s'agit d'un projet à réaliser dans le cadre du cours de Projet d'Intégration en dernière année de Bachelier dont le but est de créer une application et un site web qui va permettre à ses utilisateurs d'organiser divers évènements tels que, des soirées entre amis, des vacances,...
+Il s'agit d'un projet à réaliser dans le cadre du cours de Projet d'Intégration en dernière année de Bachelier dont le but est de créer une application et un site web qui vont permettre à ses utilisateurs d'organiser divers évènements tels que, des soirées entre amis, des vacances,...
 
 ## Membres du Groupe 
 
