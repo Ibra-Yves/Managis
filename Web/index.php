@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <script type="text/javascript" src="JS/jquery.js"></script>
-        <script type="text/javascript" src="JS/main.js"></script>
-    </head>
-    <body>
-        <a href="inscription.php">Inscription</a>
-        <a href="connexion.php"> Connexion</a>
-    </body>
-</html>
+<?php
+include_once 'INC/Events.php';
+$events  = new Events();
+if(!is_null($events->getRq())) die($events->send());
+//echo($events->getRq());
+//print_r($_GET);
+//print_r($events->getRq());
+include_once 'INC/template.php';
+?>
