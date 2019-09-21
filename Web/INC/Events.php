@@ -7,7 +7,8 @@ class Events
     private $rq = null;
     private $rqList = [
         'inscription',
-        'connexion'
+        'connexion',
+        'validation'
     ];
 
     public function __construct()
@@ -40,17 +41,21 @@ class Events
     }
     public function lectureForm($nomForm){
         $nomFichier = 'INC/'.$nomForm.'.php';
-        //$fp = fopen('INC/'.$nomForm. '.php', 'r');
-
         return implode("\n", file($nomFichier));
     }
 
+    public function validation(){
+        if(isset($_POST)) $this->rq = $_POST;
+        $this->action->affichageDefaut('#formulaires', 'alo');
+    }
+
     public function inscription(){
-       $this->action->ajouterAction('inscription', $this->lectureForm('inscription'));
+        $this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
     }
 
     public function connexion(){
-        $this->action->ajouterAction('inscription', $this->lectureForm('connexion'));
+        $this->action->affichageDefaut('#formulaire', $this->lectureForm('connexion'));
+       // $this->validation();
     }
 
 }

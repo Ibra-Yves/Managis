@@ -1,10 +1,5 @@
-<!DOCTPYE html>
-<html>
-    <head>
-        <title>Inscription</title>
-    </head>
-    <body>
-        <form id="inscription" class="inscription" name="inscription" method="post" action="Db.php">
+<body>
+        <form id="inscription" class="inscription" name="inscription" method="post" action="validation">
             <fieldset id="fieldsetInscription">
                 <legend>Inscrivez vous</legend>
 
@@ -24,4 +19,4 @@
             </fieldset>
         </form>
     </body>
-</html>
+

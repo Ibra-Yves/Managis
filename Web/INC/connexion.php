@@ -1,12 +1,7 @@
-<!DOCTPYE html>
-<html>
-<head>
-    <title>Connexion</title>
-</head>
 <body>
-<form id="connexion" class="connexion" name="connexion" method="post" action="Db.php">
+<form id="connexion" class="connexion" name="connexion" method="post" action="validation">
     <fieldset id="fieldsetConnexion">
-        <legend>Inscrivez vous</legend>
+        <legend>Connectez vous</legend>
 
         <label for="pseudo">Pseudo</label>
         <input type="text" id="pseudo" name="pseudo"><br>
@@ -19,4 +14,3 @@
     </fieldset>
 </form>
 </body>
-</html>

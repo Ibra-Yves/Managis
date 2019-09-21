@@ -8,9 +8,7 @@ function requetes(event){
    var envoyerData = {
        'request' :  request
    };
-    //console.log(requete);
    $.post('?rq=' + request, envoyerData,  gererDonnes);
-   //console.log(gererDonnes);
 }
 
 function gererDonnes(retour){
@@ -20,11 +18,11 @@ function gererDonnes(retour){
     retour.forEach(function(action){
         $.each(action, function(actionName, actionDatas){
             switch(actionName){
-                case 'inscription' :
-                   $(actionDatas).appendTo('body');
-                   break;
+                case 'affiche' :
+                    $(actionDatas['dest']).html(actionDatas['content']);
+                    break;
                default :
-                   console.log('probleme');
+                   console.log('Action inconnue'+ actionName);
            }
        })
    })
