@@ -6,22 +6,16 @@ class Events
     private $action = null;
     private $rq = null;
     private $rqList = [
+        'validation',
         'inscription',
-        'connexion',
-        'validation'
+        'connexion'
     ];
 
     public function __construct()
     {
         $this->action = new Actions();
         if(isset($_GET['rq'])) $this->rq = $_GET['rq'];
-        if($this->reqValid($this->rq)){
-            $nomFonction = $this->rq;
-            $this->$nomFonction();
-        }
-        else {
-            return false;
-        }
+        $this->gestionRequetes($this->rq);
     }
 
     /**
@@ -44,18 +38,35 @@ class Events
         return implode("\n", file($nomFichier));
     }
 
-    public function validation(){
-        if(isset($_POST)) $this->rq = $_POST;
-        $this->action->affichageDefaut('#formulaires', 'alo');
+    private function validation(){
+        $sRequest= '';
+        if(isset($_POST['senderForm'])) $sRequest = $_POST['senderForm'];
+        $this->gestionRequetes($sRequest);
     }
 
-    public function inscription(){
+    private function inscription(){
         $this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
     }
 
-    public function connexion(){
-        $this->action->affichageDefaut('#formulaire', $this->lectureForm('connexion'));
-       // $this->validation();
+    private function formInscription(){
+        echo 'yolo';
     }
 
+    private function connexion(){
+        $this->action->affichageDefaut('#formulaire', $this->lectureForm('connexion'));
+    }
+
+    private function formConnexion(){
+        echo 'yolo';
+    }
+
+    private function gestionRequetes($rq= ''){
+        if($this->reqValid($rq)){
+            $nomFonction = $rq;
+            $this->$nomFonction();
+        }
+        else {
+            return false;
+        }
+    }
 }

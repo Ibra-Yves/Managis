@@ -1,5 +1,5 @@
 <body>
-<form id="connexion" class="connexion" name="connexion" method="post" action="validation">
+<form id="formConnexion" class="formConnexion" name="formConnexion" method="post" action="validation.php">
     <fieldset id="fieldsetConnexion">
         <legend>Connectez vous</legend>
 
@@ -10,7 +10,7 @@
         <label for="mdp">Mot de passe</label>
         <input type="password" id="mdp" name="mdp"><br>
 
-        <input type="submit" value="Connexion">
+        <input type="submit" name="form" value="connexion">
     </fieldset>
 </form>
 </body>

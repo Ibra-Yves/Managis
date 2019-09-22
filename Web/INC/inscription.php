@@ -1,5 +1,5 @@
 <body>
-        <form id="inscription" class="inscription" name="inscription" method="post" action="validation">
+        <form id="formInscription" class="formInscription" name="formInscription" method="post" action="validation">
             <fieldset id="fieldsetInscription">
                 <legend>Inscrivez vous</legend>
 
@@ -15,8 +15,7 @@
                 <label for="confirmationMdp">Confirmez votre mot de passe</label>
                 <input type="password" id="confirmationMdp" name="confirmationMdp"><br>
 
-                <input type="submit" value="Inscrivez vous">
+                <input type="submit" value="inscription">
             </fieldset>
         </form>
     </body>
-

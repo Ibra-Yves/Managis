@@ -8,6 +8,7 @@ function requetes(event){
    var envoyerData = {
        'request' :  request
    };
+   console.log(request);
    $.post('?rq=' + request, envoyerData,  gererDonnes);
 }
 
