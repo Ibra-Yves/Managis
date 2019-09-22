@@ -4,12 +4,33 @@ $(function(){
 
 function requetes(event){
     event.preventDefault();
-   var request = $(this).attr('href').split('.')[0];
-   var envoyerData = {
-       'request' :  request
-   };
-   console.log(request);
-   $.post('?rq=' + request, envoyerData,  gererDonnes);
+
+    $.ajaxSetup({
+        processData: false,
+        contentType: false
+    });
+
+    let request = 'noRequest';
+    let envoyerData = new FormData();
+
+   switch (true) {
+       case Boolean(this.href):
+           request = $(this).attr('href').split('.')[0];
+       break;
+
+       case Boolean(this.action):
+           request = $(this).attr('action').split('.')[0];
+           envoyerData = new FormData(this);
+           envoyerData.append('senderForm', this.id);
+         //  console.log(envoyerData);
+       break;
+   }
+
+   console.log('rq: ' +request);
+
+   envoyerData.append('request', request);
+  // console.log(envoyerData);
+    $.post('?rq=' + request, envoyerData,  gererDonnes);
 }
 
 function gererDonnes(retour){
@@ -29,7 +50,7 @@ function gererDonnes(retour){
    })
 }
 function lireJSON(data){
-    var decode;
+    let decode;
     // var error;
     try {
         decode = JSON.parse(data);
@@ -47,7 +68,8 @@ function lireJSON(data){
     }
     return decode;
 }
-function evenements() {
-    $('a').on('click', requetes);
+function evenements(place = 'html') {
+    $(place + ' a').on( 'click', requetes);
+    $('#formulaire').on('submit', requetes);
    // $(place + ' a:not([href^="mailto:"])').on('click', requetes);
 }

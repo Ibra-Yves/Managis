@@ -1,4 +1,3 @@
-<body>
 <form id="formConnexion" class="formConnexion" name="formConnexion" method="post" action="validation.php">
     <fieldset id="fieldsetConnexion">
         <legend>Connectez vous</legend>
@@ -13,4 +12,3 @@
         <input type="submit" name="form" value="connexion">
     </fieldset>
 </form>
-</body>
