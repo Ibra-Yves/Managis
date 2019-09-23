@@ -5,6 +5,7 @@ class Events
 {
     private $action = null;
     private $rq = null;
+    private $db = null;
     private $rqList = [
         'validation',
         'inscription',
@@ -16,6 +17,7 @@ class Events
     public function __construct()
     {
         $this->action = new Actions();
+        $this->db = new Db();
         if(isset($_GET['rq'])) $this->rq = $_GET['rq'];
         $this->gestionRequetes($this->rq);
     }
@@ -52,7 +54,16 @@ class Events
     }
 
     private function formInscription(){
-        $this->action->affichageDefaut('#formulaire', 'ss');
+        if($_POST['mdp'] != $_POST['confirmationMdp']){
+            $this->action->affichageDefaut( '#formulaire','<script> alert("Les deux mot de passes ne correspondent pas")');
+            $this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
+        }
+        //if($this->db->verifUtilisateur($_POST['pseudo'], $_POST['email']));
+        else {
+           // $this->db->verifUtilisateur($_POST['pseudo'], $_POST['email']);
+            $this->db->creationUtilisateur($_POST['pseudo'], $_POST['email'], $_POST['mdp']);
+            $this->action->affichageDefaut( '#formulaire','Vous vous bien inscrit veuillez passer à la connexion -> <a href="connexion.php"> Connexion </a>');
+        }
     }
 
     private function connexion(){
@@ -60,7 +71,7 @@ class Events
     }
 
     private function formConnexion(){
-        $this->action->affichageDefaut('#formulaire', 'yolo');
+        $this->db->connexion($_POST['pseudo'], $_POST['mdp']);
     }
 
     private function gestionRequetes($rq= ''){
