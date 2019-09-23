@@ -12,9 +12,9 @@ class Db
             print_r($e);
         }
     }
-    public function inscription(){
-        if($_GET['mdp'] != $_GET['confirmationMdp']){
-
-        }
+    public function creationUtilisateur($pseudo, $mail, $mdp){
+        $mdp = hash('md5', $mdp);
+        $query = 'INSERT INTO utilisateurs (nickName, mail, mdp) VALUES('.$pseudo.','.$mail.','.$mdp.')';
+        $this->pdo->query($query);
     }
 }

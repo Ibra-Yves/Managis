@@ -8,7 +8,9 @@ class Events
     private $rqList = [
         'validation',
         'inscription',
-        'connexion'
+        'connexion',
+        'formInscription',
+        'formConnexion'
     ];
 
     public function __construct()
@@ -38,18 +40,19 @@ class Events
         return implode("\n", file($nomFichier));
     }
 
-    private function validation(){
-        $sRequest= '';
-        if(isset($_POST['senderForm'])) $sRequest = $_POST['senderForm'];
-        $this->gestionRequetes($sRequest);
-    }
 
     private function inscription(){
         $this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
     }
 
+    private function validation(){
+        $sRequest= '';
+        if(isset($_POST['envoiForm'])) $sRequest = $_POST['envoiForm'];
+        $this->gestionRequetes($sRequest);
+    }
+
     private function formInscription(){
-        echo 'yolo';
+        $this->action->affichageDefaut('#formulaire', 'ss');
     }
 
     private function connexion(){
@@ -57,7 +60,7 @@ class Events
     }
 
     private function formConnexion(){
-        echo 'yolo';
+        $this->action->affichageDefaut('#formulaire', 'yolo');
     }
 
     private function gestionRequetes($rq= ''){

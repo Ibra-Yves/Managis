@@ -21,27 +21,26 @@ function requetes(event){
        case Boolean(this.action):
            request = $(this).attr('action').split('.')[0];
            envoyerData = new FormData(this);
-           envoyerData.append('senderForm', this.id);
-         //  console.log(envoyerData);
-       break;
+           envoyerData.append('envoiForm', this.id);
+           break;
    }
 
    console.log('rq: ' +request);
 
    envoyerData.append('request', request);
-  // console.log(envoyerData);
     $.post('?rq=' + request, envoyerData,  gererDonnes);
 }
 
 function gererDonnes(retour){
     retour = lireJSON(retour);
-  // console.log(retour[0]["Probleme JSON"]["donnes"]);
    console.log(retour);
     retour.forEach(function(action){
         $.each(action, function(actionName, actionDatas){
             switch(actionName){
                 case 'affiche' :
+                    let dest = actionDatas['dest'];
                     $(actionDatas['dest']).html(actionDatas['content']);
+                    evenements(dest);
                     break;
                default :
                    console.log('Action inconnue'+ actionName);
@@ -69,7 +68,6 @@ function lireJSON(data){
     return decode;
 }
 function evenements(place = 'html') {
-    $(place + ' a').on( 'click', requetes);
-    $('#formulaire').on('submit', requetes);
-   // $(place + ' a:not([href^="mailto:"])').on('click', requetes);
+    $(place +' a').on( 'click', requetes);
+    $(place +' form').on('submit', requetes);
 }
