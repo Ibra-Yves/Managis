@@ -10,10 +10,10 @@ Chaque utilisateur se rendant sur le site/application devra s’identifier et au
 Dans cette partie, l’utilisateur pourra créer l’évènement qu’il souhaite mettre en place et plusieurs champs qui seront utile lors de celui-ci. 
 Par exemple, si l’utilisateur veut créer une soirée entre amis, il aura des champs prédéfinis à remplir. Tels que la date, l’heure, les invité, les boissons, la nourriture, les extras, …
 
-*	Participer à un événement
+*	Participer à un événement:
 Ici, l’utilisateur trouvera tous les évènements qui lui sont proposés. Une fois qu’il aura décidé de participer à un ou plusieurs de ceux-ci, il arrivera sur la page de l’événement et pourra choisir ce qu’il amènera ou les ce qu’il fera pour le bon fonctionnement de celui-ci.
 
-*	Noter un événement
+*	Noter un événement:
 A la fin de chaque événement, l’utilisateur pourra se rendre sur PicknDrink pour noter et commenter l’événement. Cette étape sera utile dans le futur afin de prendre en compte les notes et commentaires afin d’amener d’éventuelles améliorations aux événements.
 
 
