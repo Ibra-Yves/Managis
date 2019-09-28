@@ -9,5 +9,10 @@
         <a href="connexion.php"> Connexion</a>
     <div id="formulaire">
     </div>
+    <div id="error">
+        <p id="wrongUser"></p>
+        <p id="wrongMail"></p>
+        <p id="wrongPass"></p>
+    </div>
     </body>
 </html>

@@ -57,15 +57,15 @@ class Events
         $idUser = $this->db->procCall('verifPseudo', [$_POST['pseudo']]);
         $idMail = $this->db->procCall('verifEmail', [$_POST['email']]);
         if($idUser){
-            $this->action->affichageDefaut( '#formulaire','<script> alert("L utilisateur existe deja")');
+            $this->action->ajouterAction( 'wrongUser','L utilisateur existe deja');
             //$this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
         }
         if($idMail){
-            $this->action->affichageDefaut( '#formulaire','<script> alert("Le mail existe deja")');
+            $this->action->ajouterAction( 'wrongMail','Le mail existe deja');
            // $this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
         }
         if($_POST['mdp'] != $_POST['confirmationMdp']){
-            $this->action->affichageDefaut( '#formulaire','<script> alert("Les deux mot de passes ne correspondent pas")');
+            $this->action->ajouterAction( 'wrongPass','Le mot de passe ne correspond pas');
             //$this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
         }
         if($idUser || $_POST['mdp'] != $_POST['confirmationMdp'] || $idMail){
@@ -82,7 +82,14 @@ class Events
     }
 
     private function formConnexion(){
-        $this->db->connexion($_POST['pseudo'], $_POST['mdp']);
+       $idUser = $this->db->procCall('connexionUser', [$_POST['pseudo'], hash('md5', $_POST['mdp'])]);
+       if($idUser){
+           $this->action->affichageDefaut( '#formulaire','<script> alert("Bienvenue")');
+       }
+       else {
+           $this->action->ajouterAction( 'wrongUser',"Utilisateur ou mot de passe incorrect");
+           $this->action->affichageDefaut('#formulaire', $this->lectureForm('connexion'));
+       }
     }
 
     private function gestionRequetes($rq= ''){

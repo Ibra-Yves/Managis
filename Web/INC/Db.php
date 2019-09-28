@@ -22,16 +22,14 @@ class Db
 
     public function procCall($procName, $procParams= array()){
         $params= array();
-        $this->connexionBDD();
         switch($procName){
             case 'creationUser' :
-            case 'connexionUser' :
                 array_push($params, '?', '?');
             case 'verifEmail' :
             case 'verifPseudo' :
                 array_push($params, '?');
-
                 try {
+                    $this->connexionBDD();
                     $callProc = 'call '. $procName.'('.join(',', $params).')';
                     $request = $this->pdo->prepare($callProc);
                     $request->execute($procParams);

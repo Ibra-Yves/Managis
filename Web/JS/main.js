@@ -42,8 +42,16 @@ function gererDonnes(retour){
                     $(actionDatas['dest']).html(actionDatas['content']);
                     evenements(dest);
                     break;
-               default :
-                   console.log('Action inconnue'+ actionName);
+                case 'Probleme JSON' :
+                    $('#error').html(actionDatas['donnes']);
+                    break;
+                case 'wrongUser' :
+                case 'wrongMail' :
+                case 'wrongPass'   :
+                    $('#'+actionName).html(actionDatas);
+                    break;
+                default :
+                   console.log('Action inconnue '+ actionName);
            }
        })
    })
