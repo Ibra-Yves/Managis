@@ -9,7 +9,7 @@
                 <input type="email" id="email" name="email" ><br>
 
                 <label for="mdp">Mot de passe</label>
-                <input minlength="5" type="password" id="mdp" name="mdp" ><br>
+                <input type="password" id="mdp" name="mdp" ><br>
 
                 <label for="confirmationMdp">Confirmez votre mot de passe</label>
                 <input type="password" id="confirmationMdp" name="confirmationMdp" ><br>
