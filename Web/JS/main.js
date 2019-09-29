@@ -42,6 +42,26 @@ function gererDonnes(retour){
                     $(actionDatas['dest']).html(actionDatas['content']);
                     evenements(dest);
                     break;
+                case 'connexion' :
+                    $('form').replaceWith('<h1>Bienvenue '+actionDatas['pseudo'] + '</h1>');
+                    //$('[href="connexion.php"]').replaceWith('<a href="deconnexion.php">Deconnexion</a>');
+                   // $('[href="inscription.php"]').replaceWith('<a href="acceuil.php">Acceuil</a>');
+                    //evenements('body');
+                    $('body').find('[href="connexion.php"]').html('deconnexion').attr('href', 'deconnexion.php');
+                    $('body').find('[href="inscription.php"]').html('acceuil').attr('href', 'acceuil.php');
+                    //evenements('a');
+                    break;
+                case 'deconnexion' :
+                    $('body').html('Deconnexion');
+                    $('[href="deconnexion.php"]').click(function(){
+                        location.reload();
+                    });
+                    evenements('body');
+                    //$('[href="deconnexion.php"]').replaceWith('<a href="connexion.php"> Connexion</a>');
+                    break;
+               /* case 'stillConnected' :
+                    $('#error').replaceWith('<h1> Toujours connecté </h1>');
+                    break;*/
                 case 'Probleme JSON' :
                     $('#error').html(actionDatas['donnes']);
                     break;

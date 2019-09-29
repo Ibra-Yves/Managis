@@ -1,11 +1,13 @@
 <?php
 include_once 'Db.php';
 include_once 'Actions.php';
+include_once 'Session.php';
 class Events
 {
     private $action = null;
     private $rq = null;
     private $db = null;
+    private $session = null;
     private $rqList = [
         'validation',
         'inscription',
@@ -17,6 +19,7 @@ class Events
     public function __construct()
     {
         $this->action = new Actions();
+        $this->session = new Session();
         $this->db = new Db();
         if(isset($_GET['rq'])) $this->rq = $_GET['rq'];
         $this->gestionRequetes($this->rq);
@@ -84,12 +87,26 @@ class Events
     private function formConnexion(){
        $idUser = $this->db->procCall('connexionUser', [$_POST['pseudo'], hash('md5', $_POST['mdp'])]);
        if($idUser){
-           $this->action->affichageDefaut( '#formulaire','<script> alert("Bienvenue")');
+           $_SESSION['user'] = $idUser;
+           $datas = [
+               'email' => $idUser[0]['email'],
+               'pseudo' => $idUser[0]['pseudo']
+           ];
+           $this->action->ajouterAction( 'connexion', $datas);
        }
        else {
            $this->action->ajouterAction( 'wrongUser',"Utilisateur ou mot de passe incorrect");
            $this->action->affichageDefaut('#formulaire', $this->lectureForm('connexion'));
        }
+    }
+
+    private function deconnexion(){
+        $_SESSION['user'] = [];
+        $this->action->ajouterAction('deconnexion', '');
+    }
+
+    private function acceuil(){
+        $this->action->affichageDefaut('#error', '<h1> salut </h1>');
     }
 
     private function gestionRequetes($rq= ''){
