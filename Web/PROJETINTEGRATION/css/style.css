@@ -6,10 +6,17 @@
 
 .blue{
     height: 600px;
-    background-image: url("../img/Evenement.png");
+    background-color: #6c757d;
 }
 
 .img-fluid {
     max-width: 100%;
     height: auto;
+}
+
+
+.big-banner{
+    background-image: url('../img/Evenement.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
