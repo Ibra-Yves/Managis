@@ -1,4 +1,4 @@
-# Pick-n-Drink
+# Managis
 
 ## But du projet :
 
