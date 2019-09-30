@@ -2,8 +2,8 @@
 
 ## But du projet :
 
-Dans le cadre de notre cours de projet d’intégrations, nous avons eu la tâche de créer un projet innovant. La réalisation de ce projet doit utiliser plusieurs aspects que nous avons appris durant notre bachelier d’informatique. Après avoir débattu et fait des recherches, notre groupe s’est mis d’accord afin de travailler sur un projet commun. Celui-ci est : PicknDrink.
-PicknDrink est non seulement un site web mais également une application qui aura pour but d’aider au quotidien ses utilisateurs lors de l’organisation de divers événements tel que des soirées entre amis, des vacances, … 
+Dans le cadre de notre cours de projet d’intégrations, nous avons eu la tâche de créer un projet innovant. La réalisation de ce projet doit utiliser plusieurs aspects que nous avons appris durant notre bachelier d’informatique. Après avoir débattu et fait des recherches, notre groupe s’est mis d’accord afin de travailler sur un projet commun. Celui-ci est : Managis.
+Managis est non seulement un site web mais également une application qui aura pour but d’aider au quotidien ses utilisateurs lors de l’organisation de divers événements tel que des soirées entre amis, des vacances, … 
 
 Chaque utilisateur se rendant sur le site/application devra s’identifier et aura plusieurs choix qui s’offriront à lui :
 *	Créer un événement :  
