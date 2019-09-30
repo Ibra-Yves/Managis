@@ -17,7 +17,7 @@ Ici, l’utilisateur trouvera tous les évènements qui lui sont proposés. Une 
 
 *	Noter un événement:  
 
-A la fin de chaque événement, l’utilisateur pourra se rendre sur PicknDrink pour noter et commenter l’événement. Cette étape sera utile dans le futur afin de prendre en compte les notes et commentaires afin d’amener d’éventuelles améliorations aux événements.
+A la fin de chaque événement, l’utilisateur pourra se rendre sur Managis pour noter et commenter l’événement. Cette étape sera utile dans le futur afin de prendre en compte les notes et commentaires afin d’amener d’éventuelles améliorations aux événements.
 
 
 ## Membres du Groupe 
