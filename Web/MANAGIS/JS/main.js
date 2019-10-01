@@ -43,18 +43,21 @@ function gererDonnes(retour){
                     evenements(dest);
                     break;
                 case 'connexion' :
-                    $('form').replaceWith('<h1>Bienvenue '+actionDatas['pseudo'] + '</h1>');
+                    $('.login-form-1').replaceWith('<h1>Bienvenue '+actionDatas['pseudo'] + '</h1>');
                     //$('[href="connexion.php"]').replaceWith('<a href="deconnexion.php">Deconnexion</a>');
                    // $('[href="inscription.php"]').replaceWith('<a href="acceuil.php">Acceuil</a>');
                     //evenements('body');
-                    $('body').find('[href="connexion.php"]').html('deconnexion').attr('href', 'deconnexion.php');
                     $('body').find('[href="inscription.php"]').html('acceuil').attr('href', 'acceuil.php');
                     $('body').find('[href="quiSommesNous.php"]').html('Espace Membre').attr('href', 'espaceMembre.php');
+                    $('body').find('[href="connexion.php"]').html('deconnexion').attr('href', 'deconnexion.php');
+                    $('[href="deconnexion.php"]').on('click', function(){
+                        location.reload();
+                    });
                     //evenements('a');
                     break;
                 case 'deconnexion' :
                     //$('body').html('Deconnexion');
-                    $('[href="deconnexion.php"]').click(function(){
+                    $('[href="deconnexion.php"]').on('click', function(){
                         location.reload();
                     });
                     break;

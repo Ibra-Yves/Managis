@@ -122,6 +122,9 @@ class Events
        // $this->action->affichageDefaut('div', '<h1> salut </h1>');
     }
 
+    private function espaceMembre(){
+
+    }
     private function gestionRequetes($rq= ''){
         if($this->reqValid($rq)){
             $nomFonction = $rq;

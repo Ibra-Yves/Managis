@@ -15,6 +15,18 @@
     <!-- Your custom styles (optional) -->
     <link href="CSS/style.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="IMG/favicon.png" />
+
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="JS/jquery-3.4.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="JS/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="JS/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="JS/mdb.min.js"></script>
+    <script type="text/javascript" src="JS/main.js"></script>
 </head>
 
 <body>
@@ -147,16 +159,7 @@
 </footer>
 <!-- Footer -->
 
-<!-- SCRIPTS -->
-<!-- JQuery -->
-<script type="text/javascript" src="JS/jquery-3.4.1.min.js"></script>
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" src="JS/popper.min.js"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="JS/bootstrap.min.js"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="JS/mdb.min.js"></script>
-<script type="text/javascript" src="JS/main.js"></script>
 </body>
 
-</html>'
+
+</html>
