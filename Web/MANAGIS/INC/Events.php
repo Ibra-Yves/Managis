@@ -47,7 +47,7 @@ class Events
 
 
     private function inscription(){
-        $this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
+        $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
     }
 
     private function validation(){
@@ -81,7 +81,7 @@ class Events
     }
 
     private function connexion(){
-        $this->action->affichageDefaut('#formulaire', $this->lectureForm('connexion'));
+        $this->action->affichageDefaut('#intro', $this->lectureForm('connexion'));
     }
 
     private function formConnexion(){

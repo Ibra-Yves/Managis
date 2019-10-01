@@ -1,4 +1,3 @@
-
 <?php
 include_once 'INC/Events.php';
 $events  = new Events();
