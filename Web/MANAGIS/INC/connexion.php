@@ -1,3 +1,5 @@
+<div class="container">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="CSS/style.css" rel="stylesheet">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <div class="row centered-form">
@@ -7,7 +9,7 @@
                     <h3 class="panel-title">Connectez-vous</h3>
                 </div>
                 <div class="panel-body">
-            <form id="formConnexion" class="formConnexion" name="formConnexion" method="post" action="validation.php">
+                    <form id="formConnexion" class="formConnexion" name="formConnexion" method="post" action="validation.php">
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
