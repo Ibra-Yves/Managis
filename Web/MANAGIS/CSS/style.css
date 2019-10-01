@@ -1,0 +1,72 @@
+html,
+body,
+header,
+main,
+#intro{
+    height: 100%;
+}
+
+#intro{
+    background: url("../img/background-flou.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.titre {
+    text-shadow:0.3px 0.3px 0.3px black;
+    font-family:serif;
+    font-size:1.2em;
+}
+
+.text{
+    text-shadow:0.3px 0.3px 0.3px black;
+    font-family:serif;
+    font-size:1em;
+}
+
+.rounded-circle{
+    border-radius: 50%;
+}
+
+.marge{
+    margin-top: 5%;
+    margin-bottom: 17%;
+}
+
+.colormain{
+	background-color: lightgray;
+	height : auto;
+}
+
+.textfont{
+	font-size: 1.3em;
+}
+
+.espace{
+	margin-right : 2em;
+}
+body{
+    background-color: #525252;
+}
+.centered-form{
+    margin-top: 60px;
+}
+
+.centered-form .panel{
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+/*.bouton1{
+	bottom : 40%;
+	left : 41%;
+	position: absolute;
+	display: block;
+}
+.bouton2{
+	bottom : 40%;
+	right: 41%;
+	position: absolute;
+	display: block;
+}*/
