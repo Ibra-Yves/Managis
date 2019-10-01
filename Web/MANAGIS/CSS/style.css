@@ -36,16 +36,16 @@ main,
 }
 
 .colormain{
-	background-color: lightgray;
-	height : auto;
+    background-color: lightgray;
+    height : auto;
 }
 
 .textfont{
-	font-size: 1.3em;
+    font-size: 1.3em;
 }
 
 .espace{
-	margin-right : 2em;
+    margin-right : 2em;
 }
 body{
     background-color: #525252;
