@@ -15,7 +15,9 @@ class Events
         'formInscription',
         'formConnexion',
         'deconnexion',
-         'acceuil'
+         'acceuil',
+        'espaceMembre',
+        'quiSommesNous'
     ];
 
     public function __construct()

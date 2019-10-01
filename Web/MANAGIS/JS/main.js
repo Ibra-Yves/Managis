@@ -43,7 +43,7 @@ function gererDonnes(retour){
                     evenements(dest);
                     break;
                 case 'connexion' :
-                    $('form').replaceWith('<h1>Bienvenue '+actionDatas['pseudo'] + '</h1>');
+                   // $('.login-form-1').replaceWith('<h1>Bienvenue '+actionDatas['pseudo'] + '</h1>');
                     //$('[href="connexion.php"]').replaceWith('<a href="deconnexion.php">Deconnexion</a>');
                    // $('[href="inscription.php"]').replaceWith('<a href="acceuil.php">Acceuil</a>');
                     //evenements('body');
