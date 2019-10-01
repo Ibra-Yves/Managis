@@ -1,7 +1,4 @@
 <div class="container">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link href="CSS/style.css" rel="stylesheet">
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <div class="row centered-form">
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
             <div class="panel panel-default">

@@ -16,6 +16,7 @@
     <link href="CSS/style.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="IMG/favicon.png" />
 
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
     <!-- SCRIPTS -->
     <!-- JQuery -->
