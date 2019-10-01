@@ -63,8 +63,8 @@
                             </li>';
                         if (!empty($_SESSION['user'])) {
                             $acceuil = str_replace("<a href=\"inscription.php\" class=\"btn btn-outline-dark\">Inscription</a>", "<a href=\"acceuil.php\" class=\"btn btn-outline-dark\">Acceuil</a>", $inscription);
-                            $deconnexion= str_replace("<a href=\"connexion.php\" class=\"btn btn-outline-dark\">Connexion</a>", "<a href=\"deconnexion.php\" class=\"btn btn-outline-dark\">Deconnexion</a>", $connexion);
-                            $espaceMembre = str_replace("<a href=\"quiSommesNous.php\" class=\"btn btn-outline-dark\">Qui sommes-nous?</a>", "<a href=\"espaceMembre.php\" class=\"btn btn-outline-dark\">Espace Membre</a>", $quiSommesNous);
+                            $espaceMembre = str_replace("<a href=\"connexion.php\" class=\"btn btn-outline-dark\">Connexion</a>", "<a href=\"espaceMembre.php\" class=\"btn btn-outline-dark\">Espace Membre</a>", $connexion);
+                            $deconnexion= str_replace("<a href=\"quiSommesNous.php\" class=\"btn btn-outline-dark\">Qui sommes-nous?</a>", "<a href=\"deconnexion.php\" class=\"btn btn-outline-dark\">Deconnexion</a>", $quiSommesNous);
                             echo $acceuil  . $espaceMembre . $deconnexion;
                         }
                         else {
