@@ -52,15 +52,13 @@ function gererDonnes(retour){
                     //evenements('a');
                     break;
                 case 'deconnexion' :
-                    $('body').html('Deconnexion');
+                    //$('body').html('Deconnexion');
                     $('[href="deconnexion.php"]').click(function(){
                         location.reload();
                     });
-                    evenements('body');
-                    //$('[href="deconnexion.php"]').replaceWith('<a href="connexion.php"> Connexion</a>');
                     break;
                /* case 'stillConnected' :
-                    $('#error').replaceWith('<h1> Toujours connecté </h1>');
+                    $('body').replaceWith('<h1> Toujours connecté </h1>');
                     break;*/
                 case 'Probleme JSON' :
                     $('#error').html(actionDatas['donnes']);

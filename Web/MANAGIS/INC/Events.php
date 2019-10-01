@@ -13,7 +13,9 @@ class Events
         'inscription',
         'connexion',
         'formInscription',
-        'formConnexion'
+        'formConnexion',
+        'deconnexion',
+         'acceuil'
     ];
 
     public function __construct()
@@ -72,11 +74,20 @@ class Events
             //$this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
         }
         if($idUser || $_POST['mdp'] != $_POST['confirmationMdp'] || $idMail){
-            $this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
+            $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
         }
         else {
             $this->db->procCall('creationUser', [$_POST['pseudo'], $_POST['email'], hash('md5', $_POST['mdp'])]);
-            $this->action->affichageDefaut( '#formulaire','Vous vous bien inscrit veuillez passer à la connexion -> <a href="connexion.php"> Connexion </a>');
+            $idUser = $this->db->procCall('connexionUser', [$_POST['pseudo'], hash('md5', $_POST['mdp'])]);
+            if($idUser){
+                $_SESSION['user'] = $idUser;
+                $datas = [
+                    'email' => $idUser[0]['email'],
+                    'pseudo' => $idUser[0]['pseudo']
+                ];
+                $this->action->ajouterAction( 'connexion', $datas);
+            }
+           // $this->action->affichageDefaut( '#intro','Vous vous bien inscrit veuillez passer à la connexion -> <a href="connexion.php"> Connexion </a>');
         }
     }
 
@@ -96,7 +107,7 @@ class Events
        }
        else {
            $this->action->ajouterAction( 'wrongUser',"Utilisateur ou mot de passe incorrect");
-           $this->action->affichageDefaut('#formulaire', $this->lectureForm('connexion'));
+          // $this->action->affichageDefaut('#formulaire', $this->lectureForm('connexion'));
        }
     }
 
@@ -106,7 +117,7 @@ class Events
     }
 
     private function acceuil(){
-        $this->action->affichageDefaut('#error', '<h1> salut </h1>');
+        $this->action->affichageDefaut('div', '<h1> salut </h1>');
     }
 
     private function gestionRequetes($rq= ''){

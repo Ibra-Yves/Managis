@@ -36,12 +36,25 @@
             <div class="collapse navbar-collapse" id="basicExampleNav">
 
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
+                   <?php $inscription =  '<li class="nav-item active">
                         <a href="inscription.php" class="btn btn-outline-dark">Inscription</a>
-                    </li>
-                    <li class="nav-item">
+                    </li>';
+                    $connexion =
+                    '<li class="nav-item">
                         <a href="connexion.php" class="btn btn-outline-dark">Connexion</a>
-                    </li>
+                    </li>' ;
+                   if (!empty($_SESSION['user'])) {
+                       $acceuil = str_replace("<a href=\"inscription.php\" class=\"btn btn-outline-dark\">Inscription</a>", "<a href=\"acceuil.php\" class=\"btn btn-outline-dark\">Acceuil</a>", $inscription);
+                       $deconnexion= str_replace("<a href=\"connexion.php\" class=\"btn btn-outline-dark\">Connexion</a>", "<a href=\"deconnexion.php\" class=\"btn btn-outline-dark\">Deconnexion</a>", $connexion);
+                       $espaceMembre = "<li class=\"nav-item\">
+                        <a href=\"espaceMembre.php\" class=\"btn btn-outline-dark\">Espace Membre</a>
+                    </li>";
+                        echo $acceuil . $espaceMembre  .  $deconnexion;
+                   }
+                   else {
+                       echo $inscription . $connexion;
+                   }
+                   ?>
                     <li class="nav-item">
                         <button type="button" class="btn btn-outline-dark">Qui sommes-nous?</button>
                     </li>
@@ -153,4 +166,4 @@
 <script type="text/javascript" src="JS/main.js"></script>
 </body>
 
-</html>
+</html>'
