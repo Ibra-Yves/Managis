@@ -17,7 +17,7 @@ class Events
         'deconnexion',
          'acceuil',
         'espaceMembre',
-        'quiSommesNous'
+       // 'quiSommesNous'
     ];
 
     public function __construct()
@@ -119,7 +119,7 @@ class Events
     }
 
     private function acceuil(){
-        $this->action->affichageDefaut('div', '<h1> salut </h1>');
+       // $this->action->affichageDefaut('div', '<h1> salut </h1>');
     }
 
     private function gestionRequetes($rq= ''){
