@@ -1,10 +1,13 @@
 FROM ubuntu
+
 # Installer tous les paquets nécessaires :
+
 RUN apt-get update \
     && apt-get install -y apt-utils \
     && apt-get install -y nginx \
     && apt-get install -y php-fpm php-mysql \
     && apt-get install -y nano
+    
 # Placer les configurations des sites
 COPY /siteweb/managis.be /etc/nginx/sites-available/
 
