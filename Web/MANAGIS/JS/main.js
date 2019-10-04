@@ -49,7 +49,7 @@ function gererDonnes(retour){
                     //$('[href="connexion.php"]').replaceWith('<a href="deconnexion.php">Deconnexion</a>');
                    // $('[href="inscription.php"]').replaceWith('<a href="acceuil.php">Acceuil</a>');
                     //evenements('body');
-                    $('body').find('[href="inscription.php"]').html('acceuil').attr('href', 'acceuil.php');
+                    $('body').find('[href="inscription.php"]').html('Créer votre evenement').attr('href', 'addEvent.php');
                     $('body').find('[href="quiSommesNous.php"]').html('Espace Membre').attr('href', 'espaceMembre.php');
                     $('body').find('[href="connexion.php"]').html('deconnexion').attr('href', 'deconnexion.php');
                     //evenements('a');
@@ -60,9 +60,9 @@ function gererDonnes(retour){
                         location.reload();
                     });
                     break;
-               /* case 'stillConnected' :
-                    $('body').replaceWith('<h1> Toujours connecté </h1>');
-                    break;*/
+                case 'creaEvent' :
+                    console.log(actionDatas);
+                    break;
                 case 'Probleme JSON' :
                     $('#error').html(actionDatas['donnes']);
                     break;

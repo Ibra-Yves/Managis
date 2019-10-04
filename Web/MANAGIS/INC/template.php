@@ -63,10 +63,10 @@
                                 <a href="quiSommesNous.php" class="btn btn-outline-dark">Qui sommes-nous?</a>
                             </li>';
                         if (!empty($_SESSION['user'])) {
-                            $acceuil = str_replace("<a href=\"inscription.php\" class=\"btn btn-outline-dark\">Inscription</a>", "<a href=\"acceuil.php\" class=\"btn btn-outline-dark\">Acceuil</a>", $inscription);
+                            $ajouterEvent = str_replace("<a href=\"inscription.php\" class=\"btn btn-outline-dark\">Inscription</a>", '<a href="addEvent.php"  class="btn btn-outline-dark">Créer votre evenement </a>', $inscription);
                             $espaceMembre = str_replace("<a href=\"connexion.php\" class=\"btn btn-outline-dark\">Connexion</a>", "<a href=\"espaceMembre.php\" class=\"btn btn-outline-dark\">Espace Membre</a>", $connexion);
                             $deconnexion= str_replace("<a href=\"quiSommesNous.php\" class=\"btn btn-outline-dark\">Qui sommes-nous?</a>", "<a href=\"deconnexion.php\" class=\"btn btn-outline-dark\">Deconnexion</a>", $quiSommesNous);
-                            echo $acceuil  . $espaceMembre . $deconnexion;
+                            echo $ajouterEvent  . $espaceMembre . $deconnexion;
                         }
                         else {
                             echo $inscription . $connexion . $quiSommesNous;

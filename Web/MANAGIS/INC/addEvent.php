@@ -27,11 +27,11 @@
                                 <input type="text" name="invite" id="invite" class="form-control input-sm" placeholder="Pseudo de l'invité">
                             </div>
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">Ajouter</button>
+                                <a id="ajouterInv" href="ajouterInv.php" onclick="let text = $('#invite').val(); $('#listeInvite').append(text + '\n')" class="btn btn-outline-secondary" type="button">Ajouter</a>
                             </div>
                         </div>
                         <div class="form-group">
-                            <textarea readonly class="listeInvite" id="listeInvite" rows="3" placeholder="Liste d'invités"></textarea>
+                            <textarea readonly name="pseudos" class="listeInvite" id="listeInvite" rows="3" placeholder="Liste d'invités"></textarea>
                         </div>
                         <input type="submit" value="Ajouter l'événement" class="btn btn-primary align-middle">
                     </form>

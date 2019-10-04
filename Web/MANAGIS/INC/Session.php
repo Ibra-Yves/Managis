@@ -11,6 +11,7 @@ class Session
         if($this->sessionStarted()){
             $_SESSION['start'] = date('YmdHis');
             $_SESSION['user'] = [];
+            $_SESSION['pseudos'] = [];
         }
 
     }

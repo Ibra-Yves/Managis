@@ -17,7 +17,9 @@ class Events
         'deconnexion',
          'acceuil',
         'espaceMembre',
-       // 'quiSommesNous'
+        'addEvent',
+        'ajouterInv',
+        'formCreaEvent'
     ];
 
     public function __construct()
@@ -118,10 +120,19 @@ class Events
         $this->action->ajouterAction('deconnexion', '');
     }
 
-    private function acceuil(){
-       // $this->action->affichageDefaut('div', '<h1> salut </h1>');
+    private function addEvent(){
+       $this->action->affichageDefaut('#intro', $this->lectureForm('addEvent'));
     }
 
+
+    private function formCreaEvent(){
+        //$verifPseudo = $this->db->procCall('pseudoInvite', [$_POST['verifPseudo']]);
+       // $pseudos =  $this->extraireMotsDUnePhrase($_POST['pseudos']);
+        //$this->action->ajouterAction('creaEvent', $_POST['verifPseudo']);
+    }
+    private function ajouterInv(){
+        $this->action->ajouterAction('creaEvent',$_SESSION['pseudos']);
+    }
     private function espaceMembre(){
 
     }
