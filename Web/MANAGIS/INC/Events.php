@@ -121,12 +121,8 @@ class Events
 
     private function addEvent(){
         $tousLesPseudos = $this->db->procCall('tousLesUsers', ['']);
-        $pseudos = [];
-        foreach ($tousLesPseudos as $value => $key){
-            $pseudos = $key;
-        }
        $this->action->affichageDefaut('#intro', $this->lectureForm('addEvent'));
-       $this->action->ajouterAction('creaEvent', $pseudos);
+       $this->action->ajouterAction('creaEvent', $tousLesPseudos);
     }
 
 

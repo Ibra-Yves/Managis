@@ -61,19 +61,14 @@ function gererDonnes(retour){
                     });
                     break;
                 case 'creaEvent' :
-                    let pseudo = [];
+                    let pseudos = [];
+                    //console.log(actionDatas);
                     actionDatas.forEach(function(data){
-                        $.each(data, function(a,b){
-                          pseudo =  $.merge([], data);
-
-                        });
-                        console.log(data);
+                        pseudos.push(data[0]);
                     });
-                        /*$.each(actionDatas, function(a, b){
-                            $('#invite').autocomplete({
-                              source : b
-                          });
-                    });*/
+                    $('#invite').autocomplete({
+                        source: pseudos
+                    });
                     /* let bobo  = ['toto', 'alo'];
                      $('#invite').autocomplete({
                          source : bobo
