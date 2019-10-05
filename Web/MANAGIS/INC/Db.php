@@ -27,8 +27,8 @@ class Db
                 array_push($params, '?', '?');
             case 'verifEmail' :
             case 'verifPseudo' :
-            case 'pseudoInvite':
                 array_push($params, '?');
+            case 'tousLesUsers' :
                 try {
                     $this->connexionBDD();
                     $callProc = 'call '. $procName.'('.join(',', $params).')';

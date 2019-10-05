@@ -61,7 +61,23 @@ function gererDonnes(retour){
                     });
                     break;
                 case 'creaEvent' :
-                    console.log(actionDatas);
+                    let pseudo = [];
+                    actionDatas.forEach(function(data){
+                        $.each(data, function(a,b){
+                          pseudo =  $.merge([], data);
+
+                        });
+                        console.log(data);
+                    });
+                        /*$.each(actionDatas, function(a, b){
+                            $('#invite').autocomplete({
+                              source : b
+                          });
+                    });*/
+                    /* let bobo  = ['toto', 'alo'];
+                     $('#invite').autocomplete({
+                         source : bobo
+                     });*/
                     break;
                 case 'Probleme JSON' :
                     $('#error').html(actionDatas['donnes']);

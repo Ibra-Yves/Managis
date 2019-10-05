@@ -27,7 +27,7 @@
                                 <input type="text" name="invite" id="invite" class="form-control input-sm" placeholder="Pseudo de l'invité">
                             </div>
                             <div class="input-group-append">
-                                <a id="ajouterInv" href="ajouterInv.php" onclick="let text = $('#invite').val(); $('#listeInvite').append(text + '\n')" class="btn btn-outline-secondary" type="button">Ajouter</a>
+                                <button id="ajouterInv" onclick="$('#listeInvite').append($('#invite').val() + '\n');" class="btn btn-outline-secondary" type="button">Ajouter</button>
                             </div>
                         </div>
                         <div class="form-group">
