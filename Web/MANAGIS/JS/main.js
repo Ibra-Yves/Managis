@@ -62,17 +62,17 @@ function gererDonnes(retour){
                     break;
                 case 'creaEvent' :
                     let pseudos = [];
-                    //console.log(actionDatas);
                     actionDatas.forEach(function(data){
                         pseudos.push(data[0]);
                     });
                     $('#invite').autocomplete({
                         source: pseudos
                     });
-                    /* let bobo  = ['toto', 'alo'];
-                     $('#invite').autocomplete({
-                         source : bobo
-                     });*/
+                    break;
+                case 'test' :
+                    if($('#listeInvite').val() == 'toto'){
+                        console.log('alo');
+                    }
                     break;
                 case 'Probleme JSON' :
                     $('#error').html(actionDatas['donnes']);

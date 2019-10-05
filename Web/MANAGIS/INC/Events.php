@@ -18,7 +18,8 @@ class Events
          'acceuil',
         'espaceMembre',
         'addEvent',
-        'formCreaEvent'
+        'formCreaEvent',
+        'ajouterInv'
     ];
 
     public function __construct()
@@ -130,11 +131,12 @@ class Events
         //$verifPseudo = $this->db->procCall('pseudoInvite', [$_POST['verifPseudo']]);
        // $pseudos =  $this->extraireMotsDUnePhrase($_POST['pseudos']);
         //$this->action->ajouterAction('creaEvent', $_POST['verifPseudo']);
+        $this->action->ajouterAction('test', $_POST);
     }
-   /* private function ajouterInv(){
-        $jsonDecode = json_decode($_GET['data'], true);
-        $this->action->ajouterAction('creaEvent', $jsonDecode);
-    }*/
+    private function ajouterInv(){
+       /* $tousLesPseudos = $this->db->procCall('tousLesUsers', ['']);
+        $this->action->ajouterAction('test', $tousLesPseudos);*/
+    }
     private function espaceMembre(){
 
     }
