@@ -65,21 +65,22 @@ class Events
     private function formInscription(){
         $idUser = $this->db->procCall('verifPseudo', [$_POST['pseudo']]);
         $idMail = $this->db->procCall('verifEmail', [$_POST['email']]);
-        if($idUser || $_POST['mdp'] != $_POST['confirmationMdp'] || $idMail){
-            $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
-           // $this->action->ajouterAction( 'wrongPass','Mau');
-        }
         if($idUser){
-            $this->action->ajouterAction( 'wrongUser','L utilisateur existe deja');
+            $this->action->ajouterAction( 'errorUser','L utilisateur existe deja');
             //$this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
         }
         if($idMail){
-            $this->action->ajouterAction( 'wrongMail','Le mail existe deja');
+            $this->action->ajouterAction( 'errorMail','Le mail existe deja');
             // $this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
         }
         if($_POST['mdp'] != $_POST['confirmationMdp']){
-            $this->action->ajouterAction( 'wrongPass','Les duex mots de passes ne correspondent pas');
+            $this->action->ajouterAction( 'errorPass','Les deux mots de passes ne correspondent pas');
             //$this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
+        }
+        if($idUser || $_POST['mdp'] != $_POST['confirmationMdp'] || $idMail){
+           // $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
+          //  $this->action->ajouterAction( 'wrongPass','L utilisateur et le mail existe deja');
+           // $this->action->ajouterAction( 'wrongPass','Mau');
         }
         else {
             $this->db->procCall('creationUser', [$_POST['pseudo'], $_POST['email'], hash('md5', $_POST['mdp'])]);
@@ -111,7 +112,7 @@ class Events
            $this->action->ajouterAction( 'connexion', $datas);
        }
        else {
-           $this->action->ajouterAction( 'wrongUser',"Utilisateur ou mot de passe incorrect");
+           $this->action->ajouterAction( 'errorUser',"Utilisateur ou mot de passe incorrect");
           // $this->action->affichageDefaut('#formulaire', $this->lectureForm('connexion'));
        }
     }

@@ -75,10 +75,10 @@ function gererDonnes(retour){
                 case 'Probleme JSON' :
                     $('#error').html(actionDatas['donnes']);
                     break;
-                case 'wrongUser' :
-                case 'wrongMail' :
-                case 'wrongPass'   :
-                    $('#errorUser').html('<div class="alert alert-danger" role="alert">'+actionDatas+'</div>');
+                case 'errorUser' :
+                case 'errorMail' :
+                case 'errorPass' :
+                    $('#errorInscription').html('<div class="alert alert-danger" role="alert">'+actionDatas);
                     break;
                 default :
                    console.log('Action inconnue '+ actionName);
