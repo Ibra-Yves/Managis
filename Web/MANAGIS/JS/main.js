@@ -70,9 +70,7 @@ function gererDonnes(retour){
                     });
                     break;
                 case 'test' :
-                    if($('#listeInvite').val() == 'toto'){
-                        console.log('alo');
-                    }
+
                     break;
                 case 'Probleme JSON' :
                     $('#error').html(actionDatas['donnes']);
@@ -80,7 +78,7 @@ function gererDonnes(retour){
                 case 'wrongUser' :
                 case 'wrongMail' :
                 case 'wrongPass'   :
-                    $('#'+actionName).html(actionDatas);
+                    $('#errorUser').html('<div class="alert alert-danger" role="alert">'+actionDatas+'</div>');
                     break;
                 default :
                    console.log('Action inconnue '+ actionName);

@@ -18,8 +18,8 @@ class Events
          'acceuil',
         'espaceMembre',
         'addEvent',
-        'formCreaEvent',
-        'ajouterInv'
+        'formCreaEvent'
+        //'ajouterInv'
     ];
 
     public function __construct()
@@ -65,20 +65,21 @@ class Events
     private function formInscription(){
         $idUser = $this->db->procCall('verifPseudo', [$_POST['pseudo']]);
         $idMail = $this->db->procCall('verifEmail', [$_POST['email']]);
+        if($idUser || $_POST['mdp'] != $_POST['confirmationMdp'] || $idMail){
+            $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
+           // $this->action->ajouterAction( 'wrongPass','Mau');
+        }
         if($idUser){
             $this->action->ajouterAction( 'wrongUser','L utilisateur existe deja');
             //$this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
         }
         if($idMail){
             $this->action->ajouterAction( 'wrongMail','Le mail existe deja');
-           // $this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
+            // $this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
         }
         if($_POST['mdp'] != $_POST['confirmationMdp']){
-            $this->action->ajouterAction( 'wrongPass','Le mot de passe ne correspond pas');
+            $this->action->ajouterAction( 'wrongPass','Les duex mots de passes ne correspondent pas');
             //$this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
-        }
-        if($idUser || $_POST['mdp'] != $_POST['confirmationMdp'] || $idMail){
-            $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
         }
         else {
             $this->db->procCall('creationUser', [$_POST['pseudo'], $_POST['email'], hash('md5', $_POST['mdp'])]);
@@ -132,10 +133,6 @@ class Events
        // $pseudos =  $this->extraireMotsDUnePhrase($_POST['pseudos']);
         //$this->action->ajouterAction('creaEvent', $_POST['verifPseudo']);
         $this->action->ajouterAction('test', $_POST);
-    }
-    private function ajouterInv(){
-       /* $tousLesPseudos = $this->db->procCall('tousLesUsers', ['']);
-        $this->action->ajouterAction('test', $tousLesPseudos);*/
     }
     private function espaceMembre(){
 
