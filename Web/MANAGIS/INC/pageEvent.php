@@ -38,9 +38,9 @@
                     <div class="card-body">
                         <h5 class="card-title">Ajouter des fournitures  !</h5>
                         <br>
-                        <input type="text" id="pseudo" name="pseudo" class="form-control input-sm" placeholder="Fourniture pour l'événement">
+                        <input type="text" id="nomFourniture" name="nomFourniture" class="form-control input-sm" placeholder="Fourniture pour l'événement">
                         <br>
-                        <button type="button" id="changerMDP" class="btn btn-primary boutonEvent">Ajouter la fourniture à la liste</button>
+                        <button type="button" id="addFourniture" class="btn btn-primary boutonEvent">Ajouter la fourniture à la liste</button>
                     </div>
                 </div>
             </div>
@@ -51,9 +51,9 @@
                     <div class="card-body">
                         <h5 class="card-title">Ajoutez un commentaire pour l'hôte  !</h5>
                         <br>
-                        <input type="text" id="pseudo" name="pseudo" class="form-control input-sm" placeholder="Commentaire...">
+                        <input type="text" id="commentaire" name="commentaire" class="form-control input-sm" placeholder="Commentaire...">
                         <br>
-                        <button type="button" id="changerMDP" class="btn btn-primary boutonEvent">Ajoutez</button>
+                        <button type="button" id="addCommentaire" class="btn btn-primary boutonEvent">Ajoutez</button>
                     </div>
                 </div>
             </div>
