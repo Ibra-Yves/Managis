@@ -68,7 +68,8 @@
                                     <tr>
                                         <th scope="col" class="taillePolice">#</th>
                                         <th scope="col" class="taillePolice">Fournitures</th>
-                                        <th scope="col" class="taillePolice">Add</th>
+                                        <th scope="col" class="taillePolice">Ajouter 1</th>
+                                        <th scope="col" class="taillePolice">Retirer 1</th>
                                         <th scope="col" class="taillePolice">Quantité</th> 
                                     </tr>
                                 </thead>
@@ -77,12 +78,14 @@
                                         <th scope="row">1</th>
                                         <td class="taillePolice">Vodka</td>
                                         <td><button type="button" id="apporte" class="btn btn-primary boutonEvent">+</button></td>
+                                        <td><button type="button" id="retire" class="btn btn-primary boutonEvent">-</button></td>
                                         <td class="taillePolice">35</td>    
                                     </tr>
                                     <tr>
                                         <th scope="row">2</th>
                                         <td class="taillePolice">Doritos sel</td>
                                         <td><button type="button" id="apporte" class="btn btn-primary boutonEvent">+</button></td>
+                                        <td><button type="button" id="retire" class="btn btn-primary boutonEvent">-</button></td>
                                         <td class="taillePolice">3</td>
                                     </tr>
                                 </tbody>
