@@ -19,7 +19,8 @@ class Events
         'espaceMembre',
         'addEvent',
         'formCreaEvent',
-        'formNewMdp'
+        'formNewMdp',
+        'vosEvenements'
         //'ajouterInv'
     ];
 
@@ -151,6 +152,9 @@ class Events
         }
     }
 
+    private function vosEvenements(){
+        $this->action->affichageDefaut('#intro', $this->lectureForm('pageEvent'));
+    }
     private function gestionRequetes($rq= ''){
         if($this->reqValid($rq)){
             $nomFonction = $rq;

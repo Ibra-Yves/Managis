@@ -64,11 +64,15 @@
                             '<li class="nav-item">
                                 <a href="quiSommesNous.php" class="btn btn-outline-dark">Qui sommes-nous?</a>
                             </li>';
+                        $vosEvenements =
+                            '<li class="nav-item">
+                                <a href="vosEvenements.php" class="btn btn-outline-dark">Vos evenements</a>
+                            </li>';
                         if (!empty($_SESSION['user'])) {
                             $ajouterEvent = str_replace("<a href=\"inscription.php\" class=\"btn btn-outline-dark\">Inscription</a>", '<a href="addEvent.php"  class="btn btn-outline-dark">Créer votre evenement </a>', $inscription);
                             $espaceMembre = str_replace("<a href=\"connexion.php\" class=\"btn btn-outline-dark\">Connexion</a>", "<a href=\"espaceMembre.php\" class=\"btn btn-outline-dark\">Espace Membre</a>", $connexion);
                             $deconnexion= str_replace("<a href=\"quiSommesNous.php\" class=\"btn btn-outline-dark\">Qui sommes-nous?</a>", "<a href=\"deconnexion.php\" class=\"btn btn-outline-dark\">Deconnexion</a>", $quiSommesNous);
-                            echo $ajouterEvent  . $espaceMembre . $deconnexion;
+                            echo $ajouterEvent. $vosEvenements  . $espaceMembre . $deconnexion;
                         }
                         else {
                             echo $inscription . $connexion . $quiSommesNous;
