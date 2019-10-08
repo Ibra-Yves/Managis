@@ -7,7 +7,7 @@
                 </div>
                 <div class="panel-body">
                     <form id="formInscription" class="formInscription" name="formInscription" method="post" action="validation.html">
-                        <div id="errorInscription"></div>
+                        <div id="errorForm"></div>
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">

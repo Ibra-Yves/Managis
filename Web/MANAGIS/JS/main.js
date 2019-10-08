@@ -72,13 +72,31 @@ function gererDonnes(retour){
                 case 'test' :
 
                     break;
+                case 'espaceMembre' :
+                    let title =  '<h2>Gestion de compte</h2>';
+                    let table = '';
+                    let content = '';
+                    table += title;
+                    table += '<table>';
+                    actionDatas.forEach(function(data){
+                        content+= '<tr> <th><h4>Psuedo: </h4></th><td><h4>'+data['pseudo'] + '</h4></td></tr>' +
+                                    '<tr><th><h4>Mail: </h4></th><td><h4>'+data['email']+'</h4></td></tr>'+
+                                    '<tr><th><h4>Date de creation du compte: </h4></th><td><h4>'+data['dateCrea']+'<h3></td></tr>';
+                    });
+                    table+= '<tbody>'+ content+ '</tbody>';
+                    table+= '</table>';
+                    $('#infoCompte').html(table);
+                    break;
                 case 'Probleme JSON' :
                     $('#error').html(actionDatas['donnes']);
                     break;
                 case 'errorUser' :
                 case 'errorMail' :
                 case 'errorPass' :
-                    $('#errorInscription').html('<div class="alert alert-danger" role="alert">'+actionDatas);
+                    $('#errorForm').html('<div class="alert alert-danger" role="alert">'+actionDatas);
+                    break;
+                case 'modifMdp' :
+                    $('#errorForm').html('<div class="alert alert-success" role="alert">'+actionDatas);
                     break;
                 default :
                    console.log('Action inconnue '+ actionName);

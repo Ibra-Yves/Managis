@@ -27,6 +27,7 @@ class Db
                 array_push($params, '?', '?');
             case 'verifEmail' :
             case 'verifPseudo' :
+            case 'espaceMembre' :
                 array_push($params, '?');
             case 'tousLesUsers' :
                 try {
@@ -42,7 +43,9 @@ class Db
                 break;
             default : $this->action->affichageDefaut('div', 'procedure introuvable');
         }
-        if($procName = 'connexionUser'){
+        switch($procName){
+            case 'connexionUser' :
+            case 'modifMdp'  :
             array_push($params, '?', '?');
             try {
                 $this->connexionBDD();
@@ -54,6 +57,7 @@ class Db
             catch (PDOException $e){
                 $e->getMessage();
             }
+            break;
         }
 
     }

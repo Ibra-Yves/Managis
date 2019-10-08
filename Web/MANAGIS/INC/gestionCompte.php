@@ -1,18 +1,15 @@
 <div class="container">
-  <div>
-    <h2>Gestion de compte</h2>
-    Pseudo : 
-    <br>
-    Mail : 
-    <br>
-    Date de création du compte : 
-    <br>
+  <div id="infoCompte">
   </div>
   <div>
     <h2>Voulez-vous changer de mot de passe ?</h2>
-    <input type="text" name="ancienMDP" id ="ancienMDP" placeholder="Ancien mot de passe">
-    <input type="text" name="newMDP" id="newMDP" placeholder="Nouveau mot de passe"> <input type="text" name="newMDPconfirm" id="newMDPconfirm" placeholder="Nouveau mot de passe" required>
-    <br>
-    <button type="button" id="changerMDP" class="btn btn-primary">Changer le mot de passe</button>
+      <form id="formNewMdp" class="formNewMdp" name="formNewMdp" method="post" action="validation.php">
+          <div id="errorForm"></div>
+        <input type="password" name="ancienMDP" id ="ancienMDP" placeholder="Ancien mot de passe">
+        <input type="password" name="newMDP" id="newMDP" placeholder="Nouveau mot de passe">
+        <input type="password" name="newMDPconfirm" id="newMDPconfirm" placeholder="Nouveau mot de passe">
+        <br>
+        <input type="submit" id="changerMDP" value="Changez votre mot de passe" class="btn btn-primary">
+      </form>
   </div>
 </div>

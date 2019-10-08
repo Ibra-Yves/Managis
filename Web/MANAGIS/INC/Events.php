@@ -18,7 +18,8 @@ class Events
          'acceuil',
         'espaceMembre',
         'addEvent',
-        'formCreaEvent'
+        'formCreaEvent',
+        'formNewMdp'
         //'ajouterInv'
     ];
 
@@ -88,7 +89,6 @@ class Events
             if($idUser){
                 $_SESSION['user'] = $idUser;
                 $datas = [
-                    'email' => $idUser[0]['email'],
                     'pseudo' => $idUser[0]['pseudo']
                 ];
                 $this->action->ajouterAction( 'connexion', $datas);
@@ -106,7 +106,6 @@ class Events
        if($idUser){
            $_SESSION['user'] = $idUser;
            $datas = [
-               'email' => $idUser[0]['email'],
                'pseudo' => $idUser[0]['pseudo']
            ];
            $this->action->ajouterAction( 'connexion', $datas);
@@ -136,8 +135,22 @@ class Events
         $this->action->ajouterAction('test', $_POST);
     }
     private function espaceMembre(){
-
+            $this->action->affichageDefaut('#intro', $this->lectureForm('gestionCompte'));
+           $infoMembre=  $this->db->procCall('espaceMembre', [$_SESSION['user'][0]['pseudo']]);
+           $this->action->ajouterAction('espaceMembre', $infoMembre);
     }
+
+    private function formNewMdp(){
+        $verifMdp = $this->db->procCall('connexionUser', [$_SESSION['user'][0]['pseudo'], hash('md5', $_POST['ancienMDP'])]);
+        if($_POST['newMDP'] !=$_POST['newMDPconfirm'] || !$verifMdp){
+            $this->action->ajouterAction('errorPass', 'L un des mot de passe de correspond pas');
+        }
+        else {
+            $this->db->procCall('modifMdp', [$_SESSION['user'][0]['pseudo'], hash('md5', $_POST['newMDP'])]);
+            $this->action->ajouterAction('modifMdp', 'Votre mot de passe a été changé avec success');
+        }
+    }
+
     private function gestionRequetes($rq= ''){
         if($this->reqValid($rq)){
             $nomFonction = $rq;

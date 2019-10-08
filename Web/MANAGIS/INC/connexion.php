@@ -7,7 +7,7 @@
                 </div>
                 <div class="panel-body">
                     <form id="formConnexion" class="formConnexion" name="formConnexion" method="post" action="validation.php">
-                        <div id="errorUser"></div>
+                        <div id="errorForm"></div>
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">

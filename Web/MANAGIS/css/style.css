@@ -58,6 +58,30 @@ body{
     background: rgba(255, 255, 255, 0.8);
     box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
 }
+
+/* Style pour pageEvent.php */
+
+.bg-img{
+    background: url("../IMG/image2.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.text-blanc-titre{
+    font-size :35px;
+    color :white;
+}
+
+.text-blanc{
+    font-size :20px;
+    color :white;
+}
+
+.boutonEvent{
+    border-left : 30%;
+}
 /*.bouton1{
 	bottom : 40%;
 	left : 41%;
