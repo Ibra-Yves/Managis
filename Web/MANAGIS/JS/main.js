@@ -44,6 +44,7 @@ function gererDonnes(retour){
                     break;
                 case 'connexion' :
                     location.reload();
+                    //console.log(actionDatas);
                     $('.panel-heading').replaceWith('<h3> Connexion reussie </h3>');
                     $('.panel-body').replaceWith('<h1>Bienvenue '+actionDatas['pseudo'] + '</h1>');
                     //$('[href="connexion.php"]').replaceWith('<a href="deconnexion.php">Deconnexion</a>');
@@ -60,14 +61,15 @@ function gererDonnes(retour){
                         location.reload();
                     });
                     break;
-                case 'creaEvent' :
-                    let pseudos = [];
+                case 'creerEvent' :
+                   /* let pseudos = [];
                     actionDatas.forEach(function(data){
                         pseudos.push(data[0]);
                     });
                     $('#invite').autocomplete({
                         source: pseudos
-                    });
+                    });*/
+                   alert(actionDatas);
                     break;
                 case 'test' :
 
@@ -86,6 +88,21 @@ function gererDonnes(retour){
                     table+= '<tbody>'+ content+ '</tbody>';
                     table+= '</table>';
                     $('#infoCompte').html(table);
+                    break;
+                case 'infoSoiree' :
+                    let tableSoirees = '';
+                    let i= 1;
+                    actionDatas.forEach(function(data){
+                        tableSoirees+= ' <tr>\n' +
+                            '                                    <th scope="row">'+ i++ +'</th>\n' +
+                            '                                    <td class="taillePolice">'+data['nomEvent']+'</td>\n' +
+                            '                                    <td class="taillePolice">'+data['hote']+'</td>\n' +
+                            '                                    <td class="taillePolice">'+data['dateEvent']+'</td>\n' +
+                            '                                    <td class="taillePolice">'+data['adresse']+'</td>\n' +
+                            '                                </tr>';
+
+                    });
+                    $('#infoSoiree').html(tableSoirees);
                     break;
                 case 'Probleme JSON' :
                     $('#error').html(actionDatas['donnes']);

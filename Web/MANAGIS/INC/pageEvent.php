@@ -12,18 +12,9 @@
                                     <th scope="col" class="taillePolice">Nom de l'hôte</th>
                                     <th scope="col" class="taillePolice">Date de l'événement</th>
                                     <th scope="col" class="taillePolice">Adresse</th>
-                                    <th scope="col" class="taillePolice">Invités</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td class="taillePolice">Soirée PHP</td>
-                                    <td class="taillePolice">DOMINIK Delvigne</td>
-                                    <td class="taillePolice">19/02/1996</td>
-                                    <td class="taillePolice">Av du ciseau</td>
-                                    <td class="taillePolice">Carine</td>
-                                </tr>
+                            <tbody id="infoSoiree">
                             </tbody>
                         </table>
                     </div>

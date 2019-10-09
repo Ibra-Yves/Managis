@@ -103,11 +103,13 @@ class Events
     }
 
     private function formConnexion(){
-       $idUser = $this->db->procCall('connexionUser', [$_POST['pseudo'], hash('md5', $_POST['mdp'])]);
-       if($idUser){
-           $_SESSION['user'] = $idUser;
+       $user = $this->db->procCall('connexionUser', [$_POST['pseudo'], hash('md5', $_POST['mdp'])]);
+       if($user){
+           $_SESSION['user'] = $user[0];
+           $_SESSION['user']['idUser'] = $user[0]['idUser'];
+           $_SESSION['user']['pseudo'] = $user[0]['pseudo'];
            $datas = [
-               'pseudo' => $idUser[0]['pseudo']
+               'pseudo' =>  $_SESSION['user']['pseudo']
            ];
            $this->action->ajouterAction( 'connexion', $datas);
        }
@@ -123,37 +125,40 @@ class Events
     }
 
     private function addEvent(){
-        $tousLesPseudos = $this->db->procCall('tousLesUsers', ['']);
+       // $tousLesPseudos = $this->db->procCall('tousLesUsers', ['']);
        $this->action->affichageDefaut('#intro', $this->lectureForm('addEvent'));
-       $this->action->ajouterAction('creaEvent', $tousLesPseudos);
+      // $this->action->ajouterAction('creaEvent', $tousLesPseudos);
     }
 
 
     private function formCreaEvent(){
-        //$verifPseudo = $this->db->procCall('pseudoInvite', [$_POST['verifPseudo']]);
-       // $pseudos =  $this->extraireMotsDUnePhrase($_POST['pseudos']);
-        //$this->action->ajouterAction('creaEvent', $_POST['verifPseudo']);
-        $this->action->ajouterAction('test', $_POST);
+       // $this->db->procCall('creerEvent', $_POST);
+        $this->db->procCall('creerEvent', [$_POST['nomEvent'], $_SESSION['user']['pseudo'], $_POST['adresse'], $_POST['date']]);
+        $this->action->ajouterAction('creerEvent', 'Votre soiree a été ajouté avec success');
+        $this->vosEvenements();
+
     }
     private function espaceMembre(){
             $this->action->affichageDefaut('#intro', $this->lectureForm('gestionCompte'));
-           $infoMembre=  $this->db->procCall('espaceMembre', [$_SESSION['user'][0]['pseudo']]);
+           $infoMembre=  $this->db->procCall('espaceMembre', [$_SESSION['user']['pseudo']]);
            $this->action->ajouterAction('espaceMembre', $infoMembre);
     }
 
     private function formNewMdp(){
-        $verifMdp = $this->db->procCall('connexionUser', [$_SESSION['user'][0]['pseudo'], hash('md5', $_POST['ancienMDP'])]);
+        $verifMdp = $this->db->procCall('connexionUser', [$_SESSION['user']['pseudo'], hash('md5', $_POST['ancienMDP'])]);
         if($_POST['newMDP'] !=$_POST['newMDPconfirm'] || !$verifMdp){
             $this->action->ajouterAction('errorPass', 'L un des mot de passe de correspond pas');
         }
         else {
-            $this->db->procCall('modifMdp', [$_SESSION['user'][0]['pseudo'], hash('md5', $_POST['newMDP'])]);
+            $this->db->procCall('modifMdp', [$_SESSION['user']['pseudo'], hash('md5', $_POST['newMDP'])]);
             $this->action->ajouterAction('modifMdp', 'Votre mot de passe a été changé avec success');
         }
     }
 
     private function vosEvenements(){
         $this->action->affichageDefaut('#intro', $this->lectureForm('pageEvent'));
+       $infoSoiree =  $this->db->procCall('infoSoirees', [$_SESSION['user']['idUser']]);
+       $this->action->ajouterAction('infoSoiree', $infoSoiree);
     }
     private function gestionRequetes($rq= ''){
         if($this->reqValid($rq)){
