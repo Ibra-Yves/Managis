@@ -20,7 +20,8 @@ class Events
         'addEvent',
         'formCreaEvent',
         'formNewMdp',
-        'vosEvenements'
+        'vosEvenements',
+        'pageEventInfos'
         //'ajouterInv'
     ];
 
@@ -158,7 +159,15 @@ class Events
     private function vosEvenements(){
         $this->action->affichageDefaut('#intro', $this->lectureForm('pageEvent'));
        $infoSoiree =  $this->db->procCall('infoSoirees', [$_SESSION['user']['idUser']]);
+       $_SESSION['soiree'] = $infoSoiree;
+     //  $_SESSION['soiree']['idEvent'] = $infoSoiree[0]['idEvent'];
+       //$this->action->ajouterAction('test', $_SESSION['soiree']);
        $this->action->ajouterAction('infoSoiree', $infoSoiree);
+    }
+    private function pageEventInfos(){
+        //$listeInvites = $this->db->procCall('listeInvites', )
+        $this->action->affichageDefaut('#infoPrecises', $this->lectureForm('pageEventInfos'));
+        //$this->action->ajouterAction('listeInvites', );
     }
     private function gestionRequetes($rq= ''){
         if($this->reqValid($rq)){

@@ -72,7 +72,7 @@ function gererDonnes(retour){
                    alert(actionDatas);
                     break;
                 case 'test' :
-
+                        console.log(actionDatas);
                     break;
                 case 'espaceMembre' :
                     let title =  '<h2>Gestion de compte</h2>';
@@ -91,11 +91,11 @@ function gererDonnes(retour){
                     break;
                 case 'infoSoiree' :
                     let tableSoirees = '';
-                    let i= 1;
+                    let i=1;
                     actionDatas.forEach(function(data){
-                        tableSoirees+= ' <tr>\n' +
+                        tableSoirees+= ' <tr> \n' +
                             '                                    <th scope="row">'+ i++ +'</th>\n' +
-                            '                                    <td class="taillePolice">'+data['nomEvent']+'</td>\n' +
+                            '                                    <td class="taillePolice" id="'+data['idEvent']+'"><a href="pageEventInfos.php">'+data['nomEvent']+'</a></td>\n' +
                             '                                    <td class="taillePolice">'+data['hote']+'</td>\n' +
                             '                                    <td class="taillePolice">'+data['dateEvent']+'</td>\n' +
                             '                                    <td class="taillePolice">'+data['adresse']+'</td>\n' +
@@ -103,6 +103,10 @@ function gererDonnes(retour){
 
                     });
                     $('#infoSoiree').html(tableSoirees);
+                    evenements('#infoSoiree');
+                    break;
+                case 'test' :
+                    console.log(actionDatas);
                     break;
                 case 'Probleme JSON' :
                     $('#error').html(actionDatas['donnes']);

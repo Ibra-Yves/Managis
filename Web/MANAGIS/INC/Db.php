@@ -46,6 +46,7 @@ class Db
         switch($procName){
             case 'connexionUser' :
             case 'modifMdp'  :
+            case 'ajouterInvites'    :
             array_push($params, '?', '?');
             try {
                 $this->connexionBDD();
@@ -63,6 +64,7 @@ class Db
             case 'creerEvent' :
             array_push($params, '?', '?', '?');
             case 'infoSoirees' :
+            case 'listeInvites' :
                 array_push($params, '?');
             try {
                 $this->connexionBDD();
