@@ -16,14 +16,14 @@ function requetes(event){
    switch (true) {
        case Boolean(this.href):
            request = $(this).attr('href').split('.')[0];
-       break;
-
+           break;
        case Boolean(this.action):
            request = $(this).attr('action').split('.')[0];
            envoyerData = new FormData(this);
            envoyerData.append('envoiForm', this.id);
            break;
    }
+
 
    console.log('rq: ' +request);
 
@@ -95,7 +95,7 @@ function gererDonnes(retour){
                     actionDatas.forEach(function(data){
                         tableSoirees+= ' <tr> \n' +
                             '                                    <th scope="row">'+ i++ +'</th>\n' +
-                            '                                    <td class="taillePolice" id="'+data['idEvent']+'"><a href="pageEventInfos.php">'+data['nomEvent']+'</a></td>\n' +
+                            '                                    <td class="taillePolice"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' +
                             '                                    <td class="taillePolice">'+data['hote']+'</td>\n' +
                             '                                    <td class="taillePolice">'+data['dateEvent']+'</td>\n' +
                             '                                    <td class="taillePolice">'+data['adresse']+'</td>\n' +
@@ -105,8 +105,28 @@ function gererDonnes(retour){
                     $('#infoSoiree').html(tableSoirees);
                     evenements('#infoSoiree');
                     break;
-                case 'test' :
-                    console.log(actionDatas);
+                case 'listeInvites' :
+                    let tableInvites= '';
+                     let j=1;
+                    actionDatas.forEach(function(data){
+                    tableInvites+= '<tr> \n' +
+                        '<th scope="row">'+ j++ +'</th>\n' +
+                        '<td class="taillePolice">'+data['pseudo']+'</td>\n'
+                    });
+                    $('#invites').html(tableInvites);
+                    evenements('#invites');
+                    break;
+                case 'ajoutInv' :
+                    $('#intro').html(alert(actionDatas));
+                    break;
+                case 'tousLesPseudos' :
+                    let pseudos = [];
+                    actionDatas.forEach(function(data){
+                        pseudos.push(data[0]);
+                    });
+                    $('#pseudoInv').autocomplete({
+                        source: pseudos
+                    });
                     break;
                 case 'Probleme JSON' :
                     $('#error').html(actionDatas['donnes']);

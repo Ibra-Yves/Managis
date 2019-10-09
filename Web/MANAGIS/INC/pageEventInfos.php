@@ -14,6 +14,11 @@
                         <tbody id="invites">
                         </tbody>
                     </table>
+                    <form id="formAjoutInv" class="formAjoutInv" name="formAjoutInv" method="post" action="validation.php">
+                        <div id="errorForm"></div>
+                        <input type="text" class="form-control" placeholder="Pseudo Invite" value="" id="pseudoInv" name="pseudoInv">
+                        <input type="submit" value="Ajoutez l invite!">
+                    </form>
                 </div>
             </div>
         </div>

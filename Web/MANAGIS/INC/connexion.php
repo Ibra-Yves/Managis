@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Pseudo" value="" id="pseudo" name="pseudo"/>
+                                    <input type="text" class="form-control" placeholder="Pseudo" value="" id="pseudo" name="pseudo">
                                 </div>
                             </div>
                         </div>

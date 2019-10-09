@@ -24,7 +24,7 @@ class Db
         $params= array();
         switch($procName){
             case 'creationUser' :
-                array_push($params, '?', '?');
+                array_push($params, '?', '?', '?');
             case 'verifEmail' :
             case 'verifPseudo' :
             case 'espaceMembre' :

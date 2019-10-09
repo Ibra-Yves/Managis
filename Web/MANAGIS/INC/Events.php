@@ -1,4 +1,7 @@
 <?php
+
+use Couchbase\Document;
+
 include_once 'Db.php';
 include_once 'Actions.php';
 include_once 'Session.php';
@@ -8,6 +11,7 @@ class Events
     private $rq = null;
     private $db = null;
     private $session = null;
+    private $id = null;
     private $rqList = [
         'validation',
         'inscription',
@@ -21,7 +25,8 @@ class Events
         'formCreaEvent',
         'formNewMdp',
         'vosEvenements',
-        'pageEventInfos'
+        'pageEventInfos',
+        'formAjoutInv'
         //'ajouterInv'
     ];
 
@@ -122,6 +127,7 @@ class Events
 
     private function deconnexion(){
         $_SESSION['user'] = [];
+        $_SESSION['soiree'] = [];
         $this->action->ajouterAction('deconnexion', '');
     }
 
@@ -159,20 +165,40 @@ class Events
     private function vosEvenements(){
         $this->action->affichageDefaut('#intro', $this->lectureForm('pageEvent'));
        $infoSoiree =  $this->db->procCall('infoSoirees', [$_SESSION['user']['idUser']]);
-       $_SESSION['soiree'] = $infoSoiree;
      //  $_SESSION['soiree']['idEvent'] = $infoSoiree[0]['idEvent'];
        //$this->action->ajouterAction('test', $_SESSION['soiree']);
        $this->action->ajouterAction('infoSoiree', $infoSoiree);
     }
-    private function pageEventInfos(){
-        //$listeInvites = $this->db->procCall('listeInvites', )
+    private function pageEventInfos($id){
+       // $this->action->ajouterAction('test', $_POST);
         $this->action->affichageDefaut('#infoPrecises', $this->lectureForm('pageEventInfos'));
-        //$this->action->ajouterAction('listeInvites', );
+        $users= $this->db->procCall('listeInvites', [$id]);
+        $pseudos = $this->db->procCall('tousLesUsers', ['']);
+        $this->action->ajouterAction('listeInvites', $users);
+        $this->action->ajouterAction('tousLesPseudos', $pseudos);
+    }
+    private function formAjoutInv(){
+       // if((int) $t)
+      //  $this->db->procCall('ajouterInvites',[$_POST['pseudoInv'], $id]);
+       /* $this->action->ajouterAction('ajoutInv', 'Vous avez ajoute un nouveau invite');
+        $this->action->affichageDefaut('#infoPrecises', $this->lectureForm('pageEventInfos'));*/
+       // $this->action->ajouterAction('test', $id);
+        $user = $this->db->procCall('verifPseudo', [$_POST['pseudoInv']]);
+        if($_POST['pseudoInv'] == '' || !$user){
+            $this->action->ajouterAction('errorUser', 'Le pseudo n existe pas');
+        }
+        else {
+            $this->action->ajouterAction('modifMdp', 'Le pseudo a été rajouté avec succes');
+        }
     }
     private function gestionRequetes($rq= ''){
         if($this->reqValid($rq)){
             $nomFonction = $rq;
             $this->$nomFonction();
+        }
+        if((int) $rq){
+            $this->pageEventInfos($rq);
+            //$this->formAjoutInv($rq);
         }
         else {
             return false;
