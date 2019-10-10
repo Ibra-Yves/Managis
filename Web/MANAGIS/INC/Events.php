@@ -93,10 +93,12 @@ class Events
         else {
             $this->db->procCall('creationUser', [$_POST['pseudo'], $_POST['email'], hash('md5', $_POST['mdp'])]);
             $idUser = $this->db->procCall('connexionUser', [$_POST['pseudo'], hash('md5', $_POST['mdp'])]);
+            $_SESSION['user']= $idUser[0];
+            $_SESSION['user']['pseudo'] = $idUser[0]['pseudo'];
+            $_SESSION['user']['idUser'] = $idUser[0]['idUser'];
             if($idUser){
-                $_SESSION['user'] = $idUser;
                 $datas = [
-                    'pseudo' => $idUser[0]['pseudo']
+                    'pseudo' =>  $_SESSION['user']['pseudo']
                 ];
                 $this->action->ajouterAction( 'connexion', $datas);
             }

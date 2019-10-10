@@ -40,6 +40,7 @@ function gererDonnes(retour){
                 case 'affiche' :
                     let dest = actionDatas['dest'];
                     $(actionDatas['dest']).html(actionDatas['content']);
+                    $('main').html('');
                     evenements(dest);
                     break;
                 case 'connexion' :
@@ -53,6 +54,7 @@ function gererDonnes(retour){
                     $('body').find('[href="inscription.php"]').html('Créer votre evenement').attr('href', 'addEvent.php');
                     $('body').find('[href="quiSommesNous.php"]').html('Espace Membre').attr('href', 'espaceMembre.php');
                     $('body').find('[href="connexion.php"]').html('deconnexion').attr('href', 'deconnexion.php');
+                    $('main').html('');
                     //evenements('a');
                     break;
                 case 'deconnexion' :
@@ -87,6 +89,7 @@ function gererDonnes(retour){
                     });
                     table+= '<tbody>'+ content+ '</tbody>';
                     table+= '</table>';
+                    $('main').html('');
                     $('#infoCompte').html(table);
                     break;
                 case 'infoSoiree' :
@@ -103,6 +106,7 @@ function gererDonnes(retour){
 
                     });
                     $('#infoSoiree').html(tableSoirees);
+                    $('main').html('');
                     evenements('#infoSoiree');
                     break;
                 case 'listeInvites' :
