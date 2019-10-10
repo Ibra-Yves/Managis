@@ -77,20 +77,16 @@ function gererDonnes(retour){
                         console.log(actionDatas);
                     break;
                 case 'espaceMembre' :
-                    let title =  '<h2>Gestion de compte</h2>';
-                    let table = '';
                     let content = '';
-                    table += title;
-                    table += '<table>';
                     actionDatas.forEach(function(data){
-                        content+= '<tr> <th><h4>Psuedo: </h4></th><td><h4>'+data['pseudo'] + '</h4></td></tr>' +
-                                    '<tr><th><h4>Mail: </h4></th><td><h4>'+data['email']+'</h4></td></tr>'+
-                                    '<tr><th><h4>Date de creation du compte: </h4></th><td><h4>'+data['dateCrea']+'<h3></td></tr>';
+                        content+= ' <tr>\n' +
+                            '                <td class="taillePolice">'+data['pseudo'] +'</td>\n' +
+                            '                    <td class="taillePolice">'+data['dateCrea']+'</td>\n' +
+                            '                <td class="taillePolice">'+data['email']+'</td>\n' +
+                            '                    </tr>';
                     });
-                    table+= '<tbody>'+ content+ '</tbody>';
-                    table+= '</table>';
                     $('main').html('');
-                    $('#infoCompte').html(table);
+                    $('#infoCompte').html(content);
                     break;
                 case 'infoSoiree' :
                     let tableSoirees = '';

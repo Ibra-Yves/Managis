@@ -11,7 +11,6 @@ class Events
     private $rq = null;
     private $db = null;
     private $session = null;
-    private $id = null;
     private $rqList = [
         'validation',
         'inscription',
@@ -129,7 +128,7 @@ class Events
 
     private function deconnexion(){
         $_SESSION['user'] = [];
-        $_SESSION['soiree'] = [];
+        $_SESSION['idEvent'] = [];
         $this->action->ajouterAction('deconnexion', '');
     }
 
@@ -173,34 +172,53 @@ class Events
     }
     private function pageEventInfos($id){
        // $this->action->ajouterAction('test', $_POST);
+        $_SESSION['idEvent'] = $id;
         $this->action->affichageDefaut('#infoPrecises', $this->lectureForm('pageEventInfos'));
         $users= $this->db->procCall('listeInvites', [$id]);
         $pseudos = $this->db->procCall('tousLesUsers', ['']);
         $this->action->ajouterAction('listeInvites', $users);
         $this->action->ajouterAction('tousLesPseudos', $pseudos);
+       // return $id;
     }
     private function formAjoutInv(){
        // if((int) $t)
       //  $this->db->procCall('ajouterInvites',[$_POST['pseudoInv'], $id]);
        /* $this->action->ajouterAction('ajoutInv', 'Vous avez ajoute un nouveau invite');
         $this->action->affichageDefaut('#infoPrecises', $this->lectureForm('pageEventInfos'));*/
-       // $this->action->ajouterAction('test', $id);
+       // $listeInvites = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+         //$this->action->ajouterAction('test', $listeInvites);
         $user = $this->db->procCall('verifPseudo', [$_POST['pseudoInv']]);
-        if($_POST['pseudoInv'] == '' || !$user){
-            $this->action->ajouterAction('errorUser', 'Le pseudo n existe pas');
+        $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+        foreach($verifInvite as $key){
+            if($key['pseudo'] == $_POST['pseudoInv']) {
+                $this->action->ajouterAction('errorUser', 'Le pseudo n existe pas ou invite se trouve dans la liste');
+            }
         }
+       // $this->action->ajouterAction('test', $alo);
+        if($_POST['pseudoInv'] == '' || !$user){
+            $this->action->ajouterAction('errorUser', 'Le pseudo n existe pas ou invite se trouve dans la liste');
+        }
+        /*if($_POST['pseudoInv'] = 0){
+            $this->action->ajouterAction('errorUser', 'Le pseudo n existe pas ou invite se trouve dans la liste');
+        }*/
         else {
+            //$this->db->procCall('ajouterInvites',[$_POST['pseudoInv'], $_SESSION['idEvent']]);
+            $invites= $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+            $this->action->affichageDefaut('#infoPrecises', $this->lectureForm('pageEventInfos'));
             $this->action->ajouterAction('modifMdp', 'Le pseudo a été rajouté avec succes');
+            $pseudos = $this->db->procCall('tousLesUsers', ['']);
+            $this->action->ajouterAction('tousLesPseudos', $pseudos);
+            $this->action->ajouterAction('listeInvites', $invites);
         }
     }
     private function gestionRequetes($rq= ''){
         if($this->reqValid($rq)){
             $nomFonction = $rq;
             $this->$nomFonction();
+          //  array_push($this->id, $rq);
         }
         if((int) $rq){
             $this->pageEventInfos($rq);
-            //$this->formAjoutInv($rq);
         }
         else {
             return false;

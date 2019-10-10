@@ -14,12 +14,7 @@
 
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <td class="taillePolice">Momo</td>
-                                <td class="taillePolice">2@qq</td>
-                                <td class="taillePolice">19/02/1996</td>
-                            </tr>
+                            <tbody id="infoCompte">
                             </tbody>
                         </table>
                     </div>
