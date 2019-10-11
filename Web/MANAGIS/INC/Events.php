@@ -26,7 +26,8 @@ class Events
         'vosEvenements',
         'pageEventInfos',
         'formAjoutInv',
-        'formFournitures'
+        'formFournitures',
+        'mdpOublie'
         //'ajouterInv'
     ];
 
@@ -227,6 +228,11 @@ class Events
             $listeFournitures = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
             $this->action->ajouterAction('listeFourniture', $listeFournitures);
         }
+    }
+
+    private function mdpOublie(){
+       // $this->lectureForm('#intro', $this->lectureForm('mdpOublie'));
+        $this->action->affichageDefaut('#intro', $this->lectureForm('mdpOublie'));
     }
     private function gestionRequetes($rq= ''){
         if($this->reqValid($rq)){
