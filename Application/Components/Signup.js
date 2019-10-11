@@ -2,7 +2,7 @@ import React, { Component} from 'react'
 import {
 	StyleSheet,
 	Text,
-	View,
+	View
 }
 from 'react-native';
 import Logo from '../Components/Logo.js';

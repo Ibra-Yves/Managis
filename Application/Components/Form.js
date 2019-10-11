@@ -8,7 +8,7 @@ import {
 }
 from 'react-native';
 
-export default class Logo extends Component {
+export default class Form extends Component {
   render() {
     return (
 	
@@ -67,4 +67,3 @@ const styles = StyleSheet.create({
 		paddingVertical: 13
 	}
 });
-
