@@ -25,7 +25,8 @@ class Events
         'formNewMdp',
         'vosEvenements',
         'pageEventInfos',
-        'formAjoutInv'
+        'formAjoutInv',
+        'formFournitures'
         //'ajouterInv'
     ];
 
@@ -154,7 +155,7 @@ class Events
 
     private function formNewMdp(){
         $verifMdp = $this->db->procCall('connexionUser', [$_SESSION['user']['pseudo'], hash('md5', $_POST['ancienMDP'])]);
-        if($_POST['newMDP'] !=$_POST['newMDPconfirm'] || !$verifMdp){
+        if($_POST['newMDP'] !=$_POST['confirmationMdp'] || !$verifMdp){
             $this->action->ajouterAction('errorPass', 'L un des mot de passe de correspond pas');
         }
         else {
@@ -200,6 +201,9 @@ class Events
             $this->action->ajouterAction('tousLesPseudos', $pseudos);
             $this->action->ajouterAction('listeInvites', $invites);
         }
+    }
+    private function formFournitures(){
+        $this->action->ajouterAction('test', $_POST);
     }
     private function gestionRequetes($rq= ''){
         if($this->reqValid($rq)){

@@ -114,15 +114,14 @@
             <div class="card-body">
                 <h5 class="card-title">Ajouter des fournitures !</h5>
                 <br>
-                <input type="text" id="pseudo" name="pseudo" class="form-control input-sm"
-                       placeholder="Fourniture pour l'événement">
+                <form id="formFournitures" name="formFournitures" method="post" action="validation.html">
+                <input type="text"  name="fourniture" class="form-control input-sm" placeholder="Fourniture pour l'événement">
                 <br>
-                <button type="button" id="changerMDP" class="btn btn-primary boutonEvent">Ajouter la fourniture à la
-                    liste</button>
+                <input type="submit" value="Ajouter la fourniture à la liste" class="btn btn-primary boutonEvent">
+                </form>
             </div>
         </div>
     </div>
-
 </div>
 </div>
 </div>
