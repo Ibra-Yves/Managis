@@ -1,4 +1,4 @@
-import React, { Component} from 'react'
+import React, { Component } from 'react'
 import {
 	StyleSheet,
 	Text,
@@ -10,24 +10,22 @@ from 'react-native';
 
 import Login from './Components/Login.js';
 import Signup from './Components/Signup.js';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default class App extends Component {
   render() {
     return (
      <View style={styles.container}>
-	<KeyboardAwareScrollView>
-	 <StatusBar
-	 backgroundColor="white"
-	 barStyle="light-content"
-	 />
-	 
-	 <Login/>
-	
-	 </KeyboardAwareScrollView>
-	 
-	 </View>
+	 <KeyboardAwareScrollView>
+	 	<StatusBar
+	 	backgroundColor="white"
+		 barStyle="light-content"
+	 	/>
 
+	 <Signup/>
+	 </KeyboardAwareScrollView>
+	 </View>
 	
     );
   }
