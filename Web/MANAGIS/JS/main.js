@@ -128,6 +128,25 @@ function gererDonnes(retour){
                         source: pseudos
                     });
                     break;
+                case 'listeFourniture' :
+                    let tableFournitures ='';
+                    let k = 1;
+                    actionDatas.forEach(function(data){
+                        tableFournitures+= '                    <tr>\n' +
+                            '                        <th scope="row">'+ k++ +'</th>\n' +
+                            '                        <td class="taillePolice">'+ data['fourniture']+'</td>\n' +
+                            '                        <td>\n' +
+                            '                            <button type="button" id="apporte" class="btn btn-primary boutonEvent">+</button>\n' +
+                            '                        </td>\n' +
+                            '                        <td>\n' +
+                            '                            <button type="button" id="retire" class="btn btn-primary boutonEvent">-</button>\n' +
+                            '                        </td>\n' +
+                            '                        <td class="taillePolice">'+ data['quantite'] +'</td>\n' +
+                            '                    </tr>\n' +
+                            '                    <tr>'
+                    });
+                    $('#listeFournitures').html(tableFournitures);
+                    break;
                 case 'Probleme JSON' :
                     $('#error').html(actionDatas['donnes']);
                     break;

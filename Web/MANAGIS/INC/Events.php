@@ -178,6 +178,8 @@ class Events
         $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
         $users= $this->db->procCall('listeInvites', [$id]);
         $pseudos = $this->db->procCall('tousLesUsers', ['']);
+        $listeFournitures = $this->db->procCall('listeFourniture', [$id]);
+        $this->action->ajouterAction('listeFourniture', $listeFournitures);
         $this->action->ajouterAction('listeInvites', $users);
         $this->action->ajouterAction('tousLesPseudos', $pseudos);
        // return $id;
@@ -196,7 +198,7 @@ class Events
         else {
             $this->db->procCall('ajouterInvites',[$_POST['pseudoInv'], $_SESSION['idEvent']]);
             $invites= $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
-            $this->action->affichageDefaut('#infoPrecises', $this->lectureForm('pageEventInfos'));
+            $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
             $this->action->ajouterAction('modifMdp', 'Le pseudo a été rajouté avec succes');
             $pseudos = $this->db->procCall('tousLesUsers', ['']);
             $this->action->ajouterAction('tousLesPseudos', $pseudos);
@@ -204,7 +206,11 @@ class Events
         }
     }
     private function formFournitures(){
-        $this->action->ajouterAction('test', $_POST);
+        //$this->action->ajouterAction('test', $_POST);
+        $this->db->procCall('ajouterFournitures', [$_SESSION['idEvent'],$_POST['fourniture']]);
+        $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
+        $listeFournitures = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
+        $this->action->ajouterAction('listeFourniture', $listeFournitures);
     }
     private function gestionRequetes($rq= ''){
         if($this->reqValid($rq)){

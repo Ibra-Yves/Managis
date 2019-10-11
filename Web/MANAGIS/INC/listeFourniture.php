@@ -53,29 +53,7 @@
                         <th style="width: 15%"scope="col" class="taillePolice">Quantité</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td class="taillePolice">Vodka</td>
-                        <td>
-                            <button type="button" id="apporte" class="btn btn-primary boutonEvent">+</button>
-                        </td>
-                        <td>
-                            <button type="button" id="retire" class="btn btn-primary boutonEvent">-</button>
-                        </td>
-                        <td class="taillePolice">35</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td class="taillePolice">Doritos sel</td>
-                        <td>
-                            <button type="button" id="apporte" class="btn btn-primary boutonEvent">+</button>
-                        </td>
-                        <td>
-                            <button type="button" id="apporte" class="btn btn-primary boutonEvent">-</button>
-                        </td>
-                        <td class="taillePolice">3</td>
-                    </tr>
+                    <tbody id="listeFournitures">
                     </tbody>
                 </table>
             </div>
