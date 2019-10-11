@@ -22,5 +22,6 @@
             </div>
         </div>
     </div>
+    <div id="fournitures"></div>
 </div>
-        <div class="col-md-6" id="infoPrecises"></div>
+        <div class="col-md-6" id="listeInvites"></div>
