@@ -27,7 +27,8 @@ class Events
         'pageEventInfos',
         'formAjoutInv',
         'formFournitures',
-        'mdpOublie'
+        'mdpOublie',
+        'formMdpOublie'
         //'ajouterInv'
     ];
 
@@ -85,11 +86,6 @@ class Events
         if($_POST['mdp'] != $_POST['confirmationMdp']){
             $this->action->ajouterAction( 'errorPass','Les deux mots de passes ne correspondent pas');
             //$this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
-        }
-        if($idUser || $_POST['mdp'] != $_POST['confirmationMdp'] || $idMail){
-           // $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
-          //  $this->action->ajouterAction( 'wrongPass','L utilisateur et le mail existe deja');
-           // $this->action->ajouterAction( 'wrongPass','Mau');
         }
         else {
             $this->db->procCall('creationUser', [$_POST['pseudo'], $_POST['email'], hash('md5', $_POST['mdp'])]);
@@ -233,6 +229,23 @@ class Events
     private function mdpOublie(){
        // $this->lectureForm('#intro', $this->lectureForm('mdpOublie'));
         $this->action->affichageDefaut('#intro', $this->lectureForm('mdpOublie'));
+    }
+    private function formMdpOublie()
+    {
+        $verifPseudo = $this->db->procCall('verifPseudo', [$_POST['pseudo']]);
+        $verifMail = $this->db->procCall('verifEmail', [$_POST['email']]);
+        $mail = $_POST['email'];
+        $pseudo = $_POST['pseudo'];
+        if (!$verifMail || !$verifPseudo || $_POST['pseudo'] = '' || $_POST['email'] = '') {
+            $this->action->ajouterAction('errorUser', 'Pseudo ou mail incorrect');
+        } else {
+            $this->action->ajouterAction('modifMdp', 'Votre mot de passe vous a été envoyé par mail passez à la connexion');
+            $chaineNewMdp = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            $melangeChaine = str_shuffle($chaineNewMdp);
+            $nouveauMdp = substr($melangeChaine, 0, 8);
+            $this->db->procCall('modifMdp', [$pseudo, hash('md5', $nouveauMdp)]);
+            mail($mail, 'Recuperation du mot de passe', 'Bonjour ' . $pseudo . ' voici votre nouveau mot de passe: ' . $nouveauMdp);
+        }
     }
     private function gestionRequetes($rq= ''){
         if($this->reqValid($rq)){

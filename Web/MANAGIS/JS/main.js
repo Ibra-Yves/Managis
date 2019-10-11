@@ -163,6 +163,7 @@ function gererDonnes(retour){
                     break;
                 case 'succInv' :
                     $('#errorFormm').html('<div class="alert alert-success" role="alert">'+actionDatas);
+
                     break;
                 default :
                    console.log('Action inconnue '+ actionName);
