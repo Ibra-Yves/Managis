@@ -1,17 +1,16 @@
-<div class="container-fluid">
-    <div class="row text-center">
-        <div class="col-md-6 ">
-            <div class="card mb-3 transparent" style="max-width: 110rem;">
-                <div class="card-header">Détails de votre compte</div>
-                <div class="card-body">
+<div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Changer de mot de passe</h3>
+        </div>
+        <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
                             <tr>
                                 <th style="width: 25%" scope="col" class="taillePolice">Pseudo</th>
-                                <th style="width: 25%" scope="col" class="taillePolice">Mail</th>
                                 <th style="width: 20%" scope="col" class="taillePolice">Date de création de compte</th>
-
+                                <th style="width: 25%" scope="col" class="taillePolice">Mail</th>
                             </tr>
                             </thead>
                             <tbody id="infoCompte">
@@ -21,35 +20,34 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
-<div id="infoCompte" class="row text-center">
-    <div class="col-md-6 ">
-        <div class="card mb-3 transparent" style="max-width: 110rem;">
-            <div class="card-header">Changement mot de passe</div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th style="width: 5%" scope="col" class="taillePolice">Ancien mot de passe</th>
-                            <th style="width: 25%" scope="col" class="taillePolice">Nouveau mot de passe</th>
-                            <th style="width: 25%" scope="col" class="taillePolice">Confirmation</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <!--<th scope="row">1</th>-->
-                            <td class="taillePolice"><input type="password" name="ancienMDP" id ="ancienMDP" placeholder="Ancien mot de passe"></td>
-                            <td class="taillePolice"><input type="password" name="newMDP" id="newMDP" placeholder="Nouveau mot de passe"></td>
-                            <td class="taillePolice"><input type="password" name="newMDPconfirm" id="newMDPconfirm" placeholder="Nouveau mot de passe"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <button type="button" id="*" class="btn btn-primary boutonEvent">Confirmer</button>
+<div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Changer de mot de passe</h3>
+    </div>
+    <div class="panel-body">
+        <form id="formInscription" class="formInscription" name="formInscription" method="post" action="validation.html">
+            <div id="errorForm"></div>
+            <div class="form-group">
+                <input type="email" name="" id="" class="form-control input-sm" placeholder="Ancien mot de passe">
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="password" id="" name="" class="form-control input-sm" placeholder="Nouveau mot de passe">
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="password" id="confirmationMdp" name="confirmationMdp" class="form-control input-sm" placeholder="Confirmation">
+                    </div>
                 </div>
             </div>
-        </div>
+            <input type="submit" value="Changez mot de passe" class="btn btn-primary align-middle">
+        </form>
     </div>
+</div>
 </div>
