@@ -1,7 +1,7 @@
-<div id="Maxime">
-ceci est un test
-</div>
-            <div class="card transparent mb-3" style="max-width: 110rem;">
+
+<div class="card transparent mb-3" style="max-width: 110rem;">
+<div class="card transparent mb-3" style="max-width: 110rem;">
+
                 <div class="card-header">Listes des invités</div>
                 <div class="card-body">
                     <div class="table-responsive">
