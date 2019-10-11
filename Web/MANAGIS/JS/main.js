@@ -158,6 +158,12 @@ function gererDonnes(retour){
                 case 'modifMdp' :
                     $('#errorForm').html('<div class="alert alert-success" role="alert">'+actionDatas);
                     break;
+                case 'errorInv' :
+                    $('#errorFormm').html('<div class="alert alert-danger" role="alert">'+actionDatas);
+                    break;
+                case 'succInv' :
+                    $('#errorFormm').html('<div class="alert alert-success" role="alert">'+actionDatas);
+                    break;
                 default :
                    console.log('Action inconnue '+ actionName);
            }

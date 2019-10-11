@@ -187,30 +187,46 @@ class Events
     private function formAjoutInv(){
         $user = $this->db->procCall('verifPseudo', [$_POST['pseudoInv']]);
         $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
-        $alo =  [];
+        $list =  [];
         foreach($verifInvite as $key){
-            $alo [] = $key['pseudo'];
+            $list [] = $key['pseudo'];
         }
-        $resultat = array_intersect($alo, [$_POST['pseudoInv']]);
-        if($_POST['pseudoInv'] == '' || !$user || $resultat){
-            $this->action->ajouterAction('errorUser', 'Le pseudo n existe pas ou invite se trouve dans la liste');
+        $resultatSansEspaces = array_intersect($list, [$_POST['pseudoInv']]);
+        $enleverEspaces = trim($_POST['pseudoInv']);
+        $resultatAvecEspaces = array_intersect($list, [$enleverEspaces]);
+        if($_POST['pseudoInv'] == '' || !$user || $resultatSansEspaces || $resultatAvecEspaces){
+            $this->action->ajouterAction('errorInv', 'Le pseudo n existe pas ou invite se trouve dans la liste');
         }
         else {
             $this->db->procCall('ajouterInvites',[$_POST['pseudoInv'], $_SESSION['idEvent']]);
             $invites= $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
             $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
-            $this->action->ajouterAction('modifMdp', 'Le pseudo a été rajouté avec succes');
+            $this->action->ajouterAction('succInv', 'Le pseudo a été rajouté avec succes');
             $pseudos = $this->db->procCall('tousLesUsers', ['']);
             $this->action->ajouterAction('tousLesPseudos', $pseudos);
             $this->action->ajouterAction('listeInvites', $invites);
         }
     }
     private function formFournitures(){
+        $verifFourniture= $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
+        $list =  [];
+        foreach($verifFourniture as $key){
+            $list [] = $key['fourniture'];
+        }
+        $resultatSansEspaces = array_intersect($list, [$_POST['fourniture']]);
+        $enleverEspaces= trim($_POST['fourniture']);
+        $resultatAvecEspaces = array_intersect($list, [$enleverEspaces]);
+        if($_POST['fourniture'] == ''  || $resultatSansEspaces || $resultatAvecEspaces){
+            $this->action->ajouterAction('errorUser', 'Fourniture se trouve deja dans la liste');
+        }
         //$this->action->ajouterAction('test', $_POST);
-        $this->db->procCall('ajouterFournitures', [$_SESSION['idEvent'],$_POST['fourniture']]);
-        $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
-        $listeFournitures = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
-        $this->action->ajouterAction('listeFourniture', $listeFournitures);
+        else {
+            $this->db->procCall('ajouterFournitures', [$_SESSION['idEvent'], $_POST['fourniture']]);
+            $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
+            $this->action->ajouterAction('modifMdp', 'La fourniture a été ajouté avec succes');
+            $listeFournitures = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
+            $this->action->ajouterAction('listeFourniture', $listeFournitures);
+        }
     }
     private function gestionRequetes($rq= ''){
         if($this->reqValid($rq)){
