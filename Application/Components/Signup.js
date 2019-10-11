@@ -2,9 +2,11 @@ import React, { Component} from 'react'
 import {
 	StyleSheet,
 	Text,
-	View
+    View,
+    StatusBar
 }
 from 'react-native';
+
 import Logo from '../Components/Logo.js';
 import Form from '../Components/Form.js';
 
@@ -14,7 +16,7 @@ export default class Signup extends Component {
 		
      <View style={styles.container}>
 		<Logo/>
-		<Form/>
+		<Form type="Signup"/>
 		<View style={styles.bottomView}>
 		<Text style={styles.text}>Already have an account?</Text>
 		<Text style={styles.signupButton}> Sign in</Text>
