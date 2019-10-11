@@ -24,7 +24,6 @@ export default class login extends Component {
     )
   }
 }
-
 const styles = StyleSheet.create({
 	container : {
 		backgroundColor: 'black',
@@ -32,7 +31,6 @@ const styles = StyleSheet.create({
 		alignItems:'center',
 		justifyContent:'center'
 	},
-
 	bottomView:{
  
 		width: '100%', 
@@ -47,7 +45,6 @@ const styles = StyleSheet.create({
 		color: 'rgb(255,255,255)',
 		fontSize:16
 	},
-
 	signupButton: {
 		
 		justifyContent:'center',
@@ -55,6 +52,5 @@ const styles = StyleSheet.create({
 		fontSize:16,
 		fontWeight:'500'
 	}
-
 	
 });
