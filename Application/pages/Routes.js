@@ -10,15 +10,20 @@ import Signup from '../Components/Signup.js';
 
 //const AppContainer = createAppContainer(AppNavigator);
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 export default class Routes extends Component {
     render(){
         return(
             <Router>
+                <KeyboardAwareScrollView>
                 <Stack key="root" hideNavBar={true}>
                     <Scene key="login" component={Login} title="Login" initial={true}/>
                     <Scene key="Signup" component={Signup} title="Register"/>
                 </Stack>
+
+                </KeyboardAwareScrollView>
             </Router>
         )
     }
