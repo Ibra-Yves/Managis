@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 import {
 	StyleSheet,
-	Text,
 	View,
 	StatusBar
 }
 from 'react-native';
 
-
-import Login from './Components/Login.js';
-import Signup from './Components/Signup.js';
+import Routes from "./pages/Routes.js";
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -23,7 +20,7 @@ export default class App extends Component {
 		 barStyle="light-content"
 	 	/>
 
-	 <Signup/>
+	 <Routes/>
 	 </KeyboardAwareScrollView>
 	 </View>
 	
@@ -33,8 +30,8 @@ export default class App extends Component {
 
 const styles = StyleSheet.create({
 	container : {
-		backgroundColor: 'black',
-		flexGrow: 1,
+		backgroundColor: '#455a64',
+		flex: 1,
 		alignItems:'center',
 		justifyContent:'center'
 	}
