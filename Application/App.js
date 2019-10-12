@@ -10,10 +10,11 @@ import Routes from "./pages/Routes.js";
 
 //import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
+
 export default class App extends Component {
   render() {
     return (
-     <View style={styles.container}>
+     <View style={styles.container}> 
 	 		<StatusBar
 	 		backgroundColor="white"
 		 	barStyle="light-content"
