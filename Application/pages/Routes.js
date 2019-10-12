@@ -20,7 +20,7 @@ export default class Routes extends Component {
                 <KeyboardAwareScrollView>
                 <Stack key="root" hideNavBar={true}>
                     <Scene key="login" component={Login} title="Login" initial={true}/>
-                    <Scene key="Signup" component={Signup} title="Register"/>
+                    <Scene key="signup" component={Signup} title="Register"/>
                 </Stack>
 
                 </KeyboardAwareScrollView>
