@@ -47,6 +47,8 @@ class Db
             case 'connexionUser' :
             case 'modifMdp'  :
             case 'ajouterInvites'    :
+            case 'ajouterFournitures' :
+            case 'ajoutCommentaire' :
             array_push($params, '?', '?');
             try {
                 $this->connexionBDD();
@@ -65,6 +67,8 @@ class Db
             array_push($params, '?', '?', '?');
             case 'infoSoirees' :
             case 'listeInvites' :
+            case 'listeFourniture' :
+            case 'listeCommentaire'    :
                 array_push($params, '?');
             try {
                 $this->connexionBDD();

@@ -25,7 +25,11 @@ class Events
         'formNewMdp',
         'vosEvenements',
         'pageEventInfos',
-        'formAjoutInv'
+        'formAjoutInv',
+        'formFournitures',
+        'mdpOublie',
+        'formMdpOublie',
+        'commentaire'
         //'ajouterInv'
     ];
 
@@ -83,11 +87,6 @@ class Events
         if($_POST['mdp'] != $_POST['confirmationMdp']){
             $this->action->ajouterAction( 'errorPass','Les deux mots de passes ne correspondent pas');
             //$this->action->affichageDefaut('#formulaire', $this->lectureForm('inscription'));
-        }
-        if($idUser || $_POST['mdp'] != $_POST['confirmationMdp'] || $idMail){
-           // $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
-          //  $this->action->ajouterAction( 'wrongPass','L utilisateur et le mail existe deja');
-           // $this->action->ajouterAction( 'wrongPass','Mau');
         }
         else {
             $this->db->procCall('creationUser', [$_POST['pseudo'], $_POST['email'], hash('md5', $_POST['mdp'])]);
@@ -154,7 +153,7 @@ class Events
 
     private function formNewMdp(){
         $verifMdp = $this->db->procCall('connexionUser', [$_SESSION['user']['pseudo'], hash('md5', $_POST['ancienMDP'])]);
-        if($_POST['newMDP'] !=$_POST['newMDPconfirm'] || !$verifMdp){
+        if($_POST['newMDP'] !=$_POST['confirmationMdp'] || !$verifMdp){
             $this->action->ajouterAction('errorPass', 'L un des mot de passe de correspond pas');
         }
         else {
@@ -173,32 +172,101 @@ class Events
     private function pageEventInfos($id){
        // $this->action->ajouterAction('test', $_POST);
         $_SESSION['idEvent'] = $id;
-        $this->action->affichageDefaut('#infoPrecises', $this->lectureForm('pageEventInfos'));
+        $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
+        $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
         $users= $this->db->procCall('listeInvites', [$id]);
         $pseudos = $this->db->procCall('tousLesUsers', ['']);
+        $listeFournitures = $this->db->procCall('listeFourniture', [$id]);
+        $listeComm = $this->db->procCall('listeCommentaire', [$id]);
+        $this->action->ajouterAction('listeFourniture', $listeFournitures);
         $this->action->ajouterAction('listeInvites', $users);
         $this->action->ajouterAction('tousLesPseudos', $pseudos);
+        $this->action->ajouterAction('listeComm', $listeComm);
        // return $id;
     }
     private function formAjoutInv(){
         $user = $this->db->procCall('verifPseudo', [$_POST['pseudoInv']]);
         $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
-        $alo =  [];
+        $list =  [];
         foreach($verifInvite as $key){
-            $alo [] = $key['pseudo'];
+            $list [] = $key['pseudo'];
         }
-        $resultat = array_intersect($alo, [$_POST['pseudoInv']]);
-        if($_POST['pseudoInv'] == '' || !$user || $resultat){
-            $this->action->ajouterAction('errorUser', 'Le pseudo n existe pas ou invite se trouve dans la liste');
+        $resultatSansEspaces = array_intersect($list, [$_POST['pseudoInv']]);
+        $enleverEspaces = trim($_POST['pseudoInv']);
+        $resultatAvecEspaces = array_intersect($list, [$enleverEspaces]);
+        if($_POST['pseudoInv'] == '' || !$user || $resultatSansEspaces || $resultatAvecEspaces){
+            $this->action->ajouterAction('errorInv', 'Le pseudo n existe pas ou invite se trouve dans la liste');
         }
         else {
             $this->db->procCall('ajouterInvites',[$_POST['pseudoInv'], $_SESSION['idEvent']]);
             $invites= $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
-            $this->action->affichageDefaut('#infoPrecises', $this->lectureForm('pageEventInfos'));
-            $this->action->ajouterAction('modifMdp', 'Le pseudo a été rajouté avec succes');
+            $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
+            $this->action->ajouterAction('succInv', 'Le pseudo a été rajouté avec succes');
             $pseudos = $this->db->procCall('tousLesUsers', ['']);
             $this->action->ajouterAction('tousLesPseudos', $pseudos);
             $this->action->ajouterAction('listeInvites', $invites);
+        }
+    }
+    private function formFournitures(){
+        $verifFourniture= $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
+        $list =  [];
+        foreach($verifFourniture as $key){
+            $list [] = $key['fourniture'];
+        }
+
+        $resultatSansEspaces = array_intersect($list, [$_POST['fourniture']]);
+        $enleverEspaces= trim($_POST['fourniture']);
+        $resultatAvecEspaces = array_intersect($list, [$enleverEspaces]);
+        if($_POST['fourniture'] == ''  || $resultatSansEspaces || $resultatAvecEspaces){
+            $this->action->ajouterAction('errorUser', 'Fourniture se trouve deja dans la liste');
+        }
+
+        else {
+            $this->db->procCall('ajouterFournitures', [$_SESSION['idEvent'], $_POST['fourniture']]);
+            $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
+            $this->action->ajouterAction('modifMdp', 'La fourniture a été ajouté avec succes');
+            $listeFournitures = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
+            $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
+            $this->action->ajouterAction('listeFourniture', $listeFournitures);
+            $this->action->ajouterAction('listeComm', $listeComm);
+        }
+    }
+
+    private function commentaire(){
+        $commentaire = $_POST['commentaire'];
+        if(empty($_POST['commentaire'])){
+            $this->action->ajouterAction('errorComm', 'Le commentaire ne peut pas être nul');
+        }
+        else {
+            $this->db->procCall('ajoutCommentaire', [$_SESSION['idEvent'], $commentaire]);
+            //$this->action->ajouterAction('test', $commentaire);
+            $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
+            $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
+            $listeFournitures = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
+            $this->action->ajouterAction('listeComm', $listeComm);
+            $this->action->ajouterAction('listeFourniture', $listeFournitures);
+        }
+    }
+
+    private function mdpOublie(){
+       // $this->lectureForm('#intro', $this->lectureForm('mdpOublie'));
+        $this->action->affichageDefaut('#intro', $this->lectureForm('mdpOublie'));
+    }
+    private function formMdpOublie()
+    {
+        $verifPseudo = $this->db->procCall('verifPseudo', [$_POST['pseudo']]);
+        $verifMail = $this->db->procCall('verifEmail', [$_POST['email']]);
+        $mail = $_POST['email'];
+        $pseudo = $_POST['pseudo'];
+        if (!$verifMail || !$verifPseudo || $_POST['pseudo'] = '' || $_POST['email'] = '') {
+            $this->action->ajouterAction('errorUser', 'Pseudo ou mail incorrect');
+        } else {
+            $this->action->ajouterAction('modifMdp', 'Votre mot de passe vous a été envoyé par mail passez à la connexion');
+            $chaineNewMdp = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            $melangeChaine = str_shuffle($chaineNewMdp);
+            $nouveauMdp = substr($melangeChaine, 0, 8);
+            $this->db->procCall('modifMdp', [$pseudo, hash('md5', $nouveauMdp)]);
+            mail($mail, 'Recuperation du mot de passe', 'Bonjour ' . $pseudo . ' voici votre nouveau mot de passe: ' . $nouveauMdp);
         }
     }
     private function gestionRequetes($rq= ''){

@@ -34,6 +34,7 @@ function requetes(event){
 function gererDonnes(retour){
     retour = lireJSON(retour);
    console.log(retour);
+    let i=1;
     retour.forEach(function(action){
         $.each(action, function(actionName, actionDatas){
             switch(actionName){
@@ -90,7 +91,6 @@ function gererDonnes(retour){
                     break;
                 case 'infoSoiree' :
                     let tableSoirees = '';
-                    let i=1;
                     actionDatas.forEach(function(data){
                         tableSoirees+= ' <tr> \n' +
                             '                                    <th scope="row">'+ i++ +'</th>\n' +
@@ -107,10 +107,9 @@ function gererDonnes(retour){
                     break;
                 case 'listeInvites' :
                     let tableInvites= '';
-                     let j=1;
                     actionDatas.forEach(function(data){
                     tableInvites+= '<tr> \n' +
-                        '<th scope="row">'+ j++ +'</th>\n' +
+                        '<th scope="row">'+ i++ +'</th>\n' +
                         '<td class="taillePolice">'+data['pseudo']+'</td>\n'
                     });
                     $('#invites').html(tableInvites);
@@ -128,6 +127,35 @@ function gererDonnes(retour){
                         source: pseudos
                     });
                     break;
+                case 'listeFourniture' :
+                    let tableFournitures ='';
+                    actionDatas.forEach(function(data){
+                    tableFournitures+= '                    <tr>\n' +
+                            '                        <th scope="row">'+ i++ +'</th>\n' +
+                            '                        <td class="taillePolice">'+ data['fourniture']+'</td>\n' +
+                            '                        <td>\n' +
+                            '                            <button type="button" id="apporte" onclick="" class="btn btn-primary boutonEvent">+</button>\n' +
+                            '                        </td>\n' +
+                            '                        <td>\n' +
+                            '                            <button type="button" id="retire" class="btn btn-primary boutonEvent">-</button>\n' +
+                            '                        </td>\n' +
+                            '                        <td class="taillePolice" id="quantite">'+ data['quantite'] +'</td>\n' +
+                            '                    </tr>\n' +
+                            '                    <tr>'
+                    });
+                    $('#listeFournitures').html(tableFournitures);
+                    break;
+                case 'listeComm' :
+                    let listeCommentaire = '';
+
+                        actionDatas.forEach(function(data){
+                            listeCommentaire+= ' <tr>\n' +
+                                '                        <th scope="row">'+ i++ +'</th>\n' +
+                                '                        <td class="taillePolice">'+data['commentaire']+'</td>\n' +
+                                '                    </tr>';
+                        });
+                    $('#listeCommentaire').html(listeCommentaire);
+                    break;
                 case 'Probleme JSON' :
                     $('#error').html(actionDatas['donnes']);
                     break;
@@ -138,6 +166,16 @@ function gererDonnes(retour){
                     break;
                 case 'modifMdp' :
                     $('#errorForm').html('<div class="alert alert-success" role="alert">'+actionDatas);
+                    break;
+                case 'errorInv' :
+                    $('#errorFormm').html('<div class="alert alert-danger" role="alert">'+actionDatas);
+                    break;
+                case 'succInv' :
+                    $('#errorFormm').html('<div class="alert alert-success" role="alert">'+actionDatas);
+
+                    break;
+                case 'errorComm' :
+                    $('#errorFormmm').html('<div class="alert alert-danger" role="alert">'+actionDatas);
                     break;
                 default :
                    console.log('Action inconnue '+ actionName);

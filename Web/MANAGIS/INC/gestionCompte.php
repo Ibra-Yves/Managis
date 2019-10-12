@@ -28,16 +28,16 @@
         <h3 class="panel-title">Changer de mot de passe</h3>
     </div>
     <div class="panel-body">
-        <form id="formInscription" class="formInscription" name="formInscription" method="post" action="validation.html">
+        <form id="formNewMdp" class="formNewMdp" name="formNewMdp" method="post" action="validation.html">
             <div id="errorForm"></div>
             <div class="form-group">
-                <input type="email" name="" id="" class="form-control input-sm" placeholder="Ancien mot de passe">
+                <input type="password" name="ancienMDP" id="ancienMDP" class="form-control input-sm" placeholder="Ancien mot de passe">
             </div>
 
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                        <input type="password" id="" name="" class="form-control input-sm" placeholder="Nouveau mot de passe">
+                        <input type="password" id="newMDP" name="newMDP" class="form-control input-sm" placeholder="Nouveau mot de passe">
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">

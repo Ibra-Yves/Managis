@@ -11,19 +11,19 @@
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <input type="text" id="pseudo" name="pseudo" class="form-control input-sm" placeholder="Pseudo">
+                                    <input type="text" id="pseudo" name="pseudo" class="form-control input-sm" placeholder="Pseudo" required>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Adresse Email">
+                            <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Adresse Email" required>
                         </div>
 
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <input type="password" id="mdp" name="mdp" class="form-control input-sm" placeholder="Mot de passe">
+                                    <input type="password" id="mdp" name="mdp" class="form-control input-sm" placeholder="Mot de passe" required>
                                 </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
@@ -31,6 +31,7 @@
                                     <input type="password" id="confirmationMdp" name="confirmationMdp" class="form-control input-sm" placeholder="Confirmation">
                                 </div>
                             </div>
+                            <input type="checkbox" required>Lu et accepté les CGU
                         </div>
                         <input type="submit" value="Inscrivez vous" class="btn btn-primary align-middle">
                     </form>

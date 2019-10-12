@@ -23,3 +23,6 @@
             <div id="fournitures"></div>
     </div>
     <div class="col-md-6" id="listInvites"></div>
+    <div id="fournitures"></div>
+</div>
+        <div class="col-md-6" id="listeInvites"></div>

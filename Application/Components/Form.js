@@ -8,7 +8,7 @@ import {
 }
 from 'react-native';
 
-export default class Logo extends Component {
+export default class Form extends Component {
   render() {
     return (
 	
@@ -26,7 +26,7 @@ export default class Logo extends Component {
 	 />
 	 
 	 <TouchableOpacity style={styles.button}>
-	 <Text style={styles.buttonText}>Login</Text>
+	 <Text style={styles.buttonText}>{this.props.type}</Text>
 	 </TouchableOpacity>
 	 
 	 </View>
@@ -67,4 +67,3 @@ const styles = StyleSheet.create({
 		paddingVertical: 13
 	}
 });
-
