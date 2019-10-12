@@ -28,7 +28,8 @@ class Events
         'formAjoutInv',
         'formFournitures',
         'mdpOublie',
-        'formMdpOublie'
+        'formMdpOublie',
+        'commentaire'
         //'ajouterInv'
     ];
 
@@ -176,9 +177,11 @@ class Events
         $users= $this->db->procCall('listeInvites', [$id]);
         $pseudos = $this->db->procCall('tousLesUsers', ['']);
         $listeFournitures = $this->db->procCall('listeFourniture', [$id]);
+        $listeComm = $this->db->procCall('listeCommentaire', [$id]);
         $this->action->ajouterAction('listeFourniture', $listeFournitures);
         $this->action->ajouterAction('listeInvites', $users);
         $this->action->ajouterAction('tousLesPseudos', $pseudos);
+        $this->action->ajouterAction('listeComm', $listeComm);
        // return $id;
     }
     private function formAjoutInv(){
@@ -210,18 +213,37 @@ class Events
         foreach($verifFourniture as $key){
             $list [] = $key['fourniture'];
         }
+
         $resultatSansEspaces = array_intersect($list, [$_POST['fourniture']]);
         $enleverEspaces= trim($_POST['fourniture']);
         $resultatAvecEspaces = array_intersect($list, [$enleverEspaces]);
         if($_POST['fourniture'] == ''  || $resultatSansEspaces || $resultatAvecEspaces){
             $this->action->ajouterAction('errorUser', 'Fourniture se trouve deja dans la liste');
         }
-        //$this->action->ajouterAction('test', $_POST);
+
         else {
             $this->db->procCall('ajouterFournitures', [$_SESSION['idEvent'], $_POST['fourniture']]);
             $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
             $this->action->ajouterAction('modifMdp', 'La fourniture a été ajouté avec succes');
             $listeFournitures = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
+            $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
+            $this->action->ajouterAction('listeFourniture', $listeFournitures);
+            $this->action->ajouterAction('listeComm', $listeComm);
+        }
+    }
+
+    private function commentaire(){
+        $commentaire = $_POST['commentaire'];
+        if(empty($_POST['commentaire'])){
+            $this->action->ajouterAction('errorComm', 'Le commentaire ne peut pas être nul');
+        }
+        else {
+            $this->db->procCall('ajoutCommentaire', [$_SESSION['idEvent'], $commentaire]);
+            //$this->action->ajouterAction('test', $commentaire);
+            $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
+            $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
+            $listeFournitures = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
+            $this->action->ajouterAction('listeComm', $listeComm);
             $this->action->ajouterAction('listeFourniture', $listeFournitures);
         }
     }
