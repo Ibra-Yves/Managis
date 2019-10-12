@@ -2,13 +2,21 @@ import React, { Component} from 'react'
 import {
 	StyleSheet,
 	Text,
-	View
+	View,
+	TouchableOpacity
 }
 from 'react-native';
 import Logo from '../Components/Logo.js';
 import Form from '../Components/Form.js';
 
+import { Actions } from 'react-native-router-flux';
+
 export default class login extends Component {
+
+  signup() {
+	Actions.signup()
+  }
+
   render() {
     return (
 		
@@ -17,7 +25,7 @@ export default class login extends Component {
 		<Form type="Login"/>
 		<View style={styles.bottomView}>
 		<Text style={styles.text}>Don't have an account yet?</Text>
-		<Text style={styles.signupButton}> Signup</Text>
+		<TouchableOpacity onPress={this.signup}><Text style={styles.signupButton}> Signup</Text></TouchableOpacity>
 		</View>
 	 </View>
 	
@@ -27,7 +35,7 @@ export default class login extends Component {
 const styles = StyleSheet.create({
 	container : {
 		backgroundColor: 'black',
-		flexGrow : 1,
+		flex : 1,
 		alignItems:'center',
 		justifyContent:'center'
 	},
