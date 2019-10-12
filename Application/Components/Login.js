@@ -11,6 +11,8 @@ import Form from '../Components/Form.js';
 
 import { Actions } from 'react-native-router-flux';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 export default class login extends Component {
 
   signup() {
@@ -21,12 +23,14 @@ export default class login extends Component {
     return (
 		
      <View style={styles.container}>
+		 <KeyboardAwareScrollView>
 		<Logo/>
 		<Form type="Login"/>
 		<View style={styles.bottomView}>
 		<Text style={styles.text}>Don't have an account yet?</Text>
 		<TouchableOpacity onPress={this.signup}><Text style={styles.signupButton}> Signup</Text></TouchableOpacity>
 		</View>
+		</KeyboardAwareScrollView>
 	 </View>
 	
     )
