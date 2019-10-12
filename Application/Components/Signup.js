@@ -3,14 +3,21 @@ import {
 	StyleSheet,
 	Text,
     View,
-    StatusBar
+	StatusBar,
+	TouchableOpacity
 }
 from 'react-native';
 
 import Logo from '../Components/Logo.js';
 import Form from '../Components/Form.js';
 
+import { Actions } from 'react-native-router-flux';
+
 export default class Signup extends Component {
+
+  goBack(){
+	Actions.pop();
+  }
   render() {
     return (
 		
@@ -19,7 +26,7 @@ export default class Signup extends Component {
 		<Form type="Signup"/>
 		<View style={styles.bottomView}>
 		<Text style={styles.text}>Already have an account?</Text>
-		<Text style={styles.signupButton}> Sign in</Text>
+		<TouchableOpacity onPress={this.goBack}><Text style={styles.signupButton}> Signup</Text></TouchableOpacity>
 		</View>
 	 </View>
 	
@@ -30,7 +37,7 @@ export default class Signup extends Component {
 const styles = StyleSheet.create({
 	container : {
 		backgroundColor: 'black',
-		flexGrow : 1,
+		flex : 1,
 		alignItems:'center',
 		justifyContent:'center'
 	},
@@ -51,7 +58,7 @@ const styles = StyleSheet.create({
 	},
 
 	signupButton: {
-		
+		flex: 1,
 		justifyContent:'center',
 		color: '#C0C0C0',
 		fontSize:16,
