@@ -174,6 +174,7 @@ class Events
        // $this->action->ajouterAction('test', $_POST);
         $_SESSION['idEvent'] = $id;
         $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
+        $this->action->affichageDefaut('#commentaires', $this->lectureForm('listeCommentaire'));
         $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
         $users= $this->db->procCall('listeInvites', [$id]);
         $pseudos = $this->db->procCall('tousLesUsers', ['']);
