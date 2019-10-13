@@ -4,7 +4,7 @@
 
         <div class="card-header">Listes des invités</div>
         <div class="card-body">
-            <div class="table-responsive" style="max-height: 150px">
+            <div class="table-responsive" style="max-height: 250px">
                 <table class="table table-striped">
                     <thead style="position: sticky; top: 0;">
                     <tr>

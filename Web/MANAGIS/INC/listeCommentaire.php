@@ -1,8 +1,9 @@
 <div class="row text-center">
     <div class="col-md-6 text-center">
-        <div class="card mb-3 transparent" style="max-width: 60rem;">
+        <div class="card mb-3 transparent" style="max-width: 110rem;">
             <div class="card-header">Liste commentaires</div>
             <div class="card-body">
+                <div class="table-responsive" style="max-height: 100px">
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -13,11 +14,12 @@
                     <tbody id="listeCommentaire">
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     </div>
     <div class="col-md-6 text-center">
-        <div class="card mb-3 transparent" style="max-width: 60rem;">
+        <div class="card mb-3 transparent" style="max-width: 110rem;">
             <div class="card-header">Conseils</div>
             <form id="commentaire" name="commentaire" method="post" action="validation.html">
                 <div id="errorFormmm"></div>
@@ -31,7 +33,4 @@
             </form>
         </div>
     </div>
-
-
-
 </div>

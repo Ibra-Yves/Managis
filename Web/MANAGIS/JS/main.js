@@ -112,7 +112,7 @@ function gererDonnes(retour){
                             '                                    <td class="taillePolice"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' +
                             '                                    <td class="taillePolice">'+data['hote']+'</td>\n' +
                             '                                    <td class="taillePolice">'+data['dateEvent']+'</td>\n' +
-                            '                                    <td class="taillePolice">'+data['adresse']+'</td>\n' +
+                            '                                    <td class="taillePolice">'+data['adresse']+' </td>\n' +
                             '                                </tr>';
 
                     });
@@ -122,13 +122,18 @@ function gererDonnes(retour){
                     break;
                 case 'listeInvites' :
                     let tableInvites= '';
-                    let j=1;
+                    let j=0;
+                    let o = 0;
+                    let p = 1;
                     actionDatas.forEach(function(data){
-                    tableInvites+= '<tr> \n' +
-                        '<th scope="row">'+ j++ +'</th>\n' +
-                        '<td class="taillePolice">'+data['pseudo']+'</td>\n'
+                    tableInvites+=
+                        '<tr> \n' +
+                        '<th scope="row" id="'+ o++ +'">'+ j++ +'</th>\n' +
+                        '<td class="taillePolice" id="'+ p++ +'">'+data['pseudo']+'<a href="'+data['pseudo']+'" style="float: right">-</a> </td> \n'
                     });
                     $('#invites').html(tableInvites);
+                    $('#0').remove();
+                     $('#1').remove();
                     evenements('#invites');
                     break;
                 case 'ajoutInv' :
@@ -151,11 +156,12 @@ function gererDonnes(retour){
                     tableFournitures+= '                    <tr>\n' +
                             '                        <th scope="row">'+ k++ +'</th>\n' +
                             '                        <td class="taillePolice">'+ data['fourniture']+'</td>\n' +
-                            '                        <td class="taillePolice"><input type="number" name="fourniture['+ data['fourniture']+']" value="'+data['quantite']+'"  min="0" style="width: 40px"></td>\n' +
+                            '                        <td class="taillePolice"><input type="number" name="fourniture['+ data['fourniture']+']" value="'+data['quantite']+'"  min="0" style="width: 40px"> <a href="'+data['fourniture']+'" style="float: right">-</a></td>\n' +
                             '                    </tr>\n' +
                             '                    <tr>'
                     });
                     $('#listeFournitures').html(tableFournitures);
+                    evenements('#listeFournitures');
                     break;
                 case 'listeComm' :
                     let listeCommentaire = '';
@@ -163,10 +169,11 @@ function gererDonnes(retour){
                         actionDatas.forEach(function(data){
                             listeCommentaire+= ' <tr>\n' +
                                 '                        <th scope="row">'+ l++ +'</th>\n' +
-                                '                        <td class="taillePolice">'+data['commentaire']+'</td>\n' +
+                                '                        <td class="taillePolice">'+data['commentaire']+'<a href="'+data['commentaire']+'" style="float: right">-</a></td>\n' +
                                 '                    </tr>';
                         });
                     $('#listeCommentaire').html(listeCommentaire);
+                    evenements('#listeCommentaire');
                     break;
                 case 'Probleme JSON' :
                     $('#intro').html(actionDatas['donnes']);

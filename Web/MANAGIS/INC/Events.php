@@ -31,7 +31,6 @@ class Events
         'formMdpOublie',
         'commentaire',
         'formQuantite'
-        //'ajouterInv'
     ];
 
     public function __construct()
@@ -234,11 +233,11 @@ class Events
         }
     }
     private function formQuantite(){
-        $bb = [];
+        $listeQuantite = [];
         foreach ($_POST['fourniture'] as $key => $value){
-            $bb['valeurs'] = $_POST['fourniture'][$key]; //renvoie ["25", "0", "0"]
-            $bb['cle'] = $key;
-            $this->db->procCall('ajoutQuantite', [$_SESSION['idEvent'], $bb['cle'],$bb['valeurs']]);
+            $listeQuantite['valeurs'] = $_POST['fourniture'][$key]; //renvoie ["25", "0", "0"]
+            $listeQuantite['cle'] = $key;
+            $this->db->procCall('ajoutQuantite', [$_SESSION['idEvent'], $listeQuantite['cle'],$listeQuantite['valeurs']]);
         }
        //$bb = array_column($_POST['fourniture']);
     }
@@ -280,7 +279,69 @@ class Events
             mail($mail, 'Recuperation du mot de passe', 'Bonjour ' . $pseudo . ' voici votre nouveau mot de passe: ' . $nouveauMdp);
         }
     }
+
+    private function supprimerCommentaire($req){
+        $requeteComm = [];
+        foreach ($req as $key => $value){
+            $requeteComm = $value;
+        }
+        $this->db->procCall('supprCommentaire', [$_SESSION['idEvent'],$requeteComm]);
+        $this->action->affichageDefaut('#commentaires', $this->lectureForm('listeCommentaire'));
+        $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
+        $this->action->ajouterAction('listeComm', $listeComm);
+
+    }
+    private function supprimerFourniture($req){
+        $requeteFour = [];
+        foreach ($req as $key => $value){
+            $requeteFour = $value;
+        }
+        $this->db->procCall('supprFourniture', [$_SESSION['idEvent'],$requeteFour]);
+        $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
+        $listeFourniture = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
+        $this->action->ajouterAction('listeFourniture', $listeFourniture);
+    }
+
+    private function supprimerInvite($req){
+        $requeteInv = [];
+        foreach ($req as $key => $value){
+            $requeteInv = $value;
+        }
+        $this->db->procCall('supprInvites', [$_SESSION['idEvent'],$requeteInv]);
+        $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
+        $listeInv = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+        $this->action->ajouterAction('listeInvites', $listeInv);
+    }
+
+
     private function gestionRequetes($rq= ''){
+        $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
+        $listeFour = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
+        $listeInv = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+        $listeCommentaires = [];
+        $listeFournitures = [];
+        $listeInvites = [];
+        foreach ($listeComm as $key){
+            $listeCommentaires [] = $key['commentaire'];
+        }
+        $requeteComm = array_intersect($listeCommentaires, [$rq]);
+        if($requeteComm){
+            $this->supprimerCommentaire($requeteComm);
+        }
+        foreach ($listeFour as $key){
+            $listeFournitures[] = $key['fourniture'];
+        }
+        $requeteFour = array_intersect($listeFournitures, [$rq]);
+        if($requeteFour){
+            $this->supprimerFourniture($requeteFour);
+        }
+        foreach ($listeInv as $key){
+            $listeInvites [] = $key['pseudo'];
+        }
+        $requeteInv = array_intersect($listeInvites, [$rq]);
+        if($requeteInv){
+            $this->supprimerInvite($requeteInv);
+        }
         if($this->reqValid($rq)){
             $nomFonction = $rq;
             $this->$nomFonction();
@@ -289,6 +350,7 @@ class Events
         if((int) $rq){
             $this->pageEventInfos($rq);
         }
+
         else {
             return false;
         }

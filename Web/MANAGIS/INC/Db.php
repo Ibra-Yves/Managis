@@ -49,7 +49,10 @@ class Db
             case 'ajouterInvites'    :
             case 'ajouterFournitures' :
             case 'ajoutCommentaire' :
-            array_push($params, '?', '?');
+            case 'supprCommentaire' :
+            case 'supprFourniture' :
+            case 'supprInvites' :
+                array_push($params, '?', '?');
             try {
                 $this->connexionBDD();
                 $callProc = 'call '. $procName.'('.join(',', $params).')';

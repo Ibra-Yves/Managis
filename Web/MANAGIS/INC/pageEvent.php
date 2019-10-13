@@ -25,6 +25,6 @@
             <div class="col-md-6" id="listeInvites"></div>
         </div>
 </div>
-    <div id="fournitures"></div>
-    <div id="commentaires"</div>
+    <div class="container-fluid" id="fournitures"></div>
+    <div class="container-fluid" id="commentaires"</div>
 
