@@ -28,62 +28,135 @@
 </head>
 
 <body class="bg-img">
+<br>
+<div class="container-fluid ">
+    <div class="row text-center">
 
-<div id="tableContainer" class="tableContainer">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="scrollTable">
-        <thead class="fixedHeader">
-        <tr>
-            <th width="20%">Header 1</th>
-            <th width="30%">Header 2</th>
-            <th width="50%">Header 3</th>
-        </tr>
-        </thead>
-        <tbody class="scrollContent">
-        <tr>
-            <td width="20%">Cell Content 1</td>
-            <td width="30%">Cell Content 2</td>
-            <td width="48%">Cell Content 3</td>
-        </tr>
-        <tr>
-            <td>More Cell Content 1</td>
-            <td>More Cell Content 2</td>
-            <td>More Cell Content 3</td>
-        </tr>
-        <tr>
-            <td>Even More Cell Content 1 Even More Cell Content 1 Even More Cell Content 1 Even More Cell Content 1</td>
-            <td>Even More Cell Cont asdkfh asoid hfoas ghdfoasgdojf gasdkjfgasd jfgaskjdfg kjasdgf kjasd gjkasgdfkj agskjdfgaskdjfgent 2</td>
-            <td>Even More Cell Content 3</td>
-        </tr>
-        <tr>
-            <td>More Cell Content 1</td>
-            <td>More Cell Content 2</td>
-            <td>More Cell Content 3</td>
-        </tr>
-        <tr>
-            <td>Even More Cell Content 1 Even More Cell Content 1 Even More Cell Content 1 Even More Cell Content 1</td>
-            <td>Even More Cell Cont asdkfh asoid hfoas ghdfoasgdojf gasdkjfgasd jfgaskjdfg kjasdgf kjasd gjkasgdfkj agskjdfgaskdjfgent 2</td>
-            <td>Even More Cell Content 3</td>
-        </tr>
-        <tr>
-            <td>More Cell Content 1</td>
-            <td>More Cell Content 2</td>
-            <td>More Cell Content 3</td>
-        </tr>
-        <tr>
-            <td>Even More Cell Content 1 Even More Cell Content 1 Even More Cell Content 1 Even More Cell Content 1</td>
-            <td>Even More Cell Cont asdkfh asoid hfoas ghdfoasgdojf gasdkjfgasd jfgaskjdfg kjasdgf kjasd gjkasgdfkj agskjdfgaskdjfgent 2</td>
-            <td>Even More Cell Content 3</td>
-        </tr>
-        <tr>
-            <td>More Cell Content 1</td>
-            <td>More Cell Content 2</td>
-            <td>More Cell Content 3</td>
-        </tr>
-
-        </tbody>
-    </table>
+        <div class="col-md-6 ">
+            <div class="card mb-3 transparent" style="max-width: 110rem;">
+                <div class="card-header">Détails de l'événement</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th style="width: 5%" scope="col" class="taillePolice">#</th>
+                                <th style="width: 25%" scope="col" class="taillePolice">Nom de l'événement</th>
+                                <th style="width: 25%" scope="col" class="taillePolice">Nom de l'hôte</th>
+                                <th style="width: 20%" scope="col" class="taillePolice">Date de l'événement</th>
+                                <th style="width: 25%" scope="col" class="taillePolice">Adresse</th>
+                            </tr>
+                            </thead>
+                            <tbody style="height: 10px !important; overflow: scroll;" id="invites">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card transparent mb-3" style="max-width: 110rem;">
+                <div class="card-header">Listes des invités</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th style="width: 5%" scope="col" class="taillePolice">#</th>
+                                <th style="width: 95%" scope="col" class="taillePolice">Nom de l'invité</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td class="taillePolice">DOMINIK Delvigne</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h5 class="card-title">Ajouter des invités !</h5>
+                        <div class="form-group">
+                            <input type="" id="" name="*" class="form-control input-sm" placeholder="Nom invité">
+                        </div>
+                        <button type="button" id="*" class="btn btn-primary boutonEvent">Ajouter un invité</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
+<div class="row text-center">
+    <div class="col-md-6 text-center">
+        <div class="card mb-3 transparent" style="max-width: 60rem;">
+            <div class="card-header">Liste commentaires</div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th style="width: 5%" scope="col" class="taillePolice">#</th>
+                        <th style="width: 95%" scope="col" class="taillePolice">Commentaire</th>
+                    </tr>
+                    </thead>
+                    <tbody id="listeCommentaire"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 text-center">
+        <div class="card mb-3 transparent" style="max-width: 60rem;">
+            <div class="card-header">Conseils</div>
+            <div class="card-body">
+                <h5 class="card-title">Ajoutez un commentaire pour l'hôte</h5>
+                <br>
+                <input type="text" id="pseudo" name="pseudo" class="form-control input-sm"
+                       placeholder="Commentaire...">
+                <br>
+                <button type="button" id="changerMDP" class="btn btn-primary boutonEvent">Ajoutez</button>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+<div class="row text-center">
+    <div class="col-md-6 text-center">
+        <div class="card mb-3 transparent" style="max-width: 60rem;">
+            <div class="card-header">Liste fournitures</div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th style="width: 10%" scope="col" class="taillePolice">#</th>
+                        <th style="width: 45%" scope="col" class="taillePolice">Fournitures</th>
+                        <th style="width: 15%"scope="col" class="taillePolice">Ajouter 1</th>
+                        <th style="width: 15%"scope="col" class="taillePolice">Retirer 1</th>
+                        <th style="width: 15%"scope="col" class="taillePolice">Quantité</th>
+                    </tr>
+                    </thead>
+                    <tbody id="listeFournitures"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6  text-center">
+        <div class="card mb-3 transparent" style="max-width: 60rem;">
+            <div class="card-header">Fournitures nécessaires : </div>
+            <div class="card-body">
+                <h5 class="card-title">Ajouter des fournitures !</h5>
+                <br>
+                <input type="text" id="pseudo" name="pseudo" class="form-control input-sm"
+                       placeholder="Fourniture pour l'événement">
+                <br>
+                <button type="button" id="changerMDP" class="btn btn-primary boutonEvent">Ajouter la fourniture à la
+                    liste</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+</div>
 </body>
 
 </html>
