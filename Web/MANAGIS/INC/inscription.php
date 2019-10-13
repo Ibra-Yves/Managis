@@ -31,7 +31,7 @@
                                     <input type="password" id="confirmationMdp" name="confirmationMdp" class="form-control input-sm" placeholder="Confirmation">
                                 </div>
                             </div>
-                            <input type="checkbox" required>Lu et accepté les CGU
+                            <input type="checkbox" required>   Lu et accepté le <a href="CGU.php"> CGU</a>
                         </div>
                         <input type="submit" value="Inscrivez vous" class="btn btn-primary align-middle">
                     </form>

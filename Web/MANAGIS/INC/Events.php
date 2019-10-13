@@ -14,7 +14,9 @@ class Events
     private $rqList = [
         'validation',
         'inscription',
+        'CGU',
         'connexion',
+        'quiSommesNous',
         'formInscription',
         'formConnexion',
         'deconnexion',
@@ -62,11 +64,15 @@ class Events
         return implode("\n", file($nomFichier));
     }
 
-
+    private function quiSommesNous(){
+        $this->action->affichageDefaut('#intro', $this->lectureForm('quiSommesNous'));
+    }
     private function inscription(){
         $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
     }
-
+    private function CGU(){
+        $this->action->affichageDefaut('#intro', $this->lectureForm('CGU'));
+    }
     private function validation(){
         $sRequest= '';
         if(isset($_POST['envoiForm'])) $sRequest = $_POST['envoiForm'];
