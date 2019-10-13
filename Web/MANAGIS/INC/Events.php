@@ -315,44 +315,46 @@ class Events
 
 
     private function gestionRequetes($rq= ''){
-        $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
-        $listeFour = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
-        $listeInv = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
-        $listeCommentaires = [];
-        $listeFournitures = [];
-        $listeInvites = [];
-        foreach ($listeComm as $key){
-            $listeCommentaires [] = $key['commentaire'];
-        }
-        $requeteComm = array_intersect($listeCommentaires, [$rq]);
-        if($requeteComm){
-            $this->supprimerCommentaire($requeteComm);
-        }
-        foreach ($listeFour as $key){
-            $listeFournitures[] = $key['fourniture'];
-        }
-        $requeteFour = array_intersect($listeFournitures, [$rq]);
-        if($requeteFour){
-            $this->supprimerFourniture($requeteFour);
-        }
-        foreach ($listeInv as $key){
-            $listeInvites [] = $key['pseudo'];
-        }
-        $requeteInv = array_intersect($listeInvites, [$rq]);
-        if($requeteInv){
-            $this->supprimerInvite($requeteInv);
-        }
         if($this->reqValid($rq)){
             $nomFonction = $rq;
             $this->$nomFonction();
           //  array_push($this->id, $rq);
         }
+        if($_SESSION['idEvent']){
+            $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
+            $listeFour = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
+            $listeInv = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+            $listeCommentaires = [];
+            $listeFournitures = [];
+            $listeInvites = [];
+            foreach ($listeComm as $key){
+                $listeCommentaires [] = $key['commentaire'];
+            }
+            $requeteComm = array_intersect($listeCommentaires, [$rq]);
+            if($requeteComm){
+                $this->supprimerCommentaire($requeteComm);
+            }
+            foreach ($listeFour as $key){
+                $listeFournitures[] = $key['fourniture'];
+            }
+            $requeteFour = array_intersect($listeFournitures, [$rq]);
+            if($requeteFour){
+                $this->supprimerFourniture($requeteFour);
+            }
+            foreach ($listeInv as $key){
+                $listeInvites [] = $key['pseudo'];
+            }
+            $requeteInv = array_intersect($listeInvites, [$rq]);
+            if($requeteInv){
+                $this->supprimerInvite($requeteInv);
+            }
+        }
         if((int) $rq){
             $this->pageEventInfos($rq);
         }
-
         else {
             return false;
         }
+
     }
 }
