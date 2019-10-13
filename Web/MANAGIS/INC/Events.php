@@ -30,7 +30,7 @@ class Events
         'mdpOublie',
         'formMdpOublie',
         'commentaire',
-        'quantite'
+        'formQuantite'
         //'ajouterInv'
     ];
 
@@ -174,6 +174,7 @@ class Events
        // $this->action->ajouterAction('test', $_POST);
         $_SESSION['idEvent'] = $id;
         $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
+        $this->action->affichageDefaut('#commentaires', $this->lectureForm('listeCommentaire'));
         $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
         $users= $this->db->procCall('listeInvites', [$id]);
         $pseudos = $this->db->procCall('tousLesUsers', ['']);
@@ -232,8 +233,14 @@ class Events
             $this->action->ajouterAction('listeComm', $listeComm);
         }
     }
-    private function quantite(){
-        $this->action->ajouterAction('test', $_POST);
+    private function formQuantite(){
+        $bb = [];
+        foreach ($_POST['fourniture'] as $key => $value){
+            $bb['valeurs'] = $_POST['fourniture'][$key]; //renvoie ["25", "0", "0"]
+            $bb['cle'] = $key;
+            $this->db->procCall('ajoutQuantite', [$_SESSION['idEvent'], $bb['cle'],$bb['valeurs']]);
+        }
+       //$bb = array_column($_POST['fourniture']);
     }
 
     private function commentaire(){

@@ -30,7 +30,22 @@ function requetes(event){
    envoyerData.append('request', request);
     $.post('?rq=' + request, envoyerData,  gererDonnes);
 }
-
+function incremente(id, quantite){
+    quantite = $(id).val();
+    quantite++;
+    $(id).val(quantite);
+    $(id).text(quantite);
+}
+function decremente(id, quantite){
+    quantite = $('input[value="'+id+'"]').val();
+    quantite--;
+    if(quantite <0){
+        console.log('Vous ne pouvez pas etre en negatif');
+        quantite = 0;
+    }
+    $(id).val(quantite);
+    $(id).text(quantite);
+}
 function gererDonnes(retour){
     retour = lireJSON(retour);
    console.log(retour);
@@ -133,17 +148,10 @@ function gererDonnes(retour){
                     let k=1;
                    // let data['quantite'] = 0;
                     actionDatas.forEach(function(data){
-                       // $('#apporte').click(alert('alo'));
                     tableFournitures+= '                    <tr>\n' +
                             '                        <th scope="row">'+ k++ +'</th>\n' +
                             '                        <td class="taillePolice">'+ data['fourniture']+'</td>\n' +
-                            '                        <td>\n' +
-                            '                            <button id="apporte" class="btn btn-primary boutonEvent">+</button>\n' +
-                            '                        </td>\n' +
-                            '                        <td>\n' +
-                            '                            <button type="button" id="retire" class="btn btn-primary boutonEvent">-</button>\n' +
-                            '                        </td>\n' +
-                            '                        <td class="taillePolice" id="quantite">'+ data['quantite'] +'</td>\n' +
+                            '                        <td class="taillePolice"><input type="number" name="fourniture['+ data['fourniture']+']" value="'+data['quantite']+'"  min="0" style="width: 40px"></td>\n' +
                             '                    </tr>\n' +
                             '                    <tr>'
                     });
@@ -161,7 +169,7 @@ function gererDonnes(retour){
                     $('#listeCommentaire').html(listeCommentaire);
                     break;
                 case 'Probleme JSON' :
-                    $('#error').html(actionDatas['donnes']);
+                    $('#intro').html(actionDatas['donnes']);
                     break;
                 case 'errorUser' :
                 case 'errorMail' :
