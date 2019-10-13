@@ -29,7 +29,8 @@ class Events
         'formFournitures',
         'mdpOublie',
         'formMdpOublie',
-        'commentaire'
+        'commentaire',
+        'quantite'
         //'ajouterInv'
     ];
 
@@ -213,7 +214,7 @@ class Events
         foreach($verifFourniture as $key){
             $list [] = $key['fourniture'];
         }
-
+        //$list['fourniture'] = $_SESSION['fourniture'];
         $resultatSansEspaces = array_intersect($list, [$_POST['fourniture']]);
         $enleverEspaces= trim($_POST['fourniture']);
         $resultatAvecEspaces = array_intersect($list, [$enleverEspaces]);
@@ -230,6 +231,9 @@ class Events
             $this->action->ajouterAction('listeFourniture', $listeFournitures);
             $this->action->ajouterAction('listeComm', $listeComm);
         }
+    }
+    private function quantite(){
+        $this->action->ajouterAction('test', $_POST);
     }
 
     private function commentaire(){

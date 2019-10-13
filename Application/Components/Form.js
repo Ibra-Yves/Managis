@@ -8,27 +8,32 @@ import {
 }
 from 'react-native';
 
+//import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 export default class Form extends Component {
   render() {
     return (
 	
      <View style={styles.container}>
-	
 	 <TextInput style={styles.inputBox}
 	 placeholder="Email"
 	 placeholderTextColor = "#ffffff"
+	 selectionColor="#fff"
+	 keyboardType="email-address"
+	 onSubmitEditing={()=> this.password.focus()}
 	 />
 	 
 	 <TextInput style={styles.inputBox}
 	 placeholder="Password"
 	 secureTextEntry={true}
 	 placeholderTextColor = "#ffffff"
+	 ref={(input) => this.password = input}
 	 />
 	 
 	 <TouchableOpacity style={styles.button}>
 	 <Text style={styles.buttonText}>{this.props.type}</Text>
 	 </TouchableOpacity>
-	 
+	
 	 </View>
 	
     )
@@ -37,7 +42,7 @@ export default class Form extends Component {
 
 const styles = StyleSheet.create({
 	container : {
-		flex : 1 , 
+		flex : 10, 
 		alignItems:'center',
 		justifyContent:'center'
 	},

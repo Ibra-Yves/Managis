@@ -34,7 +34,6 @@ function requetes(event){
 function gererDonnes(retour){
     retour = lireJSON(retour);
    console.log(retour);
-    let i=1;
     retour.forEach(function(action){
         $.each(action, function(actionName, actionDatas){
             switch(actionName){
@@ -91,6 +90,7 @@ function gererDonnes(retour){
                     break;
                 case 'infoSoiree' :
                     let tableSoirees = '';
+                    let i=1;
                     actionDatas.forEach(function(data){
                         tableSoirees+= ' <tr> \n' +
                             '                                    <th scope="row">'+ i++ +'</th>\n' +
@@ -107,9 +107,10 @@ function gererDonnes(retour){
                     break;
                 case 'listeInvites' :
                     let tableInvites= '';
+                    let j=1;
                     actionDatas.forEach(function(data){
                     tableInvites+= '<tr> \n' +
-                        '<th scope="row">'+ i++ +'</th>\n' +
+                        '<th scope="row">'+ j++ +'</th>\n' +
                         '<td class="taillePolice">'+data['pseudo']+'</td>\n'
                     });
                     $('#invites').html(tableInvites);
@@ -129,12 +130,15 @@ function gererDonnes(retour){
                     break;
                 case 'listeFourniture' :
                     let tableFournitures ='';
+                    let k=1;
+                   // let data['quantite'] = 0;
                     actionDatas.forEach(function(data){
+                       // $('#apporte').click(alert('alo'));
                     tableFournitures+= '                    <tr>\n' +
-                            '                        <th scope="row">'+ i++ +'</th>\n' +
+                            '                        <th scope="row">'+ k++ +'</th>\n' +
                             '                        <td class="taillePolice">'+ data['fourniture']+'</td>\n' +
                             '                        <td>\n' +
-                            '                            <button type="button" id="apporte" onclick="" class="btn btn-primary boutonEvent">+</button>\n' +
+                            '                            <button id="apporte" class="btn btn-primary boutonEvent">+</button>\n' +
                             '                        </td>\n' +
                             '                        <td>\n' +
                             '                            <button type="button" id="retire" class="btn btn-primary boutonEvent">-</button>\n' +
@@ -147,10 +151,10 @@ function gererDonnes(retour){
                     break;
                 case 'listeComm' :
                     let listeCommentaire = '';
-
+                    let l=1;
                         actionDatas.forEach(function(data){
                             listeCommentaire+= ' <tr>\n' +
-                                '                        <th scope="row">'+ i++ +'</th>\n' +
+                                '                        <th scope="row">'+ l++ +'</th>\n' +
                                 '                        <td class="taillePolice">'+data['commentaire']+'</td>\n' +
                                 '                    </tr>';
                         });
