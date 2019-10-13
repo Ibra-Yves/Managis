@@ -41,19 +41,20 @@
         <div class="card mb-3 transparent" style="max-width: 60rem;">
             <div class="card-header">Liste fournitures</div>
             <div class="card-body">
+                <form id="formQuantite" name="formQuantite" method="post" action="validation.html">
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th style="width: 10%" scope="col" class="taillePolice">#</th>
                         <th style="width: 45%" scope="col" class="taillePolice">Fournitures</th>
-                        <th style="width: 15%"scope="col" class="taillePolice">Ajouter 1</th>
-                        <th style="width: 15%"scope="col" class="taillePolice">Retirer 1</th>
                         <th style="width: 15%"scope="col" class="taillePolice">Quantité</th>
                     </tr>
                     </thead>
                     <tbody id="listeFournitures">
                     </tbody>
                 </table>
+                <input type="submit" value="Validez vos quantites" class="btn btn-primary boutonEvent">
+                </form>
             </div>
         </div>
     </div>
