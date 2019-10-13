@@ -12,7 +12,7 @@ class Session
             $_SESSION['start'] = date('YmdHis');
             $_SESSION['user']= [];
            // $_SESSION['user']['id'] = [];
-            $_SESSION['pseudos'] = [];
+            $_SESSION['idEvent'] = [];
         }
 
     }

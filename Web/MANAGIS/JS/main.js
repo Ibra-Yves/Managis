@@ -125,15 +125,20 @@ function gererDonnes(retour){
                     let j=0;
                     let o = 0;
                     let p = 1;
+                    let q = 2;
                     actionDatas.forEach(function(data){
                     tableInvites+=
                         '<tr> \n' +
                         '<th scope="row" id="'+ o++ +'">'+ j++ +'</th>\n' +
-                        '<td class="taillePolice" id="'+ p++ +'">'+data['pseudo']+'<a href="'+data['pseudo']+'" style="float: right">-</a> </td> \n'
+                        '<td class="taillePolice" id="'+ p++ +'">'+data['pseudo']+'</td> \n' +
+                        '<td class="taillePolice"><a id="' + q++ +'" href="'+data['pseudo']+'" class="btn btn-primary boutonEvent">-</a></td> \n' +
+                        '</tr>'
+
                     });
                     $('#invites').html(tableInvites);
                     $('#0').remove();
                      $('#1').remove();
+                     $('#2').remove();
                     evenements('#invites');
                     break;
                 case 'ajoutInv' :
@@ -156,7 +161,8 @@ function gererDonnes(retour){
                     tableFournitures+= '                    <tr>\n' +
                             '                        <th scope="row">'+ k++ +'</th>\n' +
                             '                        <td class="taillePolice">'+ data['fourniture']+'</td>\n' +
-                            '                        <td class="taillePolice"><input type="number" name="fourniture['+ data['fourniture']+']" value="'+data['quantite']+'"  min="0" style="width: 40px"> <a href="'+data['fourniture']+'" style="float: right">-</a></td>\n' +
+                            '                        <td class="taillePolice"><input type="number" name="fourniture['+ data['fourniture']+']" value="'+data['quantite']+'"  min="0" style="width: 40px"></td>\n' +
+                            '                        <td class="taillePolice"><a href="'+data['fourniture']+'" class="btn btn-primary boutonEvent">-</a></td> \n' +
                             '                    </tr>\n' +
                             '                    <tr>'
                     });
@@ -169,7 +175,8 @@ function gererDonnes(retour){
                         actionDatas.forEach(function(data){
                             listeCommentaire+= ' <tr>\n' +
                                 '                        <th scope="row">'+ l++ +'</th>\n' +
-                                '                        <td class="taillePolice">'+data['commentaire']+'<a href="'+data['commentaire']+'" style="float: right">-</a></td>\n' +
+                                '                        <td class="taillePolice">'+data['commentaire']+'</td>\n' +
+                                '                        <td class="taillePolice"><a href="'+data['commentaire']+'" class="btn btn-primary boutonEvent">-</a></td> \n' +
                                 '                    </tr>';
                         });
                     $('#listeCommentaire').html(listeCommentaire);
@@ -185,6 +192,7 @@ function gererDonnes(retour){
                     break;
                 case 'modifMdp' :
                     $('#errorForm').html('<div class="alert alert-success" role="alert">'+actionDatas);
+                    evenements('#errorForm');
                     break;
                 case 'errorInv' :
                     $('#errorFormm').html('<div class="alert alert-danger" role="alert">'+actionDatas);

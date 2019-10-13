@@ -10,6 +10,7 @@
                     <tr>
                         <th style="width: 5%" scope="col" class="taillePolice">#</th>
                         <th style="width: 95%" scope="col" class="taillePolice">Nom de l'invité</th>
+                        <th style="width: 95%" scope="col" class="taillePolice">Supprimer l'invité</th>
                     </tr>
                     </thead>
                     <tbody style="height: 10px !important; overflow: scroll;" id="invites">

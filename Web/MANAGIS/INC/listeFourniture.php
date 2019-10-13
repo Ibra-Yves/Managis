@@ -11,6 +11,7 @@
                                 <th style="width: 10%" scope="col" class="taillePolice">#</th>
                                 <th style="width: 45%" scope="col" class="taillePolice">Fournitures</th>
                                 <th style="width: 15%"scope="col" class="taillePolice">Quantité</th>
+                                <th style="width: 15%"scope="col" class="taillePolice">Supprimer Fourniture</th>
                             </tr>
                             </thead>
                             <tbody id="listeFournitures">

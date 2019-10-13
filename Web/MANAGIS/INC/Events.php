@@ -277,7 +277,7 @@ class Events
         if (!$verifMail || !$verifPseudo || $_POST['pseudo'] = '' || $_POST['email'] = '') {
             $this->action->ajouterAction('errorUser', 'Pseudo ou mail incorrect');
         } else {
-            $this->action->ajouterAction('modifMdp', 'Votre mot de passe vous a été envoyé par mail passez à la connexion');
+            $this->action->ajouterAction('modifMdp', 'Votre mot de passe vous a été envoyé par mail passez à la connexion <a href="connexion.php"> Connectez vous! </a>');
             $chaineNewMdp = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             $melangeChaine = str_shuffle($chaineNewMdp);
             $nouveauMdp = substr($melangeChaine, 0, 8);

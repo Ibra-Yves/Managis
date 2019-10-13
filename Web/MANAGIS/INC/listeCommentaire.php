@@ -9,6 +9,7 @@
                     <tr>
                         <th style="width: 5%" scope="col" class="taillePolice">#</th>
                         <th style="width: 95%" scope="col" class="taillePolice">Commentaire</th>
+                        <th style="width: 95%" scope="col" class="taillePolice">Supprimer le commentaire</th>
                     </tr>
                     </thead>
                     <tbody id="listeCommentaire">
