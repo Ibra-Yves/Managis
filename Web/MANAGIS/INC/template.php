@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="quiSommesNous">
 
 <head>
     <meta charset="utf-8">
@@ -36,7 +36,7 @@
 
 <header>
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="barreblanche">
         <div class="container-fluid">
             <!-- Navbar brand -->
             <a class="navbar-brand" href="#">MANAGIS</a>
