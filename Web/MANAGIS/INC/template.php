@@ -86,13 +86,11 @@
 
     </nav>
     <!--/.Navbar-->
-    <div id="intro" class="view"></div>
-
+    <div id="intro" class="container-fluid"></div>
 
 </header>
 
 <main class="container-fluid colormain">
-
     <div class="row">
         <div class="col-md-4 marge">
             <img class="rounded mx-auto d-block marge rounded-circle" src="IMG/managis.png" height="200px" width="200px"align="center">
@@ -133,7 +131,7 @@
 <footer class="page-footer font-small grey darken-1 fixed-bottom container-fluid">
 
     <!-- Footer Elements -->
-    <div class="container">
+    <div class="container-fluid">
         <!-- Grid row-->
         <div class="row">
             <!-- Grid column -->

@@ -1,6 +1,6 @@
-<div class="container-fluid ">
+<div class="container-fluid">
     <div class="row text-center">
-        <div class="col-md-6 ">
+        <div class="col-md-6">
             <div class="card mb-3 transparent" style="max-width: 110rem;">
                 <div class="card-header">Détails de l'événement</div>
                 <div class="card-body">
@@ -24,7 +24,7 @@
         </div>
             <div class="col-md-6" id="listeInvites"></div>
         </div>
-</div>
-    <div class="container-fluid" id="fournitures"></div>
-    <div class="container-fluid" id="commentaires"</div>
 
+    <div id="fournitures"></div>
+    <div id="commentaires"></div>
+</div>
