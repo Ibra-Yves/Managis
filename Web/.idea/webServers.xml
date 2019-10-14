@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="f7fcd8ea-e9a2-463f-9bf8-77c96fd5daf3" name="managis" url="https://managis.be">
+        <fileTransfer host="85.201.34.220" port="1028" rootFolder="/home/pi/managis" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="1028" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

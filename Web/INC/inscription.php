@@ -1,19 +1,42 @@
- <form id="formInscription" class="formInscription" name="formInscription" method="post" action="validation.html">
-     <fieldset id="fieldsetInscription">
-                <legend>Inscrivez vous</legend>
+<div class="container">
+    <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Inscrivez-vous pour organiser vos soirées</h3>
+                </div>
+                <div class="panel-body">
+                    <form id="formInscription" class="formInscription" name="formInscription" method="post" action="validation.html">
+                        <div id="errorForm"></div>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" id="pseudo" name="pseudo" class="form-control input-sm" placeholder="Pseudo" required>
+                                </div>
+                            </div>
+                        </div>
 
-                <label for="pseudo">Pseudo</label>
-                <input type="text" id="pseudo" name="pseudo"><br>
+                        <div class="form-group">
+                            <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Adresse Email" required>
+                        </div>
 
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" ><br>
-
-                <label for="mdp">Mot de passe</label>
-                <input type="password" id="mdp" name="mdp" ><br>
-
-                <label for="confirmationMdp">Confirmez votre mot de passe</label>
-                <input type="password" id="confirmationMdp" name="confirmationMdp" ><br>
-
-                <input type="submit" value="Inscrivez vous">
-            </fieldset>
-        </form>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="password" id="mdp" name="mdp" class="form-control input-sm" placeholder="Mot de passe" required>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="password" id="confirmationMdp" name="confirmationMdp" class="form-control input-sm" placeholder="Confirmation">
+                                </div>
+                            </div>
+                            <input type="checkbox" required>   Lu et accepté le <a href="CGU.php"> CGU</a>
+                        </div>
+                        <input type="submit" value="Inscrivez vous" class="btn btn-primary align-middle">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
