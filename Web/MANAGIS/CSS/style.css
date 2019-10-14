@@ -166,3 +166,24 @@ tbody.scrollContent tr.alternateRow td {
     border-top: 1px solid #DDD;
     padding: 2px 3px 3px 4px
 }
+
+
+/* Qui sommes-nous ? */
+#quiSommesNous{
+    background: url("../img/background-flou.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.text-nom{
+    color : dodgerblue;
+    font-size : 1.4em;
+    font-weight: bold;
+
+}
+
+.ajustement-div{
+    margin-bottom : 3em;
+}
