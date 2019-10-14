@@ -120,18 +120,8 @@ class Events
         $idMail = $this->db->procCall('verifEmail', [$_POST['email']]); //On appelle la procèdure qui va verifier le mail
 
         //Verification si le user existe deja au moment de la verification
-        if($idUser){
-            $this->action->ajouterAction( 'errorUser','L utilisateur existe deja');//On renvoie vers la balise error user avec le texte a afficher
-        }
-
-        //De meme pour le mail
-        if($idMail){
-            $this->action->ajouterAction( 'errorMail','Le mail existe deja');
-        }
-
-        //On verifie si les deux champs de mot de passe existe
-        if($_POST['mdp'] != $_POST['confirmationMdp']){
-            $this->action->ajouterAction( 'errorPass','Les deux mots de passes ne correspondent pas');
+        if($idUser || $idMail ||$_POST['mdp'] != $_POST['confirmationMdp'] ){
+            $this->action->ajouterAction( 'errorUser','Probleme d inscription, soit l utilisateur existe soit le mail existe deja');//On renvoie vers la balise error user avec le texte a afficher
         }
 
         //Sinon on peut effectuer l'inscription
