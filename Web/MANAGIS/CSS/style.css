@@ -87,6 +87,23 @@ body{
     border-left : 30%;
 }
 
+
+/* page event */
+
+.taillePoliceTitre{
+    font-size : 1em;
+    font-weight: bold;
+}
+
+.taillePolice{
+    font-size : 0.9em;
+}
+
+.taillePoliceSection{
+    font-size : 1.2em;
+    font-weight: bold;
+}
+
 div.tableContainer {
     clear: both;
     border: 1px solid #963;
