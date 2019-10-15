@@ -1,16 +1,16 @@
 <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4 ajustement-div">
     <div class="panel-default transparent">
         <div class="panel-heading">
-            <h3 class="panel-title ">Changer de mot de passe</h3>
+            <h3 class="panel-title taillePoliceSection" align="center">Détails du compte</h3>
         </div>
         <div class="panel-body">
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th style="width: 25%" scope="col" class="taillePolice">Pseudo</th>
-                        <th style="width: 20%" scope="col" class="taillePolice">Date de création de compte</th>
-                        <th style="width: 25%" scope="col" class="taillePolice">Mail</th>
+                        <th style="width: 25%" scope="col" class="taillePoliceTitre">Pseudo</th>
+                        <th style="width: 20%" scope="col" class="taillePoliceTitre">Date création</th>
+                        <th style="width: 25%" scope="col" class="taillePoliceTitre">Mail</th>
                     </tr>
                     </thead>
                     <tbody id="infoCompte">
@@ -24,7 +24,7 @@
 <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
 <div class="panel-default transparent">
     <div class="panel-heading">
-        <h3 class="panel-title">Changer de mot de passe</h3>
+        <h3 class="panel-title taillePoliceSection" align="center">Changer de mot de passe</h3>
     </div>
     <div class="panel-body">
         <form id="formNewMdp" class="formNewMdp" name="formNewMdp" method="post" action="validation.html">
