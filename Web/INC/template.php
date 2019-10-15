@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="quiSommesNous">
 
 <head>
     <meta charset="utf-8">
@@ -36,7 +36,7 @@
 
 <header>
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="barreblanche">
         <div class="container-fluid">
             <!-- Navbar brand -->
             <a class="navbar-brand" href="#">MANAGIS</a>
@@ -86,13 +86,11 @@
 
     </nav>
     <!--/.Navbar-->
-    <div id="intro" class="view"></div>
-
+    <div id="intro" class="container-fluid"></div>
 
 </header>
 
 <main class="container-fluid colormain">
-
     <div class="row">
         <div class="col-md-4 marge">
             <img class="rounded mx-auto d-block marge rounded-circle" src="IMG/managis.png" height="200px" width="200px"align="center">
@@ -133,7 +131,7 @@
 <footer class="page-footer font-small grey darken-1 fixed-bottom container-fluid">
 
     <!-- Footer Elements -->
-    <div class="container">
+    <div class="container-fluid">
         <!-- Grid row-->
         <div class="row">
             <!-- Grid column -->

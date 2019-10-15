@@ -1,7 +1,7 @@
     <div class="row text-center">
-        <div class="col-md-6 text-center">
+        <div class="col-md-6 text-center" >
             <div class="card mb-3 transparent" style="max-width: 110rem;">
-                <div class="card-header">Liste fournitures</div>
+                <div class="card-header blanc">Liste fournitures</div>
                 <div class="card-body">
                     <div class="table-responsive" style="max-height: 250px">
                     <form id="formQuantite" name="formQuantite" method="post" action="validation.html">
@@ -23,9 +23,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6  text-center">
+        <div class="col-md-6  text-center" >
             <div class="card mb-3 transparent" style="max-width: 110rem;">
-                <div class="card-header">Fournitures nécessaires : </div>
+                <div class="card-header blanc">Fournitures nécessaires : </div>
                 <div class="card-body">
                     <h5 class="card-title">Ajouter des fournitures !</h5>
                     <br>

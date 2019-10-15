@@ -79,6 +79,10 @@ body{
     color: #000;
 }
 
+.blanc{
+    background-color :whitesmoke;
+}
+
 .boutonEvent{
     border-left : 30%;
 }
@@ -165,4 +169,32 @@ tbody.scrollContent tr.alternateRow td {
     border-right: 1px solid #CCC;
     border-top: 1px solid #DDD;
     padding: 2px 3px 3px 4px
+}
+
+
+/* Qui sommes-nous ? */
+#quiSommesNous{
+    background: url("../IMG/background-flou.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width : 100%;
+}
+
+.text-nom{
+    color : dodgerblue;
+    font-size : 1.4em;
+    font-weight: bold;
+
+}
+
+.ajustement-div{
+    margin-bottom : 3em;
+}
+
+/* Test pour navbar */
+
+#barreblanche{
+    margin-bottom : 0%;
 }

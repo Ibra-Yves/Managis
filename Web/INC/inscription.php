@@ -1,3 +1,4 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <div class="container">
     <div class="row centered-form">
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
@@ -31,8 +32,10 @@
                                     <input type="password" id="confirmationMdp" name="confirmationMdp" class="form-control input-sm" placeholder="Confirmation">
                                 </div>
                             </div>
-                            <input type="checkbox" required>   Lu et accepté le <a href="CGU.php"> CGU</a>
+                            <div class="g-recaptcha" data-sitekey="6Lc-sL0UAAAAAFARONKANY5SoxGECXqbRNBbxHo7"></div>
+
                         </div>
+                        <input type="checkbox" required>   Lu et accepté le <a href="CGU.php"> CGU</a>
                         <input type="submit" value="Inscrivez vous" class="btn btn-primary align-middle">
                     </form>
                 </div>
@@ -40,3 +43,22 @@
         </div>
     </div>
 </div>
+<?php
+    $secret = "6Lc-sL0UAAAAAM06U8ciIUC48QsChvDALNetZr4n";
+    $reponse = $response = $_POST['g-recaptcha-response'];
+    $remoteip = $_SERVER['REMOTE_ADDR'];
+
+    $api_url= "https://www.google.com/recaptcha/api/siteverify?secret="
+        . $secret
+        . "&response=" . $response
+        . "&remoteip=" . $remoteip ;
+    $decode = json_decode(file_get_contents($api_url), true);
+
+    if ($decode['success'] == true) {
+        return true;
+    }
+
+    else {
+        echo 'veuillez valider';
+    }
+    ?>
