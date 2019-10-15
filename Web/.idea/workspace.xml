@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4c60f9d3-32ce-42fc-95c1-01fd87d73cd1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/INC/Events.php" beforeDir="false" afterPath="$PROJECT_DIR$/INC/Events.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +42,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="C:/wamp64/www/Pick-n-Drink/Web" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -69,6 +69,7 @@
       <workItem from="1571049635195" duration="3564000" />
       <workItem from="1571054426833" duration="95000" />
       <workItem from="1571058823426" duration="484000" />
+      <workItem from="1571132812589" duration="505000" />
     </task>
     <servers />
   </component>
