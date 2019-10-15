@@ -10,7 +10,7 @@
                         <th style="width: 95%" scope="col" class="taillePolice">Supprimer l'invité</th>
                     </tr>
                     </thead>
-                    <tbody style="height: 10px !important; overflow: scroll;" id="invites">
+                    <tbody style="height: 10px !important; overflow: scroll;" id="invites" align="left">
                     </tbody>
                 </table>
                 <h5 class="card-title blanc">Ajouter des invités !</h5>

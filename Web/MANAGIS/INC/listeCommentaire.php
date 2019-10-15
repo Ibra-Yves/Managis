@@ -12,7 +12,7 @@
                         <th style="width: 95%" scope="col" class="taillePolice">Supprimer le commentaire</th>
                     </tr>
                     </thead>
-                    <tbody id="listeCommentaire">
+                    <tbody id="listeCommentaire" align="left">
                     </tbody>
                 </table>
                 </div>

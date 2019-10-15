@@ -14,7 +14,7 @@
                                 <th style="width: 15%"scope="col" class="taillePolice">Supprimer Fourniture</th>
                             </tr>
                             </thead>
-                            <tbody id="listeFournitures">
+                            <tbody id="listeFournitures" align="left">
                             </tbody>
                         </table>
                         <input type="submit" value="Validez vos quantites" class="btn btn-primary boutonEvent">

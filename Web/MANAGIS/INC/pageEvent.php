@@ -15,7 +15,7 @@
                                  <th style="width: 25%" scope="col" class="taillePolice">Adresse</th>
                              </tr>
                              </thead>
-                             <tbody id="infoSoiree">
+                             <tbody id="infoSoiree" align="left">
                              </tbody>
                          </table>
                      </div>
