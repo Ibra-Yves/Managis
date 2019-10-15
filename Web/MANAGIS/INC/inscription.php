@@ -3,7 +3,7 @@
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Inscrivez-vous pour organiser vos soirées</h3>
+                    <h3 class="panel-title taillePoliceSection" align="center">Inscrivez-vous pour organiser vos soirées</h3>
                 </div>
                 <div class="panel-body">
                     <form id="formInscription" class="formInscription" name="formInscription" method="post" action="validation.html">
@@ -31,7 +31,7 @@
                                     <input type="password" id="confirmationMdp" name="confirmationMdp" class="form-control input-sm" placeholder="Confirmation">
                                 </div>
                             </div>
-                            <input type="checkbox" required>   Lu et accepté le <a href="CGU.php"> CGU</a>
+                            <input type="checkbox" required style="margin-left:5%">   Lu et accepté le <a href="CGU.php"> CGU</a>
                         </div>
                         <input type="submit" value="Inscrivez vous" class="btn btn-primary align-middle">
                     </form>

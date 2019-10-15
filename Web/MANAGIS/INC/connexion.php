@@ -3,7 +3,7 @@
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Connectez-vous</h3>
+                    <h3 class="panel-title taillePoliceSection" align="center">Connectez-vous</h3>
                 </div>
                 <div class="panel-body">
                     <form id="formConnexion" class="formConnexion" name="formConnexion" method="post" action="validation.php">
