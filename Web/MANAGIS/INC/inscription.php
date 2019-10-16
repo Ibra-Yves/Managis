@@ -1,3 +1,11 @@
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script type="text/javascript">
+    if("js-reaptcha-reset's resetRecaptcha" === "yes") {
+        if(typeof grecaptcha !== 'undefined' && grecaptcha && grecaptcha.reset) {
+            grecaptcha.reset();
+        }
+    }
+</script>
 <div class="container">
     <div class="row centered-form">
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
@@ -32,6 +40,8 @@
                                 </div>
                             </div>
                             <input type="checkbox" required>   Lu et accepté le <a href="CGU.php"> CGU</a>
+                        </div>
+                        <div class="g-recaptcha" id="captcha" data-sitekey="6Ldy2r0UAAAAADWwvNHnYzltYCCChGywMHOyR1nQ">
                         </div>
                         <input type="submit" value="Inscrivez vous" class="btn btn-primary align-middle">
                     </form>

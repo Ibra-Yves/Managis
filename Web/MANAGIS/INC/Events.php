@@ -119,20 +119,38 @@ class Events
         $idUser = $this->db->procCall('verifPseudo', [$_POST['pseudo']]); //On appelle la procèdure qui va verifier le pseudo
         $idMail = $this->db->procCall('verifEmail', [$_POST['email']]); //On appelle la procèdure qui va verifier le mail
 
-        //Verification si le user existe deja au moment de la verification
-        if($idUser){
-            $this->action->ajouterAction( 'errorUser','L utilisateur existe deja');//On renvoie vers la balise error user avec le texte a afficher
+        //Captcha
+        $reponse = [];
+        $clePriv = "6Ldy2r0UAAAAAFaQRBM9ungieu74xM2W2fnYOFcj";
+        $rep = $_POST['g-recaptcha-response'];
+        $remoteIp = $_SERVER['REMOTE_ADDR'];
+
+        $api_url = "https://www.google.com/recaptcha/api/siteverify?secret="
+            . $clePriv
+            . "&response=" . $rep
+            . "&remoteip=" . $remoteIp;
+
+        $decode = json_decode(file_get_contents($api_url, true));
+        foreach ($decode as $key => $value){
+            $reponse [] = $value;
         }
 
-        //De meme pour le mail
-        if($idMail){
-            $this->action->ajouterAction( 'errorMail','Le mail existe deja');
+        //Verification si le user existe deja au moment de la verification
+        if($idUser || $idMail){
+            $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
+            $this->action->ajouterAction( 'errorUser','Le pseudo ou le mail est déjà utilisé');//On renvoie vers la balise error user avec le texte a afficher
+           // $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
+        }
+
+        else if($reponse[0] == false){
+            $this->action->ajouterAction('errorCaptcha', 'Veuillez valider le reCAPTCHA');
         }
 
         //On verifie si les deux champs de mot de passe existe
-        if($_POST['mdp'] != $_POST['confirmationMdp']){
+        else if($_POST['mdp'] != $_POST['confirmationMdp']){
             $this->action->ajouterAction( 'errorPass','Les deux mots de passes ne correspondent pas');
         }
+
 
         //Sinon on peut effectuer l'inscription
         else {
@@ -229,6 +247,9 @@ class Events
         //On change de mot de passe pour l'utilisatur
         else {
             $this->db->procCall('modifMdp', [$_SESSION['user']['pseudo'], hash('md5', $_POST['newMDP'])]);
+            $this->action->affichageDefaut('#intro', $this->lectureForm('gestionCompte'));
+            $infoMembre=  $this->db->procCall('espaceMembre', [$_SESSION['user']['pseudo']]); //On appelle la procedure qui affiche les donnes du client
+            $this->action->ajouterAction('espaceMembre', $infoMembre); //On affiche au niveau de l'utilisateur les infos
             $this->action->ajouterAction('modifMdp', 'Votre mot de passe a été changé avec success');
         }
     }
@@ -468,7 +489,7 @@ class Events
         }
 
         //Si on se trouve dans un event on peut supprimer les commentaires ou invite ou fourniture
-        if($_SESSION['idEvent']){
+        if(!empty($_SESSION['idEvent'])){
 
             $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
             $listeFour = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);

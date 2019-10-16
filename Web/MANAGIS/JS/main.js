@@ -182,7 +182,6 @@ function gererDonnes(retour){
                     $('#errorForm').html('<div class="alert alert-success" role="alert">'+actionDatas);
                     evenements('#errorForm');
                     break;
-
                 case 'errorInv' :
                     $('#errorFormm').html('<div class="alert alert-danger" role="alert">'+actionDatas);
                     break;
