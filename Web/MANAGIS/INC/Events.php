@@ -148,6 +148,7 @@ class Events
 
         //On verifie si les deux champs de mot de passe existe
         else if($_POST['mdp'] != $_POST['confirmationMdp']){
+            $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
             $this->action->ajouterAction( 'errorPass','Les deux mots de passes ne correspondent pas');
         }
 
