@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4c60f9d3-32ce-42fc-95c1-01fd87d73cd1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/INC/Events.php" beforeDir="false" afterPath="$PROJECT_DIR$/INC/Events.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/INC/inscription.php" beforeDir="false" afterPath="$PROJECT_DIR$/INC/inscription.php" afterDir="false" />
-    </list>
+    <list default="true" id="4c60f9d3-32ce-42fc-95c1-01fd87d73cd1" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +67,7 @@
       <workItem from="1571054426833" duration="95000" />
       <workItem from="1571058823426" duration="484000" />
       <workItem from="1571132812589" duration="3428000" />
-      <workItem from="1571217815784" duration="148000" />
+      <workItem from="1571217815784" duration="290000" />
     </task>
     <servers />
   </component>
