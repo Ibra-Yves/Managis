@@ -143,7 +143,7 @@ class Events
         }
 
         else if($reponse[0] == false){
-            $this->action->ajouterAction('errorCaptcha', 'Veuillez valider le reCAPTCHA');
+            $this->action->ajouterAction('errorUser', 'Veuillez valider le reCAPTCHA');
         }
 
         //On verifie si les deux champs de mot de passe existe
