@@ -43,22 +43,3 @@
         </div>
     </div>
 </div>
-<?php
-    $secret = "6Lc-sL0UAAAAAM06U8ciIUC48QsChvDALNetZr4n";
-    $reponse = $response = $_POST['g-recaptcha-response'];
-    $remoteip = $_SERVER['REMOTE_ADDR'];
-
-    $api_url= "https://www.google.com/recaptcha/api/siteverify?secret="
-        . $secret
-        . "&response=" . $response
-        . "&remoteip=" . $remoteip ;
-    $decode = json_decode(file_get_contents($api_url), true);
-
-    if ($decode['success'] == true) {
-        return true;
-    }
-
-    else {
-        echo 'veuillez valider';
-    }
-    ?>

@@ -119,14 +119,38 @@ class Events
         $idUser = $this->db->procCall('verifPseudo', [$_POST['pseudo']]); //On appelle la procèdure qui va verifier le pseudo
         $idMail = $this->db->procCall('verifEmail', [$_POST['email']]); //On appelle la procèdure qui va verifier le mail
 
-        //Verification si le user existe deja au moment de la verification
-        if($idUser || $idMail ){
-            $this->action->ajouterAction( 'errorUser','Le pseudo ou le mail existe deja');//On renvoie vers la balise error user avec le texte a afficher
-        }
-        if($_POST['mdp'] != $_POST['confirmationMdp'] ){
-            $this->action->ajouterAction( 'errorPass','Les deux mot de passes ne se correspondent pas');
+        //Captcha
+        $reponse = [];
+        $clePriv = "6Lc-sL0UAAAAAM06U8ciIUC48QsChvDALNetZr4n";
+        $rep = $_POST['g-recaptcha-response'];
+        $remoteIp = $_SERVER['REMOTE_ADDR'];
+
+        $api_url = "https://www.google.com/recaptcha/api/siteverify?secret="
+            . $clePriv
+            . "&response=" . $rep
+            . "&remoteip=" . $remoteIp;
+
+        $decode = json_decode(file_get_contents($api_url, true));
+        foreach ($decode as $key => $value){
+            $reponse [] = $value;
         }
 
+        //Verification si le user existe deja au moment de la verification
+        if($idUser || $idMail){
+            $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
+            $this->action->ajouterAction( 'errorUser','Le pseudo ou le mail est déjà utilisé');//On renvoie vers la balise error user avec le texte a afficher
+            // $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
+        }
+
+        else if($reponse[0] == false){
+            $this->action->ajouterAction('errorUser', 'Veuillez valider le reCAPTCHA');
+        }
+
+        //On verifie si les deux champs de mot de passe existe
+        else if($_POST['mdp'] != $_POST['confirmationMdp']){
+            $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
+            $this->action->ajouterAction( 'errorPass','Les deux mots de passes ne correspondent pas');
+        }
         //Sinon on peut effectuer l'inscription
         else {
             $this->db->procCall('creationUser', [$_POST['pseudo'], $_POST['email'], hash('md5', $_POST['mdp'])]); //On crée le user avec les champs recupères
