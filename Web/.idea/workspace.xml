@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4c60f9d3-32ce-42fc-95c1-01fd87d73cd1" name="Default Changelist" comment="" />
+    <list default="true" id="5d87f7af-cee5-468a-80b9-c0cadb4b4aec" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/INC/pageEvent.php" beforeDir="false" afterPath="$PROJECT_DIR$/INC/pageEvent.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,33 +15,13 @@
       <executable />
     </execution>
   </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <option name="HIDDEN_KINDS">
-      <set />
-    </option>
-    <expand />
-    <select />
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectId" id="1SBv73tPjE1XXWmq82G3EVNvvNz" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="1SH8XKjBXWxV5qcqBjVL7fw94t1" />
   <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
-    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
-    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
-    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
-    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="D:/Managis/Web" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -58,16 +40,13 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4c60f9d3-32ce-42fc-95c1-01fd87d73cd1" name="Default Changelist" comment="" />
-      <created>1571049632682</created>
+      <changelist id="5d87f7af-cee5-468a-80b9-c0cadb4b4aec" name="Default Changelist" comment="" />
+      <created>1571209198590</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1571049632682</updated>
-      <workItem from="1571049635195" duration="3564000" />
-      <workItem from="1571054426833" duration="95000" />
-      <workItem from="1571058823426" duration="484000" />
-      <workItem from="1571132812589" duration="3428000" />
-      <workItem from="1571217815784" duration="290000" />
+      <updated>1571209198590</updated>
+      <workItem from="1571209200953" duration="8746000" />
+      <workItem from="1571472718164" duration="7234000" />
     </task>
     <servers />
   </component>

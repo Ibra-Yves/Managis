@@ -7,7 +7,7 @@ main,
 }
 
 #intro{
-    background: url("../IMG/background-flou.png") no-repeat center center fixed;
+    background: url("../img/background-flou.png") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -85,6 +85,23 @@ body{
 
 .boutonEvent{
     border-left : 30%;
+}
+
+
+/* page event */
+
+.taillePoliceTitre{
+    font-size : 1em;
+    font-weight: bold;
+}
+
+.taillePolice{
+    font-size : 0.9em;
+}
+
+.taillePoliceSection{
+    font-size : 1.2em;
+    font-weight: bold;
 }
 
 div.tableContainer {
@@ -174,7 +191,7 @@ tbody.scrollContent tr.alternateRow td {
 
 /* Qui sommes-nous ? */
 #quiSommesNous{
-    background: url("../IMG/background-flou.png") no-repeat center center fixed;
+    background: url("../img/background-flou.png") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

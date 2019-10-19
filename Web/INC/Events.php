@@ -121,7 +121,7 @@ class Events
 
         //Captcha
         $reponse = [];
-        $clePriv = "6Lc-sL0UAAAAAM06U8ciIUC48QsChvDALNetZr4n";
+        $clePriv = "6Ldy2r0UAAAAAFaQRBM9ungieu74xM2W2fnYOFcj";
         $rep = $_POST['g-recaptcha-response'];
         $remoteIp = $_SERVER['REMOTE_ADDR'];
 
@@ -139,7 +139,7 @@ class Events
         if($idUser || $idMail){
             $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
             $this->action->ajouterAction( 'errorUser','Le pseudo ou le mail est déjà utilisé');//On renvoie vers la balise error user avec le texte a afficher
-            // $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
+           // $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
         }
 
         else if($reponse[0] == false){
@@ -151,6 +151,8 @@ class Events
             $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
             $this->action->ajouterAction( 'errorPass','Les deux mots de passes ne correspondent pas');
         }
+
+
         //Sinon on peut effectuer l'inscription
         else {
             $this->db->procCall('creationUser', [$_POST['pseudo'], $_POST['email'], hash('md5', $_POST['mdp'])]); //On crée le user avec les champs recupères
@@ -240,12 +242,15 @@ class Events
      */
     private function formNewMdp(){
         $verifMdp = $this->db->procCall('connexionUser', [$_SESSION['user']['pseudo'], hash('md5', $_POST['ancienMDP'])]); //On verifier si l'ancien mot de passe mis est bien celui la
-        if($_POST['newMDP'] !=$_POST['confirmationMdp'] || !$verifMdp || empty($_POST['newMDP'])){ //Verification des donnes transmis dans le formulaire
+        if($_POST['newMDP'] !=$_POST['confirmationMdp'] || !$verifMdp){ //Verification des donnes transmis dans le formulaire
             $this->action->ajouterAction('errorPass', 'L un des mot de passe de correspond pas');
         }
         //On change de mot de passe pour l'utilisatur
         else {
             $this->db->procCall('modifMdp', [$_SESSION['user']['pseudo'], hash('md5', $_POST['newMDP'])]);
+            $this->action->affichageDefaut('#intro', $this->lectureForm('gestionCompte'));
+            $infoMembre=  $this->db->procCall('espaceMembre', [$_SESSION['user']['pseudo']]); //On appelle la procedure qui affiche les donnes du client
+            $this->action->ajouterAction('espaceMembre', $infoMembre); //On affiche au niveau de l'utilisateur les infos
             $this->action->ajouterAction('modifMdp', 'Votre mot de passe a été changé avec success');
         }
     }
@@ -267,6 +272,7 @@ class Events
     private function pageEventInfos($id){
         //On mémorise l'id du event dans la superglobale
         $_SESSION['idEvent'] = $id;
+        $tabSoiree = [];
 
         // On affiche au client les pages transimises
         $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
@@ -279,11 +285,14 @@ class Events
         $listeFournitures = $this->db->procCall('listeFourniture', [$id]); //La liste des fournitures
         $listeComm = $this->db->procCall('listeCommentaire', [$id]); //Liste des commentaires
 
+        $afficherSuppr = array_intersect([$invites[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         //Renvoi les données vers le client
         $this->action->ajouterAction('listeFourniture', $listeFournitures);
         $this->action->ajouterAction('listeInvites', $invites);
         $this->action->ajouterAction('tousLesPseudos', $pseudos);
         $this->action->ajouterAction('listeComm', $listeComm);
+       // $this->action->ajouterAction('test', $tabSoiree);
+        if($afficherSuppr ) $this->action->ajouterAction('afficherSuppr', '');
     }
 
     /**
@@ -302,7 +311,7 @@ class Events
         $resultatSansEspaces = array_intersect($list, [$_POST['pseudoInv']]);
         $enleverEspaces = trim($_POST['pseudoInv']);
         $resultatAvecEspaces = array_intersect($list, [$enleverEspaces]);
-
+        $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         //On renvoie vers le client le message d'erreur si le pseudo transmis n'existe pas
         if($_POST['pseudoInv'] == '' || !$user || $resultatSansEspaces || $resultatAvecEspaces){
             $this->action->ajouterAction('errorInv', 'Le pseudo n existe pas ou invite se trouve dans la liste');
@@ -317,6 +326,7 @@ class Events
             $pseudos = $this->db->procCall('tousLesUsers', ['']);
             $this->action->ajouterAction('tousLesPseudos', $pseudos);
             $this->action->ajouterAction('listeInvites', $invites);
+            if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
         }
     }
 
@@ -325,6 +335,7 @@ class Events
      */
     private function formFournitures(){
         $verifFourniture= $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
+        $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
         $list =  [];
 
         foreach($verifFourniture as $key){
@@ -335,7 +346,7 @@ class Events
         $resultatSansEspaces = array_intersect($list, [$_POST['fourniture']]);
         $enleverEspaces= trim($_POST['fourniture']);
         $resultatAvecEspaces = array_intersect($list, [$enleverEspaces]);
-
+        $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]); //Droits d'admin
         //On renvoie le message d'erreur au client
         if($_POST['fourniture'] == ''  || $resultatSansEspaces || $resultatAvecEspaces){
             $this->action->ajouterAction('errorUser', 'Fourniture se trouve deja dans la liste');
@@ -350,6 +361,7 @@ class Events
             $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
             $this->action->ajouterAction('listeFourniture', $listeFournitures);
             $this->action->ajouterAction('listeComm', $listeComm);
+            if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
         }
     }
 
@@ -372,6 +384,8 @@ class Events
      */
     private function commentaire(){
         $commentaire = $_POST['commentaire'];
+        $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]); //Droits d'admin
+        $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);//Droits d'admin
         //Verification si le commentaires n'est pas nul
         if(empty($_POST['commentaire'])){
             $this->action->ajouterAction('errorComm', 'Le commentaire ne peut pas être nul');
@@ -384,6 +398,7 @@ class Events
             $listeFournitures = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
             $this->action->ajouterAction('listeComm', $listeComm);
             $this->action->ajouterAction('listeFourniture', $listeFournitures);
+            if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
         }
     }
 
@@ -485,7 +500,7 @@ class Events
         }
 
         //Si on se trouve dans un event on peut supprimer les commentaires ou invite ou fourniture
-        if($_SESSION['idEvent']){
+        if(!empty($_SESSION['idEvent'])){
 
             $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
             $listeFour = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
