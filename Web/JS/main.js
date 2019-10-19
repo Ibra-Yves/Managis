@@ -126,8 +126,8 @@ function gererDonnes(retour){
                             '<td class="taillePolice"><a href="afficheFour.php">'+actionDatas[1][0]['nombreFour']+'</a></td>' +
                             '<td class="taillePolice"><a href="afficheComm.php">'+actionDatas[2][0]['nombreComm']+'</a></td>' +
                         '</tr>';
-                    $('#infoEvent').html(tableNombre);
-                    evenements('#infoEvent');
+                    $('#infoSupp').html(tableNombre);
+                    evenements('#infoSupp');
                     break;
                 case 'listeInvites' : //Affichage de liste d'invités
                     let tableInvites= '';

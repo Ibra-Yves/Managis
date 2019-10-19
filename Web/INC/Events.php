@@ -280,7 +280,7 @@ class Events
         //On mémorise l'id du event dans la superglobale
         $_SESSION['idEvent'] = $id;
 
-        $this->action->affichageDefaut('#nombreInvFourComm', $this->lectureForm('infoEvent'));
+        $this->action->affichageDefaut('#nombreInvFourComm', $this->lectureForm('infoSup'));
         $this->action->affichageDefaut('#afficheInfos', '');
         $invites= $this->db->procCall('listeInvites', [$id]); //Affichage de liste d'invites
         $nombreInv = $this->db->procCall('nombreInv', [$id]);

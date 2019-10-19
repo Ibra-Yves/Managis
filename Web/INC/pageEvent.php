@@ -92,7 +92,6 @@
              </div>
          </div>
          <div class="col-md-6" id="nombreInvFourComm"></div>
-             <div class="col-md-6" id="afficheInfos"></div>
      </div>
-
+         <div class="col-md-6" id="afficheInfos"></div>
  </div>
