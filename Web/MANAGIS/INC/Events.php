@@ -440,6 +440,7 @@ class Events
         $this->action->affichageDefaut('#commentaires', $this->lectureForm('listeCommentaire'));
         $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
         $this->action->ajouterAction('listeComm', $listeComm);
+        $this->action->ajouterAction('test', $listeComm);
 
     }
 
