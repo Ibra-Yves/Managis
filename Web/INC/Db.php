@@ -42,6 +42,7 @@ class Db
             case 'nombreComm' :
             case 'nombreFour' :
             case 'nombreInv' :
+            case 'vosEvent' :
                 array_push($params, '?');
             case 'tousLesUsers' :
                 try {
@@ -66,6 +67,7 @@ class Db
             case 'supprCommentaire' :
             case 'supprFourniture' :
             case 'supprInvites' :
+            case 'vosInvit' :
                 array_push($params, '?', '?');
             try {
                 $this->connexionBDD();
@@ -82,7 +84,6 @@ class Db
         switch($procName) {
             case 'creerEvent' :
             array_push($params, '?', '?', '?');
-            case 'infoSoirees' :
             case 'listeInvites' :
             case 'listeFourniture' :
             case 'listeCommentaire'    :

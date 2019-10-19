@@ -35,7 +35,7 @@
                                                  <th style="width: 25%" scope="col" class="taillePoliceTitre">Adresse</th>
                                              </tr>
                                              </thead>
-                                             <tbody id="infoSoiree" align="left">
+                                             <tbody id="vosEvent" align="left">
                                              </tbody>
                                          </table>
                                      </div>
@@ -73,7 +73,7 @@
                                                  <th style="width: 25%" scope="col" class="taillePoliceTitre">Adresse</th>
                                              </tr>
                                              </thead>
-                                             <tbody id="infoSoiree" align="left">
+                                             <tbody id="vosInvit" align="left">
                                              </tbody>
                                          </table>
                                      </div>

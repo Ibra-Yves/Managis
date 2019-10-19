@@ -260,8 +260,17 @@ class Events
      */
     private function vosEvenements(){
         $this->action->affichageDefaut('#intro', $this->lectureForm('pageEvent'));//Charge la page
-       $infoSoiree =  $this->db->procCall('infoSoirees', [$_SESSION['user']['idUser']]); //Appelle la procèdure infoSoiree
-       $this->action->ajouterAction('infoSoiree', $infoSoiree);//On envois les données vers le client
+        //$verifInv = $this->db->procCall('listeInvites', [$_SESSION['user']['']]);
+        $a = [];
+        $vosInvit =  $this->db->procCall('vosInvit', [$_SESSION['user']['idUser'],$_SESSION['user']['pseudo']]); //Appelle la procèdure juste avec les evenements ou le user a ete invite
+        $vosEvent = $this->db->procCall('vosEvent', [$_SESSION['user']['pseudo']]); //Appelle la procedure juste avec les evenements du user
+        $this->action->ajouterAction('vosEvent', $vosEvent);//On envois les données vers le client
+        $this->action->ajouterAction('vosInvit', $vosInvit);//On envbois les données vers ke client
+        foreach ($vosInvit as $key => $value){
+            $verif = array_intersect([$vosInvit[$key]['hote']], [$_SESSION['user']['pseudo']]);
+
+        }
+        $this->action->ajouterAction('test', $verif);
     }
 
     /**
