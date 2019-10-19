@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5d87f7af-cee5-468a-80b9-c0cadb4b4aec" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/INC/pageEvent.php" beforeDir="false" afterPath="$PROJECT_DIR$/INC/pageEvent.php" afterDir="false" />
-    </list>
+    <list default="true" id="5d87f7af-cee5-468a-80b9-c0cadb4b4aec" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,12 +14,13 @@
     </execution>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1SH8XKjBXWxV5qcqBjVL7fw94t1" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="D:/Managis/Web" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -47,6 +46,7 @@
       <updated>1571209198590</updated>
       <workItem from="1571209200953" duration="8746000" />
       <workItem from="1571472718164" duration="7234000" />
+      <workItem from="1571484905312" duration="616000" />
     </task>
     <servers />
   </component>
