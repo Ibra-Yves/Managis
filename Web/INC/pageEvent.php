@@ -91,10 +91,8 @@
                  </div>
              </div>
          </div>
-         <div class="col-md-6" id="listeInvites"></div>
          <div class="col-md-6" id="nombreInvFourComm"></div>
+             <div class="col-md-6" id="afficheInfos"></div>
      </div>
 
-     <div id="fournitures"></div>
-     <div id="commentaires"></div>
  </div>

@@ -32,7 +32,10 @@ class Events
         'mdpOublie',
         'formMdpOublie',
         'commentaire',
-        'formQuantite'
+        'formQuantite',
+        'afficheInv',
+        'afficheFour',
+        'afficheComm'
     ];
 
     public function __construct()
@@ -260,17 +263,12 @@ class Events
      */
     private function vosEvenements(){
         $this->action->affichageDefaut('#intro', $this->lectureForm('pageEvent'));//Charge la page
-        //$verifInv = $this->db->procCall('listeInvites', [$_SESSION['user']['']]);
-        $a = [];
+
         $vosInvit =  $this->db->procCall('vosInvit', [$_SESSION['user']['idUser'],$_SESSION['user']['pseudo']]); //Appelle la procèdure juste avec les evenements ou le user a ete invite
         $vosEvent = $this->db->procCall('vosEvent', [$_SESSION['user']['pseudo']]); //Appelle la procedure juste avec les evenements du user
+
         $this->action->ajouterAction('vosEvent', $vosEvent);//On envois les données vers le client
         $this->action->ajouterAction('vosInvit', $vosInvit);//On envbois les données vers ke client
-        foreach ($vosInvit as $key => $value){
-            $verif = array_intersect([$vosInvit[$key]['hote']], [$_SESSION['user']['pseudo']]);
-
-        }
-        $this->action->ajouterAction('test', $verif);
     }
 
     /**
@@ -282,37 +280,54 @@ class Events
         //On mémorise l'id du event dans la superglobale
         $_SESSION['idEvent'] = $id;
 
-        // On affiche au client les pages transimises
-      /*  $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
-        $this->action->affichageDefaut('#commentaires', $this->lectureForm('listeCommentaire'));
-        $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));*/
         $this->action->affichageDefaut('#nombreInvFourComm', $this->lectureForm('infoEvent'));
-        //On appelle les procèdure qui vont servir pour les 3 formulaires transmis avant
+        $this->action->affichageDefaut('#afficheInfos', '');
         $invites= $this->db->procCall('listeInvites', [$id]); //Affichage de liste d'invites
-        $pseudos = $this->db->procCall('tousLesUsers', ['']); //Tous les users pour le formulaire d'invitation
-        $listeFournitures = $this->db->procCall('listeFourniture', [$id]); //La liste des fournitures
-        $listeComm = $this->db->procCall('listeCommentaire', [$id]); //Liste des commentaires
-       // $this->action->ajouterAction('infoEvent', $invites);
         $nombreInv = $this->db->procCall('nombreInv', [$id]);
         $nombreComm = $this->db->procCall('nombreComm', [$id]);
         $nombreFour = $this->db->procCall('nombreFour', [$id]);
-        $afficherSuppr = array_intersect([$invites[0]['pseudo']], [$_SESSION['user']['pseudo']]);
-        //Renvoi les données vers le client
-       /* $this->action->ajouterAction('listeFourniture', $listeFournitures);
-        $this->action->ajouterAction('listeInvites', $invites);
-        $this->action->ajouterAction('tousLesPseudos', $pseudos);
-        $this->action->ajouterAction('listeComm', $listeComm);*/
-        //$this->action->ajouterAction('test', $invites);
+
         $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
+    }
+
+    private function afficheInv(){
+       $afficheInv =  $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+        $tousLesUser = $this->db->procCall('tousLesUsers', ['']);
+        $afficherSuppr = array_intersect([$afficheInv[0]['pseudo']], [$_SESSION['user']['pseudo']]);
+       $this->action->affichageDefaut('#afficheInfos', $this->lectureForm('listeInvites'));
+        $this->action->ajouterAction('listeInvites', $afficheInv);
+        $this->action->ajouterAction('tousLesPseudos', $tousLesUser);
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
     }
 
+    private function afficheFour(){
+        $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+        $listeFour = $this->db->procCall('listeFourniture',[$_SESSION['idEvent']]);
+
+        $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
+        $this->action->affichageDefaut('#afficheInfos', $this->lectureForm('listeFourniture'));
+
+        $this->action->ajouterAction('listeFourniture', $listeFour);
+        if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
+    }
+
+    private function afficheComm(){
+        $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+        $listeComm = $this->db->procCall('listeCommentaire',[$_SESSION['idEvent']]);
+
+        $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
+        $this->action->affichageDefaut('#afficheInfos', $this->lectureForm('listeCommentaire'));
+
+        $this->action->ajouterAction('listeComm', $listeComm);
+        if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
+    }
     /**
      * Ajout de l'invite
      */
     private function formAjoutInv(){
         $user = $this->db->procCall('verifPseudo', [$_POST['pseudoInv']]);
         $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+
         $list =  [];
 
         foreach($verifInvite as $key){
@@ -494,6 +509,7 @@ class Events
      */
     private function supprimerInvite($req){
         $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+        $tousLesUser = $this->db->procCall('tousLesUsers', ['']);
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         $requeteInv = [];
 
@@ -505,6 +521,7 @@ class Events
         $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
         $listeInv = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
         $this->action->ajouterAction('listeInvites', $listeInv);
+        $this->action->ajouterAction('tousLesPseudos', $tousLesUser);
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
     }
 

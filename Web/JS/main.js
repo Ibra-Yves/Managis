@@ -122,11 +122,12 @@ function gererDonnes(retour){
                     let tableNombre = '';
                         tableNombre =
                         '<tr>' +
-                            '<td class="taillePolice">'+actionDatas[0][0]['nombreInv']+'</td>' +
-                            '<td class="taillePolice">'+actionDatas[1][0]['nombreFour']+'</td>' +
-                            '<td class="taillePolice">'+actionDatas[2][0]['nombreComm']+'</td>' +
+                            '<td class="taillePolice"><a href="afficheInv.php">'+actionDatas[0][0]['nombreInv']+'</a></td>' +
+                            '<td class="taillePolice"><a href="afficheFour.php">'+actionDatas[1][0]['nombreFour']+'</a></td>' +
+                            '<td class="taillePolice"><a href="afficheComm.php">'+actionDatas[2][0]['nombreComm']+'</a></td>' +
                         '</tr>';
                     $('#infoEvent').html(tableNombre);
+                    evenements('#infoEvent');
                     break;
                 case 'listeInvites' : //Affichage de liste d'invités
                     let tableInvites= '';
