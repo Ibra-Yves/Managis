@@ -102,7 +102,15 @@ function gererDonnes(retour){
 
                     //Affiche le nombre d'invites commentaires etc. pour l'event
                 case 'infoEvent':
-
+                    console.log(actionDatas[0][0]['nombreInv']);
+                    let tableNombre = '';
+                        tableNombre =
+                        '<tr>' +
+                            '<td class="taillePolice">'+actionDatas[0][0]['nombreInv']+'</td>' +
+                            '<td class="taillePolice">'+actionDatas[1][0]['nombreFour']+'</td>' +
+                            '<td class="taillePolice">'+actionDatas[2][0]['nombreComm']+'</td>' +
+                        '</tr>';
+                    $('#infoEvent').html(tableNombre);
                     break;
                 case 'listeInvites' : //Affichage de liste d'invités
                     let tableInvites= '';

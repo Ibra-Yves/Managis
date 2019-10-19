@@ -274,23 +274,27 @@ class Events
         $_SESSION['idEvent'] = $id;
 
         // On affiche au client les pages transimises
-        $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
+      /*  $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
         $this->action->affichageDefaut('#commentaires', $this->lectureForm('listeCommentaire'));
-        $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
-        //$this->action->affichageDefaut('#infoEvent', $this->lectureForm('infoEvent'));
+        $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));*/
+        $this->action->affichageDefaut('#nombreInvFourComm', $this->lectureForm('infoEvent'));
         //On appelle les procèdure qui vont servir pour les 3 formulaires transmis avant
         $invites= $this->db->procCall('listeInvites', [$id]); //Affichage de liste d'invites
         $pseudos = $this->db->procCall('tousLesUsers', ['']); //Tous les users pour le formulaire d'invitation
         $listeFournitures = $this->db->procCall('listeFourniture', [$id]); //La liste des fournitures
         $listeComm = $this->db->procCall('listeCommentaire', [$id]); //Liste des commentaires
        // $this->action->ajouterAction('infoEvent', $invites);
+        $nombreInv = $this->db->procCall('nombreInv', [$id]);
+        $nombreComm = $this->db->procCall('nombreComm', [$id]);
+        $nombreFour = $this->db->procCall('nombreFour', [$id]);
         $afficherSuppr = array_intersect([$invites[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         //Renvoi les données vers le client
-        $this->action->ajouterAction('listeFourniture', $listeFournitures);
+       /* $this->action->ajouterAction('listeFourniture', $listeFournitures);
         $this->action->ajouterAction('listeInvites', $invites);
         $this->action->ajouterAction('tousLesPseudos', $pseudos);
-        $this->action->ajouterAction('listeComm', $listeComm);
+        $this->action->ajouterAction('listeComm', $listeComm);*/
         //$this->action->ajouterAction('test', $invites);
+        $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
     }
 

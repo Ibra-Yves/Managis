@@ -39,6 +39,9 @@ class Db
             case 'verifEmail' :
             case 'verifPseudo' :
             case 'espaceMembre' :
+            case 'nombreComm' :
+            case 'nombreFour' :
+            case 'nombreInv' :
                 array_push($params, '?');
             case 'tousLesUsers' :
                 try {
