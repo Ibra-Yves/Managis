@@ -13,12 +13,14 @@
                     <tbody style="height: 10px !important; overflow: scroll;" id="invites" align="left">
                     </tbody>
                 </table>
+                <div id="formInv" style="display: none">
                 <h5 class="font-weight-bold">Ajouter des invités !</h5>
-                <form class="form-group" id="formAjoutInv" name="formAjoutInv" method="post" action="validation.html">
+                <form class="form-group" id="formAjoutInv" name="formAjoutInv"  method="post" action="validation.html">
                     <div id="errorFormm"></div>
                     <input type="text" name="pseudoInv" id="pseudoInv" class="form-control input-sm" placeholder="Nom invité">
                     <input type="submit" value="Ajouter un invité" class="btn btn-primary boutonEvent">
                 </form>
+                </div>
             </div>
         </div>
     </div>
