@@ -173,6 +173,7 @@ function gererDonnes(retour){
 
                 case 'afficherSuppr' :
                     $('a').css('display', 'inline');
+                    $('#formInv').css('display', 'inline');
                     break;
                 case 'Probleme JSON' : //On affiche si il y a un problème JSON
                     $('#intro').html(actionDatas['donnes']);

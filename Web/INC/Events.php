@@ -292,7 +292,7 @@ class Events
         $this->action->ajouterAction('tousLesPseudos', $pseudos);
         $this->action->ajouterAction('listeComm', $listeComm);
        // $this->action->ajouterAction('test', $tabSoiree);
-        if($afficherSuppr ) $this->action->ajouterAction('afficherSuppr', '');
+        if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
     }
 
     /**
