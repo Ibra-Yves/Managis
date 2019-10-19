@@ -272,26 +272,25 @@ class Events
     private function pageEventInfos($id){
         //On mémorise l'id du event dans la superglobale
         $_SESSION['idEvent'] = $id;
-        $tabSoiree = [];
 
         // On affiche au client les pages transimises
         $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
         $this->action->affichageDefaut('#commentaires', $this->lectureForm('listeCommentaire'));
         $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
-
+        //$this->action->affichageDefaut('#infoEvent', $this->lectureForm('infoEvent'));
         //On appelle les procèdure qui vont servir pour les 3 formulaires transmis avant
         $invites= $this->db->procCall('listeInvites', [$id]); //Affichage de liste d'invites
         $pseudos = $this->db->procCall('tousLesUsers', ['']); //Tous les users pour le formulaire d'invitation
         $listeFournitures = $this->db->procCall('listeFourniture', [$id]); //La liste des fournitures
         $listeComm = $this->db->procCall('listeCommentaire', [$id]); //Liste des commentaires
-
+       // $this->action->ajouterAction('infoEvent', $invites);
         $afficherSuppr = array_intersect([$invites[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         //Renvoi les données vers le client
         $this->action->ajouterAction('listeFourniture', $listeFournitures);
         $this->action->ajouterAction('listeInvites', $invites);
         $this->action->ajouterAction('tousLesPseudos', $pseudos);
         $this->action->ajouterAction('listeComm', $listeComm);
-       // $this->action->ajouterAction('test', $tabSoiree);
+        //$this->action->ajouterAction('test', $invites);
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
     }
 
@@ -440,6 +439,8 @@ class Events
      * @param $req requete effecuté par le client
      */
     private function supprimerCommentaire($req){
+        $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+        $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         $requeteComm = [];
 
         foreach ($req as $key => $value){
@@ -450,6 +451,7 @@ class Events
         $this->action->affichageDefaut('#commentaires', $this->lectureForm('listeCommentaire'));
         $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
         $this->action->ajouterAction('listeComm', $listeComm);
+        if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
 
     }
 
@@ -458,6 +460,8 @@ class Events
      * @param $req requete effecuté par le client
      */
     private function supprimerFourniture($req){
+        $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+        $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         $requeteFour = [];
 
         foreach ($req as $key => $value){
@@ -468,6 +472,7 @@ class Events
         $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
         $listeFourniture = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
         $this->action->ajouterAction('listeFourniture', $listeFourniture);
+        if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
     }
 
     /**
@@ -475,6 +480,8 @@ class Events
      * @param $req requete effecuté par le client
      */
     private function supprimerInvite($req){
+        $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+        $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         $requeteInv = [];
 
         foreach ($req as $key => $value){
@@ -485,6 +492,7 @@ class Events
         $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
         $listeInv = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
         $this->action->ajouterAction('listeInvites', $listeInv);
+        if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
     }
 
     /**
