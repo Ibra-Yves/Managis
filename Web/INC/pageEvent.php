@@ -12,7 +12,7 @@
 
                              <!-- Card header -->
                              <div class="card-header" role="tab" id="headingOne1">
-                                 <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
+                                 <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="false"
                                     aria-controls="collapseOne1">
                                      <h5 class="mb-0">
                                          Vos évenements<i class="fas fa-angle-down rotate-icon"></i>
@@ -21,7 +21,7 @@
                              </div>
 
                              <!-- Card body -->
-                             <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1"
+                             <div id="collapseOne1" class="collapse" role="tabpanel" aria-labelledby="headingOne1"
                                   data-parent="#accordionEx">
                                  <div class="card-body">
                                      <div class="table-responsive">
@@ -91,7 +91,8 @@
                  </div>
              </div>
          </div>
-         <div class="col-md-6" id="nombreInvFourComm"></div>
+             <div class=" row col-md-6" id="nombreInvFourComm"></div>
      </div>
+
          <div class="col-md-6" id="afficheInfos"></div>
  </div>
