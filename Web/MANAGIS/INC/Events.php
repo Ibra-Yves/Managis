@@ -272,6 +272,7 @@ class Events
     private function pageEventInfos($id){
         //On mémorise l'id du event dans la superglobale
         $_SESSION['idEvent'] = $id;
+        $tabSoiree = [];
 
         // On affiche au client les pages transimises
         $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
@@ -284,11 +285,14 @@ class Events
         $listeFournitures = $this->db->procCall('listeFourniture', [$id]); //La liste des fournitures
         $listeComm = $this->db->procCall('listeCommentaire', [$id]); //Liste des commentaires
 
+        $afficherSuppr = array_intersect([$invites[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         //Renvoi les données vers le client
         $this->action->ajouterAction('listeFourniture', $listeFournitures);
         $this->action->ajouterAction('listeInvites', $invites);
         $this->action->ajouterAction('tousLesPseudos', $pseudos);
         $this->action->ajouterAction('listeComm', $listeComm);
+       // $this->action->ajouterAction('test', $tabSoiree);
+        if($afficherSuppr ) $this->action->ajouterAction('afficherSuppr', '');
     }
 
     /**
@@ -307,7 +311,7 @@ class Events
         $resultatSansEspaces = array_intersect($list, [$_POST['pseudoInv']]);
         $enleverEspaces = trim($_POST['pseudoInv']);
         $resultatAvecEspaces = array_intersect($list, [$enleverEspaces]);
-
+        $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         //On renvoie vers le client le message d'erreur si le pseudo transmis n'existe pas
         if($_POST['pseudoInv'] == '' || !$user || $resultatSansEspaces || $resultatAvecEspaces){
             $this->action->ajouterAction('errorInv', 'Le pseudo n existe pas ou invite se trouve dans la liste');
@@ -322,6 +326,7 @@ class Events
             $pseudos = $this->db->procCall('tousLesUsers', ['']);
             $this->action->ajouterAction('tousLesPseudos', $pseudos);
             $this->action->ajouterAction('listeInvites', $invites);
+            if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
         }
     }
 
@@ -330,6 +335,7 @@ class Events
      */
     private function formFournitures(){
         $verifFourniture= $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
+        $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
         $list =  [];
 
         foreach($verifFourniture as $key){
@@ -340,7 +346,7 @@ class Events
         $resultatSansEspaces = array_intersect($list, [$_POST['fourniture']]);
         $enleverEspaces= trim($_POST['fourniture']);
         $resultatAvecEspaces = array_intersect($list, [$enleverEspaces]);
-
+        $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]); //Droits d'admin
         //On renvoie le message d'erreur au client
         if($_POST['fourniture'] == ''  || $resultatSansEspaces || $resultatAvecEspaces){
             $this->action->ajouterAction('errorUser', 'Fourniture se trouve deja dans la liste');
@@ -355,6 +361,7 @@ class Events
             $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
             $this->action->ajouterAction('listeFourniture', $listeFournitures);
             $this->action->ajouterAction('listeComm', $listeComm);
+            if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
         }
     }
 
@@ -377,6 +384,8 @@ class Events
      */
     private function commentaire(){
         $commentaire = $_POST['commentaire'];
+        $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]); //Droits d'admin
+        $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);//Droits d'admin
         //Verification si le commentaires n'est pas nul
         if(empty($_POST['commentaire'])){
             $this->action->ajouterAction('errorComm', 'Le commentaire ne peut pas être nul');
@@ -389,6 +398,7 @@ class Events
             $listeFournitures = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
             $this->action->ajouterAction('listeComm', $listeComm);
             $this->action->ajouterAction('listeFourniture', $listeFournitures);
+            if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
         }
     }
 

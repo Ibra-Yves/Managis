@@ -111,14 +111,16 @@ function gererDonnes(retour){
                         '<tr> \n' +
                             '<th scope="row" id="'+ o++ +'">'+ j++ +'</th>\n' +
                             '<td class="taillePolice" id="'+ p++ +'">'+data['pseudo']+'</td> \n' +
-                            '<td class="taillePolice"><a id="' + q++ +'" href="'+data['pseudo']+'" class="btn btn-primary boutonEvent">-</a></td> \n' +
+                            '<td class="taillePolice"><a id="' + q++ +'" href="'+data['pseudo']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
                         '</tr>';
+
                     });
 
                     $('#invites').html(tableInvites); //Affichage des invités sous le forme de tableau
                     $('#0').remove(); // On n'affiche pas lé premier invité car c'est un hote et si on le supprime faudra remodifier dans la BDD
                     $('#1').remove();
                     $('#2').remove();
+
                     evenements('#invites');
                     break;
 
@@ -145,7 +147,7 @@ function gererDonnes(retour){
                             '<th scope="row">'+ k++ +'</th>\n' +
                             '<td class="taillePolice">'+ data['fourniture']+'</td>\n' +
                             '<td class="taillePolice"><input type="number" name="fourniture['+ data['fourniture']+']" value="'+data['quantite']+'"  min="0" style="width: 40px"></td>\n' +
-                            '<td class="taillePolice"><a href="'+data['fourniture']+'" class="btn btn-primary boutonEvent">-</a></td> \n' +
+                            '<td class="taillePolice"><a href="'+data['fourniture']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
                         '</tr>';
 
                     });
@@ -161,7 +163,7 @@ function gererDonnes(retour){
                                 ' <tr>\n' +
                                     '<th scope="row">'+ l++ +'</th>\n' +
                                     '<td class="taillePolice">'+data['commentaire']+'</td>\n' +
-                                    '<td class="taillePolice"><a href="'+data['commentaire']+'" class="btn btn-primary boutonEvent">-</a></td> \n' +
+                                    '<td class="taillePolice"><a href="'+data['commentaire']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
                                 '</tr>';
                         });
 
@@ -169,6 +171,9 @@ function gererDonnes(retour){
                     evenements('#listeCommentaire');
                     break;
 
+                case 'afficherSuppr' :
+                    $('a').css('display', 'inline');
+                    break;
                 case 'Probleme JSON' : //On affiche si il y a un problème JSON
                     $('#intro').html(actionDatas['donnes']);
                     break;
