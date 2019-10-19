@@ -1,0 +1,28 @@
+FROM ubuntu
+
+#On installe les services necessaires
+RUN apt-get update \
+        && apt-get install -y vim \
+    && apt-get install -y apt-utils \
+ && apt-get install -y php-fpm php-mysql \
+    && apt-get install -y nginx
+
+#On place les config des sites
+COPY managis.be /etc/nginx/sites-available/
+
+
+#On copie les config dans sites-enabled
+RUN rm /etc/nginx/sites-enabled/default
+RUN ln -s /etc/nginx/sites-available/managis.be /etc/nginx/sites-enabled/
+
+
+# Modifier la configuration par défaut de PHP7.0 en passant le paramètres cgi.fix_pathinfo à 0
+RUN sed -i -e 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.2/fpm/php.ini
+
+
+#On verifie que les configs sont bons
+RUN nginx -t
+#On expose les ports
+EXPOSE 80  443
+
+CMD  service php7.2-fpm start &&  nginx -g "daemon off;"
