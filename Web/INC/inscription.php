@@ -8,7 +8,6 @@
                     <h3 class="panel-title taillePoliceSection" align="center">Inscrivez-vous pour organiser vos soirées</h3>
                 </div>
                 <div class="panel-body">
-                    <input type="button" onclick="window.location='<?php echo 'alo.be'; ?>';"  value="Inscrivez vous via facebook" class="btn btn-primary align-middle">
                     <form id="formInscription" class="formInscription" name="formInscription" method="post" action="validation.html">
                         <div id="errorForm"></div>
                         <div class="row">

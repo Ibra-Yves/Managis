@@ -1,13 +1,13 @@
 <?php
 
-use Couchbase\Document;
+/*use Couchbase\Document;
 use Facebook\Exceptions\FacebookResponseException;
-use Facebook\Exceptions\FacebookSDKException;
+use Facebook\Exceptions\FacebookSDKException;*/
 
 include_once 'Db.php';
 include_once 'Actions.php';
 include_once 'Session.php';
-include_once 'Facebook/autoload.php';
+//include_once 'Facebook/autoload.php';
 class Events
 {
     private $action = null;
@@ -101,47 +101,10 @@ class Events
      * Renvoie la page d'inscription
      */
     private function inscription(){
-        $fb = new Facebook\Facebook([
-            'app_id' => '730903687321089',
-            'app_secret' => '0fdb5fe6b65924b62fb3c40e91480227',
-            'default_graph_version' => 'v2.10'
-        ]);
-        $helper = $fb->getRedirectLoginHelper();
-        $redirectURL = "http://localhost/Managis/Web/fbCallback";
-        $permission = ['email'];
-        $loginURL = $helper->getLoginUrl($redirectURL, $permission);
         $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
         //$this->action->affichageDefaut('#intro', $_SESSION['facebook']['url']);
     }
 
-    private function fbCallback(){
-        $fb = new Facebook\Facebook([
-            'app_id' => '730903687321089',
-            'app_secret' => '0fdb5fe6b65924b62fb3c40e91480227',
-            'default_graph_version' => 'v2.10'
-        ]);
-        $helper = $fb->getRedirectLoginHelper();
-        try {
-            $accessToken = $helper->getAccessToken();
-        }
-        catch(FacebookResponseException $e){
-            $this->action->affichageDefaut('#intro', $e->getMessage());
-            exit();
-        }
-        catch(FacebookSDKException $e) {
-            $this->action->affichageDefaut('#intro', $e->getMessage());
-            exit();
-        }
-        if(!$accessToken){
-            $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
-        }
-        $oAuth2Client = $fb->getOAuth2Client();
-        if(!$accessToken->isLongLived()) $oAuth2Client->getLongLivedAccessToken();
-
-        $response = $fb->get("/me?fields=first_name,email", $accessToken);
-        $userData = $response->getGraphNode()->asArray();
-        $this->action->affichageDefaut('#intro', $userData);
-    }
     /**
      * Rnvoie la page des conditions generales
      */
@@ -293,8 +256,10 @@ class Events
         //On change de mot de passe pour l'utilisatur
         else {
             $this->db->procCall('modifMdp', [$_SESSION['user']['pseudo'], hash('md5', $_POST['newMDP'])]);
-            $this->action->affichageDefaut('#intro', $this->lectureForm('gestionCompte'));
             $infoMembre=  $this->db->procCall('espaceMembre', [$_SESSION['user']['pseudo']]); //On appelle la procedure qui affiche les donnes du client
+
+            $this->action->affichageDefaut('#intro', $this->lectureForm('gestionCompte'));
+
             $this->action->ajouterAction('espaceMembre', $infoMembre); //On affiche au niveau de l'utilisateur les infos
             $this->action->ajouterAction('modifMdp', 'Votre mot de passe a été changé avec success');
         }
@@ -306,14 +271,21 @@ class Events
     private function vosEvenements(){
         $this->action->affichageDefaut('#intro', $this->lectureForm('pageEvent'));//Charge la page
 
-        $vosInvit =  $this->db->procCall('vosInvit', [$_SESSION['user']['idUser'],$_SESSION['user']['pseudo']]); //Appelle la procèdure juste avec les evenements ou le user a ete invite
-        $vosEvent = $this->db->procCall('vosEvent', [$_SESSION['user']['pseudo']]); //Appelle la procedure juste avec les evenements du user
+        $vosInvitFutur =  $this->db->procCall('vosInvitFutur', [$_SESSION['user']['idUser'],$_SESSION['user']['pseudo']]); //Appelle la procèdure juste avec les evenements ou le user a ete invite
+        $vosEventFutur = $this->db->procCall('vosEventFutur', [$_SESSION['user']['pseudo']]); //Appelle la procedure juste avec les evenements du user
 
-        $this->action->ajouterAction('vosEvent', $vosEvent);//On envois les données vers le client
-        $this->action->ajouterAction('vosInvit', $vosInvit);//On envbois les données vers ke client
+        $this->action->ajouterAction('vosEventFutur', $vosEventFutur);//On envois les données vers le client
+        $this->action->ajouterAction('vosInvitFutur', $vosInvitFutur);//On envbois les données vers ke client
     }
+
     private function historiqueEvents(){
         $this->action->affichageDefaut('#intro', $this->lectureForm('historiqueEvents'));
+
+        $vosInvitPasse =  $this->db->procCall('vosInvitPasse', [$_SESSION['user']['idUser'],$_SESSION['user']['pseudo']]); //Appelle la procèdure juste avec les evenements ou le user a ete invite
+        $vosEventPasse = $this->db->procCall('vosEventPasse', [$_SESSION['user']['pseudo']]); //Appelle la procedure juste avec les evenements du user
+
+        $this->action->ajouterAction('vosEventPasse', $vosEventPasse);//On envois les données vers le client
+        $this->action->ajouterAction('vosInvitPasse', $vosInvitPasse);//On envbois les données vers ke client
     }
 
     /**
@@ -327,7 +299,7 @@ class Events
 
         $this->action->affichageDefaut('#nombreInvFourComm', $this->lectureForm('infoSup'));
         $this->action->affichageDefaut('#afficheInfos', '');
-        $invites= $this->db->procCall('listeInvites', [$id]); //Affichage de liste d'invites
+
         $nombreInv = $this->db->procCall('nombreInv', [$id]);
         $nombreComm = $this->db->procCall('nombreComm', [$id]);
         $nombreFour = $this->db->procCall('nombreFour', [$id]);
@@ -338,10 +310,14 @@ class Events
     private function afficheInv(){
        $afficheInv =  $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
         $tousLesUser = $this->db->procCall('tousLesUsers', ['']);
+
         $afficherSuppr = array_intersect([$afficheInv[0]['pseudo']], [$_SESSION['user']['pseudo']]);
-       $this->action->affichageDefaut('#afficheInfos', $this->lectureForm('listeInvites'));
+
+        $this->action->affichageDefaut('#afficheInfos', $this->lectureForm('listeInvites'));
+
         $this->action->ajouterAction('listeInvites', $afficheInv);
         $this->action->ajouterAction('tousLesPseudos', $tousLesUser);
+
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
     }
 
@@ -392,12 +368,21 @@ class Events
         //Sinon on rajoute l'invite et on l'affiche dans la liste
         else {
             $this->db->procCall('ajouterInvites',[$_POST['pseudoInv'], $_SESSION['idEvent']]);
+
             $invites= $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
-            $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
-            $this->action->ajouterAction('succInv', 'Le pseudo a été rajouté avec succes');
+            $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
+            $nombreComm = $this->db->procCall('nombreComm', [$_SESSION['idEvent']]);
+            $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
             $pseudos = $this->db->procCall('tousLesUsers', ['']);
+
+            $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
+            $this->action->affichageDefaut('#nombreInvFourComm', $this->lectureForm('infoSup'));
+
+            $this->action->ajouterAction('succInv', 'Le pseudo a été rajouté avec succes');
             $this->action->ajouterAction('tousLesPseudos', $pseudos);
             $this->action->ajouterAction('listeInvites', $invites);
+            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
+
             if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
         }
     }
@@ -419,6 +404,7 @@ class Events
         $enleverEspaces= trim($_POST['fourniture']);
         $resultatAvecEspaces = array_intersect($list, [$enleverEspaces]);
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]); //Droits d'admin
+
         //On renvoie le message d'erreur au client
         if($_POST['fourniture'] == ''  || $resultatSansEspaces || $resultatAvecEspaces){
             $this->action->ajouterAction('errorUser', 'Fourniture se trouve deja dans la liste');
@@ -427,12 +413,20 @@ class Events
         //Sinon on ajoute la fourniture à la liste et on la fait afficher
         else {
             $this->db->procCall('ajouterFournitures', [$_SESSION['idEvent'], $_POST['fourniture']]);
+
             $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
-            $this->action->ajouterAction('modifMdp', 'La fourniture a été ajouté avec succes');
+
             $listeFournitures = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
             $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
+            $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
+            $nombreComm = $this->db->procCall('nombreComm', [$_SESSION['idEvent']]);
+            $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
+
+            $this->action->ajouterAction('modifMdp', 'La fourniture a été ajouté avec succes');
+            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
             $this->action->ajouterAction('listeFourniture', $listeFournitures);
             $this->action->ajouterAction('listeComm', $listeComm);
+
             if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
         }
     }
@@ -458,6 +452,7 @@ class Events
         $commentaire = $_POST['commentaire'];
         $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]); //Droits d'admin
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);//Droits d'admin
+
         //Verification si le commentaires n'est pas nul
         if(empty($_POST['commentaire'])){
             $this->action->ajouterAction('errorComm', 'Le commentaire ne peut pas être nul');
@@ -466,10 +461,18 @@ class Events
         else {
             $this->db->procCall('ajoutCommentaire', [$_SESSION['idEvent'], $commentaire]);
             $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
+
             $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
             $listeFournitures = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
+            $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
+            $nombreComm = $this->db->procCall('nombreComm', [$_SESSION['idEvent']]);
+            $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
+
+            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
+            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
             $this->action->ajouterAction('listeComm', $listeComm);
             $this->action->ajouterAction('listeFourniture', $listeFournitures);
+
             if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
         }
     }
@@ -513,6 +516,9 @@ class Events
      */
     private function supprimerCommentaire($req){
         $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+        $nombreComm = $this->db->procCall('nombreComm', [$_SESSION['idEvent']]);
+        $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
+        $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         $requeteComm = [];
 
@@ -524,6 +530,7 @@ class Events
         $this->action->affichageDefaut('#commentaires', $this->lectureForm('listeCommentaire'));
         $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
         $this->action->ajouterAction('listeComm', $listeComm);
+        $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
 
     }
@@ -536,15 +543,21 @@ class Events
         $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         $requeteFour = [];
-
+        $nombreComm = $this->db->procCall('nombreComm', [$_SESSION['idEvent']]);
+        $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
+        $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
         foreach ($req as $key => $value){
             $requeteFour = $value;
         }
         //On retire la fourniture de la liste
         $this->db->procCall('supprFourniture', [$_SESSION['idEvent'],$requeteFour]);
+
         $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
+
         $listeFourniture = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
+
         $this->action->ajouterAction('listeFourniture', $listeFourniture);
+        $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
     }
 
@@ -555,6 +568,9 @@ class Events
     private function supprimerInvite($req){
         $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
         $tousLesUser = $this->db->procCall('tousLesUsers', ['']);
+        $nombreComm = $this->db->procCall('nombreComm', [$_SESSION['idEvent']]);
+        $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
+        $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         $requeteInv = [];
 
@@ -563,10 +579,15 @@ class Events
         }
         //On enleve l'invite de la liste
         $this->db->procCall('supprInvites', [$_SESSION['idEvent'],$requeteInv]);
+
         $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
+
         $listeInv = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+
         $this->action->ajouterAction('listeInvites', $listeInv);
         $this->action->ajouterAction('tousLesPseudos', $tousLesUser);
+        $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
+
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
     }
 
