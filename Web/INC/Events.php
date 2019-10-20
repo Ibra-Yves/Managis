@@ -1,13 +1,9 @@
 <?php
 
-/*use Couchbase\Document;
-use Facebook\Exceptions\FacebookResponseException;
-use Facebook\Exceptions\FacebookSDKException;*/
 
 include_once 'Db.php';
 include_once 'Actions.php';
 include_once 'Session.php';
-//include_once 'Facebook/autoload.php';
 class Events
 {
     private $action = null;
