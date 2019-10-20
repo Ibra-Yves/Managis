@@ -54,34 +54,34 @@
                    <?php
                         $inscription =
                             '<li class="nav-item active">
-                                <a href="inscription.php" class="btn btn-outline-dark">Inscription</a>
+                                <a href="inscription.php" class="btn btn-outline-dark"><i class="far fa-address-card"></i> Inscription</a>
+                            </li>';
+                        $quiSommesNous =
+                            '<li class="nav-item">
+                                <a href="quiSommesNous.php" class="btn btn-outline-dark"><i class="fas fa-users"></i> Qui sommes-nous?</a>
                             </li>';
                         $connexion =
                             '<li class="nav-item">
-                                <a href="connexion.php" class="btn btn-outline-dark">Connexion</a>
+                                <a href="connexion.php" class="btn btn-outline-dark"> <i class="fas fa-sign-in-alt"></i> Connexion</a>
                             </li>' ;
-                        $quiSommesNous =
-                            '<li class="nav-item">
-                                <a href="quiSommesNous.php" class="btn btn-outline-dark">Qui sommes-nous?</a>
-                            </li>';
                         $vosEvenements =
                             /*'<li class="nav-item">
                                 <a href="vosEvenements.php" class="btn btn-outline-dark">Vos evenements</a>
                             </li>'*/
                         '<li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle btn btn-outline-dark" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              GESTION EVENEMENTS
+                              <span class="glyphicon glyphicon-calendar"></span> GESTION EVENEMENTS
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="addEvent.php">Créer votre événement événement</a>
-                              <a class="dropdown-item" href="vosEvenements.php">Evenements à venir</a>
-                              <a class="dropdown-item" href="historiqueEvents.php">Historique des événements</a>
+                            <a class="dropdown-item" href="addEvent.php">CREER VOTRE EVENEMENT</a>
+                              <a class="dropdown-item" href="vosEvenements.php">EVENEMENTS A VENIR</a>
+                              <a class="dropdown-item" href="historiqueEvents.php">HISTORIQUE DE VOS EVENEMENTS</a>
                             </div>
                          </li>';
                         if (!empty($_SESSION['user'])) {
                             //$ajouterEvent = str_replace("<a href=\"inscription.php\" class=\"btn btn-outline-dark\">Inscription</a>", '<a href="addEvent.php"  class="btn btn-outline-dark">Créer votre evenement </a>', $inscription);
-                            $espaceMembre = str_replace("<a href=\"connexion.php\" class=\"btn btn-outline-dark\">Connexion</a>", "<a href=\"espaceMembre.php\" class=\"btn btn-outline-dark\">Espace Membre</a>", $connexion);
-                            $deconnexion= str_replace("<a href=\"quiSommesNous.php\" class=\"btn btn-outline-dark\">Qui sommes-nous?</a>", "<a href=\"deconnexion.php\" class=\"btn btn-outline-dark\">Deconnexion</a>", $quiSommesNous);
+                            $espaceMembre = str_replace("<a href=\"connexion.php\" class=\"btn btn-outline-dark\"> <i class=\"fas fa-sign-in-alt\"></i> Connexion</a>", "<a href=\"espaceMembre.php\" class=\"btn btn-outline-dark\"><span class=\"glyphicon glyphicon-user\"></span>  Espace Membre</a>", $connexion);
+                            $deconnexion= str_replace("<a href=\"quiSommesNous.php\" class=\"btn btn-outline-dark\"><i class=\"fas fa-users\"></i> Qui sommes-nous?</a>", "<a href=\"deconnexion.php\" class=\"btn btn-outline-dark\"><i class=\"fas fa-sign-out-alt\"></i> Deconnexion</a>", $quiSommesNous);
                             echo $vosEvenements  . $espaceMembre . $deconnexion;
                         }
                         else {

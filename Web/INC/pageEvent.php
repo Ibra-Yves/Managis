@@ -2,7 +2,7 @@
      <div class="row text-center">
          <div class="col-md-6">
              <div class="card mb-3 transparent" style="max-width: 110rem;">
-                 <div class="card-header blanc taillePoliceSection">Evenement</div>
+                 <div class="card-header blanc taillePoliceSection">Evenement à venir</div>
                  <div class="card-body">
                      <!--Accordion wrapper-->
                      <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
@@ -53,7 +53,7 @@
                                  <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2"
                                     aria-expanded="false" aria-controls="collapseTwo2">
                                      <h5 class="mb-0">
-                                         Vos invitations<i class="fas fa-angle-down rotate-icon"></i>
+                                         Vos invitations à venir<i class="fas fa-angle-down rotate-icon"></i>
                                      </h5>
                                  </a>
                              </div>
