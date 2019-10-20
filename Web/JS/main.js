@@ -238,8 +238,9 @@ function gererDonnes(retour){
                     break;
 
                 case 'afficherSuppr' :
-                    $('a').css('display', 'inline');
-                    $('#formInv').css('display', 'inline');
+                    $('a').show();
+                    $('#formInv').show();
+                    $('#suppr').show();
                     break;
                 case 'Probleme JSON' : //On affiche si il y a un problème JSON
                     $('#intro').html(actionDatas['donnes']);

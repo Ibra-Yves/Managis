@@ -24,7 +24,7 @@
                     <tr>
                         <th style="width: 5%" scope="col" class="taillePoliceTitre">#</th>
                         <th style="width: 95%" scope="col" class="taillePoliceTitre">Commentaire</th>
-                        <th style="width: 95%" scope="col" class="taillePoliceTitre">Supprimer le commentaire</th>
+                        <th style="width: 95%; display: none " id="suppr" scope="col" class="taillePoliceTitre" >Supprimer le commentaire</th>
                     </tr>
                     </thead>
                     <tbody id="listeCommentaire" align="left">

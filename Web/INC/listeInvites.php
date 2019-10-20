@@ -24,7 +24,7 @@
                         <tr>
                             <th style="width: 5%" scope="col" class="taillePoliceTitre">#</th>
                             <th style="width: 95%" scope="col" class="taillePoliceTitre">Nom de l'invité</th>
-                            <th style="width: 95%" scope="col" class="taillePoliceTitre" style="display: none">Supprimer l'invité</th>
+                            <th style="width: 95% ; display: none " id="suppr" scope="col" class="taillePoliceTitre" style="display: none">Supprimer l'invité</th>
                         </tr>
                         </thead>
                         <tbody style="height: 10px !important; overflow: scroll;" id="invites" align="left">
