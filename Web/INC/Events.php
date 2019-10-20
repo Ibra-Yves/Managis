@@ -1,10 +1,13 @@
 <?php
 
 use Couchbase\Document;
+use Facebook\Exceptions\FacebookResponseException;
+use Facebook\Exceptions\FacebookSDKException;
 
 include_once 'Db.php';
 include_once 'Actions.php';
 include_once 'Session.php';
+include_once 'Facebook/autoload.php';
 class Events
 {
     private $action = null;
@@ -35,7 +38,8 @@ class Events
         'formQuantite',
         'afficheInv',
         'afficheFour',
-        'afficheComm'
+        'afficheComm',
+        'fbCallback'
     ];
 
     public function __construct()
@@ -96,9 +100,47 @@ class Events
      * Renvoie la page d'inscription
      */
     private function inscription(){
+        $fb = new Facebook\Facebook([
+            'app_id' => '730903687321089',
+            'app_secret' => '0fdb5fe6b65924b62fb3c40e91480227',
+            'default_graph_version' => 'v2.10'
+        ]);
+        $helper = $fb->getRedirectLoginHelper();
+        $redirectURL = "http://localhost/Managis/Web/fbCallback";
+        $permission = ['email'];
+        $loginURL = $helper->getLoginUrl($redirectURL, $permission);
         $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
+        //$this->action->affichageDefaut('#intro', $_SESSION['facebook']['url']);
     }
 
+    private function fbCallback(){
+        $fb = new Facebook\Facebook([
+            'app_id' => '730903687321089',
+            'app_secret' => '0fdb5fe6b65924b62fb3c40e91480227',
+            'default_graph_version' => 'v2.10'
+        ]);
+        $helper = $fb->getRedirectLoginHelper();
+        try {
+            $accessToken = $helper->getAccessToken();
+        }
+        catch(FacebookResponseException $e){
+            $this->action->affichageDefaut('#intro', $e->getMessage());
+            exit();
+        }
+        catch(FacebookSDKException $e) {
+            $this->action->affichageDefaut('#intro', $e->getMessage());
+            exit();
+        }
+        if(!$accessToken){
+            $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
+        }
+        $oAuth2Client = $fb->getOAuth2Client();
+        if(!$accessToken->isLongLived()) $oAuth2Client->getLongLivedAccessToken();
+
+        $response = $fb->get("/me?fields=first_name,email", $accessToken);
+        $userData = $response->getGraphNode()->asArray();
+        $this->action->affichageDefaut('#intro', $userData);
+    }
     /**
      * Rnvoie la page des conditions generales
      */
@@ -160,7 +202,6 @@ class Events
         else {
             $this->db->procCall('creationUser', [$_POST['pseudo'], $_POST['email'], hash('md5', $_POST['mdp'])]); //On crée le user avec les champs recupères
             $idUser = $this->db->procCall('connexionUser', [$_POST['pseudo'], hash('md5', $_POST['mdp'])]); //On effectue la connexion de user pour qu'il soit deja connecte au moment de l'inscriptioin
-
             //On memorise les valeurs recuperés de la procèdure dans la superglobale
             $_SESSION['user']= $idUser[0];
             $_SESSION['user']['pseudo'] = $idUser[0]['pseudo'];

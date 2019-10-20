@@ -1,5 +1,6 @@
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <div class="container">
+
     <div class="row centered-form">
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
             <div class="panel panel-default">
@@ -7,6 +8,7 @@
                     <h3 class="panel-title taillePoliceSection" align="center">Inscrivez-vous pour organiser vos soirées</h3>
                 </div>
                 <div class="panel-body">
+                    <input type="button" onclick="window.location='<?php echo 'alo.be'; ?>';"  value="Inscrivez vous via facebook" class="btn btn-primary align-middle">
                     <form id="formInscription" class="formInscription" name="formInscription" method="post" action="validation.html">
                         <div id="errorForm"></div>
                         <div class="row">
