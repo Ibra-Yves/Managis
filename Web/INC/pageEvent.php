@@ -15,7 +15,7 @@
                                  <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="false"
                                     aria-controls="collapseOne1">
                                      <h5 class="mb-0">
-                                         Vos évenements<i class="fas fa-angle-down rotate-icon"></i>
+                                         Vos évenements à venir<i class="fas fa-angle-down rotate-icon"></i>
                                      </h5>
                                  </a>
                              </div>

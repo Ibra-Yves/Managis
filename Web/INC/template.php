@@ -39,7 +39,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="barreblanche">
         <div class="container-fluid">
             <!-- Navbar brand -->
-            <a class="navbar-brand" href="#">MANAGIS</a>
+            <a class="navbar-brand" href="template.php">MANAGIS</a>
 
             <!-- Collapse button -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
@@ -65,14 +65,24 @@
                                 <a href="quiSommesNous.php" class="btn btn-outline-dark">Qui sommes-nous?</a>
                             </li>';
                         $vosEvenements =
-                            '<li class="nav-item">
+                            /*'<li class="nav-item">
                                 <a href="vosEvenements.php" class="btn btn-outline-dark">Vos evenements</a>
-                            </li>';
+                            </li>'*/
+                        '<li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle btn btn-outline-dark" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              GESTION EVENEMENTS
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="addEvent.php">Créer votre événement événement</a>
+                              <a class="dropdown-item" href="vosEvenements.php">Evenements à venir</a>
+                              <a class="dropdown-item" href="historiqueEvents.php">Historique des événements</a>
+                            </div>
+                         </li>';
                         if (!empty($_SESSION['user'])) {
-                            $ajouterEvent = str_replace("<a href=\"inscription.php\" class=\"btn btn-outline-dark\">Inscription</a>", '<a href="addEvent.php"  class="btn btn-outline-dark">Créer votre evenement </a>', $inscription);
+                            //$ajouterEvent = str_replace("<a href=\"inscription.php\" class=\"btn btn-outline-dark\">Inscription</a>", '<a href="addEvent.php"  class="btn btn-outline-dark">Créer votre evenement </a>', $inscription);
                             $espaceMembre = str_replace("<a href=\"connexion.php\" class=\"btn btn-outline-dark\">Connexion</a>", "<a href=\"espaceMembre.php\" class=\"btn btn-outline-dark\">Espace Membre</a>", $connexion);
                             $deconnexion= str_replace("<a href=\"quiSommesNous.php\" class=\"btn btn-outline-dark\">Qui sommes-nous?</a>", "<a href=\"deconnexion.php\" class=\"btn btn-outline-dark\">Deconnexion</a>", $quiSommesNous);
-                            echo $ajouterEvent. $vosEvenements  . $espaceMembre . $deconnexion;
+                            echo $vosEvenements  . $espaceMembre . $deconnexion;
                         }
                         else {
                             echo $inscription . $connexion . $quiSommesNous;
