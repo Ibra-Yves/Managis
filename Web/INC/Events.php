@@ -39,7 +39,8 @@ class Events
         'afficheInv',
         'afficheFour',
         'afficheComm',
-        'fbCallback'
+        'fbCallback',
+        'historiqueEvents'
     ];
 
     public function __construct()
@@ -310,6 +311,9 @@ class Events
 
         $this->action->ajouterAction('vosEvent', $vosEvent);//On envois les données vers le client
         $this->action->ajouterAction('vosInvit', $vosInvit);//On envbois les données vers ke client
+    }
+    private function historiqueEvents(){
+        $this->action->affichageDefaut('#intro', $this->lectureForm('historiqueEvents'));
     }
 
     /**
