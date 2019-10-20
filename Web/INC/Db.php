@@ -42,7 +42,8 @@ class Db
             case 'nombreComm' :
             case 'nombreFour' :
             case 'nombreInv' :
-            case 'vosEvent' :
+            case 'vosEventFutur' :
+            case 'vosEventPasse'    :
                 array_push($params, '?');
             case 'tousLesUsers' :
                 try {
@@ -67,7 +68,8 @@ class Db
             case 'supprCommentaire' :
             case 'supprFourniture' :
             case 'supprInvites' :
-            case 'vosInvit' :
+            case 'vosInvitFutur' :
+            case 'vosInvitPasse' :
                 array_push($params, '?', '?');
             try {
                 $this->connexionBDD();

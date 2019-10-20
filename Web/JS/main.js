@@ -81,7 +81,7 @@ function gererDonnes(retour){
                     $('#infoCompte').html(content); //Affichage sous un tableau
                     break;
 
-                case 'vosEvent' : //Affichage des soirées en cours
+                case 'vosEventFutur' : //Affichage des soirées en cours
                     let tableVosEvent = '';
                     let i=1;
                     actionDatas.forEach(function(data){
@@ -99,7 +99,7 @@ function gererDonnes(retour){
                     $('main').html('');
                     evenements('#vosEvent');
                     break;
-                case 'vosInvit':
+                case 'vosInvitFutur':
                     let tableVosInvit = '';
                     let b=1;
                     actionDatas.forEach(function(data){
@@ -116,6 +116,43 @@ function gererDonnes(retour){
                     $('#vosInvit').html(tableVosInvit); //Affichage sous un tableau
                     $('main').html('');
                     evenements('#vosInvit');
+                    break;
+
+                case 'vosEventPasse' : //Affichage des soirées en cours
+                    let tableVosEventPasse = '';
+                    let c=1;
+                    actionDatas.forEach(function(data){
+                        tableVosEventPasse+=
+                            '<tr> \n' +
+                            '<th scope="row">'+ c++ +'</th>\n' +
+                            '<td class="taillePolice"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' +
+                            '<td class="taillePolice">'+data['hote']+'</td>\n' +
+                            '<td class="taillePolice">'+data['dateEvent']+'</td>\n' +
+                            '<td class="taillePolice">'+data['adresse']+' </td>\n' +
+                            '</tr>';
+
+                    });
+                    $('#vosEventPasse').html(tableVosEventPasse); //Affichage sous un tableau
+                    $('main').html('');
+                    evenements('#vosEventPasse');
+                    break;
+                case 'vosInvitPasse':
+                    let tableVosInvitPasse = '';
+                    let d=1;
+                    actionDatas.forEach(function(data){
+                        tableVosInvitPasse+=
+                            '<tr> \n' +
+                            '<th scope="row">'+ d++ +'</th>\n' +
+                            '<td class="taillePolice"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' +
+                            '<td class="taillePolice">'+data['hote']+'</td>\n' +
+                            '<td class="taillePolice">'+data['dateEvent']+'</td>\n' +
+                            '<td class="taillePolice">'+data['adresse']+' </td>\n' +
+                            '</tr>';
+
+                    });
+                    $('#vosInvitPasse').html(tableVosInvitPasse); //Affichage sous un tableau
+                    $('main').html('');
+                    evenements('#vosInvitPasse');
                     break;
                     //Affiche le nombre d'invites commentaires etc. pour l'event
                 case 'infoEvent':
