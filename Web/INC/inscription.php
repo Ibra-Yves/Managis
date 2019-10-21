@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <input type="password" id="mdp" name="mdp" class="form-control input-sm" placeholder="Mot de passe" required>
+                                    <input type="password" id="mdp" name="mdp" class="form-control input-sm" placeholder="Mot de passe" required minlength="8">
                                 </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
