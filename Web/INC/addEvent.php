@@ -10,7 +10,7 @@
 
                                 <div class="form-group font-weight-bold">
                                     Nom de l'événement :
-                                    <input type="text" name="nomEvent" id="nom" class="form-control input-sm" placeholder="Nom de l'événement" required minlength="6">
+                                    <input type="text" name="nomEvent" id="nom" class="form-control input-sm" placeholder="Nom de l'événement" required>
                                 </div>
                                 <div class="form-group font-weight-bold">
                                     Adresse de l'événement : 

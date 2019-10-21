@@ -72,26 +72,26 @@ function gererDonnes(retour){
                     actionDatas.forEach(function(data){
                         content+=
                             '<tr>\n' +
-                                '<td class="taillePolice">'+data['pseudo'] +'</td>\n' +
-                                '<td class="taillePolice">'+data['dateCrea']+'</td>\n' +
-                                '<td class="taillePolice">'+data['email']+'</td>\n' +
+                                '<td class="taillePolice">'+data['pseudo'] +'</td>\n' + //Pseudo de l'user
+                                '<td class="taillePolice">'+data['dateCrea']+'</td>\n' + //Date de la création du compte
+                                '<td class="taillePolice">'+data['email']+'</td>\n' + //Le mail de l'utilisateur
                             '</tr>';
                     });
                     $('main').html('');
                     $('#infoCompte').html(content); //Affichage sous un tableau
                     break;
 
-                case 'vosEventFutur' : //Affichage des soirées en cours
+                case 'vosEventFutur' : //Affichage des soirées futurs
                     let tableVosEvent = '';
                     let i=1;
                     actionDatas.forEach(function(data){
                         tableVosEvent+=
                             '<tr> \n' +
                                 '<th scope="row">'+ i++ +'</th>\n' +
-                                '<td class="taillePolice"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' +
-                                '<td class="taillePolice">'+data['hote']+'</td>\n' +
-                                '<td class="taillePolice">'+data['dateEvent']+'</td>\n' +
-                                '<td class="taillePolice"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+' </a></td>\n' +
+                                '<td class="taillePolice"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' + //Nom de l'événement
+                                '<td class="taillePolice">'+data['hote']+'</td>\n' + //Hote
+                                '<td class="taillePolice">'+data['dateEvent']+'</td>\n' + //Date de l'évènement
+                                '<td class="taillePolice"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+' </a></td>\n' + //Adresse de l'évent
                             '</tr>';
 
                     });
@@ -99,26 +99,26 @@ function gererDonnes(retour){
                     $('main').html('');
                     evenements('#vosEvent');
                     break;
-                case 'vosInvitFutur':
+                case 'vosInvitFutur': //Affiche les invitation de user futurs
                     let tableVosInvit = '';
                     let b=1;
                     actionDatas.forEach(function(data){
                         tableVosInvit+=
                             '<tr> \n' +
                             '<th scope="row">'+ b++ +'</th>\n' +
-                            '<td class="taillePolice"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' +
-                            '<td class="taillePolice">'+data['hote']+'</td>\n' +
-                            '<td class="taillePolice">'+data['dateEvent']+'</td>\n' +
-                            '<td class="taillePolice"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+'</a> </td>\n' +
+                            '<td class="taillePolice"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' + //Nom de l'évént
+                            '<td class="taillePolice">'+data['hote']+'</td>\n' + //Hote
+                            '<td class="taillePolice">'+data['dateEvent']+'</td>\n' + //Date
+                            '<td class="taillePolice"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+'</a> </td>\n' + //Adresse
                             '</tr>';
 
                     });
                     $('#vosInvit').html(tableVosInvit); //Affichage sous un tableau
                     $('main').html('');
-                    evenements('#vosInvit');
+                    evenements('#vosInvit'); //On peut accèder à une page ou submit un formulaire
                     break;
 
-                case 'vosEventPasse' : //Affichage des soirées en cours
+                case 'vosEventPasse' : //Affichage des soirées passées
                     let tableVosEventPasse = '';
                     let c=1;
                     actionDatas.forEach(function(data){
@@ -136,7 +136,7 @@ function gererDonnes(retour){
                     $('main').html('');
                     evenements('#vosEventPasse');
                     break;
-                case 'vosInvitPasse':
+                case 'vosInvitPasse': //Invitation à l'évent passé
                     let tableVosInvitPasse = '';
                     let d=1;
                     actionDatas.forEach(function(data){
@@ -237,7 +237,7 @@ function gererDonnes(retour){
                     evenements('#listeCommentaire');
                     break;
 
-                case 'afficherSuppr' :
+                case 'afficherSuppr' : //Affichage des liens de suppression en tant que hote
                     $('a').show();
                     $('#formInv').show();
                     $('#suppr').show();
@@ -268,7 +268,7 @@ function gererDonnes(retour){
                     break;
 
                 default :
-                   console.log('Action inconnue '+ actionName);
+                   console.log('Action inconnue '+ actionName); //Affichage des actions inconnues
            }
        })
    })

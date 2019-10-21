@@ -98,7 +98,6 @@ class Events
      */
     private function inscription(){
         $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
-        //$this->action->affichageDefaut('#intro', $_SESSION['facebook']['url']);
     }
 
     /**
@@ -144,9 +143,9 @@ class Events
         if($idUser || $idMail){
             $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
             $this->action->ajouterAction( 'errorUser','Le pseudo ou le mail est déjà utilisé');//On renvoie vers la balise error user avec le texte a afficher
-           // $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
         }
 
+        //Si on ne cooche pas captcha
         else if($reponse[0] == false){
             $this->action->ajouterAction('errorUser', 'Veuillez valider le reCAPTCHA');
         }
@@ -154,7 +153,7 @@ class Events
         //On verifie si les deux champs de mot de passe existe
         else if($_POST['mdp'] != $_POST['confirmationMdp']){
             $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
-            $this->action->ajouterAction( 'errorPass','Les deux mots de passes ne correspondent pas');
+            $this->action->ajouterAction( 'errorPass','Les deux mots de passes ne se correspondent pas');
         }
 
 
@@ -246,7 +245,7 @@ class Events
     private function formNewMdp(){
         $verifMdp = $this->db->procCall('connexionUser', [$_SESSION['user']['pseudo'], hash('md5', $_POST['ancienMDP'])]); //On verifier si l'ancien mot de passe mis est bien celui la
         if($_POST['newMDP'] !=$_POST['confirmationMdp'] || !$verifMdp){ //Verification des donnes transmis dans le formulaire
-            $this->action->ajouterAction('errorPass', 'L un des mot de passe de correspond pas');
+            $this->action->ajouterAction('errorPass', "L'un des mot de passe ne correspond pas");
         }
         //On change de mot de passe pour l'utilisatur
         else {
@@ -261,7 +260,10 @@ class Events
     }
 
     /**
-     * Renvoie la page de l'evenement
+     * Renvoie la page avec les evenements futur
+     * L'utilisateur possède deux champs dont lequels il peut choisir
+     * Soit les soirées où il organise
+     * Soit les soirées où il est invité
      */
     private function vosEvenements(){
         $this->action->affichageDefaut('#intro', $this->lectureForm('pageEvent'));//Charge la page
@@ -269,10 +271,15 @@ class Events
         $vosInvitFutur =  $this->db->procCall('vosInvitFutur', [$_SESSION['user']['idUser'],$_SESSION['user']['pseudo']]); //Appelle la procèdure juste avec les evenements ou le user a ete invite
         $vosEventFutur = $this->db->procCall('vosEventFutur', [$_SESSION['user']['pseudo']]); //Appelle la procedure juste avec les evenements du user
 
-        $this->action->ajouterAction('vosEventFutur', $vosEventFutur);//On envois les données vers le client
-        $this->action->ajouterAction('vosInvitFutur', $vosInvitFutur);//On envbois les données vers ke client
+        $this->action->ajouterAction('vosEventFutur', $vosEventFutur);//On envois les données vers le client sur les event futur crées pas l'utilisateur
+        $this->action->ajouterAction('vosInvitFutur', $vosInvitFutur);//On envbois les données vers le client sur les event futur où le user a été invité
     }
 
+    /**
+     * Affiche l'historique des événements
+     * Soit les soirées où l'utilisateur a été invité
+     * Soit les soirées où l'utilisateur a organisé
+     */
     private function historiqueEvents(){
         $this->action->affichageDefaut('#intro', $this->lectureForm('historiqueEvents'));
 
@@ -284,68 +291,101 @@ class Events
     }
 
     /**
-     * Page à propos de l'evenement qui renvoie les 3 formulaires
-     * les 3 formulaires sont : la liste d'invités, liste des commentaires et la liste de fourniture
+     * On affiche un tableau avec 3 données
+     * Le nombre d'invités
+     * Le nombre de fournitures
+     * Le nombre de commentaires
      * @param $id de l'evenement
      */
     private function pageEventInfos($id){
         //On mémorise l'id du event dans la superglobale
         $_SESSION['idEvent'] = $id;
 
+        //On renvoie le tableau à la page
         $this->action->affichageDefaut('#nombreInvFourComm', $this->lectureForm('infoSup'));
         $this->action->affichageDefaut('#afficheInfos', '');
 
+        //On appelle les procèdures nécessaires
         $nombreInv = $this->db->procCall('nombreInv', [$id]);
         $nombreComm = $this->db->procCall('nombreComm', [$id]);
         $nombreFour = $this->db->procCall('nombreFour', [$id]);
 
+        //On affiche le tableau avec les données niveau client
         $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
     }
 
+    /**
+     * Affiche le tableau avec les invites
+     * Avec la possibilité de rajouter les invites
+     */
     private function afficheInv(){
+        //On appelle les procèdures requises
        $afficheInv =  $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
         $tousLesUser = $this->db->procCall('tousLesUsers', ['']);
 
+        //Si le user connecté est le premier sur la liste d'invités il est hote donc il a droit de supprimer les invités
         $afficherSuppr = array_intersect([$afficheInv[0]['pseudo']], [$_SESSION['user']['pseudo']]);
 
+        //On affiche le formulaire ainsi que le tableau niveau client
         $this->action->affichageDefaut('#afficheInfos', $this->lectureForm('listeInvites'));
 
+        //On affiche les données dans le tableau niveau user
         $this->action->ajouterAction('listeInvites', $afficheInv);
         $this->action->ajouterAction('tousLesPseudos', $tousLesUser);
 
+        //Affichage de la possibilité de suppression si le user est hote
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
     }
 
+    /**
+     * Affiche le tableau avec les fournitures
+     * Avec la possibilité de rajouter les fournitures
+     */
     private function afficheFour(){
+        //On appelle les procèdures requises
         $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
         $listeFour = $this->db->procCall('listeFourniture',[$_SESSION['idEvent']]);
 
+        //Si le user connecté est le premier sur la liste d'invités il est hote donc il a droit de supprimer les fournitures
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
+        //On affiche le formulaire ainsi que le tableau niveau client
         $this->action->affichageDefaut('#afficheInfos', $this->lectureForm('listeFourniture'));
 
+        //On affiche les données dans le tableau niveau user
         $this->action->ajouterAction('listeFourniture', $listeFour);
+        //Affichage de la possibilité de suppression si le user est hote
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
     }
 
+    /**
+     * Affiche le tableau avec les commentaires
+     * Avec la possibilité de rajouter les commentaires
+     */
     private function afficheComm(){
+        //Procedures requises
         $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
         $listeComm = $this->db->procCall('listeCommentaire',[$_SESSION['idEvent']]);
 
+        //Si le user connecté est le premier sur la liste d'invités il est hote donc il a droit de supprimer les commentaires
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
+        //On affiche le formulaire ainsi que le tableau niveau client
         $this->action->affichageDefaut('#afficheInfos', $this->lectureForm('listeCommentaire'));
 
+        //On affiche les données dans le tableau niveau user
         $this->action->ajouterAction('listeComm', $listeComm);
+        //Affichage de la possibilité de suppression si le user est hote
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
     }
     /**
      * Ajout de l'invite
      */
     private function formAjoutInv(){
+        //Appel des procèdures requises
         $user = $this->db->procCall('verifPseudo', [$_POST['pseudoInv']]);
         $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
 
         $list =  [];
-
+        //On recupere les pseudos
         foreach($verifInvite as $key){
             $list [] = $key['pseudo'];
         }
@@ -355,6 +395,7 @@ class Events
         $enleverEspaces = trim($_POST['pseudoInv']);
         $resultatAvecEspaces = array_intersect($list, [$enleverEspaces]);
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
+
         //On renvoie vers le client le message d'erreur si le pseudo transmis n'existe pas
         if($_POST['pseudoInv'] == '' || !$user || $resultatSansEspaces || $resultatAvecEspaces){
             $this->action->ajouterAction('errorInv', 'Le pseudo n existe pas ou invite se trouve dans la liste');
@@ -520,7 +561,7 @@ class Events
         foreach ($req as $key => $value){
             $requeteComm = $value;
         }
-        //On retire le commentaire de la liste
+        //On retire le commentaire de la liste et on affiche le nouveau chiffre avec le nombre de commentaires
         $this->db->procCall('supprCommentaire', [$_SESSION['idEvent'],$requeteComm]);
         $this->action->affichageDefaut('#commentaires', $this->lectureForm('listeCommentaire'));
         $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
@@ -544,7 +585,7 @@ class Events
         foreach ($req as $key => $value){
             $requeteFour = $value;
         }
-        //On retire la fourniture de la liste
+        //On retire la fourniture de la liste et on affiche le nombre de fournitures dans le tableau
         $this->db->procCall('supprFourniture', [$_SESSION['idEvent'],$requeteFour]);
 
         $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
