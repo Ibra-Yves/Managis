@@ -26,7 +26,7 @@ class EventsTest extends TestCase
 
             //Requete non autorisé
             $rq = 'blabla';
-            $this->assertFalse($rq, $reqValides);//Renvoi false
+            $this->assertContains($rq, $reqValides);//Renvoi false
     }
-
+    
 }
