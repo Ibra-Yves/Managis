@@ -242,6 +242,19 @@ function gererDonnes(retour){
                     $('#formInv').show();
                     $('#suppr').show();
                     break;
+
+                    //On cache toutes les balises nécessaires qui ruisquent d'être modifié dans l'historique des events
+                /*case 'hideModif' :
+                    //$('a').hide();
+                    $('#formInv').css('display', 'none');
+                    $('#suppr').hide();
+                    $('#ajoutFour').css('display', 'none');
+                    $('#ajoutCom').hide();
+                    $('#submit').hide();
+                    $('#invites a').hide();
+                    $('#listeFournitures a').hide();
+                    $('#listeCommentaire a').hide();
+                    break;*/
                 case 'Probleme JSON' : //On affiche si il y a un problème JSON
                     $('#intro').html(actionDatas['donnes']);
                     break;

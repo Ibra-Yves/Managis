@@ -317,12 +317,12 @@ class Events
     /**
      * Affiche le tableau avec les invites
      * Avec la possibilité de rajouter les invites
+     * On ne peut pas apporter de modifications lorsque l'evenement est passé
      */
     private function afficheInv(){
         //On appelle les procèdures requises
        $afficheInv =  $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
         $tousLesUser = $this->db->procCall('tousLesUsers', ['']);
-
         //Si le user connecté est le premier sur la liste d'invités il est hote donc il a droit de supprimer les invités
         $afficherSuppr = array_intersect([$afficheInv[0]['pseudo']], [$_SESSION['user']['pseudo']]);
 
@@ -335,6 +335,7 @@ class Events
 
         //Affichage de la possibilité de suppression si le user est hote
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
+
     }
 
     /**
@@ -351,10 +352,13 @@ class Events
         //On affiche le formulaire ainsi que le tableau niveau client
         $this->action->affichageDefaut('#afficheInfos', $this->lectureForm('listeFourniture'));
 
+
         //On affiche les données dans le tableau niveau user
         $this->action->ajouterAction('listeFourniture', $listeFour);
         //Affichage de la possibilité de suppression si le user est hote
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
+
+
     }
 
     /**
@@ -365,7 +369,6 @@ class Events
         //Procedures requises
         $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
         $listeComm = $this->db->procCall('listeCommentaire',[$_SESSION['idEvent']]);
-
         //Si le user connecté est le premier sur la liste d'invités il est hote donc il a droit de supprimer les commentaires
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         //On affiche le formulaire ainsi que le tableau niveau client

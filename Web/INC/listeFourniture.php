@@ -1,4 +1,4 @@
-<div class="row text-center ajustement-div">
+<div class="row text-center ajustement-div" id="ajoutFour">
         <div class="col-md-12  text-center" >
             <div class="card mb-3 transparent" style="max-width: 110rem;">
                 <div class="card-header blanc taillePoliceSection">Fournitures nécessaires : </div>
@@ -25,14 +25,14 @@
                                 <tr>
                                     <th style="width: 10%" scope="col" class="taillePoliceTitre">#</th>
                                     <th style="width: 45%" scope="col" class="taillePoliceTitre">Fournitures</th>
-                                    <th style="width: 15%"scope="col" class="taillePoliceTitre">Quantité</th>
+                                    <th style="width: 15%" scope="col" class="taillePoliceTitre">Quantité</th>
                                     <th style="width: 15%; display: none "  id="suppr" scope="col" class="taillePoliceTitre">Supprimer Fourniture</th>
                                 </tr>
                                 </thead>
                                 <tbody id="listeFournitures" align="left">
                                 </tbody>
                             </table>
-                            <input type="submit" value="Validez vos quantites" class="btn btn-primary boutonEvent">
+                            <input type="submit" value="Validez vos quantites" class="btn btn-primary boutonEvent" id="submit">
                         </form>
                     </div>
                 </div>

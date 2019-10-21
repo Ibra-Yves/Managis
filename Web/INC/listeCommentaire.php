@@ -1,4 +1,4 @@
-<div class="row text-center ajustement-div">
+<div class="row text-center ajustement-div" id="ajoutCom">
     <div class="col-md-12 text-center">
         <div class="card mb-3 transparent " style="max-width: 110rem;">
             <div class="card-header blanc taillePoliceSection">Conseils</div>
