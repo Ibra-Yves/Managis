@@ -26,18 +26,7 @@ class EventsTest extends TestCase
 
             //Requete non autorisé
             $rq = 'blabla';
-            $this->assertContains($rq, $reqValides);//Renvoi false
+            $this->assertFalse($rq, $reqValides);//Renvoi false
     }
 
-    /**
-     * Renvoi le contenu des fichiers se trouvant dans INC/
-     */
-    public function testLectureForm()
-    {
-            $nomFichier = 'inscription'; //On prends le fichier se trouvant dans le INC
-            $path = 'INC/' .$nomFichier.'.php'; //On le chemin vers ce fichier
-          //  $renvoiFichier =implode("\n", file($path));
-            $this->assertDirectoryExists($path);//Renvoi false car le fichier existe
-            $this->assertDirectoryIsReadable($path);//Renvoi false car le fichier est bien readable
-    }
 }
