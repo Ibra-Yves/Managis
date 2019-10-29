@@ -9,6 +9,7 @@
                             <th style="width: 5%" scope="col" class="taillePoliceTitre">Invités</th>
                             <th style="width: 95%" scope="col" class="taillePoliceTitre">Fournitures</th>
                             <th style="width: 95%" scope="col" class="taillePoliceTitre">Commentaires</th>
+                            <th style="width: 95%" scope="col" class="taillePoliceTitre">Participants</th>
                         </tr>
                         </thead>
                         <tbody id="infoSupp" align="left">
