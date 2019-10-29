@@ -35,7 +35,6 @@ class Events
         'afficheInv',
         'afficheFour',
         'afficheComm',
-        'fbCallback',
         'historiqueEvents'
     ];
 
@@ -297,21 +296,26 @@ class Events
      * Le nombre de commentaires
      * @param $id de l'evenement
      */
-    private function pageEventInfos($id){
+    public function pageEventInfos($id){
         //On mémorise l'id du event dans la superglobale
-        $_SESSION['idEvent'] = $id;
+        if($_SESSION['user']) {
+            $_SESSION['idEvent'] = $id;
 
-        //On renvoie le tableau à la page
-        $this->action->affichageDefaut('#nombreInvFourComm', $this->lectureForm('infoSup'));
-        $this->action->affichageDefaut('#afficheInfos', '');
+            //On renvoie le tableau à la page
+            $this->action->affichageDefaut('#nombreInvFourComm', $this->lectureForm('infoSup'));
+            $this->action->affichageDefaut('#afficheInfos', '');
 
-        //On appelle les procèdures nécessaires
-        $nombreInv = $this->db->procCall('nombreInv', [$id]);
-        $nombreComm = $this->db->procCall('nombreComm', [$id]);
-        $nombreFour = $this->db->procCall('nombreFour', [$id]);
+            //On appelle les procèdures nécessaires
+            $nombreInv = $this->db->procCall('nombreInv', [$id]);
+            $nombreComm = $this->db->procCall('nombreComm', [$id]);
+            $nombreFour = $this->db->procCall('nombreFour', [$id]);
 
-        //On affiche le tableau avec les données niveau client
-        $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
+            //On affiche le tableau avec les données niveau client
+            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
+        }
+        else {
+            include_once 'infoSupAno.php';
+        }
     }
 
     /**
@@ -407,7 +411,8 @@ class Events
 
         //On renvoie vers le client le message d'erreur si le pseudo transmis n'existe pas
         if($_POST['pseudoInv'] == '' || !$user || $resultatSansEspaces || $resultatAvecEspaces){
-            $this->action->ajouterAction('errorInv', 'Le pseudo n existe pas ou invite se trouve dans la liste');
+          //  $this->action->ajouterAction('errorInv', "L'invité n'exsite pas encore, veuillez spécifier son mail pour l'inviter");
+
         }
 
         //Sinon on rajoute l'invite et on l'affiche dans la liste
