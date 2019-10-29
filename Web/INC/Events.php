@@ -65,7 +65,7 @@ class Events
      * @return bool
      */
     public function reqValid($rq){
-        if(in_array($rq, $this->rqList)) return true;
+        if(in_array($rq, $this->rqList)) return "a";
         return false;
     }
 
@@ -326,6 +326,11 @@ class Events
         //Si le user connecté est le premier sur la liste d'invités il est hote donc il a droit de supprimer les invités
         $afficherSuppr = array_intersect([$afficheInv[0]['pseudo']], [$_SESSION['user']['pseudo']]);
 
+        foreach($afficheInv as $key => $value){
+            $afficheParticip [] = $value['pseudo'];
+        }
+        $listePres = array_intersect($afficheParticip,[$_SESSION['user']['pseudo']]);
+
         //On affiche le formulaire ainsi que le tableau niveau client
         $this->action->affichageDefaut('#afficheInfos', $this->lectureForm('listeInvites'));
 
@@ -335,6 +340,7 @@ class Events
 
         //Affichage de la possibilité de suppression si le user est hote
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
+        if($listePres) $this->action->ajouterAction('test', $listePres);
 
     }
 

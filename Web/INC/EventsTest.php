@@ -1,6 +1,7 @@
 <?php
 
-
+use PHPUnit\Framework\Error\Notice;
+use PHPUnit\Framework\Error\Warning;
 use PHPUnit\Framework\TestCase;
 
 class EventsTest extends TestCase
@@ -28,5 +29,5 @@ class EventsTest extends TestCase
             $rq = 'blabla';
             $this->assertContains($rq, $reqValides);//Renvoi false
     }
-    
+
 }

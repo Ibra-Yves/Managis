@@ -64,7 +64,9 @@ function gererDonnes(retour){
                     break;
 
                 case 'test' :
-                        console.log(actionDatas);
+                        console.log(actionDatas[1]);
+                        let buttonPres= '<input type="button">';
+                        $('#'+actionDatas[1]).html(buttonPres);
                     break;
 
                 case 'espaceMembre' : //Espace memebre affiché
@@ -178,6 +180,7 @@ function gererDonnes(retour){
                             '<th scope="row" id="'+ o++ +'">'+ j++ +'</th>\n' +
                             '<td class="taillePolice" id="'+ p++ +'">'+data['pseudo']+'</td> \n' +
                             '<td class="taillePolice"><a id="' + q++ +'" href="'+data['pseudo']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
+                            '<td class="taillePolice" id="'+ data['pseudo'] +'"></td> \n' +
                         '</tr>';
 
                     });
