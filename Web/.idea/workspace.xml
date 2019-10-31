@@ -4,7 +4,7 @@
     <list default="true" id="f1912a27-f8ff-4a69-89a6-f546f19d169e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/INC/Events.php" beforeDir="false" afterPath="$PROJECT_DIR$/INC/Events.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/INC/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/INC/template.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/INC/EventsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/INC/EventsTest.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,21 +17,10 @@
       <executable />
     </execution>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>connexi</find>
-      <find>connexio</find>
-      <find>&lt;/se</find>
-      <find>connex</find>
-      <find>intro</find>
-      <find>AFFICHEiNV</find>
-      <find>listeInv</find>
-      <find>affiche</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-9" />
     <option name="y" value="-9" />
@@ -57,6 +46,17 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="EventsTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="EventsTest" file="$PROJECT_DIR$/INC/EventsTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHPUnit.EventsTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
