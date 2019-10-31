@@ -177,7 +177,7 @@ class Events
      * On renvoie le formulaire de connexion
      */
     private function connexion(){
-        $this->action->affichageDefaut('#intro', $this->lectureForm('connexion'));
+        $this->action->affichageDefaut('.intro-text', $this->lectureForm('connexion'));
     }
 
     /**
@@ -217,7 +217,7 @@ class Events
      * Renvoie le formulaire d'ajout de l'evenement
      */
     private function addEvent(){
-       $this->action->affichageDefaut('#intro', $this->lectureForm('addEvent'));
+       $this->action->affichageDefaut('.intro-text', $this->lectureForm('addEvent'));
     }
 
     /**
@@ -233,7 +233,7 @@ class Events
      * Espace membre pour l'utilisateur
      */
     private function espaceMembre(){
-            $this->action->affichageDefaut('#intro', $this->lectureForm('gestionCompte')); //On affiche la page de gestion de compte
+            $this->action->affichageDefaut('.intro-text', $this->lectureForm('gestionCompte')); //On affiche la page de gestion de compte
            $infoMembre=  $this->db->procCall('espaceMembre', [$_SESSION['user']['pseudo']]); //On appelle la procedure qui affiche les donnes du client
            $this->action->ajouterAction('espaceMembre', $infoMembre); //On affiche au niveau de l'utilisateur les infos
     }
@@ -265,7 +265,7 @@ class Events
      * Soit les soirées où il est invité
      */
     private function vosEvenements(){
-        $this->action->affichageDefaut('#intro', $this->lectureForm('pageEvent'));//Charge la page
+        $this->action->affichageDefaut('.intro-text', $this->lectureForm('pageEvent'));//Charge la page
 
         $vosInvitFutur =  $this->db->procCall('vosInvitFutur', [$_SESSION['user']['idUser'],$_SESSION['user']['pseudo']]); //Appelle la procèdure juste avec les evenements ou le user a ete invite
         $vosEventFutur = $this->db->procCall('vosEventFutur', [$_SESSION['user']['pseudo']]); //Appelle la procedure juste avec les evenements du user
@@ -280,7 +280,7 @@ class Events
      * Soit les soirées où l'utilisateur a organisé
      */
     private function historiqueEvents(){
-        $this->action->affichageDefaut('#intro', $this->lectureForm('historiqueEvents'));
+        $this->action->affichageDefaut('.intro-text', $this->lectureForm('historiqueEvents'));
 
         $vosInvitPasse =  $this->db->procCall('vosInvitPasse', [$_SESSION['user']['idUser'],$_SESSION['user']['pseudo']]); //Appelle la procèdure juste avec les evenements ou le user a ete invite
         $vosEventPasse = $this->db->procCall('vosEventPasse', [$_SESSION['user']['pseudo']]); //Appelle la procedure juste avec les evenements du user

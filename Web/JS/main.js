@@ -43,7 +43,7 @@ function gererDonnes(retour){
                 case 'affiche' : //Affichage par défaut
                     let dest = actionDatas['dest'];
                     $(actionDatas['dest']).html(actionDatas['content']);
-                    $('main').html('');
+                    $('#difSection').html('');
                     evenements(dest);
                     break;
 
