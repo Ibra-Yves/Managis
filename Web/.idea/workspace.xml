@@ -4,7 +4,7 @@
     <list default="true" id="f1912a27-f8ff-4a69-89a6-f546f19d169e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/INC/Events.php" beforeDir="false" afterPath="$PROJECT_DIR$/INC/Events.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/INC/EventsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/INC/EventsTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/INC/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/INC/template.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

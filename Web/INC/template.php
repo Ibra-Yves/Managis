@@ -408,21 +408,21 @@
       </div>
       <div class="row">
         <div class="col-lg-12">
-          <form id="contactForm" name="sentMessage" novalidate="novalidate">
+          <form id="contactForm" name="sentMessage" novalidate="novalidate" method="post" action="validation.php">
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <input class="form-control" id="name" type="text" placeholder="Votre nom *" required="required" data-validation-required-message="Veuillez entrer votre prénom.">
+                  <input class="form-control" name="name" id="name" type="text" placeholder="Votre nom *" required="required" data-validation-required-message="Veuillez entrer votre prénom.">
                   <p class="help-block text-danger"></p>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" id="email" type="email" placeholder="Votre email *" required="required" data-validation-required-message="Veuillez entrer votre adresse email.">
+                  <input class="form-control" name="email" id="email" type="email" placeholder="Votre email *" required="required" data-validation-required-message="Veuillez entrer votre adresse email.">
                   <p class="help-block text-danger"></p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <textarea class="form-control" id="message" placeholder="Votre message *" required="required" data-validation-required-message="Veuillez entrer votre message."></textarea>
+                  <textarea class="form-control" name="message" id="message" placeholder="Votre message *" required="required" data-validation-required-message="Veuillez entrer votre message."></textarea>
                   <p class="help-block text-danger"></p>
                 </div>
               </div>
@@ -692,7 +692,6 @@
 
   <!-- Contact form JavaScript -->
   <script src="js/jqBootstrapValidation.js"></script>
-  <script src="js/contact_me.js"></script>
 
   <!-- Custom scripts for this template -->
   <script src="js/agency.min.js"></script>
