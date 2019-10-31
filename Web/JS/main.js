@@ -74,9 +74,9 @@ function gererDonnes(retour){
                     actionDatas.forEach(function(data){
                         content+=
                             '<tr>\n' +
-                                '<td class="gestionDeCompteInfos">'+data['pseudo'] +'</td>\n' + //Pseudo de l'user
-                                '<td class="gestionDeCompteInfos">'+data['dateCrea']+'</td>\n' + //Date de la création du compte
-                                '<td class="gestionDeCompteInfos">'+data['email']+'</td>\n' + //Le mail de l'utilisateur
+                                '<td class="taillePolice">'+data['pseudo'] +'</td>\n' + //Pseudo de l'user
+                                '<td class="taillePolice">'+data['dateCrea']+'</td>\n' + //Date de la création du compte
+                                '<td class="taillePolice">'+data['email']+'</td>\n' + //Le mail de l'utilisateur
                             '</tr>';
                     });
                     $('main').html('');
