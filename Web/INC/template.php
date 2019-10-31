@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" id="quiSommesNous">
+<html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -13,35 +12,34 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 
-    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="CSS/mdb.min.css" rel="stylesheet">
 
-
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
     <link href="CSS/style.css" rel="stylesheet">
 
-  <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
-  <!-- Custom styles for this template -->
-  <link href="css/agency.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- SCRIPTS -->
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
     <!-- JQuery -->
     <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="JS/popper.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="JS/bootstrap.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="JS/mdb.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="css/agency.min.css" rel="stylesheet">
     <script type="text/javascript" src="JS/main.js"></script>
+
 
 
 </head>
@@ -81,7 +79,7 @@
           </li>';
             $vosEvenements =
                 '<li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle btn btn-outline-dark" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle btn btn-outline-light" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               <span class="glyphicon glyphicon-calendar"></span> Gestion des evenements
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -89,7 +87,7 @@
                               <a class="dropdown-item" href="vosEvenements.php">EVENEMENTS A VENIR</a>
                               <a class="dropdown-item" href="historiqueEvents.php">HISTORIQUE DE VOS EVENEMENTS</a>
                             </div>
-                         </li>';
+                </li>';
             if (!empty($_SESSION['user'])) {
                 //$ajouterEvent = str_replace("<a href=\"inscription.php\" class=\"btn btn-outline-dark\">Inscription</a>", '<a href="addEvent.php"  class="btn btn-outline-dark">Créer votre evenement </a>', $inscription);
                 $espaceMembre = str_replace("<a class=\"nav-link js-scroll-trigger\" href=\"connexion.php\">Connexion</a>", "<a href=\"espaceMembre.php\" class=\"nav-link js-scroll-trigger\"> Espace Membre</a>", $connexion);

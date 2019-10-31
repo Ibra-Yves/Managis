@@ -169,6 +169,7 @@ function gererDonnes(retour){
 
                     });
                     $('#vosInvitPasse').html(tableVosInvitPasse); //Affichage sous un tableau
+                    $('#vosInvitPasse').html(tableVosInvitPasse); //Affichage sous un tableau
                     $('main').html('');
                     evenements('#vosInvitPasse');
                     break;

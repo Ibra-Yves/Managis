@@ -1,4 +1,4 @@
- <div class="container-fluid centered-form" id="quiSommesNous">
+ <div class="container-fluid centered-form">
      <div class="row text-center">
          <div class="col-md-6">
              <div class="card mb-3 transparent" style="max-width: 110rem;">
