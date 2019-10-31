@@ -25,6 +25,9 @@
 <div class="form-group">
     <input type="password" name="ancienMDP" id="ancienMDP" class="form-control input-sm" placeholder="Ancien mot de passe">
 </div>-->
+<div class="panel-heading">
+    <h3 class="panel-title gestionDeCompteTitre" align="center">Changer de mot de passe</h3>
+</div>
 <div class="row centered-form" >
     <div class="col-lg-12">
         <form id="formNewMDP" class="formNewMDP" name="formNewMDP" method="post" action="validation.html" novalidate="novalidate">
