@@ -411,7 +411,7 @@ class Events
 
         //On renvoie vers le client le message d'erreur si le pseudo transmis n'existe pas
         if($_POST['pseudoInv'] == '' || !$user || $resultatSansEspaces || $resultatAvecEspaces){
-          //  $this->action->ajouterAction('errorInv', "L'invité n'exsite pas encore, veuillez spécifier son mail pour l'inviter");
+           //$this->action->ajouterAction('errorInv', "L'invité n'exsite pas encore, veuillez spécifier son mail pour l'inviter");
 
         }
 
