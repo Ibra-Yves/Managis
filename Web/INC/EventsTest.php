@@ -3,34 +3,31 @@
 use PHPUnit\Framework\Error\Notice;
 use PHPUnit\Framework\Error\Warning;
 use PHPUnit\Framework\TestCase;
-include_once 'Events.php';
+
 class EventsTest extends TestCase
 {
     /**
      * Test au niveau des requetes
      * Verifie si la requete demandé par le client est valide
      * On possède un tableau de requetes autorisés
-     * Renvoi true si la requete passé correspond à celle du tableau des requetes autorisés
+     * Si la requete demande n'existe pas dans le tableau, on reste sur la meme page
      */
-    public function testReqValidTrue()
+    public function testReqValid()
     {
-        $events = new Events();
+            //Quelques requetes utilisés dans les events.php
+            $reqValides = [
+                'validation',
+                'inscription',
+                'CGU'
+            ];
             //Exemple de la requete qui arrive cote client dans ce cas CGU
             $rq = 'CGU';
             //Verification de la requete
-            $this->assertTrue($events->reqValid($rq));//Renvoi true
+            $this->assertContains($rq, $reqValides);//Renvoi true
 
-    }
-
-    /**
-     * Test d'une requete qui n'est pas autorisé
-     * Renvoi false si la requete n'est pas bonne
-     */
-    public function testReqValidFalse() {
-        $events = new Events();
-        //Requete non autorisé
-        $rq = 'BLABLA';
-        $this->assertFalse($events->reqValid($rq));//Renvoi true
+            //Requete non autorisé
+            $rq = 'blabla';
+            $this->assertContains($rq, $reqValides);//Renvoi false
     }
 
 }

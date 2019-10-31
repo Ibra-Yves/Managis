@@ -30,19 +30,15 @@
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
-    <link href="CSS/agency.css" rel="stylesheet">
 
     <!-- JQuery -->
     <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="JS/popper.min.js"></script>
-    <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="JS/mdb.min.js"></script>
-    <script type="text/javascript" src="JS/main.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+    <!-- Custom styles for this template -->
+    <link href="css/agency.min.css" rel="stylesheet">
+    <script type="text/javascript" src="JS/main.js"></script>
 
 
 
@@ -408,21 +404,21 @@
       </div>
       <div class="row">
         <div class="col-lg-12">
-          <form id="contactForm" name="sentMessage" novalidate="novalidate" method="post" action="validation.php">
+          <form id="contactForm" name="sentMessage" novalidate="novalidate">
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <input class="form-control" name="name" id="name" type="text" placeholder="Votre nom *" required="required" data-validation-required-message="Veuillez entrer votre prénom.">
+                  <input class="form-control" id="name" type="text" placeholder="Votre nom *" required="required" data-validation-required-message="Veuillez entrer votre prénom.">
                   <p class="help-block text-danger"></p>
                 </div>
                 <div class="form-group">
-                  <input class="form-control" name="email" id="email" type="email" placeholder="Votre email *" required="required" data-validation-required-message="Veuillez entrer votre adresse email.">
+                  <input class="form-control" id="email" type="email" placeholder="Votre email *" required="required" data-validation-required-message="Veuillez entrer votre adresse email.">
                   <p class="help-block text-danger"></p>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <textarea class="form-control" name="message" id="message" placeholder="Votre message *" required="required" data-validation-required-message="Veuillez entrer votre message."></textarea>
+                  <textarea class="form-control" id="message" placeholder="Votre message *" required="required" data-validation-required-message="Veuillez entrer votre message."></textarea>
                   <p class="help-block text-danger"></p>
                 </div>
               </div>
@@ -685,6 +681,7 @@
     </div>
   </div>
   <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Plugin JavaScript -->
@@ -692,6 +689,7 @@
 
   <!-- Contact form JavaScript -->
   <script src="js/jqBootstrapValidation.js"></script>
+  <script src="js/contact_me.js"></script>
 
   <!-- Custom scripts for this template -->
   <script src="js/agency.min.js"></script>
