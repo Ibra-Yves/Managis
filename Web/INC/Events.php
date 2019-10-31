@@ -35,7 +35,8 @@ class Events
         'afficheInv',
         'afficheFour',
         'afficheComm',
-        'historiqueEvents'
+        'historiqueEvents',
+        'contactForm'
     ];
 
     public function __construct()
@@ -64,7 +65,7 @@ class Events
      * @return bool
      */
     public function reqValid($rq){
-        if(in_array($rq, $this->rqList)) return "a";
+        if(in_array($rq, $this->rqList)) return true;
         return false;
     }
 
@@ -113,6 +114,9 @@ class Events
         $sRequest= '';
         if(isset($_POST['envoiForm'])) $sRequest = $_POST['envoiForm']; //Recupere le nm du formulaire
         $this->gestionRequetes($sRequest); //On renvoie vers la fonction qui gère les requetes
+    }
+    private function contactForm(){
+        mail('HE201451@students.ephec.be', 'Contact de '.$_POST['name'],'Mail de contact '.$_POST['email']. ' Message: '. $_POST['message']);
     }
 
     /**
@@ -411,7 +415,7 @@ class Events
 
         //On renvoie vers le client le message d'erreur si le pseudo transmis n'existe pas
         if($_POST['pseudoInv'] == '' || !$user || $resultatSansEspaces || $resultatAvecEspaces){
-          //  $this->action->ajouterAction('errorInv', "L'invité n'exsite pas encore, veuillez spécifier son mail pour l'inviter");
+           //$this->action->ajouterAction('errorInv', "L'invité n'exsite pas encore, veuillez spécifier son mail pour l'inviter");
 
         }
 
