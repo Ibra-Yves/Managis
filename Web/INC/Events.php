@@ -35,7 +35,8 @@ class Events
         'afficheInv',
         'afficheFour',
         'afficheComm',
-        'historiqueEvents'
+        'historiqueEvents',
+        'contactForm'
     ];
 
     public function __construct()
@@ -104,6 +105,13 @@ class Events
      */
     private function CGU(){
         $this->action->affichageDefaut('#intro', $this->lectureForm('CGU'));
+    }
+
+    /**
+     * Envoi de mail pour le contact
+     */
+    private function contactForm(){
+        mail('HE201451@students.ephec.be', 'Contact de '.$_POST['name'],'Mail de contact '.$_POST['email']. ' Message: '. $_POST['message']);
     }
 
     /**
