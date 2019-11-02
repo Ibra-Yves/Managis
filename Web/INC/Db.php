@@ -45,6 +45,7 @@ class Db
             case 'vosEventFutur' :
             case 'vosEventPasse'    :
             case 'nombreParticipant' :
+            case 'listeParticipant' :
                 array_push($params, '?');
             case 'tousLesUsers' :
                 try {

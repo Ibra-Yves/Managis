@@ -126,12 +126,25 @@ function gererDonnes(retour){
                     break;
 
                 case 'ajoutParticipant' :
-                    $('input[type=checkbox]').attr('checked');
-                    $('body').find('[href="ajoutParticipant.php"]').attr('href', 'supprParticipant.php');
+                    /*$('input[type=checkbox]').attr('checked');
+                    $('body').find('[href="ajoutParticipant.php"]').attr('href', 'supprParticipant.php');*/
                     break;
                 case 'supprParticipant' :
-                    $('input[type=checkbox]').attr('unchecked');
-                    $('body').find('[href="supprParticipant.php"]').attr('href', 'ajoutParticipant.php');
+                   /* $('input[type=checkbox]').attr('unchecked');
+                    $('body').find('[href="supprParticipant.php"]').attr('href', 'ajoutParticipant.php');*/
+                    break;
+                case 'listeParticipant' :
+                    let tableParticipant = '';
+                    let r = 1;
+                    actionDatas.forEach(function(data){
+                        tableParticipant+=
+                            '<tr> \n' +
+                            '<th scope="row">'+ r++ +'</th>\n' +
+                            '<td class="taillePolice">'+data['pseudo']+'</td> \n' +
+                            '</tr>';
+                    });
+
+                    $('#participants').html(tableParticipant); //Affichage des invités sous le forme de tableau
                     break;
                 case 'vosEventPasse' : //Affichage des soirées passées
                     let tableVosEventPasse = '';
