@@ -36,7 +36,10 @@ class Events
         'afficheFour',
         'afficheComm',
         'historiqueEvents',
-        'contactForm'
+        'contactForm',
+        'ajoutParticipant',
+        'supprParticipant',
+        'afficheParticipants'
     ];
 
     public function __construct()
@@ -317,13 +320,31 @@ class Events
             $nombreInv = $this->db->procCall('nombreInv', [$id]);
             $nombreComm = $this->db->procCall('nombreComm', [$id]);
             $nombreFour = $this->db->procCall('nombreFour', [$id]);
+             $nombreParticipant =  $this->db->procCall('nombreParticipant', [$id]);
 
             //On affiche le tableau avec les données niveau client
-            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
+            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
         }
         else {
             include_once 'infoSupAno.php';
         }
+    }
+
+    /**
+     * Ajoute à la liste des participants
+     */
+
+    private function ajoutParticipant(){
+        $this->db->procCall('ajoutParticipant', [$_SESSION['idEvent'], $_SESSION['user']['idUser']]);
+        $this->action->ajouterAction('ajoutParticipant', '');
+    }
+
+    /**
+     * Enleve le participant de la liste des participants
+     */
+    private function supprParticipant(){
+        $this->db->procCall('supprParticipant', [$_SESSION['idEvent'], $_SESSION['user']['idUser']]);
+        $this->action->ajouterAction('supprParticipant', '');
     }
 
     /**
@@ -396,6 +417,10 @@ class Events
         $this->action->ajouterAction('listeComm', $listeComm);
         //Affichage de la possibilité de suppression si le user est hote
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
+    }
+    private function afficheParticipants(){
+       // $this->db->procCall('nombreParticipant', [$_SESSION['idEvent']]);
+
     }
     /**
      * Ajout de l'invite

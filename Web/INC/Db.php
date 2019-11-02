@@ -44,6 +44,7 @@ class Db
             case 'nombreInv' :
             case 'vosEventFutur' :
             case 'vosEventPasse'    :
+            case 'nombreParticipant' :
                 array_push($params, '?');
             case 'tousLesUsers' :
                 try {
@@ -70,6 +71,8 @@ class Db
             case 'supprInvites' :
             case 'vosInvitFutur' :
             case 'vosInvitPasse' :
+            case 'ajoutParticipant':
+            case 'supprParticipant' :
                 array_push($params, '?', '?');
             try {
                 $this->connexionBDD();

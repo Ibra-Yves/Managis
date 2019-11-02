@@ -95,9 +95,7 @@ function gererDonnes(retour){
                                 '<td class="taillePolice">'+data['dateEvent']+'</td>\n' + //Date de l'évènement
                                 '<td class="taillePolice"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+' </a></td>\n' + //Adresse de l'évent
                                 ' <td class="taillePolice"> <div class="form-check">\n' +
-                            '    <input type="checkbox" class="form-check-input" id="materialUnchecked">\n' +
-                            '    <label class="form-check-label" for="materialUnchecked"></label>\n' +
-                            '</div></td>'
+                            '</div></td>' +
                             '</tr>';
 
                     });
@@ -117,8 +115,7 @@ function gererDonnes(retour){
                             '<td class="taillePolice">'+data['dateEvent']+'</td>\n' + //Date
                             '<td class="taillePolice"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+'</a> </td>\n' + //Adresse
                             ' <td class="taillePolice"> <div class="form-check">\n' +
-                            '    <input type="checkbox" class="form-check-input" id="materialUnchecked">\n' +
-                            '    <label class="form-check-label" for="materialUnchecked"></label>\n' +
+                            '  <a href="ajoutParticipant.php"> <input type="checkbox" class="form-check-input" id=""></a>\n' +
                             '</div></td>'
                             '</tr>';
 
@@ -128,6 +125,14 @@ function gererDonnes(retour){
                     evenements('#vosInvit'); //On peut accèder à une page ou submit un formulaire
                     break;
 
+                case 'ajoutParticipant' :
+                    $('input[type=checkbox]').attr('checked');
+                    $('body').find('[href="ajoutParticipant.php"]').attr('href', 'supprParticipant.php');
+                    break;
+                case 'supprParticipant' :
+                    $('input[type=checkbox]').attr('unchecked');
+                    $('body').find('[href="supprParticipant.php"]').attr('href', 'ajoutParticipant.php');
+                    break;
                 case 'vosEventPasse' : //Affichage des soirées passées
                     let tableVosEventPasse = '';
                     let c=1;
@@ -140,9 +145,7 @@ function gererDonnes(retour){
                             '<td class="taillePolice">'+data['dateEvent']+'</td>\n' +
                             '<td class="taillePolice"><a href="http://maps.google.com/?q='+data['adresse']+'">'+data['adresse']+'</a></td>\n' +
                             ' <td class="taillePolice"> <div class="form-check">\n' +
-                            '    <input type="checkbox" class="form-check-input" id="materialUnchecked">\n' +
-                            '    <label class="form-check-label" for="materialUnchecked"></label>\n' +
-                            '</div></td>'
+                            '</div></td>' +
                             '</tr>';
 
                     });
@@ -162,9 +165,7 @@ function gererDonnes(retour){
                             '<td class="taillePolice">'+data['dateEvent']+'</td>\n' +
                             '<td class="taillePolice">'+data['adresse']+' </td>\n' +
                             ' <td class="taillePolice"> <div class="form-check">\n' +
-                            '    <input type="checkbox" class="form-check-input" id="materialUnchecked">\n' +
-                            '    <label class="form-check-label" for="materialUnchecked"></label>\n' +
-                            '</div></td>'
+                            '</div></td>' +
                             '</tr>';
 
                     });
@@ -181,7 +182,7 @@ function gererDonnes(retour){
                             '<td class="taillePolice"><a href="afficheInv.php">'+actionDatas[0][0]['nombreInv']+'</a></td>' +
                             '<td class="taillePolice"><a href="afficheFour.php">'+actionDatas[1][0]['nombreFour']+'</a></td>' +
                             '<td class="taillePolice"><a href="afficheComm.php">'+actionDatas[2][0]['nombreComm']+'</a></td>' +
-                            '<td class="taillePolice"><a href="">'+actionDatas[2][0]['nombreComm']+'</a></td>' +
+                            '<td class="taillePolice"><a href="afficheParticipants.php">'+actionDatas[3][0]['participant']+'</a></td>' +
                         '</tr>';
                     $('#infoSupp').html(tableNombre);
                     evenements('#infoSupp');
