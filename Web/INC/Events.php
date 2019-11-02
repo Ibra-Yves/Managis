@@ -345,16 +345,30 @@ class Events
      */
 
     private function ajoutParticipant(){
+        $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
+        $nombreComm = $this->db->procCall('nombreComm', [$_SESSION['idEvent']]);
+        $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
+
         $this->db->procCall('ajoutParticipant', [$_SESSION['idEvent'], $_SESSION['user']['idUser']]);
+        $nombreParticipant =  $this->db->procCall('nombreParticipant', [$_SESSION['idEvent']]);
+
         $this->action->ajouterAction('ajoutParticipant', $_SESSION['idEvent']);
+        $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
     }
 
     /**
      * Enleve le participant de la liste des participants
      */
     private function supprParticipant(){
+        $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
+        $nombreComm = $this->db->procCall('nombreComm', [$_SESSION['idEvent']]);
+        $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
+
         $this->db->procCall('supprParticipant', [$_SESSION['idEvent'], $_SESSION['user']['idUser']]);
+        $nombreParticipant =  $this->db->procCall('nombreParticipant', [$_SESSION['idEvent']]);
+        
         $this->action->ajouterAction('supprParticipant', $_SESSION['idEvent']);
+        $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
     }
 
     /**
