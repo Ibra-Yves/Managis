@@ -1,8 +1,8 @@
-<div class="row text-center ajustement-div" id="ajoutCom">
-    <div class="col-md-12 text-center">
-        <div class="mb-3 transparent " style="max-width: 110rem;">
+<div class="row text-center " id="ajoutCom">
+    <div class="col-md-6 col-md-offset-0 text-center">
+        <div class="mb-3 transparent" style="max-width: 110rem;">
             <div class="card-header transparent gestionDeCompteSousTitre">Conseils</div>
-            <div class="card-body">
+            <div class="card-body transparent">
                 <h5 class="card-title font-weight-bold">Ajoutez un commentaire pour l'hôte</h5>
             <form id="commentaire" name="commentaire" method="post" action="validation.html">
                 <div id="errorFormmm"></div>
@@ -12,14 +12,10 @@
             </div>
         </div>
     </div>
-</div>
-
-
-<div class="row text-center ajustement-div">
-    <div class="col-md-12 text-center" >
+    <div class="col-md-6 col-md-offset-0 text-center" >
         <div class="mb-3 transparent" style="max-width: 110rem;">
             <div class="card-header transparent gestionDeCompteSousTitre">Liste commentaires</div>
-            <div class="card-body">
+            <div class="card-body transparent">
                 <div class="table-responsive" style="max-height: 250px">
                     <form id="formQuantite" name="formQuantite" method="post" action="validation.html">
                         <table class="table table-striped">
@@ -39,6 +35,3 @@
         </div>
     </div>
 </div>
-
-
-

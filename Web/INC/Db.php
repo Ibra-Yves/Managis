@@ -18,7 +18,7 @@ class Db
      */
     public function connexionBDD(){
         try {
-            $this->pdo = new PDO('mysql:host=localhost;dbname=projet', 'root', '');
+            $this->pdo = new PDO('mysql:host=localhost;dbname=projet', 'root', 'root');
         }
         catch (PDOException $e){
             print_r($e);

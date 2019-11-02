@@ -5,7 +5,7 @@
      <div class="row text-center ">
          <div class="col-md-12">
              <div class="col mb-6" style="max-width: 110rem;">
-                 <div class="transparent">
+                 <div>
                      <!--Accordion wrapper-->
                      <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
 
@@ -36,7 +36,6 @@
                                                  <th style="width: 20%" scope="col" class="taillePoliceTitre">Date de l'événement</th>
                                                  <th style="width: 25%" scope="col" class="taillePoliceTitre">Adresse</th>
                                                  <th style="width: 25%" scope="col" class="taillePoliceTitre">Participe</th>
-
                                              </tr>
                                              </thead>
                                              <tbody id="vosEvent" align="left">
@@ -50,7 +49,7 @@
                          <!-- Accordion card -->
 
                          <!-- Accordion card -->
-                         <div class="transparent">
+                         <div class="transparent ajustement-div">
 
                              <!-- Card header -->
                              <div class="card-header" role="tab" id="headingTwo2">
@@ -87,17 +86,10 @@
 
                          </div>
                          <!-- Accordion card -->
-
-                         <!-- Accordion card -->
-                         <div class="card">
-
-                         </div>
-                         <!-- Accordion wrapper -->
                  </div>
              </div>
          </div>
              <div class=" row col-md-12" id="nombreInvFourComm"></div>
      </div>
-
-         <div class="col-md-6" id="afficheInfos"></div>
+         <div class="col-md-12" id="afficheInfos"></div>
  </div>

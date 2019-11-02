@@ -1,8 +1,8 @@
-<div class="row text-center ajustement-div" id="ajoutFour">
-        <div class="col-md-12  text-center" >
+<div class="row text-center " id="ajoutFour">
+        <div class="col-md-6  text-center" >
             <div class="mb-3 transparent" style="max-width: 110rem;">
                 <div class="card-header transparent gestionDeCompteSousTitre">Fournitures nécessaires : </div>
-                <div class="card-body">
+                <div class="card-body transparent">
                     <h5 class="card-title font-weight-bold">Ajouter des fournitures !</h5>
                     <form id="formFournitures" name="formFournitures" method="post" action="validation.html">
                         <div id="errorForm"></div>
@@ -12,12 +12,10 @@
                 </div>
             </div>
         </div>
-</div>
-<div class="row text-center ajustement-div">
-        <div class="col-md-12 text-center" >
+        <div class="col-md-6 text-center" >
             <div class="mb-3 transparent" style="max-width: 110rem;">
                 <div class="card-header transparent gestionDeCompteSousTitre">Liste fournitures</div>
-                <div class="card-body">
+                <div class="card-body transparent">
                     <div class="table-responsive" style="max-height: 250px">
                         <form id="formQuantite" name="formQuantite" method="post" action="validation.html">
                             <table class="table table-striped">

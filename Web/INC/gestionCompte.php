@@ -3,10 +3,10 @@
         <div class="panel-heading">
             <h3 class="panel-title gestionDeCompteTitre" align="center">Détails du compte</h3>
         </div>
-        <div class="panel-body">
+        <div class="panel-body ">
             <div class="table-responsive ">
-                <table class="table table-striped">
-                    <thead class="transparent">
+                <table class="table table-striped transparent">
+                    <thead>
                     <tr>
                         <th style="width: 25%" scope="col" class="gestionDeCompteSousTitre">Pseudo</th>
                         <th style="width: 20%" scope="col" class="gestionDeCompteSousTitre">Date création</th>

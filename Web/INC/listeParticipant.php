@@ -1,8 +1,8 @@
-<div class="row text-center ajustement-div">
-    <div class="col-md-12  text-center" >
+<div class="row text-center">
+    <div class="col-md-6  text-center" >
         <div class="transparent mb-3" style="max-width: 110rem;">
             <div class="card-header transparent gestionDeCompteSousTitre">Liste des participants</div>
-            <div class="card-body">
+            <div class="card-body transparent">
                 <div class="table-responsive" style="max-height: 250px">
                     <table class="table table-striped">
                         <thead style="position: sticky; top: 0;">

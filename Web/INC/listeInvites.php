@@ -1,8 +1,8 @@
-<div class="row text-center ajustement-div">
-    <div class="col-md-12  text-center" id="formInv" style="display: none">
+<div class="row text-center">
+    <div class="col-md-6  text-center" id="formInv" style="display: none">
         <div class="mb-3 transparent" style="max-width: 110rem;">
             <div class="card-header transparent gestionDeCompteSousTitre">Invités</div>
-            <div class="card-body">
+            <div class="card-body transparent">
                     <h5 class="card-title font-weight-bold">Ajouter des invités !</h5>
                     <form class="form-group" id="formAjoutInv" name="formAjoutInv"  method="post" action="validation.html">
                         <div id="errorFormm"></div>
@@ -12,12 +12,10 @@
             </div>
         </div>
     </div>
-</div>
-<div class="row text-center ajustement-div">
-    <div class="col-md-12  text-center" >
+    <div class="col-md-6  text-center" >
         <div class="transparent mb-3" style="max-width: 110rem;">
             <div class="card-header transparent gestionDeCompteSousTitre">Listes des invités</div>
-            <div class="card-body">
+            <div class="card-body transparent">
                 <div class="table-responsive" style="max-height: 250px">
                     <table class="table table-striped">
                         <thead style="position: sticky; top: 0;">
