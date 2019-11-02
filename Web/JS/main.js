@@ -144,6 +144,10 @@ function gererDonnes(retour){
 
                     $('#participants').html(tableParticipant); //Affichage des invités sous le forme de tableau
                     break;
+                case 'participe' :
+                    $('#'+actionDatas).prop('checked', true);
+                    $('.'+actionDatas).attr('href', 'supprParticipant.php');
+                    break;
                 case 'vosEventPasse' : //Affichage des soirées passées
                     let tableVosEventPasse = '';
                     let c=1;

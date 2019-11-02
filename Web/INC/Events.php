@@ -281,22 +281,18 @@ class Events
         $vosInvitFutur =  $this->db->procCall('vosInvitFutur', [$_SESSION['user']['idUser'],$_SESSION['user']['pseudo']]); //Appelle la procèdure juste avec les evenements ou le user a ete invite
         $vosEventFutur = $this->db->procCall('vosEventFutur', [$_SESSION['user']['pseudo']]); //Appelle la procedure juste avec les evenements du user
        //$participe = $this->db->procCall('')
-        $participe = [];
-        foreach ($vosInvitFutur as $key => $value){
-          $participe =   $this->db->procCall('listeParticipant', [$vosInvitFutur[$key]['idEvent']]);
-
-        }
-        foreach ($participe as $key => $value){
-            $this->action->ajouterAction('test', $participe);
-            $verif = array_intersect([$participe[$key]['pseudo']], [$_SESSION['user']['pseudo']]);
-            if($verif) $this->action->ajouterAction('participe', $participe[$key]['idEvent']);
-        }
-
-       /* $verif = array_intersect([$participe], [$_SESSION['user']['pseudo']]);
-        if($verif) $this->action->ajouterAction('test', $participe);*/
 
         $this->action->ajouterAction('vosEventFutur', $vosEventFutur);//On envois les données vers le client sur les event futur crées pas l'utilisateur
         $this->action->ajouterAction('vosInvitFutur', $vosInvitFutur);//On envbois les données vers le client sur les event futur où le user a été invité
+        foreach ($vosInvitFutur as $key => $value){
+            $participe =   $this->db->procCall('listeParticipant', [$vosInvitFutur[$key]['idEvent']]);
+            foreach ($participe as $key => $value){
+                $verif = array_intersect([$participe[$key]['pseudo']], [$_SESSION['user']['pseudo']]);
+                if($verif) $this->action->ajouterAction('participe', $participe[$key]['idEvent']);
+            }
+
+        }
+
     }
 
     /**
