@@ -4,6 +4,7 @@
 <div class="row centered-form" >
     <div class="col-lg-12">
         <form id="formConnexion" class="formConnexion" name="formConnexion" method="post" action="validation.php">
+            <div id="errorForm"></div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">

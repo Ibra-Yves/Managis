@@ -251,7 +251,7 @@ class Events
      */
     private function formNewMdp(){
         $verifMdp = $this->db->procCall('connexionUser', [$_SESSION['user']['pseudo'], hash('md5', $_POST['ancienMDP'])]); //On verifier si l'ancien mot de passe mis est bien celui la
-        if($_POST['newMDP'] !=$_POST['confirmationMdp'] || !$verifMdp){ //Verification des donnes transmis dans le formulaire
+        if($_POST['newMDP'] !=$_POST['confirmationMDP'] || !$verifMdp){ //Verification des donnes transmis dans le formulaire
             $this->action->ajouterAction('errorPass', "L'un des mot de passe ne correspond pas");
         }
         //On change de mot de passe pour l'utilisatur

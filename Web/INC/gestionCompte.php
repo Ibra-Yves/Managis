@@ -30,7 +30,8 @@
 </div>
 <div class="row centered-form" >
     <div class="col-lg-12">
-        <form id="formNewMDP" class="formNewMDP" name="formNewMDP" method="post" action="validation.html" novalidate="novalidate">
+        <div id="errorForm"></div>
+        <form id="formNewMdp" class="formNewMdp" name="formNewMDP" method="post" action="validation.html" >
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
