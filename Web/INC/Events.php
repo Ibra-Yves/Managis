@@ -36,7 +36,10 @@ class Events
         'afficheFour',
         'afficheComm',
         'historiqueEvents',
-        'contactForm'
+        'contactForm',
+        'ajoutParticipant',
+        'supprParticipant',
+        'afficheParticipants'
     ];
 
     public function __construct()
@@ -317,13 +320,31 @@ class Events
             $nombreInv = $this->db->procCall('nombreInv', [$id]);
             $nombreComm = $this->db->procCall('nombreComm', [$id]);
             $nombreFour = $this->db->procCall('nombreFour', [$id]);
+             $nombreParticipant =  $this->db->procCall('nombreParticipant', [$id]);
 
             //On affiche le tableau avec les données niveau client
-            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
+            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
         }
         else {
             include_once 'infoSupAno.php';
         }
+    }
+
+    /**
+     * Ajoute à la liste des participants
+     */
+
+    private function ajoutParticipant(){
+        $this->db->procCall('ajoutParticipant', [$_SESSION['idEvent'], $_SESSION['user']['idUser']]);
+       // $this->action->ajouterAction('ajoutParticipant', '');
+    }
+
+    /**
+     * Enleve le participant de la liste des participants
+     */
+    private function supprParticipant(){
+        $this->db->procCall('supprParticipant', [$_SESSION['idEvent'], $_SESSION['user']['idUser']]);
+        $this->action->ajouterAction('supprParticipant', '');
     }
 
     /**
@@ -397,6 +418,11 @@ class Events
         //Affichage de la possibilité de suppression si le user est hote
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
     }
+    private function afficheParticipants(){
+       $listeParticipant =  $this->db->procCall('listeParticipant', [$_SESSION['idEvent']]);
+        $this->action->affichageDefaut('#afficheInfos', $this->lectureForm('listeParticipant'));
+        $this->action->ajouterAction('listeParticipant', $listeParticipant);
+    }
     /**
      * Ajout de l'invite
      */
@@ -431,6 +457,7 @@ class Events
             $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
             $nombreComm = $this->db->procCall('nombreComm', [$_SESSION['idEvent']]);
             $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
+            $nombreParticipant =  $this->db->procCall('nombreParticipant', [$_SESSION['idEvent']]);
             $pseudos = $this->db->procCall('tousLesUsers', ['']);
 
             $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
@@ -439,7 +466,7 @@ class Events
             $this->action->ajouterAction('succInv', 'Le pseudo a été rajouté avec succes');
             $this->action->ajouterAction('tousLesPseudos', $pseudos);
             $this->action->ajouterAction('listeInvites', $invites);
-            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
+            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
 
             if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
         }
@@ -479,9 +506,10 @@ class Events
             $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
             $nombreComm = $this->db->procCall('nombreComm', [$_SESSION['idEvent']]);
             $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
+            $nombreParticipant =  $this->db->procCall('nombreParticipant', [$_SESSION['idEvent']]);
 
             $this->action->ajouterAction('modifMdp', 'La fourniture a été ajouté avec succes');
-            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
+            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
             $this->action->ajouterAction('listeFourniture', $listeFournitures);
             $this->action->ajouterAction('listeComm', $listeComm);
 
@@ -525,9 +553,9 @@ class Events
             $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
             $nombreComm = $this->db->procCall('nombreComm', [$_SESSION['idEvent']]);
             $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
+            $nombreParticipant =  $this->db->procCall('nombreParticipant', [$_SESSION['idEvent']]);
 
-            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
-            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
+            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
             $this->action->ajouterAction('listeComm', $listeComm);
             $this->action->ajouterAction('listeFourniture', $listeFournitures);
 
