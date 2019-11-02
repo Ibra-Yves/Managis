@@ -280,6 +280,20 @@ class Events
 
         $vosInvitFutur =  $this->db->procCall('vosInvitFutur', [$_SESSION['user']['idUser'],$_SESSION['user']['pseudo']]); //Appelle la procèdure juste avec les evenements ou le user a ete invite
         $vosEventFutur = $this->db->procCall('vosEventFutur', [$_SESSION['user']['pseudo']]); //Appelle la procedure juste avec les evenements du user
+       //$participe = $this->db->procCall('')
+        $participe = [];
+        foreach ($vosInvitFutur as $key => $value){
+          $participe =   $this->db->procCall('listeParticipant', [$vosInvitFutur[$key]['idEvent']]);
+
+        }
+        foreach ($participe as $key => $value){
+            $this->action->ajouterAction('test', $participe);
+            $verif = array_intersect([$participe[$key]['pseudo']], [$_SESSION['user']['pseudo']]);
+            if($verif) $this->action->ajouterAction('participe', $participe[$key]['idEvent']);
+        }
+
+       /* $verif = array_intersect([$participe], [$_SESSION['user']['pseudo']]);
+        if($verif) $this->action->ajouterAction('test', $participe);*/
 
         $this->action->ajouterAction('vosEventFutur', $vosEventFutur);//On envois les données vers le client sur les event futur crées pas l'utilisateur
         $this->action->ajouterAction('vosInvitFutur', $vosInvitFutur);//On envbois les données vers le client sur les event futur où le user a été invité
@@ -336,7 +350,7 @@ class Events
 
     private function ajoutParticipant(){
         $this->db->procCall('ajoutParticipant', [$_SESSION['idEvent'], $_SESSION['user']['idUser']]);
-       // $this->action->ajouterAction('ajoutParticipant', '');
+        $this->action->ajouterAction('ajoutParticipant', $_SESSION['idEvent']);
     }
 
     /**
@@ -344,7 +358,7 @@ class Events
      */
     private function supprParticipant(){
         $this->db->procCall('supprParticipant', [$_SESSION['idEvent'], $_SESSION['user']['idUser']]);
-        $this->action->ajouterAction('supprParticipant', '');
+        $this->action->ajouterAction('supprParticipant', $_SESSION['idEvent']);
     }
 
     /**

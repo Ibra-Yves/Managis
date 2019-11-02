@@ -64,9 +64,7 @@ function gererDonnes(retour){
                     break;
 
                 case 'test' :
-                        console.log(actionDatas[1]);
-                        let buttonPres= '<input type="button">';
-                        $('#'+actionDatas[1]).html(buttonPres);
+                        console.log(actionDatas);
                     break;
 
                 case 'espaceMembre' : //Espace memebre affiché
@@ -115,8 +113,8 @@ function gererDonnes(retour){
                             '<td class="taillePolice">'+data['dateEvent']+'</td>\n' + //Date
                             '<td class="taillePolice"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+'</a> </td>\n' + //Adresse
                             ' <td class="taillePolice"> <div class="form-check">\n' +
-                            '  <a href="ajoutParticipant.php"> <input type="checkbox" class="form-check-input" id=""></a>\n' +
-                            '</div></td>'
+                            '  <a href="ajoutParticipant.php" class="'+data['idEvent']+'"> <input type="checkbox" class="form-check-input" id="'+data['idEvent']+'"></a>\n' +
+                            '</div></td>'+
                             '</tr>';
 
                     });
@@ -126,12 +124,12 @@ function gererDonnes(retour){
                     break;
 
                 case 'ajoutParticipant' :
-                    /*$('input[type=checkbox]').attr('checked');
-                    $('body').find('[href="ajoutParticipant.php"]').attr('href', 'supprParticipant.php');*/
+                    $('#'+actionDatas).prop('checked', true);
+                    $('.'+actionDatas).attr('href', 'supprParticipant.php');
                     break;
                 case 'supprParticipant' :
-                   /* $('input[type=checkbox]').attr('unchecked');
-                    $('body').find('[href="supprParticipant.php"]').attr('href', 'ajoutParticipant.php');*/
+                    $('#'+actionDatas).attr('checked', false);
+                    $('.'+actionDatas).attr('href', 'ajoutParticipant.php');
                     break;
                 case 'listeParticipant' :
                     let tableParticipant = '';
@@ -291,7 +289,7 @@ function gererDonnes(retour){
                     $('#listeCommentaire a').hide();
                     break;*/
                 case 'Probleme JSON' : //On affiche si il y a un problème JSON
-                    $('#intro').html(actionDatas['donnes']);
+                    $('.intro-text').html(actionDatas['donnes']);
                     break;
                     //Gestion des erreurs
                 case 'errorUser' :
