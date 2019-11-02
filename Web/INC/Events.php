@@ -577,7 +577,7 @@ class Events
      * Renvoie le formulaire de mot de passe oublié
      */
     private function mdpOublie(){
-        $this->action->affichageDefaut('#intro', $this->lectureForm('mdpOublie'));
+        $this->action->affichageDefaut('.intro-text', $this->lectureForm('mdpOublie'));
     }
 
     /**
