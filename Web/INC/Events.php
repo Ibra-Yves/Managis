@@ -100,7 +100,7 @@ class Events
      * Renvoie la page d'inscription
      */
     private function inscription(){
-        $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
+        $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
     }
 
     /**

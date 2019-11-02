@@ -2,10 +2,10 @@
 <div class="container">
 
     <div class="row centered-form">
-        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title taillePoliceSection" align="center">Inscrivez-vous pour organiser vos soirées</h3>
+                    <h3 class="panel-title gestionDeCompteTitre" align="center">Inscrivez-vous pour organiser vos soirées</h3>
                 </div>
                 <div class="panel-body">
                     <form id="formInscription" class="formInscription" name="formInscription" method="post" action="validation.html">
@@ -37,7 +37,7 @@
                         </div>
                         <div class="g-recaptcha" id="captcha" data-sitekey="6Ldy2r0UAAAAADWwvNHnYzltYCCChGywMHOyR1nQ">
                         </div>
-                        <input type="submit" value="Inscrivez vous" class="btn btn-primary align-middle">
+                        <button class="btn btn-primary btn-xl text-uppercase" name="form" type="submit">Inscription</button>
                     </form>
                 </div>
             </div>

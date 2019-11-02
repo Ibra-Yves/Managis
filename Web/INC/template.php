@@ -444,7 +444,7 @@
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-4">
-          <span class="copyright">Copyright &copy; Your Website 2019</span>
+          <span class="copyright">Managis Website</span>
         </div>
         <div class="col-md-4">
           <ul class="list-inline social-buttons">
