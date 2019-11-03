@@ -312,7 +312,7 @@ class Events
      */
     public function pageEventInfos($id){
         //On mémorise l'id du event dans la superglobale
-        if($_SESSION['user']) {
+        if(!empty($_SESSION['user'])) {
             $_SESSION['idEvent'] = $id;
 
             //On renvoie le tableau à la page
