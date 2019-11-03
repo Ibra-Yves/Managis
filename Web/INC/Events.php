@@ -39,7 +39,8 @@ class Events
         'contactForm',
         'ajoutParticipant',
         'supprParticipant',
-        'afficheParticipants'
+        'afficheParticipants',
+        'index'
     ];
 
     public function __construct()
@@ -332,6 +333,13 @@ class Events
             $_SESSION['idEvent'] = $id;
            include_once 'infoSupAno.php';
         }
+    }
+
+    /**
+     * Client peux se rediriger vers index.php
+     */
+    private function index(){
+        header('Location: index.php');
     }
 
     /**
