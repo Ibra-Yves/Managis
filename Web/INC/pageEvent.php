@@ -35,7 +35,6 @@
                                                  <th style="width: 25%" scope="col" class="taillePoliceTitre">Nom de l'hôte</th>
                                                  <th style="width: 20%" scope="col" class="taillePoliceTitre">Date de l'événement</th>
                                                  <th style="width: 25%" scope="col" class="taillePoliceTitre">Adresse</th>
-                                                 <th style="width: 25%" scope="col" class="taillePoliceTitre">Participe</th>
                                              </tr>
                                              </thead>
                                              <tbody id="vosEvent" align="left">

@@ -5,7 +5,7 @@
             <div class="card-body transparent">
                     <h5 class="card-title font-weight-bold">Ajouter des invités !</h5>
                     <form class="form-group" id="formAjoutInv" name="formAjoutInv"  method="post" action="validation.html">
-                        <div id="errorFormm"></div>
+                        <div id="errorFormm">Si la personne que vous voulez inviter ne se trouve pas sur notre page veuillez spécifier son mail</div>
                         <input type="text" name="pseudoInv" id="pseudoInv" class="form-control input-sm" placeholder="Nom invité">
                         <input type="submit" value="Ajouter un invité" class="btn btn-primary boutonEvent">
                     </form>

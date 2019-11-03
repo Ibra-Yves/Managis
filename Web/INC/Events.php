@@ -447,6 +447,7 @@ class Events
     private function formAjoutInv(){
         //Appel des procèdures requises
         $user = $this->db->procCall('verifPseudo', [$_POST['pseudoInv']]);
+        $pseudo = $_POST['pseudoInv'];
         $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
 
         $list =  [];
@@ -463,8 +464,7 @@ class Events
 
         //On renvoie vers le client le message d'erreur si le pseudo transmis n'existe pas
         if($_POST['pseudoInv'] == '' || !$user || $resultatSansEspaces || $resultatAvecEspaces){
-          //  $this->action->ajouterAction('errorInv', "L'invité n'exsite pas encore, veuillez spécifier son mail pour l'inviter");
-
+            mail($pseudo, 'Invitation dans un nouvel événement', 'Bonjour, un de vos amis vous a invité à son événement rejoignez nous ici: http://localhost/Managis/Web/index.php?rq='.$_SESSION['idEvent']);
         }
 
         //Sinon on rajoute l'invite et on l'affiche dans la liste
