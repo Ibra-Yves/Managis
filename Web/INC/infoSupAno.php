@@ -76,6 +76,3 @@ function listeParticipant($idEvent)
     echo $tabListePart;
 }
 ?>
-<html>
-    <?php listeInvites($_SESSION['idEvent']) ?>
-</html>
