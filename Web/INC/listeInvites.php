@@ -14,7 +14,7 @@
     </div>
     <div class="col-md-6  text-center" >
         <div class="transparent mb-3" style="max-width: 110rem;">
-            <div class="card-header transparent gestionDeCompteSousTitre">Listes des invités</div>
+            <div class="card-header transparent gestionDeCompteSousTitre">Liste des invités</div>
             <div class="card-body transparent">
                 <div class="table-responsive" style="max-height: 250px">
                     <table class="table table-striped">
