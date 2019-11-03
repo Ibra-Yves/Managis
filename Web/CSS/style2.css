@@ -28,3 +28,9 @@
 .ajustement-div{
     margin-bottom : 3em;
 }
+
+.avertissementAnonyme{
+    font-size : 2em;
+    font-weight: bold;
+    color: #fed136;
+}
