@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  sam. 02 nov. 2019 à 15:17
+-- Généré le :  Dim 03 nov. 2019 à 12:41
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -205,6 +205,13 @@ from evenement
 where hote = evenement.hote AND dateEvent < now();
 END$$
 
+DROP PROCEDURE IF EXISTS `vosInvitAno`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `vosInvitAno` (IN `idEvent` INT)  BEGIN
+select idEvent,nomEvent, hote, adresse, dateEvent
+from evenement
+where idEvent = evenement.idEvent;
+END$$
+
 DROP PROCEDURE IF EXISTS `vosInvitFutur`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `vosInvitFutur` (IN `id` INT, IN `psd` VARCHAR(100))  BEGIN
 select evenement.idEvent, nomEvent, hote, adresse, dateEvent from evenement
@@ -261,7 +268,7 @@ CREATE TABLE IF NOT EXISTS `evenement` (
   KEY `fk_nomEvent` (`nomEvent`),
   KEY `fk_hote` (`hote`),
   KEY `fk_eventComm` (`idEvent`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `evenement`
@@ -281,7 +288,8 @@ INSERT INTO `evenement` (`idEvent`, `nomEvent`, `hote`, `adresse`, `dateEvent`) 
 (35, 'Soiree cartes', 'toto', 'rue des 3 combattants', '2019-10-26'),
 (36, 'epheccccccccccccc', 'toto', 'Avenue du ciseau, 1348 Louvain-la-Neuve', '2019-10-30'),
 (37, 'soiree php', 'toto', 'rue des 3 combattants', '2019-11-03'),
-(38, 'walibi', 'dominik', 'rue des 3 combattants, 1348 LLN', '2019-11-03');
+(38, 'walibi', 'dominik', 'rue des 3 combattants, 1348 LLN', '2019-11-03'),
+(39, 'Soiree monopoly', 'toto', 'rue des 3 combattants, 1348 LLN', '2019-11-16');
 
 -- --------------------------------------------------------
 
@@ -351,9 +359,11 @@ INSERT INTO `invite` (`idUser`, `idEvent`, `participe`) VALUES
 (63, 36, NULL),
 (62, 37, 0),
 (63, 38, NULL),
-(62, 38, 1),
+(62, 38, 0),
 (64, 38, 1),
-(64, 37, 0);
+(64, 37, 1),
+(62, 39, 0),
+(63, 39, 1);
 
 -- --------------------------------------------------------
 
