@@ -141,7 +141,7 @@ function listeParticipant($idEvent)
                 <?php
                 $accueil =
                     '<li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="http://localhost:8878/Managis/Managis/Web/index.php?">Accueil</a>
+            <a class="nav-link js-scroll-trigger" href="index.php">Accueil</a>
           </li>';
                     echo $accueil;
                 ?>
@@ -158,17 +158,17 @@ function listeParticipant($idEvent)
             <div class="panel-heading">
                 <h3 class="panel-title gestionDeCompteTitre pasColler" align="center">Vous avez été invité à cet événement :</h3>
             </div>
+            <div class="panel-heading">
+                <h3 class="panel-title avertissementAnonyme" align="center" style="color : orange">Pour le rejoindre veuillez d'abord rejoindre l'accueil afin de vous inscrire.</h3>
+            </div>
             <div class="row text-center">
                 <div class="col-md-12">
                     <?php infoSoiree($_SESSION['idEvent']); ?>
                 </div>
             </div>
-            <div class="row text-center">
+            <div class="row text-center ajustement-div">
                 <?php listeInvites($_SESSION['idEvent']); ?>
                 <?php listeParticipant($_SESSION['idEvent']); ?>
-            </div>
-            <div>
-                <h3 class="panel-title avertissementAnonyme pasColler" align="center">Pour le rejoindre veuillez d'abord rejoindre l'accueil afin de vous inscrire.</h3>
             </div>
         </div>
     </div>
