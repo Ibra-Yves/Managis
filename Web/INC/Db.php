@@ -18,7 +18,7 @@ class Db
      */
     public function connexionBDD(){
         try {
-            $this->pdo = new PDO('mysql:host=localhost;dbname=projet', 'root', 'root');
+            $this->pdo = new PDO('mysql:host=localhost;dbname=projet', 'root', '');
         }
         catch (PDOException $e){
             print_r($e);
@@ -59,7 +59,7 @@ class Db
                     $e->getMessage();
                 }
                 break;
-            default : $this->action->affichageDefaut('div', 'procedure introuvable');
+            default : $this->action->affichageDefaut('.intro-text', 'procedure introuvable');
         }
         switch($procName){
             case 'connexionUser' :

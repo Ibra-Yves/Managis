@@ -89,12 +89,6 @@ class Events
         return implode("\n", file($nomFichier));
     }
 
-    /**
-     * Renvoie la page qui sommes nous
-     */
-    private function quiSommesNous(){
-        $this->action->affichageDefaut('#intro', $this->lectureForm('quiSommesNous'));
-    }
 
     /**
      * Renvoie la page d'inscription
@@ -107,7 +101,7 @@ class Events
      * Rnvoie la page des conditions generales
      */
     private function CGU(){
-        $this->action->affichageDefaut('#intro', $this->lectureForm('CGU'));
+        $this->action->affichageDefaut('.intro-text', $this->lectureForm('CGU'));
     }
 
     /**
@@ -151,7 +145,7 @@ class Events
 
         //Verification si le user existe deja au moment de la verification
         if($idUser || $idMail){
-            $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
+            $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
             $this->action->ajouterAction( 'errorUser','Le pseudo ou le mail est déjà utilisé');//On renvoie vers la balise error user avec le texte a afficher
         }
 
@@ -162,7 +156,7 @@ class Events
 
         //On verifie si les deux champs de mot de passe existe
         else if($_POST['mdp'] != $_POST['confirmationMdp']){
-            $this->action->affichageDefaut('#intro', $this->lectureForm('inscription'));
+            $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
             $this->action->ajouterAction( 'errorPass','Les deux mots de passes ne se correspondent pas');
         }
 
@@ -262,7 +256,7 @@ class Events
             $this->db->procCall('modifMdp', [$_SESSION['user']['pseudo'], hash('md5', $_POST['newMDP'])]);
             $infoMembre=  $this->db->procCall('espaceMembre', [$_SESSION['user']['pseudo']]); //On appelle la procedure qui affiche les donnes du client
 
-            $this->action->affichageDefaut('#intro', $this->lectureForm('gestionCompte'));
+            $this->action->affichageDefaut('.intro-text', $this->lectureForm('gestionCompte'));
 
             $this->action->ajouterAction('espaceMembre', $infoMembre); //On affiche au niveau de l'utilisateur les infos
             $this->action->ajouterAction('modifMdp', 'Votre mot de passe a été changé avec success');
