@@ -141,7 +141,7 @@ function listeParticipant($idEvent)
                 <?php
                 $accueil =
                     '<li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="http://localhost:8878/Managis/Managis/Web/index.php?">Accueil</a>
+            <a class="nav-link js-scroll-trigger" href="index.php">Accueil</a>
           </li>';
                     echo $accueil;
                 ?>

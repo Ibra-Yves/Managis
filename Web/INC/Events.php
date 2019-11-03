@@ -339,7 +339,7 @@ class Events
      * Client peux se rediriger vers index.php
      */
     private function index(){
-        header('Location: index.php');
+      header('Location: index.php');
     }
 
     /**
