@@ -339,7 +339,8 @@ class Events
      * Client peux se rediriger vers index.php
      */
     private function index(){
-      header('Location: index.php');
+        $_SESSION = [];
+        $this->action->ajouterAction('retourIndex', '');
     }
 
     /**

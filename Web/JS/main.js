@@ -280,6 +280,15 @@ function gererDonnes(retour){
                     $('#suppr').show();
                     break;
 
+                /**
+                 * Redirection vers index.php
+                 */
+                case 'retourIndex' :
+                   // location.reload();
+                    let hrefActuel = window.location.href;
+                    let hrefIndex =  hrefActuel.split('?');
+                    window.location.replace(hrefIndex[0]);
+                    break;
                     //On cache toutes les balises nécessaires qui ruisquent d'être modifié dans l'historique des events
                 /*case 'hideModif' :
                     //$('a').hide();
