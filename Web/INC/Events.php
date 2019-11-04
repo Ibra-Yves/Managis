@@ -125,56 +125,100 @@ class Events
      * Gestion de l'inscription au moment de validation du formulaire
      */
     private function formInscription(){
-        $idUser = $this->db->procCall('verifPseudo', [$_POST['pseudo']]); //On appelle la procèdure qui va verifier le pseudo
-        $idMail = $this->db->procCall('verifEmail', [$_POST['email']]); //On appelle la procèdure qui va verifier le mail
+        if(empty($_SESSION['idEvent'])) {
+            $idUser = $this->db->procCall('verifPseudo', [$_POST['pseudo']]); //On appelle la procèdure qui va verifier le pseudo
+            $idMail = $this->db->procCall('verifEmail', [$_POST['email']]); //On appelle la procèdure qui va verifier le mail
 
-        //Captcha
-        $reponse = [];
-        $clePriv = "6Ldy2r0UAAAAAFaQRBM9ungieu74xM2W2fnYOFcj";
-        $rep = $_POST['g-recaptcha-response'];
-        $remoteIp = $_SERVER['REMOTE_ADDR'];
+            //Captcha
+            $reponse = [];
+            $clePriv = "6Ldy2r0UAAAAAFaQRBM9ungieu74xM2W2fnYOFcj";
+            $rep = $_POST['g-recaptcha-response'];
+            $remoteIp = $_SERVER['REMOTE_ADDR'];
 
-        $api_url = "https://www.google.com/recaptcha/api/siteverify?secret="
-            . $clePriv
-            . "&response=" . $rep
-            . "&remoteip=" . $remoteIp;
+            $api_url = "https://www.google.com/recaptcha/api/siteverify?secret="
+                . $clePriv
+                . "&response=" . $rep
+                . "&remoteip=" . $remoteIp;
 
-        $decode = json_decode(file_get_contents($api_url, true));
-        foreach ($decode as $key => $value){
-            $reponse [] = $value;
+            $decode = json_decode(file_get_contents($api_url, true));
+            foreach ($decode as $key => $value) {
+                $reponse [] = $value;
+            }
+
+            //Verification si le user existe deja au moment de la verification
+            if ($idUser || $idMail) {
+                $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
+                $this->action->ajouterAction('errorUser', 'Le pseudo ou le mail est déjà utilisé');//On renvoie vers la balise error user avec le texte a afficher
+            } //Si on ne cooche pas captcha
+            else if ($reponse[0] == false) {
+                $this->action->ajouterAction('errorUser', 'Veuillez valider le reCAPTCHA');
+            } //On verifie si les deux champs de mot de passe existe
+            else if ($_POST['mdp'] != $_POST['confirmationMdp']) {
+                $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
+                $this->action->ajouterAction('errorPass', 'Les deux mots de passes ne se correspondent pas');
+            } //Sinon on peut effectuer l'inscription
+            else {
+                $this->db->procCall('creationUser', [$_POST['pseudo'], $_POST['email'], hash('md5', $_POST['mdp'])]); //On crée le user avec les champs recupères
+                $idUser = $this->db->procCall('connexionUser', [$_POST['pseudo'], hash('md5', $_POST['mdp'])]); //On effectue la connexion de user pour qu'il soit deja connecte au moment de l'inscriptioin
+                //On memorise les valeurs recuperés de la procèdure dans la superglobale
+                $_SESSION['user'] = $idUser[0];
+                $_SESSION['user']['pseudo'] = $idUser[0]['pseudo'];
+                $_SESSION['user']['idUser'] = $idUser[0]['idUser'];
+                if ($idUser) {
+                    $datas = [
+                        'pseudo' => $_SESSION['user']['pseudo']
+                    ];
+                    $this->action->ajouterAction('connexion', $datas);
+                }
+            }
         }
-
-        //Verification si le user existe deja au moment de la verification
-        if($idUser || $idMail){
-            $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
-            $this->action->ajouterAction( 'errorUser','Le pseudo ou le mail est déjà utilisé');//On renvoie vers la balise error user avec le texte a afficher
-        }
-
-        //Si on ne cooche pas captcha
-        else if($reponse[0] == false){
-            $this->action->ajouterAction('errorUser', 'Veuillez valider le reCAPTCHA');
-        }
-
-        //On verifie si les deux champs de mot de passe existe
-        else if($_POST['mdp'] != $_POST['confirmationMdp']){
-            $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
-            $this->action->ajouterAction( 'errorPass','Les deux mots de passes ne se correspondent pas');
-        }
-
-
-        //Sinon on peut effectuer l'inscription
         else {
-            $this->db->procCall('creationUser', [$_POST['pseudo'], $_POST['email'], hash('md5', $_POST['mdp'])]); //On crée le user avec les champs recupères
-            $idUser = $this->db->procCall('connexionUser', [$_POST['pseudo'], hash('md5', $_POST['mdp'])]); //On effectue la connexion de user pour qu'il soit deja connecte au moment de l'inscriptioin
-            //On memorise les valeurs recuperés de la procèdure dans la superglobale
-            $_SESSION['user']= $idUser[0];
-            $_SESSION['user']['pseudo'] = $idUser[0]['pseudo'];
-            $_SESSION['user']['idUser'] = $idUser[0]['idUser'];
-            if($idUser){
-                $datas = [
-                    'pseudo' =>  $_SESSION['user']['pseudo']
-                ];
-                $this->action->ajouterAction( 'connexion', $datas);
+            $idUser = $this->db->procCall('verifPseudo', [$_POST['pseudo']]); //On appelle la procèdure qui va verifier le pseudo
+            $idMail = $this->db->procCall('verifEmail', [$_POST['email']]); //On appelle la procèdure qui va verifier le mail
+
+            //Captcha
+            $reponse = [];
+            $clePriv = "6Ldy2r0UAAAAAFaQRBM9ungieu74xM2W2fnYOFcj";
+            $rep = $_POST['g-recaptcha-response'];
+            $remoteIp = $_SERVER['REMOTE_ADDR'];
+
+            $api_url = "https://www.google.com/recaptcha/api/siteverify?secret="
+                . $clePriv
+                . "&response=" . $rep
+                . "&remoteip=" . $remoteIp;
+
+            $decode = json_decode(file_get_contents($api_url, true));
+            foreach ($decode as $key => $value) {
+                $reponse [] = $value;
+            }
+
+            //Verification si le user existe deja au moment de la verification
+            if ($idUser || $idMail) {
+                $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
+                $this->action->ajouterAction('errorUser', 'Le pseudo ou le mail est déjà utilisé');//On renvoie vers la balise error user avec le texte a afficher
+            } //Si on ne cooche pas captcha
+            else if ($reponse[0] == false) {
+                $this->action->ajouterAction('errorUser', 'Veuillez valider le reCAPTCHA');
+            } //On verifie si les deux champs de mot de passe existe
+            else if ($_POST['mdp'] != $_POST['confirmationMdp']) {
+                $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
+                $this->action->ajouterAction('errorPass', 'Les deux mots de passes ne se correspondent pas');
+            } //Sinon on peut effectuer l'inscription
+            else {
+                $this->db->procCall('creationUser', [$_POST['pseudo'], $_POST['email'], hash('md5', $_POST['mdp'])]); //On crée le user avec les champs recupères
+                $idUser = $this->db->procCall('connexionUser', [$_POST['pseudo'], hash('md5', $_POST['mdp'])]); //On effectue la connexion de user pour qu'il soit deja connecte au moment de l'inscriptioin
+                //On memorise les valeurs recuperés de la procèdure dans la superglobale
+                $_SESSION['user'] = $idUser[0];
+                $_SESSION['user']['pseudo'] = $idUser[0]['pseudo'];
+                $_SESSION['user']['idUser'] = $idUser[0]['idUser'];
+                $this->db->procCall('ajouterInvites', [$_SESSION['user']['pseudo'], $_SESSION['idEvent']]);
+                $_SESSION['idEvent'] = [];
+                if ($idUser) {
+                    $datas = [
+                        'pseudo' => $_SESSION['user']['pseudo']
+                    ];
+                    $this->action->ajouterAction('connexion', $datas);
+                }
             }
         }
     }
@@ -339,7 +383,6 @@ class Events
      * Client peux se rediriger vers index.php
      */
     private function index(){
-        $_SESSION = [];
         $this->action->ajouterAction('retourIndex', '');
     }
 
