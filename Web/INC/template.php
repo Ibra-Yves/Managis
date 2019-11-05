@@ -44,7 +44,6 @@
 
 
 
-
 </head>
 
 <body id="page-top">
@@ -135,7 +134,7 @@
         <div class="col-md-6">
           <span class="fa-stack fa-4x">
             <i class="fas fa-circle fa-stack-2x text-primary"></i>
-            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+            <i class="fas fa-plus fa-stack-1x fa-inverse"></i>
           </span>
           <h4 class="service-heading">Créez vos événements</h4>
           <p class="text-muted">Préparez votre soirée au mieux en invitant tous vos amis tout en leur partageant les informations nécessaires pour le bon déroulement de celui-ci.</p>
@@ -143,7 +142,7 @@
         <div class="col-md-6">
           <span class="fa-stack fa-4x">
             <i class="fas fa-circle fa-stack-2x text-primary"></i>
-            <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+            <i class="fas fa-eye fa-stack-1x fa-inverse"></i>
           </span>
           <h4 class="service-heading">Checkez vos événements</h4>
           <p class="text-muted">Recevez toutes vos invitations et regardez ce dont l'hôte a besoin pour son événement.</p>

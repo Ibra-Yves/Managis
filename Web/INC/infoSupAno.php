@@ -145,7 +145,6 @@ function listeParticipant($idEvent)
           </li>';
                     echo $accueil;
                 ?>
-
             </ul>
         </div>
     </div>
