@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 
-import {Text, View, StyleSheet, Image, KeyboardAvoidingView, TextInput, TouchableOpacity} from 'react-native'
+import {Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 
 
 export default class ConnexionInscription extends Component {
   render() {
     return (
-      <KeyboardAvoidingView
-        style={{flex: 1}}
-        behavior="padding">
+      <ScrollView>
         <View style={styles.logoContainer}>
           <Image
             source={require('../Images/logo_transparent.png')}
@@ -39,7 +37,7 @@ export default class ConnexionInscription extends Component {
             <Text>Pas encore de compte ?</Text>
           </TouchableOpacity>
         </View>
-      </KeyboardAvoidingView>
+      </ScrollView>
     )
   }
 }

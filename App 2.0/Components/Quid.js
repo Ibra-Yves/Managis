@@ -5,9 +5,9 @@ export default class Quid extends Component {
   render() {
     return (
       <ScrollView contentContainerStyle={{ flexGrow: 1}}>
-        <View style={{flex: 1}}>
-          <View style={styles.titrePage}>
-            <Text>Qui sommes nous ?</Text>
+        <View style={{flex: 1, alignItems: 'center'}}>
+          <View style={styles.containerTitre}>
+            <Text style={styles.titrePage}>Qui sommes nous ?</Text>
           </View>
           <View style={styles.imageContainer}>
             <Image
@@ -15,7 +15,8 @@ export default class Quid extends Component {
               style={styles.image}/>
           </View>
           <View>
-            <Text style={styles.textImage}>Adrien Chellé{"\n"}Product Owner/Application Mobile</Text>
+            <Text style={styles.textImage}>Adrien Chellé</Text>
+            <Text style={{textAlign: 'center'}}>Product Owner/Application Mobile</Text>
           </View>
           <View style={styles.imageContainer}>
             <Image
@@ -23,7 +24,8 @@ export default class Quid extends Component {
               style={styles.image}/>
           </View>
           <View>
-            <Text style={styles.textImage}>Ambroise Mostin{"\n"}Scrum Master/Application Mobile</Text>
+            <Text style={styles.textImage}>Ambroise Mostin</Text>
+            <Text style={{textAlign: 'center'}}>Scrum Master/Application Mobile</Text>
           </View>
           <View style={styles.imageContainer}>
             <Image
@@ -31,7 +33,8 @@ export default class Quid extends Component {
               style={styles.image}/>
           </View>
           <View>
-            <Text style={styles.textImage}>Nicolas Viroux{"\n"}Application Mobile et Réseau</Text>
+            <Text style={styles.textImage}>Nicolas Viroux</Text>
+            <Text style={{textAlign: 'center'}}>Application Mobile et Réseau</Text>
           </View>
           <View style={styles.imageContainer}>
             <Image
@@ -39,7 +42,8 @@ export default class Quid extends Component {
               style={styles.image}/>
           </View>
           <View>
-            <Text style={styles.textImage}>Ibrahima Yves{"\n"}Application Mobile et Réseau</Text>
+            <Text style={styles.textImage}>Ibrahima Yves</Text>
+            <Text style={{textAlign: 'center'}}>Application Mobile et Réseau</Text>
           </View>
           <View style={styles.imageContainer}>
             <Image
@@ -47,7 +51,8 @@ export default class Quid extends Component {
               style={styles.image}/>
           </View>
           <View>
-            <Text style={styles.textImage}>Dominik Fiedorczuk{"\n"}Développeur Web</Text>
+            <Text style={styles.textImage}>Dominik Fiedorczuk</Text>
+            <Text style={{textAlign: 'center'}}>Développeur Web</Text>
           </View>
           <View style={styles.imageContainer}>
             <Image
@@ -55,7 +60,8 @@ export default class Quid extends Component {
               style={styles.image}/>
           </View>
           <View>
-            <Text style={styles.textImage}>Maxime Liber{"\n"}Développeur Web</Text>
+            <Text style={styles.textImage}>Maxime Liber</Text>
+            <Text style={{textAlign: 'center'}}>Développeur Web</Text>
           </View>
           <View style={styles.imageContainer}>
             <Image
@@ -63,7 +69,23 @@ export default class Quid extends Component {
               style={styles.image}/>
           </View>
           <View>
-            <Text style={styles.textImage}>Rémy Vase{"\n"}Développeur Web/Application Mobile</Text>
+            <Text style={styles.textImage}>Rémy Vase</Text>
+            <Text style={{marginBottom: 5, textAlign: 'center'}}>Développeur Web/Application Mobile</Text>
+          </View>
+          <View >
+            <Text>Notre commencement</Text>
+            <Text>
+              Nous sommes des étudiants en 3eme technologie de l'informatique à l'EPHEC de Louvain-La-Neuve.
+              Dans le cadre de notre cours de projet d'intégration,
+              nous avons comme tâche d'effectuer un projet qui nous serait utile dans la vie de tous les jours
+            </Text>
+          </View>
+          <View>
+            <Text>L'idée!</Text>
+            <Text>
+              Lors de notre voyage de fin d'étude nous sommes passé par l'étape d'organisation.
+              C'est alors que nous nous sommes dit que nous allions créer une plateforme afin de faciliter cette tâche!
+            </Text>
           </View>
         </View>
       </ScrollView>
@@ -86,7 +108,21 @@ const styles = StyleSheet.create({
   },
   textImage: {
     textAlign: 'center',
-    marginVertical: 10,
-		paddingVertical: 10
+		paddingVertical: 5,
+    color: '#3A4750',
+    fontWeight: 'bold',
+    //fontFamily: 'KaushanScript-Regular'
+  },
+  titrePage: {
+    color: '#FFFFFF',
+    fontSize: 18
+  },
+  containerTitre: {
+    backgroundColor:'#3A4750',
+		width:200,
+		borderRadius: 25,
+		marginVertical: 10,
+		paddingVertical: 13,
+    textAlign: 'center',
   }
 });
