@@ -69,7 +69,7 @@ class Events
      * @return bool
      */
     public function reqValid($rq){
-        if(in_array($rq, $this->rqList)) return "a";
+        if(in_array($rq, $this->rqList)) return true;
         return false;
     }
 

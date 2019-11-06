@@ -1,7 +1,5 @@
 <?php
 
-use PHPUnit\Framework\Error\Notice;
-use PHPUnit\Framework\Error\Warning;
 use PHPUnit\Framework\TestCase;
 include_once 'Events.php';
 class EventsTest extends TestCase
