@@ -44,7 +44,6 @@
 
 
 
-
 </head>
 
 <body id="page-top">
@@ -83,7 +82,7 @@
             $vosEvenements =
                 '<li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle btn btn-outline-light" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <span class="glyphicon glyphicon-calendar"></span> Gestion des evenements
+                              <span class="glyphicon glyphicon-calendar"></span> Gestion des événements
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="addEvent.php">CREER VOTRE EVENEMENT</a>
@@ -93,8 +92,8 @@
                 </li>';
             if (!empty($_SESSION['user'])) {
                 //$ajouterEvent = str_replace("<a href=\"inscription.php\" class=\"btn btn-outline-dark\">Inscription</a>", '<a href="addEvent.php"  class="btn btn-outline-dark">Créer votre evenement </a>', $inscription);
-                $espaceMembre = str_replace("<a class=\"nav-link js-scroll-trigger\" href=\"connexion.php\">Connexion</a>", "<a href=\"espaceMembre.php\" class=\"nav-link js-scroll-trigger\"> Espace Membre</a>", $connexion);
-                $deconnexion= str_replace("<a class=\"nav-link js-scroll-trigger\" href=\"#team\">L'équipe</a>", "<a href=\"deconnexion.php\" class=\"nav-link js-scroll-trigger\"> Deconnexion</a>", $quiSommesNous);
+                $espaceMembre = str_replace("<a class=\"nav-link js-scroll-trigger\" href=\"connexion.php\">Connexion</a>", "<a href=\"espaceMembre.php\" class=\"nav-link js-scroll-trigger\">Gestion de  compte</a>", $connexion);
+                $deconnexion= str_replace("<a class=\"nav-link js-scroll-trigger\" href=\"#team\">L'équipe</a>", "<a href=\"deconnexion.php\" class=\"nav-link js-scroll-trigger\"> Déconnexion</a>", $quiSommesNous);
                 echo $vosEvenements  . $espaceMembre . $deconnexion;
             }
             else {
@@ -135,7 +134,7 @@
         <div class="col-md-6">
           <span class="fa-stack fa-4x">
             <i class="fas fa-circle fa-stack-2x text-primary"></i>
-            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+            <i class="fas fa-plus fa-stack-1x fa-inverse"></i>
           </span>
           <h4 class="service-heading">Créez vos événements</h4>
           <p class="text-muted">Préparez votre soirée au mieux en invitant tous vos amis tout en leur partageant les informations nécessaires pour le bon déroulement de celui-ci.</p>
@@ -143,7 +142,7 @@
         <div class="col-md-6">
           <span class="fa-stack fa-4x">
             <i class="fas fa-circle fa-stack-2x text-primary"></i>
-            <i class="fas fa-lock fa-stack-1x fa-inverse"></i>
+            <i class="fas fa-eye fa-stack-1x fa-inverse"></i>
           </span>
           <h4 class="service-heading">Checkez vos événements</h4>
           <p class="text-muted">Recevez toutes vos invitations et regardez ce dont l'hôte a besoin pour son événement.</p>

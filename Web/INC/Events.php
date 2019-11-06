@@ -155,7 +155,7 @@ class Events
             } //On verifie si les deux champs de mot de passe existe
             else if ($_POST['mdp'] != $_POST['confirmationMdp']) {
                 $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
-                $this->action->ajouterAction('errorPass', 'Les deux mots de passes ne se correspondent pas');
+                $this->action->ajouterAction('errorPass', 'Les deux mots de passes ne sont pas identiques');
             } //Sinon on peut effectuer l'inscription
             else {
                 $this->db->procCall('creationUser', [$_POST['pseudo'], $_POST['email'], hash('md5', $_POST['mdp'])]); //On crée le user avec les champs recupères
@@ -228,6 +228,7 @@ class Events
      */
     private function connexion(){
         $this->action->affichageDefaut('.intro-text', $this->lectureForm('connexion'));
+        $this->action->affichageDefaut('#navbarResponsive', '<ul class="navbar-nav text-uppercase ml-auto"><li class="nav-item"><a class="nav-link js-scroll-trigger" href="index.php">Accueil</a></li></ul>');
     }
 
     /**
@@ -249,12 +250,12 @@ class Events
        }
        //Sinon on renvoie ceci à l'utilisateur
        else {
-           $this->action->ajouterAction( 'errorUser',"Utilisateur ou mot de passe incorrect");
+           $this->action->ajouterAction( 'errorUser',"Le pseudo ou le mot de passe est incorrect");
        }
     }
 
     /**
-     * Gestion de la deonnexion
+     * Gestion de la deconnexion
      */
     private function deconnexion(){
         //On vide les superglobales pour eviter d'avoir des erreurs
@@ -304,7 +305,7 @@ class Events
             $this->action->affichageDefaut('.intro-text', $this->lectureForm('gestionCompte'));
 
             $this->action->ajouterAction('espaceMembre', $infoMembre); //On affiche au niveau de l'utilisateur les infos
-            $this->action->ajouterAction('modifMdp', 'Votre mot de passe a été changé avec success');
+            $this->action->ajouterAction('modifMdp', 'Votre mot de passe a été changé avec succes');
         }
     }
 
@@ -516,7 +517,7 @@ class Events
 
         //On renvoie vers le client le message d'erreur si le pseudo transmis n'existe pas
         if($_POST['pseudoInv'] == '' || !$user || $resultatSansEspaces || $resultatAvecEspaces){
-            mail($pseudo, 'Invitation dans un nouvel événement', 'Bonjour, un de vos amis vous a invité à son événement rejoignez nous ici: http://localhost/Managis/Web/index.php?rq='.$_SESSION['idEvent']);
+            mail($pseudo, 'Invitation dans un nouvel événement', 'Bonjour, un de vos amis vous a invité à son événement rejoignez le ici: http://localhost/Managis/Web/index.php?rq='.$_SESSION['idEvent']);
         }
 
         //Sinon on rajoute l'invite et on l'affiche dans la liste
@@ -562,7 +563,7 @@ class Events
 
         //On renvoie le message d'erreur au client
         if($_POST['fourniture'] == ''  || $resultatSansEspaces || $resultatAvecEspaces){
-            $this->action->ajouterAction('errorUser', 'Fourniture se trouve deja dans la liste');
+            $this->action->ajouterAction('errorUser', 'La fourniture se trouve déjà dans la liste');
         }
 
         //Sinon on ajoute la fourniture à la liste et on la fait afficher
@@ -578,7 +579,7 @@ class Events
             $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
             $nombreParticipant =  $this->db->procCall('nombreParticipant', [$_SESSION['idEvent']]);
 
-            $this->action->ajouterAction('modifMdp', 'La fourniture a été ajouté avec succes');
+            $this->action->ajouterAction('modifMdp', 'La fourniture a été ajoutée avec succes');
             $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
             $this->action->ajouterAction('listeFourniture', $listeFournitures);
             $this->action->ajouterAction('listeComm', $listeComm);
@@ -611,7 +612,7 @@ class Events
 
         //Verification si le commentaires n'est pas nul
         if(empty($_POST['commentaire'])){
-            $this->action->ajouterAction('errorComm', 'Le commentaire ne peut pas être nul');
+            $this->action->ajouterAction('errorComm', "Veuillez introduire un commentaire avant de l'ajouter");
         }
         //Sinon on ajoute le commentaire à la liste et on l'affiche
         else {
@@ -653,11 +654,11 @@ class Events
 
         //On verifie l'existence et du mail transmis dans le formulaire
         if (!$verifMail || !$verifPseudo || $_POST['pseudo'] = '' || $_POST['email'] = '') {
-            $this->action->ajouterAction('errorUser', 'Pseudo ou mail incorrect');
+            $this->action->ajouterAction('errorUser', 'Le pseudo ou le mail est incorrect');
         }
         //Sinon on genere le nouveau mot de passe et on le transmet par mail du user
         else {
-            $this->action->ajouterAction('modifMdp', 'Votre mot de passe vous a été envoyé par mail passez à la connexion <a href="connexion.php"> Connectez vous! </a>');
+            $this->action->ajouterAction('modifMdp', 'Votre mot de passe vous a été envoyé par mail, veuillez passer à la connexion <a href="connexion.php"> Connectez vous! </a>');
             $chaineNewMdp = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             $melangeChaine = str_shuffle($chaineNewMdp);
             $nouveauMdp = substr($melangeChaine, 0, 8);
