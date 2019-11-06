@@ -684,6 +684,7 @@ class Events
         }
         //On retire le commentaire de la liste et on affiche le nouveau chiffre avec le nombre de commentaires
         $this->db->procCall('supprCommentaire', [$_SESSION['idEvent'],$requeteComm]);
+        $nombreParticipant =  $this->db->procCall('nombreParticipant', [$_SESSION['idEvent']]);
         $this->action->affichageDefaut('#commentaires', $this->lectureForm('listeCommentaire'));
         $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
         $this->action->ajouterAction('listeComm', $listeComm);
@@ -712,6 +713,7 @@ class Events
         $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
 
         $listeFourniture = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
+        $nombreParticipant =  $this->db->procCall('nombreParticipant', [$_SESSION['idEvent']]);
 
         $this->action->ajouterAction('listeFourniture', $listeFourniture);
         $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
@@ -740,6 +742,7 @@ class Events
         $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
 
         $listeInv = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+        $nombreParticipant =  $this->db->procCall('nombreParticipant', [$_SESSION['idEvent']]);
 
         $this->action->ajouterAction('listeInvites', $listeInv);
         $this->action->ajouterAction('tousLesPseudos', $tousLesUser);
