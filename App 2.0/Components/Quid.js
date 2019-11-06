@@ -72,17 +72,27 @@ export default class Quid extends Component {
             <Text style={styles.textImage}>Rémy Vase</Text>
             <Text style={{marginBottom: 5, textAlign: 'center'}}>Développeur Web/Application Mobile</Text>
           </View>
-          <View >
-            <Text>Notre commencement</Text>
-            <Text>
+		  <View style={styles.imageContainer}>
+            <Image
+              source={require('../Images/1.jpg')}
+              style={styles.image}/>
+          </View>
+          <View>
+            <Text style={styles.textImage}>Notre commencement</Text>
+            <Text style={{marginBottom: 5, textAlign: 'center'}}>
               Nous sommes des étudiants en 3eme technologie de l'informatique à l'EPHEC de Louvain-La-Neuve.
               Dans le cadre de notre cours de projet d'intégration,
               nous avons comme tâche d'effectuer un projet qui nous serait utile dans la vie de tous les jours
             </Text>
           </View>
+		  <View style={styles.imageContainer}>
+            <Image
+              source={require('../Images/2.jpg')}
+              style={styles.image}/>
+          </View>
           <View>
-            <Text>L'idée!</Text>
-            <Text>
+            <Text style={styles.textImage}>L'idée!</Text>
+            <Text style={{marginBottom: 5, textAlign: 'center'}}>
               Lors de notre voyage de fin d'étude nous sommes passé par l'étape d'organisation.
               C'est alors que nous nous sommes dit que nous allions créer une plateforme afin de faciliter cette tâche!
             </Text>
