@@ -687,7 +687,7 @@ class Events
         $this->action->affichageDefaut('#commentaires', $this->lectureForm('listeCommentaire'));
         $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
         $this->action->ajouterAction('listeComm', $listeComm);
-        $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
+        $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
 
     }
@@ -714,7 +714,7 @@ class Events
         $listeFourniture = $this->db->procCall('listeFourniture', [$_SESSION['idEvent']]);
 
         $this->action->ajouterAction('listeFourniture', $listeFourniture);
-        $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
+        $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
     }
 
@@ -743,7 +743,7 @@ class Events
 
         $this->action->ajouterAction('listeInvites', $listeInv);
         $this->action->ajouterAction('tousLesPseudos', $tousLesUser);
-        $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm]);
+        $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
 
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
     }
