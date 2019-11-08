@@ -1,6 +1,5 @@
 <?php
 
-use Couchbase\Document;
 
 include_once 'Db.php';
 include_once 'Actions.php';

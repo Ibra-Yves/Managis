@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5a126132-6491-4754-8607-3e5d2568e541" name="Default Changelist" comment="">
+    <list default="true" id="0ed774df-29d7-4118-852f-d29b029cc506" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../.idea/MANAGIS.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Web.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/MANAGIS/INC/Events.php" beforeDir="false" afterPath="$PROJECT_DIR$/MANAGIS/INC/Events.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MANAGIS/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/MANAGIS/css/style.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,21 +26,37 @@
       <executable />
     </execution>
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="IgnoredFileRootStore">
-    <option name="generatedRoots">
-      <set>
-        <option value="C:\wamp64\www\Pick-n-Drink\Web\.idea" />
-      </set>
-    </option>
-  </component>
-  <component name="ProjectId" id="1RalMe5phZxIC7T2wrQ2RA0kxeG" />
+  <component name="ProjectId" id="1R3PM1sBwpZBqoDqX8D9C1mxUwj" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="D:/Program Files/Git/git-cmd.exe" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -49,14 +75,19 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5a126132-6491-4754-8607-3e5d2568e541" name="Default Changelist" comment="" />
-      <created>1569913047112</created>
+      <changelist id="0ed774df-29d7-4118-852f-d29b029cc506" name="Default Changelist" comment="" />
+      <created>1568892755794</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1569913047112</updated>
-      <workItem from="1569913061092" duration="91000" />
-      <workItem from="1569913161312" duration="63000" />
-      <workItem from="1571132912831" duration="111000" />
+      <updated>1568892755794</updated>
+      <workItem from="1568892764420" duration="10415000" />
+      <workItem from="1568903458036" duration="516000" />
+      <workItem from="1569058427105" duration="14258000" />
+      <workItem from="1569144761186" duration="11508000" />
+      <workItem from="1569162723441" duration="4026000" />
+      <workItem from="1569221580853" duration="16610000" />
+      <workItem from="1569662089619" duration="11067000" />
+      <workItem from="1569743890503" duration="7995000" />
     </task>
     <servers />
   </component>
