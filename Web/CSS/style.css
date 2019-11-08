@@ -1,0 +1,217 @@
+html,
+body,
+header,
+main,
+#intro{
+    height: 100%;
+}
+
+#intro{
+    background: url("../img/background-flou.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.titre {
+    text-shadow:0.3px 0.3px 0.3px black;
+    font-family:serif;
+    font-size:1.2em;
+}
+
+.text{
+    text-shadow:0.3px 0.3px 0.3px black;
+    font-family:serif;
+    font-size:1em;
+}
+
+.rounded-circle{
+    border-radius: 50%;
+}
+
+.marge{
+    margin-top: 5%;
+    margin-bottom: 17%;
+}
+
+.colormain{
+    background-color: lightgray;
+    height : auto;
+}
+
+.textfont{
+    font-size: 1.3em;
+}
+
+.espace{
+    margin-right : 2em;
+}
+
+body{
+    background-color: #525252;
+}
+
+/* Style pour formulaires */
+
+.centered-form{
+    margin-top: 60px;
+}
+
+.centered-form .panel{
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+
+/* Style pour pageEvent */
+
+.bg-img{
+    background: url("../IMG/image2.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
+.transparent{
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #000;
+}
+
+.blanc{
+    background-color :whitesmoke;
+}
+
+.boutonEvent{
+    border-left : 30%;
+}
+
+
+/* page event */
+
+.taillePoliceTitre{
+    font-size : 1em;
+    font-weight: bold;
+}
+
+.taillePolice{
+    font-size : 0.9em;
+}
+
+.taillePoliceSection{
+    font-size : 1.2em;
+    font-weight: bold;
+}
+
+div.tableContainer {
+    clear: both;
+    border: 1px solid #963;
+    height: 285px;
+    overflow: auto;
+    width: 900px
+}
+
+/* Reset overflow value to hidden for all non-IE browsers. */
+html>body div.tableContainer {
+    overflow: hidden;
+    width: 900px
+}
+
+/* define width of table. IE browsers only                 */
+div.tableContainer table {
+    float: left;
+    /* width: 740px */
+}
+
+/* define width of table. Add 16px to width for scrollbar.           */
+/* All other non-IE browsers.                                        */
+html>body div.tableContainer table {
+    /* width: 756px */
+}
+
+/* set table header to a fixed position. WinIE 6.x only                                       */
+/* In WinIE 6.x, any element with a position property set to relative and is a child of       */
+/* an element that has an overflow property set, the relative value translates into fixed.    */
+/* Ex: parent element DIV with a class of tableContainer has an overflow property set to auto */
+
+thead.fixedHeader tr {
+    position: relative;
+}
+
+/* set THEAD element to have block level attributes. All other non-IE browsers            */
+/* this enables overflow to work on TBODY element. All other non-IE, non-Mozilla browsers */
+
+/* make the TH elements pretty */
+thead.fixedHeader th {
+    background: #C96;
+    border-left: 1px solid #EB8;
+    border-right: 1px solid #B74;
+    border-top: 1px solid #EB8;
+    font-weight: normal;
+    padding: 4px 3px;
+    text-align: left
+}
+
+html>body tbody.scrollContent {
+    display: block;
+    height: 262px;
+    overflow: auto;
+    width: 100%
+}
+
+html>body thead.fixedHeader {
+    display: table;
+    overflow: auto;
+    width: 100%
+}
+
+/* make TD elements pretty. Provide alternating classes for striping the table */
+/* http://www.alistapart.com/articles/zebratables/                             */
+tbody.scrollContent td, tbody.scrollContent tr.normalRow td {
+    background: #FFF;
+    border-bottom: none;
+    border-left: none;
+    border-right: 1px solid #CCC;
+    border-top: 1px solid #DDD;
+    padding: 2px 3px 3px 4px
+}
+
+
+
+tbody.scrollContent tr.alternateRow td {
+    background: #EEE;
+    border-bottom: none;
+    border-left: none;
+    border-right: 1px solid #CCC;
+    border-top: 1px solid #DDD;
+    padding: 2px 3px 3px 4px
+}
+
+
+/* Qui sommes-nous ? */
+#quiSommesNous{
+    background: url("../img/background-flou.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width : 100%;
+}
+
+.text-nom{
+    color : dodgerblue;
+    font-size : 1.4em;
+    font-weight: bold;
+
+}
+
+.ajustement-div{
+    margin-bottom : 3em;
+}
+
+/* Test pour navbar */
+
+#barreblanche{
+    margin-bottom : 0%;
+}
