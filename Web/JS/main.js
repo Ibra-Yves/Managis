@@ -112,8 +112,6 @@ function gererDonnes(retour){
                             '<td class="taillePolice">'+data['hote']+'</td>\n' + //Hote
                             '<td class="taillePolice">'+data['dateEvent']+'</td>\n' + //Date
                             '<td class="taillePolice"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+'</a> </td>\n' + //Adresse
-                            ' <td class="taillePolice"> <div class="form-check">\n' +
-                            '  <a href="ajoutParticipant.php" class="'+data['idEvent']+'"> <input type="checkbox" class="form-check-input" id="'+data['idEvent']+'"></a>\n' +
                             '</div></td>'+
                             '</tr>';
 
@@ -192,12 +190,16 @@ function gererDonnes(retour){
                     //Affiche le nombre d'invites commentaires etc. pour l'event
                 case 'infoEvent':
                     let tableNombre = '';
+                    console.log(actionDatas);
                         tableNombre =
                         '<tr>' +
                             '<td class="taillePolice"><a href="afficheInv.php">'+actionDatas[0][0]['nombreInv']+'</a></td>' +
                             '<td class="taillePolice"><a href="afficheFour.php">'+actionDatas[1][0]['nombreFour']+'</a></td>' +
                             '<td class="taillePolice"><a href="afficheComm.php">'+actionDatas[2][0]['nombreComm']+'</a></td>' +
                             '<td class="taillePolice"><a href="afficheParticipants.php">'+actionDatas[3][0]['participant']+'</a></td>' +
+                            ' <td class="taillePolice" style="display: none" id="affichePourParticiper"> <div class="form-check">\n' +
+                            '<a href="ajoutParticipant.php" class="'+actionDatas[4]+'"> <input type="checkbox" class="form-check-input" id="'+actionDatas[4]+'"></a>\n' +
+                            '</div></td>' +
                         '</tr>';
                     $('#infoSupp').html(tableNombre);
                     evenements('#infoSupp');
@@ -228,7 +230,7 @@ function gererDonnes(retour){
                     break;
 
                 case 'ajoutInv' : //Ajout des invites
-                    $('#intro').html(alert(actionDatas));
+                    $('.intro-text').html(alert(actionDatas));
                     break;
                 case 'tousLesPseudos' : //Affiche tous les pseudos
                     let pseudos = [];
@@ -278,6 +280,10 @@ function gererDonnes(retour){
                     $('a').show();
                     $('#formInv').show();
                     $('#suppr').show();
+                    break;
+                case 'afficheParticipe':
+                    $('#participerEvent').show();
+                    $('#affichePourParticiper').css('display', 'block');
                     break;
 
                 /**

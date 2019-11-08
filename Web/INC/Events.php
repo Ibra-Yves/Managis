@@ -323,14 +323,7 @@ class Events
 
         $this->action->ajouterAction('vosEventFutur', $vosEventFutur);//On envois les données vers le client sur les event futur crées pas l'utilisateur
         $this->action->ajouterAction('vosInvitFutur', $vosInvitFutur);//On envbois les données vers le client sur les event futur où le user a été invité
-        foreach ($vosInvitFutur as $key => $value){
-            $participe =   $this->db->procCall('listeParticipant', [$vosInvitFutur[$key]['idEvent']]);
-            foreach ($participe as $key => $value){
-                $verif = array_intersect([$participe[$key]['pseudo']], [$_SESSION['user']['pseudo']]);
-                if($verif) $this->action->ajouterAction('participe', $participe[$key]['idEvent']);
-            }
 
-        }
 
     }
 
@@ -369,10 +362,27 @@ class Events
             $nombreInv = $this->db->procCall('nombreInv', [$id]);
             $nombreComm = $this->db->procCall('nombreComm', [$id]);
             $nombreFour = $this->db->procCall('nombreFour', [$id]);
-             $nombreParticipant =  $this->db->procCall('nombreParticipant', [$id]);
+            $nombreParticipant =  $this->db->procCall('nombreParticipant', [$id]);
+
+            $afficheInv =  $this->db->procCall('listeInvites', [$id]);
+
+            $verif = array_intersect([$afficheInv[0]['pseudo']], [$_SESSION['user']['pseudo']]);
+
 
             //On affiche le tableau avec les données niveau client
-            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
+            $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant, $id]);
+            if(empty($verif)){
+                $this->action->ajouterAction('afficheParticipe', $id);
+            }
+            $vosInvitFutur =  $this->db->procCall('vosInvitFutur', [$_SESSION['user']['idUser'],$_SESSION['user']['pseudo']]);
+            foreach ($vosInvitFutur as $key => $value){
+                $participe =   $this->db->procCall('listeParticipant', [$vosInvitFutur[$key]['idEvent']]);
+                foreach ($participe as $key => $value){
+                    $verif = array_intersect([$participe[$key]['pseudo']], [$_SESSION['user']['pseudo']]);
+                    if($verif) $this->action->ajouterAction('participe', $participe[$key]['idEvent']);
+                }
+
+            }
         }
         else {
             $_SESSION['idEvent'] = $id;
@@ -399,8 +409,16 @@ class Events
         $this->db->procCall('ajoutParticipant', [$_SESSION['idEvent'], $_SESSION['user']['idUser']]);
         $nombreParticipant =  $this->db->procCall('nombreParticipant', [$_SESSION['idEvent']]);
 
+        $afficheInv =  $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+        $verif = array_intersect([$afficheInv[0]['pseudo']], [$_SESSION['user']['pseudo']]);
+
+        $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant, $_SESSION['idEvent']]);
+        if(empty($verif)){
+            $this->action->ajouterAction('afficheParticipe',  $_SESSION['idEvent']);
+        }
+
         $this->action->ajouterAction('ajoutParticipant', $_SESSION['idEvent']);
-        $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
+
     }
 
     /**
@@ -413,9 +431,17 @@ class Events
 
         $this->db->procCall('supprParticipant', [$_SESSION['idEvent'], $_SESSION['user']['idUser']]);
         $nombreParticipant =  $this->db->procCall('nombreParticipant', [$_SESSION['idEvent']]);
+
+        $afficheInv =  $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+        $verif = array_intersect([$afficheInv[0]['pseudo']], [$_SESSION['user']['pseudo']]);
+
         
         $this->action->ajouterAction('supprParticipant', $_SESSION['idEvent']);
         $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
+
+        if(empty($verif)){
+            $this->action->ajouterAction('afficheParticipe',  $_SESSION['idEvent']);
+        }
     }
 
     /**
@@ -579,12 +605,20 @@ class Events
             $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
             $nombreParticipant =  $this->db->procCall('nombreParticipant', [$_SESSION['idEvent']]);
 
+            $afficheInv =  $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+            $verif = array_intersect([$afficheInv[0]['pseudo']], [$_SESSION['user']['pseudo']]);
+
             $this->action->ajouterAction('modifMdp', 'La fourniture a été ajoutée avec succes');
             $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
+            if(empty($verif)){
+                $this->action->ajouterAction('participe', $_SESSION['idEvent']);
+                $this->action->ajouterAction('afficheParticipe',  $_SESSION['idEvent']);
+            }
             $this->action->ajouterAction('listeFourniture', $listeFournitures);
             $this->action->ajouterAction('listeComm', $listeComm);
 
             if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
+
         }
     }
 
