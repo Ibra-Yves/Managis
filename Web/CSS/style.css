@@ -2,9 +2,11 @@ html,
 body,
 header,
 main,
+
 #connexion{
     float: center;
 }
+
 #intro{
     height: 100%;
 }

@@ -44,6 +44,7 @@ function gererDonnes(retour){
                     let dest = actionDatas['dest'];
                     $(actionDatas['dest']).html(actionDatas['content']);
                     $('#difSection').html('');
+                    $('main').html('');
                     evenements(dest);
                     break;
 
@@ -303,6 +304,124 @@ function gererDonnes(retour){
                     break;*/
                 case 'Probleme JSON' : //On affiche si il y a un problème JSON
                     $('.intro-text').html(actionDatas['donnes']);
+                    break;
+                    //Gestion des erreurs
+                case 'errorUser' :
+                case 'errorMail' :
+                case 'errorPass' :
+                    $('#errorForm').html('<div class="alert alert-danger" role="alert">'+actionDatas);
+
+                    break;
+
+                case 'espaceMembre' : //Espace memebre affiché
+                    let content = '';
+                    actionDatas.forEach(function(data){
+                        content+=
+                            '<tr>\n' +
+                                '<td class="taillePolice">'+data['pseudo'] +'</td>\n' +
+                                '<td class="taillePolice">'+data['dateCrea']+'</td>\n' +
+                                '<td class="taillePolice">'+data['email']+'</td>\n' +
+                            '</tr>';
+                    });
+                    $('main').html('');
+                    $('#infoCompte').html(content); //Affichage sous un tableau
+                    break;
+
+                case 'infoSoiree' : //Affichage des soirées en cours
+                    let tableSoirees = '';
+                    let i=1;
+                    actionDatas.forEach(function(data){
+                        tableSoirees+=
+                            '<tr> \n' +
+                                '<th scope="row">'+ i++ +'</th>\n' +
+                                '<td class="taillePolice"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' +
+                                '<td class="taillePolice">'+data['hote']+'</td>\n' +
+                                '<td class="taillePolice">'+data['dateEvent']+'</td>\n' +
+                                '<td class="taillePolice">'+data['adresse']+' </td>\n' +
+                            '</tr>';
+
+                    });
+                    $('#infoSoiree').html(tableSoirees); //Affichage sous un tableau
+                    $('main').html('');
+                    evenements('#infoSoiree');
+                    break;
+
+                case 'listeInvites' : //Affichage de liste d'invités
+                    let tableInvites= '';
+                    let j=0;
+                    let o = 0;
+                    let p = 1;
+                    let q = 2;
+                    actionDatas.forEach(function(data){
+                    tableInvites+=
+                        '<tr> \n' +
+                            '<th scope="row" id="'+ o++ +'">'+ j++ +'</th>\n' +
+                            '<td class="taillePolice" id="'+ p++ +'">'+data['pseudo']+'</td> \n' +
+                            '<td class="taillePolice"><a id="' + q++ +'" href="'+data['pseudo']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
+                        '</tr>';
+
+                    });
+
+                    $('#invites').html(tableInvites); //Affichage des invités sous le forme de tableau
+                    $('#0').remove(); // On n'affiche pas lé premier invité car c'est un hote et si on le supprime faudra remodifier dans la BDD
+                    $('#1').remove();
+                    $('#2').remove();
+
+                    evenements('#invites');
+                    break;
+
+                case 'ajoutInv' : //Ajout des invites
+                    $('#intro').html(alert(actionDatas));
+                    break;
+                case 'tousLesPseudos' : //Affiche tous les pseudos
+                    let pseudos = [];
+                    actionDatas.forEach(function(data){
+                        pseudos.push(data[0]);
+                    });
+                    //Lorsqu'on est sur le champ ou on met le pseudo, il y aura une proposition avec les pseudos existants par rapport à la lettre mise
+                    $('#pseudoInv').autocomplete({
+                        source: pseudos
+                    });
+                    break;
+
+                case 'listeFourniture' : //Liste des fournitures sous forme de tableau
+                    let tableFournitures ='';
+                    let k=1;
+                    actionDatas.forEach(function(data){
+                    tableFournitures+=
+                        '<tr>\n' +
+                            '<th scope="row">'+ k++ +'</th>\n' +
+                            '<td class="taillePolice">'+ data['fourniture']+'</td>\n' +
+                            '<td class="taillePolice"><input type="number" name="fourniture['+ data['fourniture']+']" value="'+data['quantite']+'"  min="0" style="width: 40px"></td>\n' +
+                            '<td class="taillePolice"><a href="'+data['fourniture']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
+                        '</tr>';
+
+                    });
+                    $('#listeFournitures').html(tableFournitures);
+                    evenements('#listeFournitures');
+                    break;
+
+                case 'listeComm' : //Liste des commentaires
+                    let listeCommentaire = '';
+                    let l=1;
+                        actionDatas.forEach(function(data){
+                            listeCommentaire+=
+                                ' <tr>\n' +
+                                    '<th scope="row">'+ l++ +'</th>\n' +
+                                    '<td class="taillePolice">'+data['commentaire']+'</td>\n' +
+                                    '<td class="taillePolice"><a href="'+data['commentaire']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
+                                '</tr>';
+                        });
+
+                    $('#listeCommentaire').html(listeCommentaire);
+                    evenements('#listeCommentaire');
+                    break;
+
+                case 'afficherSuppr' :
+                    $('a').css('display', 'inline');
+                    break;
+                case 'Probleme JSON' : //On affiche si il y a un problème JSON
+                    $('#intro').html(actionDatas['donnes']);
                     break;
                     //Gestion des erreurs
                 case 'errorUser' :

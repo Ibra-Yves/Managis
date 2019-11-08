@@ -47,6 +47,7 @@ class Db
             case 'nombreParticipant' :
             case 'listeParticipant' :
             case 'vosInvitAno' :
+
                 array_push($params, '?');
             case 'tousLesUsers' :
                 try {
@@ -88,9 +89,36 @@ class Db
             }
             break;
         }
+
         switch($procName) {
             case 'creerEvent' :
             array_push($params, '?', '?', '?');
+        switch($procName){
+            case 'connexionUser' :
+            case 'modifMdp'  :
+            case 'ajouterInvites'    :
+            case 'ajouterFournitures' :
+            case 'ajoutCommentaire' :
+            case 'supprCommentaire' :
+            case 'supprFourniture' :
+            case 'supprInvites' :
+                array_push($params, '?', '?');
+            try {
+                $this->connexionBDD();
+                $callProc = 'call '. $procName.'('.join(',', $params).')';
+                $request = $this->pdo->prepare($callProc);
+                $request->execute($procParams);
+                return $request->fetchAll();
+            }
+            catch (PDOException $e){
+                $e->getMessage();
+            }
+            break;
+        }
+        switch($procName) {
+            case 'creerEvent' :
+            array_push($params, '?', '?', '?');
+            case 'infoSoirees' :
             case 'listeInvites' :
             case 'listeFourniture' :
             case 'listeCommentaire'    :
