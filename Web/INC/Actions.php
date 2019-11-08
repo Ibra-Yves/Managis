@@ -39,6 +39,5 @@ class Actions
 
     public function send(){
         echo json_encode($this->donnes);
-        return json_encode($this->donnes);
     }
 }

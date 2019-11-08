@@ -2,6 +2,11 @@ html,
 body,
 header,
 main,
+
+#connexion{
+    float: center;
+}
+
 #intro{
     height: 100%;
 }
@@ -214,4 +219,14 @@ tbody.scrollContent tr.alternateRow td {
 
 #barreblanche{
     margin-bottom : 0%;
+}
+
+.carousel-item {
+    height: 100vh;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }

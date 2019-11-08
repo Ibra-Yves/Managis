@@ -39,6 +39,15 @@ class Db
             case 'verifEmail' :
             case 'verifPseudo' :
             case 'espaceMembre' :
+            case 'nombreComm' :
+            case 'nombreFour' :
+            case 'nombreInv' :
+            case 'vosEventFutur' :
+            case 'vosEventPasse'    :
+            case 'nombreParticipant' :
+            case 'listeParticipant' :
+            case 'vosInvitAno' :
+
                 array_push($params, '?');
             case 'tousLesUsers' :
                 try {
@@ -52,8 +61,38 @@ class Db
                     $e->getMessage();
                 }
                 break;
-            default : $this->action->affichageDefaut('div', 'procedure introuvable');
+            default : $this->action->affichageDefaut('.intro-text', 'procedure introuvable');
         }
+        switch($procName){
+            case 'connexionUser' :
+            case 'modifMdp'  :
+            case 'ajouterInvites'    :
+            case 'ajouterFournitures' :
+            case 'ajoutCommentaire' :
+            case 'supprCommentaire' :
+            case 'supprFourniture' :
+            case 'supprInvites' :
+            case 'vosInvitFutur' :
+            case 'vosInvitPasse' :
+            case 'ajoutParticipant':
+            case 'supprParticipant' :
+                array_push($params, '?', '?');
+            try {
+                $this->connexionBDD();
+                $callProc = 'call '. $procName.'('.join(',', $params).')';
+                $request = $this->pdo->prepare($callProc);
+                $request->execute($procParams);
+                return $request->fetchAll();
+            }
+            catch (PDOException $e){
+                $e->getMessage();
+            }
+            break;
+        }
+
+        switch($procName) {
+            case 'creerEvent' :
+            array_push($params, '?', '?', '?');
         switch($procName){
             case 'connexionUser' :
             case 'modifMdp'  :
