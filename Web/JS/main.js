@@ -1,9 +1,10 @@
 $(function(){
-    evenements();
+    evenements();//On appelle tout le temps cette fonction pour efectuer chaque requete ou evenement
 });
 
+//On effecute les requetes
 function requetes(event){
-    event.preventDefault();
+    event.preventDefault();//On reste sur la meme page
 
     $.ajaxSetup({
         processData: false,
@@ -11,72 +12,327 @@ function requetes(event){
     });
 
     let request = 'noRequest';
-    let envoyerData = new FormData();
+    let envoyerData = new FormData(); //Creation du nouveau formulaire
 
    switch (true) {
-       case Boolean(this.href):
+       case Boolean(this.href): //Si la requete contient le lien on recupere toute jusqu'au .php
            request = $(this).attr('href').split('.')[0];
-       break;
-
-       case Boolean(this.action):
+           break;
+       case Boolean(this.action): //Si la requete contient une action on recupere le nom de l'action
            request = $(this).attr('action').split('.')[0];
            envoyerData = new FormData(this);
-           envoyerData.append('envoiForm', this.id);
+           envoyerData.append('envoiForm', this.id); //On appelle le formualaire envoiForm a chaque fois qu'on submit
            break;
    }
 
-   console.log('rq: ' +request);
 
-   envoyerData.append('request', request);
-    $.post('?rq=' + request, envoyerData,  gererDonnes);
+    console.log('rq: ' +request);
+
+    envoyerData.append('request', request); //Le nom de formulaire on le remplace par le nom du vrai formulaire
+    $.post('?rq=' + request, envoyerData,  gererDonnes); //Requete ajax vers le php pour lui passer les données de la requete
 }
 
+//Ce qu'on recoit du PHP
 function gererDonnes(retour){
-    retour = lireJSON(retour);
+    retour = lireJSON(retour); //On lit les données envoyés par PHP qui sont encodés en JSON
    console.log(retour);
-    retour.forEach(function(action){
-        $.each(action, function(actionName, actionDatas){
-            switch(actionName){
-                case 'affiche' :
+    retour.forEach(function(action){ //Double boucle pour le retour pour lire les données
+        $.each(action, function(actionName, actionDatas){ //Nom de l'action passé en paramètres dans action.php ainsi que les données transmises
+            switch(actionName){ //Changements sur le nom de l'action
+                //Differents noms d'action
+                case 'affiche' : //Affichage par défaut
                     let dest = actionDatas['dest'];
                     $(actionDatas['dest']).html(actionDatas['content']);
+                    $('#difSection').html('');
                     evenements(dest);
                     break;
-                case 'connexion' :
-                    $('form').replaceWith('<h1>Bienvenue '+actionDatas['pseudo'] + '</h1>');
-                    //$('[href="connexion.php"]').replaceWith('<a href="deconnexion.php">Deconnexion</a>');
-                   // $('[href="inscription.php"]').replaceWith('<a href="acceuil.php">Acceuil</a>');
-                    //evenements('body');
+
+                case 'connexion' : //Gestion de la connexion et remplacement des elements qu'il faut
+                    location.reload();
+                    $('.panel-heading').replaceWith('<h3> Connexion reussie </h3>');
+                    $('.panel-body').replaceWith('<h1>Bienvenue '+actionDatas['pseudo'] + '</h1>');
+                    $('body').find('[href="inscription.php"]').html('Créer votre evenement').attr('href', 'addEvent.php');
+                    $('body').find('[href="quiSommesNous.php"]').html('Espace Membre').attr('href', 'espaceMembre.php');
                     $('body').find('[href="connexion.php"]').html('deconnexion').attr('href', 'deconnexion.php');
-                    $('body').find('[href="inscription.php"]').html('acceuil').attr('href', 'acceuil.php');
-                    //evenements('a');
+                    $('main').html('');
                     break;
-                case 'deconnexion' :
-                    $('body').html('Deconnexion');
-                    $('[href="deconnexion.php"]').click(function(){
+
+                case 'deconnexion' : //Gestion de la deconnexion
+                    $('[href="deconnexion.php"]').on('click', function(){
                         location.reload();
                     });
-                    evenements('body');
-                    //$('[href="deconnexion.php"]').replaceWith('<a href="connexion.php"> Connexion</a>');
                     break;
-               /* case 'stillConnected' :
-                    $('#error').replaceWith('<h1> Toujours connecté </h1>');
+
+                case 'test' :
+                        console.log(actionDatas);
+                    break;
+
+                case 'espaceMembre' : //Espace memebre affiché
+                    let content = '';
+                    actionDatas.forEach(function(data){
+                        content+=
+                            '<tr>\n' +
+                                '<td class="gestionDeCompteInfos">'+data['pseudo'] +'</td>\n' + //Pseudo de l'user
+                                '<td class="gestionDeCompteInfos">'+data['dateCrea']+'</td>\n' + //Date de la création du compte
+                                '<td class="gestionDeCompteInfos">'+data['email']+'</td>\n' + //Le mail de l'utilisateur
+                            '</tr>';
+                    });
+                    $('main').html('');
+                    $('#infoCompte').html(content); //Affichage sous un tableau
+                    break;
+
+                case 'vosEventFutur' : //Affichage des soirées futurs
+                    let tableVosEvent = '';
+                    let i=1;
+                    actionDatas.forEach(function(data){
+                        tableVosEvent+=
+                            '<tr> \n' +
+                                '<th scope="row">'+ i++ +'</th>\n' +
+                                '<td class="taillePolice"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' + //Nom de l'événement
+                                '<td class="taillePolice">'+data['hote']+'</td>\n' + //Hote
+                                '<td class="taillePolice">'+data['dateEvent']+'</td>\n' + //Date de l'évènement
+                                '<td class="taillePolice"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+' </a></td>\n' + //Adresse de l'évent
+                                ' <td class="taillePolice"> <div class="form-check">\n' +
+                            '</div></td>' +
+                            '</tr>';
+
+                    });
+                    $('#vosEvent').html(tableVosEvent); //Affichage sous un tableau
+                    $('main').html('');
+                    evenements('#vosEvent');
+                    break;
+                case 'vosInvitFutur': //Affiche les invitation de user futurs
+                    let tableVosInvit = '';
+                    let b=1;
+                    actionDatas.forEach(function(data){
+                        tableVosInvit+=
+                            '<tr> \n' +
+                            '<th scope="row">'+ b++ +'</th>\n' +
+                            '<td class="taillePolice"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' + //Nom de l'évént
+                            '<td class="taillePolice">'+data['hote']+'</td>\n' + //Hote
+                            '<td class="taillePolice">'+data['dateEvent']+'</td>\n' + //Date
+                            '<td class="taillePolice"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+'</a> </td>\n' + //Adresse
+                            ' <td class="taillePolice"> <div class="form-check">\n' +
+                            '  <a href="ajoutParticipant.php" class="'+data['idEvent']+'"> <input type="checkbox" class="form-check-input" id="'+data['idEvent']+'"></a>\n' +
+                            '</div></td>'+
+                            '</tr>';
+
+                    });
+                    $('#vosInvit').html(tableVosInvit); //Affichage sous un tableau
+                    $('main').html('');
+                    evenements('#vosInvit'); //On peut accèder à une page ou submit un formulaire
+                    break;
+
+                case 'ajoutParticipant' :
+                    $('#'+actionDatas).prop('checked', true);
+                    $('.'+actionDatas).attr('href', 'supprParticipant.php');
+                    break;
+                case 'supprParticipant' :
+                    $('#'+actionDatas).attr('checked', false);
+                    $('.'+actionDatas).attr('href', 'ajoutParticipant.php');
+                    break;
+                case 'listeParticipant' :
+                    let tableParticipant = '';
+                    let r = 1;
+                    actionDatas.forEach(function(data){
+                        tableParticipant+=
+                            '<tr> \n' +
+                            '<th scope="row">'+ r++ +'</th>\n' +
+                            '<td class="taillePolice">'+data['pseudo']+'</td> \n' +
+                            '</tr>';
+                    });
+
+                    $('#participants').html(tableParticipant); //Affichage des invités sous le forme de tableau
+                    break;
+                case 'participe' :
+                    $('#'+actionDatas).prop('checked', true);
+                    $('.'+actionDatas).attr('href', 'supprParticipant.php');
+                    break;
+                case 'vosEventPasse' : //Affichage des soirées passées
+                    let tableVosEventPasse = '';
+                    let c=1;
+                    actionDatas.forEach(function(data){
+                        tableVosEventPasse+=
+                            '<tr> \n' +
+                            '<th scope="row">'+ c++ +'</th>\n' +
+                            '<td class="taillePolice"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' +
+                            '<td class="taillePolice">'+data['hote']+'</td>\n' +
+                            '<td class="taillePolice">'+data['dateEvent']+'</td>\n' +
+                            '<td class="taillePolice"><a href="http://maps.google.com/?q='+data['adresse']+'">'+data['adresse']+'</a></td>\n' +
+                            ' <td class="taillePolice"> <div class="form-check">\n' +
+                            '</div></td>' +
+                            '</tr>';
+
+                    });
+                    $('#vosEventPasse').html(tableVosEventPasse); //Affichage sous un tableau
+                    $('main').html('');
+                    evenements('#vosEventPasse');
+                    break;
+                case 'vosInvitPasse': //Invitation à l'évent passé
+                    let tableVosInvitPasse = '';
+                    let d=1;
+                    actionDatas.forEach(function(data){
+                        tableVosInvitPasse+=
+                            '<tr> \n' +
+                            '<th scope="row">'+ d++ +'</th>\n' +
+                            '<td class="taillePolice"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' +
+                            '<td class="taillePolice">'+data['hote']+'</td>\n' +
+                            '<td class="taillePolice">'+data['dateEvent']+'</td>\n' +
+                            '<td class="taillePolice">'+data['adresse']+' </td>\n' +
+                            ' <td class="taillePolice"> <div class="form-check">\n' +
+                            '</div></td>' +
+                            '</tr>';
+
+                    });
+                    $('#vosInvitPasse').html(tableVosInvitPasse); //Affichage sous un tableau
+                    $('#vosInvitPasse').html(tableVosInvitPasse); //Affichage sous un tableau
+                    $('main').html('');
+                    evenements('#vosInvitPasse');
+                    break;
+                    //Affiche le nombre d'invites commentaires etc. pour l'event
+                case 'infoEvent':
+                    let tableNombre = '';
+                        tableNombre =
+                        '<tr>' +
+                            '<td class="taillePolice"><a href="afficheInv.php">'+actionDatas[0][0]['nombreInv']+'</a></td>' +
+                            '<td class="taillePolice"><a href="afficheFour.php">'+actionDatas[1][0]['nombreFour']+'</a></td>' +
+                            '<td class="taillePolice"><a href="afficheComm.php">'+actionDatas[2][0]['nombreComm']+'</a></td>' +
+                            '<td class="taillePolice"><a href="afficheParticipants.php">'+actionDatas[3][0]['participant']+'</a></td>' +
+                        '</tr>';
+                    $('#infoSupp').html(tableNombre);
+                    evenements('#infoSupp');
+                    break;
+                case 'listeInvites' : //Affichage de liste d'invités
+                    let tableInvites= '';
+                    let j=0;
+                    let o = 0;
+                    let p = 1;
+                    let q = 2;
+                    actionDatas.forEach(function(data){
+                    tableInvites+=
+                        '<tr> \n' +
+                            '<th scope="row" id="'+ o++ +'">'+ j++ +'</th>\n' +
+                            '<td class="taillePolice" id="'+ p++ +'">'+data['pseudo']+'</td> \n' +
+                            '<td class="taillePolice"><a id="' + q++ +'" href="'+data['pseudo']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
+                            '<td class="taillePolice" id="'+ data['pseudo'] +'"></td> \n' +
+                        '</tr>';
+
+                    });
+
+                    $('#invites').html(tableInvites); //Affichage des invités sous le forme de tableau
+                    $('#0').remove(); // On n'affiche pas lé premier invité car c'est un hote et si on le supprime faudra remodifier dans la BDD
+                    $('#1').remove();
+                    $('#2').remove();
+
+                    evenements('#invites');
+                    break;
+
+                case 'ajoutInv' : //Ajout des invites
+                    $('#intro').html(alert(actionDatas));
+                    break;
+                case 'tousLesPseudos' : //Affiche tous les pseudos
+                    let pseudos = [];
+                    actionDatas.forEach(function(data){
+                        pseudos.push(data[0]);
+                    });
+                    //Lorsqu'on est sur le champ ou on met le pseudo, il y aura une proposition avec les pseudos existants par rapport à la lettre mise
+                    $('#pseudoInv').autocomplete({
+                        source: pseudos
+                    });
+                    break;
+
+                case 'listeFourniture' : //Liste des fournitures sous forme de tableau
+                    let tableFournitures ='';
+                    let k=1;
+                    actionDatas.forEach(function(data){
+                    tableFournitures+=
+                        '<tr>\n' +
+                            '<th scope="row">'+ k++ +'</th>\n' +
+                            '<td class="taillePolice">'+ data['fourniture']+'</td>\n' +
+                            '<td class="taillePolice"><input type="number" name="fourniture['+ data['fourniture']+']" value="'+data['quantite']+'"  min="0" style="width: 40px"></td>\n' +
+                            '<td class="taillePolice"><a href="'+data['fourniture']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
+                        '</tr>';
+
+                    });
+                    $('#listeFournitures').html(tableFournitures);
+                    evenements('#listeFournitures');
+                    break;
+
+                case 'listeComm' : //Liste des commentaires
+                    let listeCommentaire = '';
+                    let l=1;
+                        actionDatas.forEach(function(data){
+                            listeCommentaire+=
+                                ' <tr>\n' +
+                                    '<th scope="row">'+ l++ +'</th>\n' +
+                                    '<td class="taillePolice">'+data['commentaire']+'</td>\n' +
+                                    '<td class="taillePolice"><a href="'+data['commentaire']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
+                                '</tr>';
+                        });
+
+                    $('#listeCommentaire').html(listeCommentaire);
+                    evenements('#listeCommentaire');
+                    break;
+
+                case 'afficherSuppr' : //Affichage des liens de suppression en tant que hote
+                    $('a').show();
+                    $('#formInv').show();
+                    $('#suppr').show();
+                    break;
+
+                /**
+                 * Redirection vers index.php
+                 */
+                case 'retourIndex' :
+                   // location.reload();
+                    let hrefActuel = window.location.href;
+                    let hrefIndex =  hrefActuel.split('?');
+                    window.location.replace(hrefIndex[0]);
+                    break;
+                    //On cache toutes les balises nécessaires qui ruisquent d'être modifié dans l'historique des events
+                /*case 'hideModif' :
+                    //$('a').hide();
+                    $('#formInv').css('display', 'none');
+                    $('#suppr').hide();
+                    $('#ajoutFour').css('display', 'none');
+                    $('#ajoutCom').hide();
+                    $('#submit').hide();
+                    $('#invites a').hide();
+                    $('#listeFournitures a').hide();
+                    $('#listeCommentaire a').hide();
                     break;*/
-                case 'Probleme JSON' :
-                    $('#error').html(actionDatas['donnes']);
+                case 'Probleme JSON' : //On affiche si il y a un problème JSON
+                    $('.intro-text').html(actionDatas['donnes']);
                     break;
-                case 'wrongUser' :
-                case 'wrongMail' :
-                case 'wrongPass'   :
-                    $('#'+actionName).html(actionDatas);
+                    //Gestion des erreurs
+                case 'errorUser' :
+                case 'errorMail' :
+                case 'errorPass' :
+                    $('#errorForm').html('<div class="alert alert-danger" role="alert">'+actionDatas);
                     break;
+                case 'modifMdp' :
+                    $('#errorForm').html('<div class="alert alert-success" role="alert">'+actionDatas);
+                    evenements('#errorForm');
+                    break;
+                case 'errorInv' :
+                    $('#errorFormm').html('<div class="alert alert-danger" role="alert">'+actionDatas);
+                    break;
+                case 'succInv' :
+                    $('#errorFormm').html('<div class="alert alert-success" role="alert">'+actionDatas);
+
+                    break;
+
+                case 'errorComm' :
+                    $('#errorFormmm').html('<div class="alert alert-danger" role="alert">'+actionDatas);
+                    break;
+
                 default :
-                   console.log('Action inconnue '+ actionName);
+                   console.log('Action inconnue '+ actionName); //Affichage des actions inconnues
            }
        })
    })
 }
-function lireJSON(data){
+function lireJSON(data){ //Decodage de JSON qui vient de action.php
     let decode;
     // var error;
     try {
@@ -95,7 +351,7 @@ function lireJSON(data){
     }
     return decode;
 }
-function evenements(place = 'html') {
+function evenements(place = 'html') { //Gestion des evenements effecutes sur les liens et les formulaires
     $(place +' a').on( 'click', requetes);
     $(place +' form').on('submit', requetes);
 }
