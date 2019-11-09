@@ -610,13 +610,13 @@ class Events
 
             $this->action->ajouterAction('modifMdp', 'La fourniture a été ajoutée avec succes');
             $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
-            if(empty($verif)){
-                $this->action->ajouterAction('participe', $_SESSION['idEvent']);
-                $this->action->ajouterAction('afficheParticipe',  $_SESSION['idEvent']);
-            }
             $this->action->ajouterAction('listeFourniture', $listeFournitures);
             $this->action->ajouterAction('listeComm', $listeComm);
 
+            if(empty($verif)){
+                $this->action->ajouterAction('afficheParticipe',  $_SESSION['idEvent']);
+                $this->action->ajouterAction('participe', $_SESSION['idEvent']);
+            }
             if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
 
         }
@@ -707,7 +707,6 @@ class Events
      */
     private function supprimerCommentaire($req){
         $verifInvite = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
-        $nombreComm = $this->db->procCall('nombreComm', [$_SESSION['idEvent']]);
         $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
         $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
@@ -718,6 +717,7 @@ class Events
         }
         //On retire le commentaire de la liste et on affiche le nouveau chiffre avec le nombre de commentaires
         $this->db->procCall('supprCommentaire', [$_SESSION['idEvent'],$requeteComm]);
+        $nombreComm = $this->db->procCall('nombreComm', [$_SESSION['idEvent']]);
         $nombreParticipant =  $this->db->procCall('nombreParticipant', [$_SESSION['idEvent']]);
         $this->action->affichageDefaut('#commentaires', $this->lectureForm('listeCommentaire'));
         $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
@@ -736,13 +736,13 @@ class Events
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         $requeteFour = [];
         $nombreComm = $this->db->procCall('nombreComm', [$_SESSION['idEvent']]);
-        $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
         $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
         foreach ($req as $key => $value){
             $requeteFour = $value;
         }
         //On retire la fourniture de la liste et on affiche le nombre de fournitures dans le tableau
         $this->db->procCall('supprFourniture', [$_SESSION['idEvent'],$requeteFour]);
+        $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
 
         $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
 
@@ -763,7 +763,6 @@ class Events
         $tousLesUser = $this->db->procCall('tousLesUsers', ['']);
         $nombreComm = $this->db->procCall('nombreComm', [$_SESSION['idEvent']]);
         $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
-        $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         $requeteInv = [];
 
@@ -772,7 +771,7 @@ class Events
         }
         //On enleve l'invite de la liste
         $this->db->procCall('supprInvites', [$_SESSION['idEvent'],$requeteInv]);
-
+        $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
         $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
 
         $listeInv = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
