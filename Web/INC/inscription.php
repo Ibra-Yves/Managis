@@ -7,6 +7,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title gestionDeCompteTitre" align="center">Inscrivez-vous pour organiser vos soirées</h3>
                 </div>
+                <a href="inscriptionFacebook.php">Inscrivez vous via facebook</a>
                 <div class="panel-body">
                     <form id="formInscription" class="formInscription" name="formInscription" method="post" action="validation.html">
                         <div id="errorForm"></div>

@@ -98,7 +98,7 @@
                 echo $vosEvenements  . $espaceMembre . $deconnexion;
             }
             else {
-                echo $services . $aProposDeNous . $quiSommesNous . $contact . $connexion;
+                echo $services . $aProposDeNous . $quiSommesNous . $contact . $connexion. '<a href="inscriptionFacebook.php>">inscription </a>';
             }
             ?>
 

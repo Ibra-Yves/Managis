@@ -51,16 +51,14 @@ function gererDonnes(retour){
                     location.reload();
                     $('.panel-heading').replaceWith('<h3> Connexion reussie </h3>');
                     $('.panel-body').replaceWith('<h1>Bienvenue '+actionDatas['pseudo'] + '</h1>');
-                    $('body').find('[href="inscription.php"]').html('Créer votre evenement').attr('href', 'addEvent.php');
-                    $('body').find('[href="quiSommesNous.php"]').html('Espace Membre').attr('href', 'espaceMembre.php');
-                    $('body').find('[href="connexion.php"]').html('deconnexion').attr('href', 'deconnexion.php');
                     $('main').html('');
                     break;
 
                 case 'deconnexion' : //Gestion de la deconnexion
-                    $('[href="deconnexion.php"]').on('click', function(){
                         location.reload();
-                    });
+                    break;
+                case 'fbInscription' :
+                    window.location.replace(actionDatas);
                     break;
 
                 case 'test' :
