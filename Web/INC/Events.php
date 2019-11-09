@@ -4,7 +4,6 @@
 include_once 'Db.php';
 include_once 'Actions.php';
 include_once 'Session.php';
-include_once 'Facebook/autoload.php';
 
 class Events
 {
@@ -43,7 +42,6 @@ class Events
         'supprParticipant',
         'afficheParticipants',
         'index',
-        'inscriptionFacebook'
     ];
 
     public function __construct()
@@ -226,21 +224,6 @@ class Events
         }
     }
 
-    private function inscriptionFacebook(){
-        $appId= '730903687321089';
-        $appSecret = '0fdb5fe6b65924b62fb3c40e91480227';
-        $fb = new Facebook\Facebook([
-            'app_id' => $appId,
-            'app_secret' => $appSecret,
-            'default_graph_version' => 'v2.10'
-        ]);
-        $helper = $fb->getRedirectLoginHelper();
-        $redirectURL = "callback.php";
-        $permissions = ['email'];
-        $loginURL = $helper->getLoginUrl($redirectURL, $permissions);
-        //$this->action->affichageDefaut('.intro-text', $loginURL);
-        $this->action->ajouterAction('fbInscription', $loginURL);
-    }
 
     /**
      * On renvoie le formulaire de connexion
