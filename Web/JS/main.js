@@ -57,9 +57,6 @@ function gererDonnes(retour){
                 case 'deconnexion' : //Gestion de la deconnexion
                         location.reload();
                     break;
-                case 'fbInscription' :
-                    window.location.replace(actionDatas);
-                    break;
 
                 case 'test' :
                         console.log(actionDatas);
