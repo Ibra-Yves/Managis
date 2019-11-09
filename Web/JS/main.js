@@ -143,7 +143,6 @@ function gererDonnes(retour){
                     $('#participants').html(tableParticipant); //Affichage des invités sous le forme de tableau
                     break;
                 case 'participe' :
-                    console.log(actionDatas);
                     $('#'+actionDatas).prop('checked', true);
                     $('.'+actionDatas).attr('href', 'supprParticipant.php');
                     break;
