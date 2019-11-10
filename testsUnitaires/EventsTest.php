@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-include_once 'Events.php';
+include_once '../Web/INC/Events.php';
 class EventsTest extends TestCase
 {
     /**
