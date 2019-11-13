@@ -8,7 +8,9 @@ import ConnexionInscription from '../Components/ConnexionInscription'
 import Quid from '../Components/Quid'
 import CreateEvent from '../Components/CreateEvent'
 import EventList from '../Components/EventList'
-import Test from '../Components/Test'
+import Invitation from '../Components/Invitation'
+import Restes from '../Components/Restes'
+import Historique from '../Components/Historique'
 
 
 const EventDrawerNav = createDrawerNavigator({
@@ -22,6 +24,24 @@ const EventDrawerNav = createDrawerNavigator({
     screen: CreateEvent,
     navigationOptions: {
       title: 'Créer un événement'
+    }
+  },
+  Invitation: {
+    screen: Invitation,
+    navigationOptions: {
+      title: 'Vos invitations'
+    }
+  },
+  Historique: {
+    screen: Historique,
+    navigationOptions: {
+      title: 'Vos événements passés'
+    }
+  },
+  Restes: {
+    screen: Restes,
+    navigationOptions: {
+      title: 'Marché des restes'
     }
   }
 })
@@ -94,4 +114,3 @@ const styles= StyleSheet.create({
 })
 
 export default createAppContainer(ManagisTabNavigator)
-
