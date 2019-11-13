@@ -67,9 +67,9 @@ function gererDonnes(retour){
                     actionDatas.forEach(function(data){
                         content+=
                             '<tr>\n' +
-                                '<td class="gestionDeCompteInfos">'+data['pseudo'] +'</td>\n' + //Pseudo de l'user
-                                '<td class="gestionDeCompteInfos">'+data['dateCrea']+'</td>\n' + //Date de la création du compte
-                                '<td class="gestionDeCompteInfos">'+data['email']+'</td>\n' + //Le mail de l'utilisateur
+                                '<td class="gestionDeCompteInfos" align="center">'+data['pseudo'] +'</td>\n' + //Pseudo de l'user
+                                '<td class="gestionDeCompteInfos" align="center">'+data['dateCrea']+'</td>\n' + //Date de la création du compte
+                                '<td class="gestionDeCompteInfos" align="center">'+data['email']+'</td>\n' + //Le mail de l'utilisateur
                             '</tr>';
                     });
                     $('main').html('');
@@ -83,10 +83,13 @@ function gererDonnes(retour){
                         tableVosEvent+=
                             '<tr> \n' +
                                 '<th scope="row">'+ i++ +'</th>\n' +
-                                '<td class="taillePolice"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' + //Nom de l'événement
-                                '<td class="taillePolice">'+data['hote']+'</td>\n' + //Hote
-                                '<td class="taillePolice">'+data['dateEvent']+'</td>\n' + //Date de l'évènement
-                                '<td class="taillePolice"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+' </a></td>\n' + //Adresse de l'évent
+                                '<td class="taillePolice" align="center"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' + //Nom de l'événement
+                                '<td class="taillePolice" align="center">'+data['hote']+'</td>\n' + //Hote
+                                '<td class="taillePolice" align="center">'+data['dateEvent']+'</td>\n' + //Date de l'évènement
+                                '<td class="taillePolice" align="center"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+' </a></td>\n' + //Adresse de l'évent
+                                '<td class="taillePolice" align="center">'+data['heure']+'</td>\n' + //Heure
+                                '<td class="taillePolice" align="center"><button type="button" class="btn btn-xs btn-primary">modif</button></td>\n'+ //Bouton modification
+                                '<td class="taillePolice" align="center"><button type="button" class="btn btn-xs btn-primary">-</button></td>\n'+
                                 ' <td class="taillePolice"> <div class="form-check">\n' +
                             '</div></td>' +
                             '</tr>';
@@ -103,10 +106,10 @@ function gererDonnes(retour){
                         tableVosInvit+=
                             '<tr> \n' +
                             '<th scope="row">'+ b++ +'</th>\n' +
-                            '<td class="taillePolice"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' + //Nom de l'évént
-                            '<td class="taillePolice">'+data['hote']+'</td>\n' + //Hote
-                            '<td class="taillePolice">'+data['dateEvent']+'</td>\n' + //Date
-                            '<td class="taillePolice"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+'</a> </td>\n' + //Adresse
+                            '<td class="taillePolice" align="center"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' + //Nom de l'évént
+                            '<td class="taillePolice" align="center">'+data['hote']+'</td>\n' + //Hote
+                            '<td class="taillePolice" align="center">'+data['dateEvent']+'</td>\n' + //Date
+                            '<td class="taillePolice" align="center"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+'</a> </td>\n' + //Adresse
                             '</div></td>'+
                             '</tr>';
 
@@ -148,10 +151,10 @@ function gererDonnes(retour){
                         tableVosEventPasse+=
                             '<tr> \n' +
                             '<th scope="row">'+ c++ +'</th>\n' +
-                            '<td class="taillePolice"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' +
-                            '<td class="taillePolice">'+data['hote']+'</td>\n' +
-                            '<td class="taillePolice">'+data['dateEvent']+'</td>\n' +
-                            '<td class="taillePolice"><a href="http://maps.google.com/?q='+data['adresse']+'">'+data['adresse']+'</a></td>\n' +
+                            '<td class="taillePolice" align="center"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' +
+                            '<td class="taillePolice" align="center">'+data['hote']+'</td>\n' +
+                            '<td class="taillePolice" align="center">'+data['dateEvent']+'</td>\n' +
+                            '<td class="taillePolice" align="center"><a href="http://maps.google.com/?q='+data['adresse']+'">'+data['adresse']+'</a></td>\n' +
                             ' <td class="taillePolice"> <div class="form-check">\n' +
                             '</div></td>' +
                             '</tr>';
@@ -168,10 +171,10 @@ function gererDonnes(retour){
                         tableVosInvitPasse+=
                             '<tr> \n' +
                             '<th scope="row">'+ d++ +'</th>\n' +
-                            '<td class="taillePolice"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' +
-                            '<td class="taillePolice">'+data['hote']+'</td>\n' +
-                            '<td class="taillePolice">'+data['dateEvent']+'</td>\n' +
-                            '<td class="taillePolice">'+data['adresse']+' </td>\n' +
+                            '<td class="taillePolice" align="center"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' +
+                            '<td class="taillePolice" align="center">'+data['hote']+'</td>\n' +
+                            '<td class="taillePolice" align="center">'+data['dateEvent']+'</td>\n' +
+                            '<td class="taillePolice" align="center">'+data['adresse']+' </td>\n' +
                             ' <td class="taillePolice"> <div class="form-check">\n' +
                             '</div></td>' +
                             '</tr>';
@@ -188,11 +191,11 @@ function gererDonnes(retour){
                     console.log(actionDatas);
                         tableNombre =
                         '<tr>' +
-                            '<td class="taillePolice"><a href="afficheInv.php">'+actionDatas[0][0]['nombreInv']+'</a></td>' +
-                            '<td class="taillePolice"><a href="afficheFour.php">'+actionDatas[1][0]['nombreFour']+'</a></td>' +
-                            '<td class="taillePolice"><a href="afficheComm.php">'+actionDatas[2][0]['nombreComm']+'</a></td>' +
-                            '<td class="taillePolice"><a href="afficheParticipants.php">'+actionDatas[3][0]['participant']+'</a></td>' +
-                            ' <td class="taillePolice" style="display: none" id="affichePourParticiper"> <div class="form-check">\n' +
+                            '<td class="taillePolice" align="center"><a href="afficheInv.php">'+actionDatas[0][0]['nombreInv']+'</a></td>' +
+                            '<td class="taillePolice" align="center"><a href="afficheFour.php">'+actionDatas[1][0]['nombreFour']+'</a></td>' +
+                            '<td class="taillePolice" align="center"><a href="afficheComm.php">'+actionDatas[2][0]['nombreComm']+'</a></td>' +
+                            '<td class="taillePolice" align="center"><a href="afficheParticipants.php">'+actionDatas[3][0]['participant']+'</a></td>' +
+                            ' <td class="taillePolice" align="center" style="display: none" id="affichePourParticiper"> <div class="form-check">\n' +
                             '<a href="ajoutParticipant.php" class="'+actionDatas[4]+'"> <input type="checkbox" class="form-check-input" id="'+actionDatas[4]+'"></a>\n' +
                             '</div></td>' +
                         '</tr>';
@@ -209,9 +212,9 @@ function gererDonnes(retour){
                     tableInvites+=
                         '<tr> \n' +
                             '<th scope="row" id="'+ o++ +'">'+ j++ +'</th>\n' +
-                            '<td class="taillePolice" id="'+ p++ +'">'+data['pseudo']+'</td> \n' +
-                            '<td class="taillePolice"><a id="' + q++ +'" href="'+data['pseudo']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
-                            '<td class="taillePolice" id="'+ data['pseudo'] +'"></td> \n' +
+                            '<td class="taillePolice" align="center" id="'+ p++ +'">'+data['pseudo']+'</td> \n' +
+                            '<td class="taillePolice" align="center"><a id="' + q++ +'" href="'+data['pseudo']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
+                            '<td class="taillePolice" align="center" id="'+ data['pseudo'] +'"></td> \n' +
                         '</tr>';
 
                     });
@@ -245,9 +248,9 @@ function gererDonnes(retour){
                     tableFournitures+=
                         '<tr>\n' +
                             '<th scope="row">'+ k++ +'</th>\n' +
-                            '<td class="taillePolice">'+ data['fourniture']+'</td>\n' +
-                            '<td class="taillePolice"><input type="number" name="fourniture['+ data['fourniture']+']" value="'+data['quantite']+'"  min="0" style="width: 40px"></td>\n' +
-                            '<td class="taillePolice"><a href="'+data['fourniture']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
+                            '<td class="taillePolice" align="center">'+ data['fourniture']+'</td>\n' +
+                            '<td class="taillePolice" align="center"><input type="number" name="fourniture['+ data['fourniture']+']" value="'+data['quantite']+'"  min="0" style="width: 40px"></td>\n' +
+                            '<td class="taillePolice" align="center"><a href="'+data['fourniture']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
                         '</tr>';
 
                     });
@@ -262,8 +265,8 @@ function gererDonnes(retour){
                             listeCommentaire+=
                                 ' <tr>\n' +
                                     '<th scope="row">'+ l++ +'</th>\n' +
-                                    '<td class="taillePolice">'+data['commentaire']+'</td>\n' +
-                                    '<td class="taillePolice"><a href="'+data['commentaire']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
+                                    '<td class="taillePolice" align="center">'+data['commentaire']+'</td>\n' +
+                                    '<td class="taillePolice" align="center"><a href="'+data['commentaire']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
                                 '</tr>';
                         });
 
