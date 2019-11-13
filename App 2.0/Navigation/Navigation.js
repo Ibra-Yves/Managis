@@ -3,15 +3,40 @@ import { StyleSheet, Image } from 'react-native'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createAppContainer } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
+import { createDrawerNavigator } from 'react-navigation-drawer'
 import ConnexionInscription from '../Components/ConnexionInscription'
 import Quid from '../Components/Quid'
+import CreateEvent from '../Components/CreateEvent'
+import EventList from '../Components/EventList'
+import Test from '../Components/Test'
 
+
+const EventDrawerNav = createDrawerNavigator({
+  EventList: {
+    screen: EventList,
+    navigationOptions: {
+      title: 'Liste des événements'
+    }
+  },
+  CreateEvent: {
+    screen: CreateEvent,
+    navigationOptions: {
+      title: 'Créer un événement'
+    }
+  }
+})
 
 const ConnexionInscriptionStackNavigator = createStackNavigator({
   ConnexionInscription: {
     screen: ConnexionInscription,
     navigationOptions: {
       title: 'Connexion/Inscription',
+      headerShown: false
+    }
+  },
+  EventList: {
+    screen: EventDrawerNav,
+    navigationOptions: {
       headerShown: false
     }
   }
@@ -27,6 +52,8 @@ const QuidStackNavigator = createStackNavigator({
     }
   }
 })
+
+
 
 
 const ManagisTabNavigator = createBottomTabNavigator({
@@ -49,7 +76,7 @@ const ManagisTabNavigator = createBottomTabNavigator({
           style={styles.icon}/>
       }
     }
-  }
+  },
 }, {
   tabBarOptions: {
     showLabel: false,
@@ -67,3 +94,4 @@ const styles= StyleSheet.create({
 })
 
 export default createAppContainer(ManagisTabNavigator)
+
