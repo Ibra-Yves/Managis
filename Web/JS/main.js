@@ -88,8 +88,8 @@ function gererDonnes(retour){
                                 '<td class="taillePolice" align="center">'+data['dateEvent']+'</td>\n' + //Date de l'évènement
                                 '<td class="taillePolice" align="center"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+' </a></td>\n' + //Adresse de l'évent
                                 '<td class="taillePolice" align="center">'+data['heure']+'</td>\n' + //Heure
-                                '<td class="taillePolice" align="center"><button type="button" class="btn btn-xs btn-primary">modif</button></td>\n'+ //Bouton modification
-                                '<td class="taillePolice" align="center"><button type="button" class="btn btn-xs btn-primary">-</button></td>\n'+
+                                '<td class="taillePolice" align="center"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fas fa-pen"></i></button></td>\n'+ //Bouton modification
+                                '<td class="taillePolice" align="center"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fa fa-trash" aria-hidden="true"></i></button></td>\n'+
                                 ' <td class="taillePolice"> <div class="form-check">\n' +
                             '</div></td>' +
                             '</tr>';
