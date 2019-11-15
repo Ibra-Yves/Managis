@@ -276,6 +276,9 @@ function gererDonnes(retour){
                     $('#listeCommentaire').html(listeCommentaire);
                     evenements('#listeCommentaire');
                     break;
+                /**
+                 * Les valeurs du formulaiure de modification de l'événement prédéfinies
+                  */
                 case 'champEvent' :
                     actionDatas.forEach(function (data) {
                         $('#nom').val(data['nomEvent']);
