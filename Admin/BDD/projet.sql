@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 03 nov. 2019 à 12:41
+-- Généré le :  ven. 15 nov. 2019 à 09:51
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -193,14 +193,14 @@ END$$
 
 DROP PROCEDURE IF EXISTS `vosEventFutur`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `vosEventFutur` (IN `hote` VARCHAR(100))  BEGIN
-select idEvent, nomEvent, hote, adresse, dateEvent
+select idEvent, nomEvent, hote, adresse, dateEvent, heure
 from evenement
 where hote = evenement.hote AND dateEvent > now();
 END$$
 
 DROP PROCEDURE IF EXISTS `vosEventPasse`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `vosEventPasse` (IN `hote` VARCHAR(100))  BEGIN
-select idEvent, nomEvent, hote, adresse, dateEvent
+select idEvent, nomEvent, hote, adresse, dateEvent, heure
 from evenement
 where hote = evenement.hote AND dateEvent < now();
 END$$
@@ -214,14 +214,14 @@ END$$
 
 DROP PROCEDURE IF EXISTS `vosInvitFutur`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `vosInvitFutur` (IN `id` INT, IN `psd` VARCHAR(100))  BEGIN
-select evenement.idEvent, nomEvent, hote, adresse, dateEvent from evenement
+select evenement.idEvent, nomEvent, hote, adresse, dateEvent, heure from evenement
 join invite on evenement.idEvent = invite.idEvent
 where id = invite.idUser AND evenement.hote != psd AND dateEvent > now() ;
 END$$
 
 DROP PROCEDURE IF EXISTS `vosInvitPasse`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `vosInvitPasse` (IN `id` INT, IN `psd` VARCHAR(100))  BEGIN
-select evenement.idEvent, nomEvent, hote, adresse, dateEvent from evenement
+select evenement.idEvent, nomEvent, hote, adresse, dateEvent, heure from evenement
 join invite on evenement.idEvent = invite.idEvent
 where id = invite.idUser AND evenement.hote != psd AND dateEvent < now();
 END$$
@@ -264,32 +264,35 @@ CREATE TABLE IF NOT EXISTS `evenement` (
   `hote` varchar(50) NOT NULL,
   `adresse` varchar(100) NOT NULL,
   `dateEvent` varchar(50) NOT NULL,
+  `heure` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idEvent`),
   KEY `fk_nomEvent` (`nomEvent`),
   KEY `fk_hote` (`hote`),
   KEY `fk_eventComm` (`idEvent`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `evenement`
 --
 
-INSERT INTO `evenement` (`idEvent`, `nomEvent`, `hote`, `adresse`, `dateEvent`) VALUES
-(25, 'Soiree cartes', 'ambroise', 'rue des 3 combattants', '2019-10-15'),
-(26, 'Soiree walibi', 'ambroise', 'rue des 52 combattants', '2019-10-21'),
-(27, 'soiree php', 'ambroise', 'Rue de bruxelles 38, 1348 LLN', '2019-10-08'),
-(28, 'sqsqsq', 'ambroise', 'rue des 3 combattants', '2019-10-06'),
-(29, 'Soiree monopoly', 'dominik', 'Rue de bruxelles 38, 1348 LLN', '2019-10-24'),
-(30, 'Soiree monopoly', 'dominik', 'rue', '2019-10-15'),
-(31, 'walibi', 'dominik', 'rue des 3 combattants, 1348 LLN', '2019-10-09'),
-(32, 'Â§jjÂ§jtttuj,tug,kut,gk', 'dominik', 'rue des 3 combattants', '2019-10-09'),
-(33, 'zzzzzzz', 'dominik', 'rue des ciseaux', '2019-10-25'),
-(34, 'kkkkkkkkkkkkkkkkk', 'dominik', 'kk@kk', '2019-10-26'),
-(35, 'Soiree cartes', 'toto', 'rue des 3 combattants', '2019-10-26'),
-(36, 'epheccccccccccccc', 'toto', 'Avenue du ciseau, 1348 Louvain-la-Neuve', '2019-10-30'),
-(37, 'soiree php', 'toto', 'rue des 3 combattants', '2019-11-03'),
-(38, 'walibi', 'dominik', 'rue des 3 combattants, 1348 LLN', '2019-11-03'),
-(39, 'Soiree monopoly', 'toto', 'rue des 3 combattants, 1348 LLN', '2019-11-16');
+INSERT INTO `evenement` (`idEvent`, `nomEvent`, `hote`, `adresse`, `dateEvent`, `heure`) VALUES
+(25, 'Soiree cartes', 'ambroise', 'rue des 3 combattants', '2019-10-15', NULL),
+(26, 'Soiree walibi', 'ambroise', 'rue des 52 combattants', '2019-10-21', NULL),
+(27, 'soiree php', 'ambroise', 'Rue de bruxelles 38, 1348 LLN', '2019-10-08', NULL),
+(28, 'sqsqsq', 'ambroise', 'rue des 3 combattants', '2019-10-06', NULL),
+(29, 'Soiree monopoly', 'dominik', 'Rue de bruxelles 38, 1348 LLN', '2019-10-24', NULL),
+(30, 'Soiree monopoly', 'dominik', 'rue', '2019-10-15', NULL),
+(31, 'walibi', 'dominik', 'rue des 3 combattants, 1348 LLN', '2019-10-09', NULL),
+(32, 'Â§jjÂ§jtttuj,tug,kut,gk', 'dominik', 'rue des 3 combattants', '2019-10-09', NULL),
+(33, 'zzzzzzz', 'dominik', 'rue des ciseaux', '2019-10-25', NULL),
+(34, 'kkkkkkkkkkkkkkkkk', 'dominik', 'kk@kk', '2019-10-26', NULL),
+(35, 'Soiree cartes', 'toto', 'rue des 3 combattants', '2019-10-26', NULL),
+(36, 'epheccccccccccccc', 'toto', 'Avenue du ciseau, 1348 Louvain-la-Neuve', '2019-10-30', NULL),
+(37, 'soiree php', 'toto', 'rue des 3 combattants', '2019-11-03', NULL),
+(38, 'walibi', 'dominik', 'rue des 3 combattants, 1348 LLN', '2019-11-03', NULL),
+(39, 'Soiree monopoly', 'toto', 'rue des 3 combattants, 1348 LLN', '2019-11-16', NULL),
+(40, 'Soiree monopoly', 'toto', 'rue des 3 combattants, 1348 LLN', '2019-11-30', NULL),
+(41, 'alo', 'dominik', 'alo', '2019-11-22', NULL);
 
 -- --------------------------------------------------------
 
@@ -363,6 +366,11 @@ INSERT INTO `invite` (`idUser`, `idEvent`, `participe`) VALUES
 (64, 38, 1),
 (64, 37, 1),
 (62, 39, 0),
+(65, 38, 0),
+(62, 40, 0),
+(65, 40, 0),
+(64, 40, 0),
+(63, 41, 0),
 (63, 39, 1);
 
 -- --------------------------------------------------------
@@ -381,7 +389,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`idUser`),
   KEY `fk_pseudo` (`pseudo`),
   KEY `fk_hote` (`pseudo`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `users`
@@ -390,7 +398,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`idUser`, `pseudo`, `email`, `passwd`, `dateCreation`) VALUES
 (62, 'toto', 'toto@ici.be', '3691308f2a4c2f6983f2880d32e29c84', '2019-10-20 10:25:53'),
 (63, 'dominik', 'HE201451@students.ephec.be', 'd73bc916993092a2f670042a8dcc8961', '2019-10-20 10:26:17'),
-(64, 'ambroise', 'ambroise@alo', '4bc92a7aeb9478e6bf3f989025232b22', '2019-10-20 10:26:42');
+(64, 'ambroise', 'ambroise@alo', '4bc92a7aeb9478e6bf3f989025232b22', '2019-10-20 10:26:42'),
+(65, 'momo', 'momo@momo', '18f3af6147ba96618064459da6dd90b1', '2019-11-04 14:33:30'),
+(66, 'alo', 'alo@aluile', '18f3af6147ba96618064459da6dd90b1', '2019-11-04 14:36:05');
 
 --
 -- Contraintes pour les tables déchargées
