@@ -277,7 +277,7 @@ class Events
      * Creation de l'evenement
      */
     private function formCreaEvent(){
-        $this->db->procCall('creerEvent', [$_POST['nomEvent'], $_SESSION['user']['pseudo'], $_POST['adresse'], $_POST['date']]);//Appel de la procèdure qui va servir de creation de l'evenement
+        $this->db->procCall('creerEvent', [$_POST['nomEvent'], $_SESSION['user']['pseudo'], $_POST['adresse'], $_POST['date'], $_POST['heure']]);//Appel de la procèdure qui va servir de creation de l'evenement
         $this->vosEvenements(); //On appelle directement vos evenements
 
     }
