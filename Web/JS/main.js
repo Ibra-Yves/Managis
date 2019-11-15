@@ -110,6 +110,7 @@ function gererDonnes(retour){
                             '<td class="taillePolice" align="center">'+data['hote']+'</td>\n' + //Hote
                             '<td class="taillePolice" align="center">'+data['dateEvent']+'</td>\n' + //Date
                             '<td class="taillePolice" align="center"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+'</a> </td>\n' + //Adresse
+                            '<td class="taillePolice" align="center">'+data['heure']+'</td>\n' +
                             '</div></td>'+
                             '</tr>';
 
@@ -155,6 +156,7 @@ function gererDonnes(retour){
                             '<td class="taillePolice" align="center">'+data['hote']+'</td>\n' +
                             '<td class="taillePolice" align="center">'+data['dateEvent']+'</td>\n' +
                             '<td class="taillePolice" align="center"><a href="http://maps.google.com/?q='+data['adresse']+'">'+data['adresse']+'</a></td>\n' +
+                            '<td class="taillePolice" align="center">'+data['heure']+'</td>\n' +
                             ' <td class="taillePolice"> <div class="form-check">\n' +
                             '</div></td>' +
                             '</tr>';
@@ -175,6 +177,7 @@ function gererDonnes(retour){
                             '<td class="taillePolice" align="center">'+data['hote']+'</td>\n' +
                             '<td class="taillePolice" align="center">'+data['dateEvent']+'</td>\n' +
                             '<td class="taillePolice" align="center">'+data['adresse']+' </td>\n' +
+                            '<td class="taillePolice" align="center">'+data['heure']+'</td>\n' +
                             ' <td class="taillePolice"> <div class="form-check">\n' +
                             '</div></td>' +
                             '</tr>';
