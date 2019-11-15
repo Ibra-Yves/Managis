@@ -47,6 +47,7 @@ class Db
             case 'nombreParticipant' :
             case 'listeParticipant' :
             case 'vosInvitAno' :
+            case 'suppEvent':
                 array_push($params, '?');
             case 'tousLesUsers' :
                 try {
@@ -90,7 +91,7 @@ class Db
         }
         switch($procName) {
             case 'creerEvent' :
-            array_push($params, '?', '?', '?');
+            array_push($params, '?', '?', '?', '?');
             case 'listeInvites' :
             case 'listeFourniture' :
             case 'listeCommentaire'    :

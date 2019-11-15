@@ -42,6 +42,8 @@ class Events
         'supprParticipant',
         'afficheParticipants',
         'index',
+        'modifEvent',
+        'suppEvent'
     ];
 
     public function __construct()
@@ -97,6 +99,21 @@ class Events
      */
     private function inscription(){
         $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
+    }
+
+    /**
+     * Renvoie la page de modification d'event
+     */
+    private function modifEvent(){
+        $this->action->affichageDefaut('.intro-text', $this->lectureForm('modifEvent'));
+    }
+
+    /**
+     * Appel la fonction de supp d'event
+     */
+    private function suppEvent(){
+        $this->db->procCall('suppEvent',[$_SESSION['idEvent']]);
+        $this->vosEvenements();
     }
 
     /**
@@ -369,9 +386,11 @@ class Events
 
             $verif = array_intersect([$afficheInv[0]['pseudo']], [$_SESSION['user']['pseudo']]);
 
+            $afficherSuppr = array_intersect([$afficheInv[0]['pseudo']], [$_SESSION['user']['pseudo']]);
 
             //On affiche le tableau avec les données niveau client
             $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant, $id]);
+            if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
             if(empty($verif)){
                 $this->action->ajouterAction('afficheParticipe', $id);
             }

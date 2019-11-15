@@ -36,8 +36,6 @@
                                                  <th style="width: 20%" scope="col" class="taillePoliceTitre">Date de l'événement</th>
                                                  <th style="width: 25%" scope="col" class="taillePoliceTitre">Adresse</th>
                                                  <th style="width: 25%" scope="col" class="taillePoliceTitre">Heure</th>
-                                                 <th style="width: 25%" scope="col" class="taillePoliceTitre">modifier</th>
-                                                 <th style="width: 25%" scope="col" class="taillePoliceTitre">Supprimer</th>
                                              </tr>
                                              </thead>
                                              <tbody id="vosEvent" align="left">
