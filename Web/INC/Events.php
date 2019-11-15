@@ -111,6 +111,10 @@ class Events
         $this->action->ajouterAction('champEvent', $infoEvent);
     }
 
+    /**
+     * On modifie l"événement
+     * On insère dans la base de données toutes les données
+     */
     private function formModifEvent(){
         //$this->action->ajouterAction('test', $_POST);
             $this->db->procCall('modifEvent', [$_SESSION['idEvent'],$_POST['nomEvent'], $_POST['adresse'], $_POST['date'], $_POST['heure']]);
