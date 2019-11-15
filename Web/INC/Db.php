@@ -48,6 +48,7 @@ class Db
             case 'listeParticipant' :
             case 'vosInvitAno' :
             case 'suppEvent':
+            case 'infoEvent' :
                 array_push($params, '?');
             case 'tousLesUsers' :
                 try {
@@ -111,6 +112,21 @@ class Db
         switch ($procName){
             case 'ajoutQuantite' :
                 array_push($params, '?', '?', '?');
+                try {
+                    $this->connexionBDD();
+                    $callProc = 'call '. $procName.'('.join(',', $params).')';
+                    $request = $this->pdo->prepare($callProc);
+                    $request->execute($procParams);
+                    return $request->fetchAll();
+                }
+                catch (PDOException $e){
+                    $e->getMessage();
+                }
+                break;
+        }
+        switch ($procName){
+            case 'modifEvent' :
+                array_push($params, '?', '?', '?', '?', '?');
                 try {
                     $this->connexionBDD();
                     $callProc = 'call '. $procName.'('.join(',', $params).')';

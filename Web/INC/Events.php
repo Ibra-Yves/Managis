@@ -43,7 +43,8 @@ class Events
         'afficheParticipants',
         'index',
         'modifEvent',
-        'suppEvent'
+        'suppEvent',
+        'formModifEvent'
     ];
 
     public function __construct()
@@ -105,7 +106,15 @@ class Events
      * Renvoie la page de modification d'event
      */
     private function modifEvent(){
+        $infoEvent = $this->db->procCall('infoEvent', [$_SESSION['idEvent']]);
         $this->action->affichageDefaut('.intro-text', $this->lectureForm('modifEvent'));
+        $this->action->ajouterAction('champEvent', $infoEvent);
+    }
+
+    private function formModifEvent(){
+        //$this->action->ajouterAction('test', $_POST);
+            $this->db->procCall('modifEvent', [$_SESSION['idEvent'],$_POST['nomEvent'], $_POST['adresse'], $_POST['date'], $_POST['heure']]);
+            $this->vosEvenements();
     }
 
     /**

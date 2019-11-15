@@ -7,26 +7,26 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input class="form-control" id="nom" name="nomEvent" type="text" value="<?php echo '-'; ?>" required="required">
+                        <input class="form-control" id="nom" name="nomEvent" type="text"  required="required">
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input class="form-control" id="adresse" name="adresse" type="text" value="<?php ?>" required="required">
+                        <input class="form-control" id="adresse" name="adresse" type="text" required="required">
                         *Format ville-rue-numéro
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input class="form-control" id="date" name="date" type="date" value="<?php ?>" required="required">
+                        <input class="form-control" id="date" name="date" type="date"  required="required">
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input class="form-control" id="heure" name="heure" type="time" value="<?php ?>" required="required">
+                        <input class="form-control" id="heure" name="heure" type="time" required="required">
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>

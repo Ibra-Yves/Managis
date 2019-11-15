@@ -276,7 +276,14 @@ function gererDonnes(retour){
                     $('#listeCommentaire').html(listeCommentaire);
                     evenements('#listeCommentaire');
                     break;
-
+                case 'champEvent' :
+                    actionDatas.forEach(function (data) {
+                        $('#nom').val(data['nomEvent']);
+                        $('#adresse').val(data['adresse']);
+                        $('#date').val(data['dateEvent']);
+                        $('#heure').val(data['heure']);
+                    });
+                    break;
                 case 'afficherSuppr' : //Affichage des liens de suppression en tant que hote
                     $('a').show();
                     $('#formInv').show();
