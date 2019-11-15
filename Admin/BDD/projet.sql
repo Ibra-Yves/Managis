@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 15 nov. 2019 à 09:51
+-- Généré le :  ven. 15 nov. 2019 à 10:01
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -71,8 +71,8 @@ INSERT INTO users(pseudo, email, passwd, dateCreation) values (psd, mail, pswd, 
 END$$
 
 DROP PROCEDURE IF EXISTS `creerEvent`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `creerEvent` (IN `nomEvent` VARCHAR(100), IN `hote` VARCHAR(50), IN `adresse` VARCHAR(100), IN `dateEvent` VARCHAR(50))  BEGIN
-INSERT into evenement (nomEvent, hote, adresse, dateEvent) values (nomEvent, hote, adresse, dateEvent);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `creerEvent` (IN `nomEvent` VARCHAR(100), IN `hote` VARCHAR(50), IN `adresse` VARCHAR(100), IN `dateEvent` VARCHAR(50), IN `heureEvent` VARCHAR(50))  BEGIN
+INSERT into evenement (nomEvent, hote, adresse, dateEvent, heure) values (nomEvent, hote, adresse, dateEvent, heureEvent);
 insert into invite (idUser, idEvent) 
 (select idUser, MAX(idEvent) from users
 join evenement on users.pseudo = evenement.hote
