@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 15 nov. 2019 à 10:01
+-- Généré le :  ven. 15 nov. 2019 à 13:33
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -86,6 +86,12 @@ select pseudo, email, substring(dateCreation, 1,10) as dateCrea from users
 where psd = users.pseudo;
 END$$
 
+DROP PROCEDURE IF EXISTS `infoEvent`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `infoEvent` (IN `idEvent` INT)  BEGIN
+select nomEvent, adresse, dateEvent, heure from evenement
+where idEvent = evenement.idEvent;
+END$$
+
 DROP PROCEDURE IF EXISTS `listeCommentaire`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listeCommentaire` (IN `idEvent` INT)  BEGIN
 select commentaire from commentaires
@@ -100,7 +106,7 @@ END$$
 
 DROP PROCEDURE IF EXISTS `listeInvites`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listeInvites` (IN `id` INT)  BEGIN
-select evenement.idEvent,  pseudo from invite
+select evenement.idEvent,  pseudo, email from invite
 join users on invite.idUser = users.idUser
 join evenement on invite.idEvent = evenement.idEvent
 where id = evenement.idEvent;
@@ -112,6 +118,19 @@ select evenement.idEvent,  pseudo from invite
 join users on invite.idUser = users.idUser
 join evenement on invite.idEvent = evenement.idEvent
 where idEvent = evenement.idEvent AND invite.participe = 1;
+END$$
+
+DROP PROCEDURE IF EXISTS `mailSupprInvite`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `mailSupprInvite` (IN `pseudo` VARCHAR(50))  BEGIN
+select email from users 
+where users.pseudo = pseudo;
+END$$
+
+DROP PROCEDURE IF EXISTS `modifEvent`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modifEvent` (IN `idEvent` INT, IN `nomEvent` VARCHAR(100), IN `adresse` VARCHAR(100), IN `dateEvent` VARCHAR(50), IN `heure` VARCHAR(45))  BEGIN
+update evenement
+set evenement.nomEvent= nomEvent, evenement.adresse = adresse, evenement.dateEvent = dateEvent,evenement.heure = heure 
+where evenement.idEvent = idEvent;
 END$$
 
 DROP PROCEDURE IF EXISTS `modifMdp`$$
@@ -143,6 +162,14 @@ DROP PROCEDURE IF EXISTS `nombreParticipant`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `nombreParticipant` (IN `idEvent` INT)  BEGIN
 select count(participe) as participant from invite
 where invite.participe = 1 AND idEvent = invite.idEvent;
+END$$
+
+DROP PROCEDURE IF EXISTS `suppEvent`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `suppEvent` (IN `idEvent` INT)  BEGIN
+delete from commentaires where idEvent = commentaires.idEvent;
+delete from fournitures where idEvent = fournitures.idEvent;
+delete from invite where idEvent = invite.idEvent;
+delete from evenement where idEvent = evenement.idEvent;
 END$$
 
 DROP PROCEDURE IF EXISTS `supprCommentaire`$$
@@ -276,7 +303,6 @@ CREATE TABLE IF NOT EXISTS `evenement` (
 --
 
 INSERT INTO `evenement` (`idEvent`, `nomEvent`, `hote`, `adresse`, `dateEvent`, `heure`) VALUES
-(25, 'Soiree cartes', 'ambroise', 'rue des 3 combattants', '2019-10-15', NULL),
 (26, 'Soiree walibi', 'ambroise', 'rue des 52 combattants', '2019-10-21', NULL),
 (27, 'soiree php', 'ambroise', 'Rue de bruxelles 38, 1348 LLN', '2019-10-08', NULL),
 (28, 'sqsqsq', 'ambroise', 'rue des 3 combattants', '2019-10-06', NULL),
@@ -290,8 +316,7 @@ INSERT INTO `evenement` (`idEvent`, `nomEvent`, `hote`, `adresse`, `dateEvent`, 
 (36, 'epheccccccccccccc', 'toto', 'Avenue du ciseau, 1348 Louvain-la-Neuve', '2019-10-30', NULL),
 (37, 'soiree php', 'toto', 'rue des 3 combattants', '2019-11-03', NULL),
 (38, 'walibi', 'dominik', 'rue des 3 combattants, 1348 LLN', '2019-11-03', NULL),
-(39, 'Soiree monopoly', 'toto', 'rue des 3 combattants, 1348 LLN', '2019-11-16', NULL),
-(40, 'Soiree monopoly', 'toto', 'rue des 3 combattants, 1348 LLN', '2019-11-30', NULL),
+(40, 'Soiree monopoly', 'toto', 'rue des 3 combattants, 1348 LLN', '2019-11-30', '18:00'),
 (41, 'alo', 'dominik', 'alo', '2019-11-22', NULL);
 
 -- --------------------------------------------------------
@@ -340,9 +365,6 @@ CREATE TABLE IF NOT EXISTS `invite` (
 --
 
 INSERT INTO `invite` (`idUser`, `idEvent`, `participe`) VALUES
-(64, 25, 0),
-(62, 25, NULL),
-(63, 25, NULL),
 (64, 26, NULL),
 (63, 26, NULL),
 (64, 27, NULL),
@@ -365,13 +387,10 @@ INSERT INTO `invite` (`idUser`, `idEvent`, `participe`) VALUES
 (62, 38, 0),
 (64, 38, 1),
 (64, 37, 1),
-(62, 39, 0),
 (65, 38, 0),
 (62, 40, 0),
-(65, 40, 0),
-(64, 40, 0),
 (63, 41, 0),
-(63, 39, 1);
+(64, 40, 0);
 
 -- --------------------------------------------------------
 

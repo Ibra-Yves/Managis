@@ -49,6 +49,7 @@ class Db
             case 'vosInvitAno' :
             case 'suppEvent':
             case 'infoEvent' :
+            case 'mailSupprInvite':
                 array_push($params, '?');
             case 'tousLesUsers' :
                 try {

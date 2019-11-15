@@ -828,10 +828,12 @@ class Events
         $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         $requeteInv = [];
-
+        $this->action->ajouterAction('test', $req);
         foreach ($req as $key => $value){
             $requeteInv = $value;
         }
+        $mailInv = $this->db->procCall('mailSupprInvite', [$requeteInv]);
+        mail($mailInv[0]['email'], "Votre suppression de la liste d'invités", "Vous avez été retiré de la liste d'invités pour plus d'informations veuillez contacter l'hôte");
         //On enleve l'invite de la liste
         $this->db->procCall('supprInvites', [$_SESSION['idEvent'],$requeteInv]);
         $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
