@@ -112,6 +112,13 @@ class Events
      * Appel la fonction de supp d'event
      */
     private function suppEvent(){
+        $invites = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+        $emails =[];
+        foreach ($invites as $key => $value){
+            $emails [] = $invites[$key]['email'];
+        }
+        $sendEmail = implode(", ", $emails);
+        mail($sendEmail, "Suppression de l'événement", "L'événement auquel vous avez été invité a été annulé par l'hôte de la soirée");
         $this->db->procCall('suppEvent',[$_SESSION['idEvent']]);
         $this->vosEvenements();
     }
