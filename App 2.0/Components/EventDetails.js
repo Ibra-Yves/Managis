@@ -6,11 +6,9 @@ import { Text, TouchableOpacity, StyleSheet } from 'react-native'
 
  class EventDetails extends Component {
   render() {
-    const {item} = this.props
+    //const idEvent = this.props.navigation.state.params.idEvent
     return (
-      <TouchableOpacity>
         <Text>ok</Text>
-      </TouchableOpacity>
     )
   }
 }

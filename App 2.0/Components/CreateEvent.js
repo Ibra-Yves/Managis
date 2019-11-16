@@ -66,7 +66,6 @@ export default class AjoutEvenement extends Component {
     )
   }
 }
-
 const styles = StyleSheet.create({
   logo: {
     width: 350,
@@ -118,7 +117,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingVertical: 13,
     color: '#3A4750'
-
   },
   icon: {
     height: 30,

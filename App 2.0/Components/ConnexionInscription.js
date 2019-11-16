@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 import {Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 
-
 export default class ConnexionInscription extends Component {
   render() {
     return (
@@ -28,7 +27,9 @@ export default class ConnexionInscription extends Component {
           />
         </View>
         <View style={styles.submitContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('EventList')}
+            >
             <Text style={styles.submitButton}>Se connecter</Text>
           </TouchableOpacity>
         </View>
