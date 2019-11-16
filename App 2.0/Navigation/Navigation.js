@@ -11,11 +11,26 @@ import EventList from '../Components/EventList'
 import Invitation from '../Components/Invitation'
 import Restes from '../Components/Restes'
 import Historique from '../Components/Historique'
+import EventDetails from '../Components/EventDetails'
 
+const EventStackNav = createStackNavigator({
+  EventList: {
+    screen: EventList,
+    navigationOptions : {
+      headerShown: false
+    }
+  },
+  EventDetails: {
+    screen: EventDetails,
+    navigationOptions: {
+      headerShown: false
+    }
+  }
+})
 
 const EventDrawerNav = createDrawerNavigator({
   EventList: {
-    screen: EventList,
+    screen: EventStackNav,
     navigationOptions: {
       title: 'Liste des événements'
     }
