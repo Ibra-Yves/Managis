@@ -3,13 +3,16 @@ import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
 
 
+
 class EventItem extends React.Component {
   render() {
     const event = this.props.event
+
+
     return (
       <View style={styles.container}>
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('EventDetails')}
+          onPress={() => this.props.navigation.navigate("Event")}
           style={styles.event}>
           <View style={{flex: 1}}>
             <View style={styles.header}>

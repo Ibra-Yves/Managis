@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import {Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 import Constants from 'expo-constants'
 
-export default class AjoutEvenement extends Component {
+export default class CreateEvent extends Component {
   render() {
     return (
       <ScrollView style={{marginTop: Constants.statusBarHeight}}>

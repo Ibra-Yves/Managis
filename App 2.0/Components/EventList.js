@@ -75,6 +75,13 @@ const EVENT = [
 
 class EventList extends Component {
 
+  _displayEventDetail = (idEvent) => {
+    //console.log("display details event :" + idEvent)
+    this.props.navigation.navigate("EventDetails", {idEvent: idEvent})
+  }
+
+
+
   render() {
     return (
       <ScrollView style={{marginTop: Constants.statusBarHeight}}>
@@ -95,7 +102,9 @@ class EventList extends Component {
         </View>
           <FlatList
             data={EVENT}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={function(item) {
+              console.log(item.id.toString())
+              item.id.toString()}}
             renderItem={({item}) => <EventItem event={item}/>}
           />
 
