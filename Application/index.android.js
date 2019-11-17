@@ -4,5 +4,5 @@ import { AppRegistry,
         Text,
         StyleSheet } from 'react-native';
 
-import UsersManager from './pages/app';
+import UsersManager from './app/app.js';
 AppRegistry.registerComponent('Managis', () => Managis);
