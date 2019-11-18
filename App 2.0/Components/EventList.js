@@ -103,8 +103,8 @@ class EventList extends Component {
           <FlatList
             data={EVENT}
             keyExtractor={function(item) {
-              console.log(item.id.toString())
-              item.id.toString()}}
+              console.log(item.id)
+              item.id}}
             renderItem={({item}) => <EventItem event={item}/>}
           />
 
