@@ -93,8 +93,8 @@
                 </li>';
             if (!empty($_SESSION['user'])) {
                 //$ajouterEvent = str_replace("<a href=\"inscription.php\" class=\"btn btn-outline-dark\">Inscription</a>", '<a href="addEvent.php"  class="btn btn-outline-dark">Créer votre evenement </a>', $inscription);
-                $espaceMembre = str_replace("<a class=\"nav-link js-scroll-trigger\" id=\"connexion\" href=\"connexion.php\">Connexion</a>", "<a href=\"espaceMembre.php\" class=\"nav-link js-scroll-trigger\">Gestion de  compte</a>", $connexion);
-                $deconnexion= str_replace("<a class=\"nav-link js-scroll-trigger\" href=\"#team\">L'équipe</a>", "<a href=\"deconnexion.php\" class=\"nav-link js-scroll-trigger\"> Déconnexion</a>", $quiSommesNous);
+                $espaceMembre = str_replace("<a class=\"nav-link js-scroll-trigger\" id=\"connexion\" href=\"connexion.php\">Connexion</a>", "<a href=\"espaceMembre.php\" id=\"espaceMembre\" class=\"nav-link js-scroll-trigger\">Gestion de  compte</a>", $connexion);
+                $deconnexion= str_replace("<a class=\"nav-link js-scroll-trigger\" href=\"#team\">L'équipe</a>", "<a href=\"deconnexion.php\" id=\"deconnexion\" class=\"nav-link js-scroll-trigger\"> Déconnexion</a>", $quiSommesNous);
                 echo $vosEvenements  . $espaceMembre . $deconnexion;
             }
             else {
