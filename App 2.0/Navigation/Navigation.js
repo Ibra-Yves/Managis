@@ -12,6 +12,11 @@ import Invitation from '../Components/Invitation'
 import Restes from '../Components/Restes'
 import Historique from '../Components/Historique'
 import EventDetails from '../Components/EventDetails'
+import EventItem from '../Components/EventItem'
+import CreateAnnonce from '../Components/CreateAnnonce'
+import AnnoncePerso from '../Components/AnnoncePerso'
+
+
 
 const EventStackNav = createStackNavigator({
   EventList: {
@@ -57,6 +62,18 @@ const EventDrawerNav = createDrawerNavigator({
     screen: Restes,
     navigationOptions: {
       title: 'Marché des restes'
+    }
+  },
+  CreateAnnonce: {
+    screen: CreateAnnonce,
+    navigationOptions: {
+      title: 'Créer une annonce'
+    }
+  },
+  AnnoncePerso: {
+    screen: AnnoncePerso,
+    navigationOptions: {
+      title:'Vos annonces'
     }
   }
 })
