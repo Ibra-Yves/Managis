@@ -9,7 +9,8 @@ import {
   TextInput,
   Button,
   Keyboard,
-  ScrollView
+  ScrollView,
+  Liking
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
