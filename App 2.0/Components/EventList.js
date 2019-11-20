@@ -73,7 +73,17 @@ const EVENT = [
 ]
 
 
+
+
+
 class EventList extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      events: []
+    }
+  }
 
   _displayEventDetail = (idEvent) => {
     //console.log("display details event :" + idEvent)
@@ -83,6 +93,7 @@ class EventList extends Component {
 
 
   render() {
+    console.log(this.props.events)
     return (
       <ScrollView style={{marginTop: Constants.statusBarHeight}}>
         <View style={styles.containerTitre}>
@@ -103,9 +114,28 @@ class EventList extends Component {
           <FlatList
             data={EVENT}
             keyExtractor={function(item) {
-              console.log(item.id)
-              item.id}}
-            renderItem={({item}) => <EventItem event={item}/>}
+              //console.log(item.id)
+              item.id.toString()}}
+            renderItem={({item}) =>
+            <View style={styles.container}>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate("EventDetails", {idEvent: item.id})}
+                style={styles.event}>
+                <View style={{flex: 1}}>
+                  <View style={styles.header}>
+                    <View style={{flex: 2}}>
+                      <Text style={styles.textTitle}>{item.title}</Text>
+                    </View>
+                    <View style={{flex: 1}}>
+                      <Text style={styles.textDate}>{item.date}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.footer}>
+                    <Text style={styles.textPlace}>{item.lieu}</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            </View>}
           />
 
       </ScrollView>
@@ -130,10 +160,45 @@ const styles= StyleSheet.create({
     height: 60
   },
   titrePage: {
-      color: '#FFFFFF',
-      fontSize: 18,
-      textAlign: 'center'
-    }
+    color: '#FFFFFF',
+    fontSize: 18,
+    textAlign: 'center'
+  },
+  container: {
+    height: 100,
+    padding: 12,
+    paddingBottom: 3
+  },
+  event: {
+    flex: 1,
+    backgroundColor: '#3A4750'
+  },
+  header: {
+    flexDirection: 'row',
+    flex: 1
+  },
+  footer: {
+    flex: 1,
+    justifyContent: 'center',
+    marginLeft: 5
+  },
+  textTitle: {
+    color: '#FFFFFF',
+    fontSize: 22,
+    margin: 5,
+    marginTop: 2
+  },
+  textDate: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    margin: 5,
+    marginTop: 10
+  },
+  textPlace: {
+    color: '#FFFFFF',
+    fontSize: 16,
+
+  }
 })
 
 export default EventList
