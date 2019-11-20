@@ -15,7 +15,7 @@ import { StackNavigator } from 'react-navigation';
 
 export default class login extends Component {
 	static navigationOptions= ({navigation}) =>({
-		  title: 'Login',
+		  title: 'Connexion',
 		  headerRight:
 		  <TouchableOpacity
 			onPress={() => navigation.navigate('Home')}
@@ -53,7 +53,7 @@ export default class login extends Component {
 		}
 		else{
 
-		fetch('http://192.168.0.8/IbraManagis/connexion/User_Login.php',{
+		fetch('http://192.168.1.45/IbraManagis/connexion/User_Login.php',{
 			method:'POST',
 			header:{
 				'Accept': 'application/json',
@@ -71,7 +71,7 @@ export default class login extends Component {
 			 if(responseJson == "ok"){
 
 				 alert("Vous êtes connecté ! ");
-				 this.props.navigation.navigate("Profile");
+				 this.props.navigation.navigate("Menu");
 			 }else{
 				 alert("Mot de passe ou adresse mail incorect!");
 			 }

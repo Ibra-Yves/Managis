@@ -13,7 +13,7 @@ import {
 
 export default class register extends Component {
 	   static navigationOptions= ({navigation}) =>({
-		  title: 'Register',
+		  title: "S'inscrire",
 		  headerRight:
 		  <TouchableOpacity
 			onPress={() => navigation.navigate('Home')}
@@ -56,7 +56,7 @@ export default class register extends Component {
     }
     else{
 
-		fetch('http://192.168.0.8/IbraManagis/inscription/user_registration.php', {
+		fetch('http://192.168.1.45/IbraManagis/inscription/user_registration.php', {
 			method: 'post',
 			header:{
 				'Accept': 'application/json',

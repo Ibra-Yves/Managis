@@ -22,13 +22,17 @@ import CreateEvent from '../components/createEvent.js';
 import Invitation from '../components/invitation.js';
 import Historique from '../components/historique.js';
 import Restes from '../components/restes.js';
+import CreateAnnonce from '../components/createAnnonce.js';
+import AnnoncePerso from '../components/annoncePerso.js';
 
-const myDrawer = DrawerNavigator({
+const myNav = DrawerNavigator({
 	"Liste des événement": {screen: EventList},
 	"Créer un événement": {screen: CreateEvent},
 	"Vos invitations": {screen: Invitation},
 	"Vos événements passés": {screen: Historique},
-	"Marchés des Restes": {screen: Restes}
+	"Marchés des Restes": {screen: Restes},
+	"Créer une annonce": {screen: CreateAnnonce},
+	"Vos annonces": {screen: AnnoncePerso}
 });
 
 const Managis = StackNavigator({
@@ -38,7 +42,7 @@ const Managis = StackNavigator({
 	WhoIs: {screen: WhoIs},
 	Menu: {screen: Menu},
 	Profile: {screen: Profile},
-	EventList: {screen: myDrawer},
+	EventList: {screen: myNav},
 	Settings: {screen: Settings}
  });
 

@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, ScrollView } from 'react-native'
 import EventDetails from '../components/eventDetails.js';
-import EventItem from '../components/eventItem.js';
+import EventItem from '../components/eventItem.js'
 
-/*je declare ici une serie d'event afin de tester la liste*/
 const EVENT = [
   {
     id: '1',
@@ -72,15 +71,32 @@ const EVENT = [
 ]
 
 
+
+
+
 class EventList extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      events: []
+    }
+  }
+
+  _displayEventDetail = (idEvent) => {
+
+    this.props.navigation.openDrawer("EventDetails", {idEvent: idEvent})
+  }
+
+
+
   render() {
-    const { navigate } = this.props.navigation;
+    console.log(this.props.events)
     return (
       <ScrollView>
         <View style={styles.containerTitre}>
           <TouchableOpacity
-            onPress={() => navigate('CreateEvent')}
+            onPress={() => this.props.navigation.openDrawer('myNav')}
             style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Image
               source={require('../image/icons8-menu-arrondi-50.png')}
@@ -95,8 +111,28 @@ class EventList extends Component {
         </View>
           <FlatList
             data={EVENT}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({item}) => <EventItem event={item}/>}
+            keyExtractor={function(item) {
+              item.id.toString()}}
+            renderItem={({item}) =>
+            <View style={styles.container}>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.openDrawer("EventDetails", {idEvent: item.id})}
+                style={styles.event}>
+                <View style={{flex: 1}}>
+                  <View style={styles.header}>
+                    <View style={{flex: 2}}>
+                      <Text style={styles.textTitle}>{item.title}</Text>
+                    </View>
+                    <View style={{flex: 1}}>
+                      <Text style={styles.textDate}>{item.date}</Text>
+                    </View>
+                  </View>
+                  <View style={styles.footer}>
+                    <Text style={styles.textPlace}>{item.lieu}</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            </View>}
           />
 
       </ScrollView>
@@ -121,10 +157,45 @@ const styles= StyleSheet.create({
     height: 60
   },
   titrePage: {
-      color: '#FFFFFF',
-      fontSize: 18,
-      textAlign: 'center'
-    }
+    color: '#FFFFFF',
+    fontSize: 18,
+    textAlign: 'center'
+  },
+  container: {
+    height: 100,
+    padding: 12,
+    paddingBottom: 3
+  },
+  event: {
+    flex: 1,
+    backgroundColor: '#3A4750'
+  },
+  header: {
+    flexDirection: 'row',
+    flex: 1
+  },
+  footer: {
+    flex: 1,
+    justifyContent: 'center',
+    marginLeft: 5
+  },
+  textTitle: {
+    color: '#FFFFFF',
+    fontSize: 22,
+    margin: 5,
+    marginTop: 2
+  },
+  textDate: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    margin: 5,
+    marginTop: 10
+  },
+  textPlace: {
+    color: '#FFFFFF',
+    fontSize: 16,
+
+  }
 })
 
 export default EventList

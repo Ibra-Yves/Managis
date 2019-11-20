@@ -4,12 +4,11 @@ import {Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView} 
 
 export default class AjoutEvenement extends Component {
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <ScrollView>
         <View style={styles.containerTitre}>
         <TouchableOpacity
-          onPress={() => navigate('EventList')}
+          onPress={() => this.props.navigation.openDrawer('myNav')}
           style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <Image
             source={require('../image/icons8-menu-arrondi-50.png')}
@@ -61,7 +60,7 @@ export default class AjoutEvenement extends Component {
         </View>
         <View style={styles.submitContainer}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('EventList')}>
+            onPress={() => this.props.navigation.openDrawer('EventList')}>
             <Text style={styles.submitButton}>Valider</Text>
           </TouchableOpacity>
         </View>

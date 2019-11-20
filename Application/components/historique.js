@@ -50,7 +50,7 @@ class Historique extends Component {
       <ScrollView>
         <View style={styles.containerTitre}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.openDrawer('myDrawer')}
+            onPress={() => this.props.navigation.openDrawer('myNav')}
             style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Image
               source={require('../image/icons8-menu-arrondi-50.png')}

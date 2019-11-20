@@ -9,9 +9,6 @@ import { AppRegistry,
 				Image } from 'react-native';
 
 export default class home extends Component{
-static navigationOptions= ({navigation}) =>({
-		  title: 'Bienvenue',
-	});
 
 	render(){
 		const { navigate } = this.props.navigation;
@@ -59,13 +56,13 @@ const styles = StyleSheet.create({
   },
 	btn1:{
 		backgroundColor:'#3A4750',
-		padding:10,margin:10,width:'95%',
+		padding:10,margin:10,width:'85%',
 		alignItems:'center',
 		justifyContent:'center'
 	},
 	btn2:{
 		backgroundColor:'#3A4750',
-		padding:10,margin:10,width:'95%',
+		padding:10,margin:10,width:'85%',
 		alignItems:'center',
 		justifyContent:'center'
 	},

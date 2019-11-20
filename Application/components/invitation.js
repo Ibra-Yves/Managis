@@ -8,14 +8,14 @@ class Invitation extends Component {
     return (
       <View>
       <TouchableOpacity
-        onPress={() => navigate('EventList')}
+        onPress={() => this.props.navigation.openDrawer('myNav')}
         style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <Image
           source={require('../image/icons8-menu-arrondi-50.png')}
             style={styles.icon}
             />
         </TouchableOpacity>
-        <Text>Ici les invit</Text>
+        <Text>Ici les invités</Text>
       </View>
     )
   }

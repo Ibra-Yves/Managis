@@ -17,7 +17,7 @@ static navigationOptions= ({navigation}) =>({
 		  <TouchableOpacity
 			onPress={() => navigation.navigate('Home')}
 			style={{margin:10,backgroundColor:'#3A4750',padding:10}}>
-			<Text style={{color:'#ffffff'}}>Se déconnecter</Text>
+			<Text style={{color:'#ffffff'}}>Se deconnecter</Text>
 		  </TouchableOpacity>
 	});
 
@@ -38,12 +38,12 @@ static navigationOptions= ({navigation}) =>({
 		<TouchableOpacity
 		onPress={()=> navigate('EventList')}
 		style={styles.btn2}>
-		<Text style={styles.btnText}>Gestion des événements</Text>
+		<Text style={styles.btnText}>Gestion des evenements</Text>
 		</TouchableOpacity>
 		<TouchableOpacity
 		onPress={()=> navigate('Settings')}
 		style={styles.btn2}>
-		<Text style={styles.btnText}>Parametre</Text>
+		<Text style={styles.btnText}>Parametres</Text>
 		</TouchableOpacity>
     </View>
 		</ScrollView>

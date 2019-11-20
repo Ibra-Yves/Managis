@@ -5,7 +5,7 @@ export default class Settings extends Component {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>En construction</Text>
+        <Text>Page en construction !</Text>
       </View>
     );
   }
