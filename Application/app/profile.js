@@ -4,11 +4,25 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  AppRegistry,
+  AsyncStorage
 } from 'react-native';
 
 export default class Profile extends Component {
+  state = {
+    UserEmail: [],
+  }
 
+  componentDidMount(){
+    this._loadInitialState().done();
+  }
+  _loadInitialState = async () => {
+    var value = await AsyncStorage.getItem('UserEmail');
+    if (value !==null) {
+      this.setState({UserEmail: value});
+    }
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -16,12 +30,9 @@ export default class Profile extends Component {
           <Image style={styles.avatar} source={{uri: 'https://raw.githubusercontent.com/Ibra-Yves/Managis/Sprint-4/Application/image/inconnu.png'}}/>
           <View style={styles.body}>
             <View style={styles.bodyContent}>
-              <Text style={styles.name}>Toto</Text>
-              <Text style={styles.info}>Network & Mobile developer</Text>
-              <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
-
+              <Text style={styles.name}> {this.state.UserEmail}</Text>
               <TouchableOpacity style={styles.buttonContainer}>
-                <Text>Modifier</Text>
+                <Text style={styles.phrase}>Modifier</Text>
               </TouchableOpacity>
             </View>
         </View>
@@ -76,7 +87,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   buttonContainer: {
-    marginTop:10,
+    marginTop:50,
     height:45,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -86,4 +97,7 @@ const styles = StyleSheet.create({
     borderRadius:30,
     backgroundColor: "#3A4750"
   },
+  phrase: {
+    color: 'white',
+  }
 });
