@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   TextInput,
   Button,
-  Keyboard
+  Keyboard,
+  AsyncStorage
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
@@ -72,6 +73,9 @@ export default class login extends Component {
 
 				 alert("Vous êtes connecté ! ");
 				 this.props.navigation.navigate("Menu");
+
+        			AsyncStorage.setItem('UserEmail',UserEmail);
+
 			 }else{
 				 alert("Mot de passe ou adresse mail incorect!");
 			 }
