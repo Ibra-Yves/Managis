@@ -12,63 +12,72 @@ const EVENT = [
     title: 'Soiree Monopoly',
     date: '20 novembre 2019',
     heure: '22h00',
-    lieu: '12 rue de la paix'
+    lieu: '12 rue de la paix',
+    invites: ['ibra','ambroise', 'nico', 'max']
   },
   {
     id: '2',
     title: 'Soiree react',
     date: '16 novembre 2019',
     heure: '18h00',
-    lieu: '2 avenue du js'
+    lieu: '2 avenue du js',
+    invites: ['ibra','ambroise', 'nico', 'max']
   },
   {
     id: '3',
     title: 'Soiree php',
     date: '12 decembre 2020',
     heure: '19h30',
-    lieu: '4 boulevard delvigne'
+    lieu: '4 boulevard delvigne',
+    invites: ['ibra','ambroise', 'nico', 'max']
   },
   {
     id: '4',
     title: 'Soiree Monopoly',
     date: '20 novembre 2019',
     heure: '22h00',
-    lieu: '12 rue de la paix'
+    lieu: '12 rue de la paix',
+    invites: ['ibra','ambroise', 'nico', 'max']
   },
   {
     id: '5',
     title: 'Soiree react',
     date: '16 novembre 2019',
     heure: '18h00',
-    lieu: '2 avenue du js'
+    lieu: '2 avenue du js',
+    invites: ['ibra','ambroise', 'nico', 'max']
   },
   {
     id: '6',
     title: 'Soiree php',
     date: '12 decembre 2020',
     heure: '19h30',
-    lieu: '4 boulevard delvigne'
+    lieu: '4 boulevard delvigne',
+    invites: ['ibra','ambroise', 'nico', 'max']
   },
   {
     id: '7',
     title: 'Soiree Monopoly',
     date: '20 novembre 2019',
     heure: '22h00',
-    lieu: '12 rue de la paix'
+    lieu: '12 rue de la paix',
+    invites: ['ibra','ambroise', 'nico', 'max']
   },
   {
     id: '8',
     title: 'Soiree react',
     date: '16 novembre 2019',
     heure: '18h00',
-    lieu: '2 avenue du js'
+    lieu: '2 avenue du js',
+    invites: ['ibra','ambroise', 'nico', 'max']
   },
   {
     id: '9',
     title: 'Soiree php',
     date: '12 decembre 2020',
     heure: '19h30',
-    lieu: '4 boulevard delvigne'
+    lieu: '4 boulevard delvigne',
+    invites: ['ibra','ambroise', 'nico', 'max']
   }
 ]
 
@@ -119,7 +128,7 @@ class EventList extends Component {
             renderItem={({item}) =>
             <View style={styles.container}>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("EventDetails", {idEvent: item.id})}
+                onPress={() => this.props.navigation.navigate("EventDetails", {event: item})}
                 style={styles.event}>
                 <View style={{flex: 1}}>
                   <View style={styles.header}>
