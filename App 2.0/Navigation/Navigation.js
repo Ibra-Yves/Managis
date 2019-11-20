@@ -15,6 +15,7 @@ import EventDetails from '../Components/EventDetails'
 import EventItem from '../Components/EventItem'
 import CreateAnnonce from '../Components/CreateAnnonce'
 import AnnoncePerso from '../Components/AnnoncePerso'
+import Settings from '../Components/Settings'
 
 
 
@@ -28,7 +29,7 @@ const EventStackNav = createStackNavigator({
   EventDetails: {
     screen: EventDetails,
     navigationOptions: {
-      headerShown: false
+      title: 'Details event'
     }
   }
 })
@@ -74,6 +75,12 @@ const EventDrawerNav = createDrawerNavigator({
     screen: AnnoncePerso,
     navigationOptions: {
       title:'Vos annonces'
+    }
+  },
+  Settings: {
+    screen: Settings,
+    navigationOptions: {
+      title: 'Paramètres'
     }
   }
 })
