@@ -61,7 +61,154 @@ function gererDonnes(retour){
                 case 'deconnexion' : //Gestion de la deconnexion
                     $('[href="deconnexion.php"]').on('click', function(){
                         location.reload();
+                    break;
+
+                case 'test' :
+                        console.log(actionDatas);
+                    break;
+
+                case 'espaceMembre' : //Espace memebre affiché
+                    let content = '';
+                    actionDatas.forEach(function(data){
+                        content+=
+                            '<tr>\n' +
+                                '<td class="gestionDeCompteInfos" align="center">'+data['pseudo'] +'</td>\n' + //Pseudo de l'user
+                                '<td class="gestionDeCompteInfos" align="center">'+data['dateCrea']+'</td>\n' + //Date de la création du compte
+                                '<td class="gestionDeCompteInfos" align="center">'+data['email']+'</td>\n' + //Le mail de l'utilisateur
+                            '</tr>';
                     });
+                    $('main').html('');
+                    $('#infoCompte').html(content); //Affichage sous un tableau
+                    break;
+
+                case 'vosEventFutur' : //Affichage des soirées futurs
+                    let tableVosEvent = '';
+                    let i=1;
+                    actionDatas.forEach(function(data){
+                        tableVosEvent+=
+                            '<tr> \n' +
+                                '<th scope="row">'+ i++ +'</th>\n' +
+                                '<td class="taillePolice" align="center"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' + //Nom de l'événement
+                                '<td class="taillePolice" align="center">'+data['hote']+'</td>\n' + //Hote
+                                '<td class="taillePolice" align="center">'+data['dateEvent']+'</td>\n' + //Date de l'évènement
+                                '<td class="taillePolice" align="center"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+' </a></td>\n' + //Adresse de l'évent
+                                '<td class="taillePolice" align="center">'+data['heure']+'</td>\n' + //Heure
+                                ' <td class="taillePolice"> <div class="form-check">\n' +
+                            '</div></td>' +
+                            '</tr>';
+
+                    });
+                    $('#vosEvent').html(tableVosEvent); //Affichage sous un tableau
+                    $('main').html('');
+                    evenements('#vosEvent');
+                    break;
+                case 'vosInvitFutur': //Affiche les invitation de user futurs
+                    let tableVosInvit = '';
+                    let b=1;
+                    actionDatas.forEach(function(data){
+                        tableVosInvit+=
+                            '<tr> \n' +
+                            '<th scope="row">'+ b++ +'</th>\n' +
+                            '<td class="taillePolice" align="center"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' + //Nom de l'évént
+                            '<td class="taillePolice" align="center">'+data['hote']+'</td>\n' + //Hote
+                            '<td class="taillePolice" align="center">'+data['dateEvent']+'</td>\n' + //Date
+                            '<td class="taillePolice" align="center"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+'</a> </td>\n' + //Adresse
+                            '<td class="taillePolice" align="center">'+data['heure']+'</td>\n' +
+                            '</div></td>'+
+                            '</tr>';
+
+                    });
+                    $('#vosInvit').html(tableVosInvit); //Affichage sous un tableau
+                    $('main').html('');
+                    evenements('#vosInvit'); //On peut accèder à une page ou submit un formulaire
+                    break;
+
+                case 'ajoutParticipant' :
+                    $('#'+actionDatas).prop('checked', true);
+                    $('.'+actionDatas).attr('href', 'supprParticipant.php');
+                    break;
+                case 'supprParticipant' :
+                    $('#'+actionDatas).attr('checked', false);
+                    $('.'+actionDatas).attr('href', 'ajoutParticipant.php');
+                    break;
+                case 'listeParticipant' :
+                    let tableParticipant = '';
+                    let r = 1;
+                    actionDatas.forEach(function(data){
+                        tableParticipant+=
+                            '<tr> \n' +
+                            '<th scope="row">'+ r++ +'</th>\n' +
+                            '<td class="taillePolice">'+data['pseudo']+'</td> \n' +
+                            '</tr>';
+                    });
+
+                    $('#participants').html(tableParticipant); //Affichage des invités sous le forme de tableau
+                    break;
+                case 'participe' :
+                    $('#'+actionDatas).prop('checked', true);
+                    $('.'+actionDatas).attr('href', 'supprParticipant.php');
+                    break;
+                case 'vosEventPasse' : //Affichage des soirées passées
+                    let tableVosEventPasse = '';
+                    let c=1;
+                    actionDatas.forEach(function(data){
+                        tableVosEventPasse+=
+                            '<tr> \n' +
+                            '<th scope="row">'+ c++ +'</th>\n' +
+                            '<td class="taillePolice" align="center"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' +
+                            '<td class="taillePolice" align="center">'+data['hote']+'</td>\n' +
+                            '<td class="taillePolice" align="center">'+data['dateEvent']+'</td>\n' +
+                            '<td class="taillePolice" align="center"><a href="http://maps.google.com/?q='+data['adresse']+'">'+data['adresse']+'</a></td>\n' +
+                            '<td class="taillePolice" align="center">'+data['heure']+'</td>\n' +
+                            ' <td class="taillePolice"> <div class="form-check">\n' +
+                            '</div></td>' +
+                            '</tr>';
+
+                    });
+                    $('#vosEventPasse').html(tableVosEventPasse); //Affichage sous un tableau
+                    $('main').html('');
+                    evenements('#vosEventPasse');
+                    break;
+                case 'vosInvitPasse': //Invitation à l'évent passé
+                    let tableVosInvitPasse = '';
+                    let d=1;
+                    actionDatas.forEach(function(data){
+                        tableVosInvitPasse+=
+                            '<tr> \n' +
+                            '<th scope="row">'+ d++ +'</th>\n' +
+                            '<td class="taillePolice" align="center"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' +
+                            '<td class="taillePolice" align="center">'+data['hote']+'</td>\n' +
+                            '<td class="taillePolice" align="center">'+data['dateEvent']+'</td>\n' +
+                            '<td class="taillePolice" align="center">'+data['adresse']+' </td>\n' +
+                            '<td class="taillePolice" align="center">'+data['heure']+'</td>\n' +
+                            ' <td class="taillePolice"> <div class="form-check">\n' +
+                            '</div></td>' +
+                            '</tr>';
+
+                    });
+                    $('#vosInvitPasse').html(tableVosInvitPasse); //Affichage sous un tableau
+                    $('#vosInvitPasse').html(tableVosInvitPasse); //Affichage sous un tableau
+                    $('main').html('');
+                    evenements('#vosInvitPasse');
+                    break;
+                    //Affiche le nombre d'invites commentaires etc. pour l'event
+                case 'infoEvent':
+                    let tableNombre = '';
+                    console.log(actionDatas);
+                        tableNombre =
+                        '<tr>' +
+                            '<td class="taillePolice" align="center"><a href="afficheInv.php">'+actionDatas[0][0]['nombreInv']+'</a></td>' +
+                            '<td class="taillePolice" align="center"><a href="afficheFour.php">'+actionDatas[1][0]['nombreFour']+'</a></td>' +
+                            '<td class="taillePolice" align="center"><a href="afficheComm.php">'+actionDatas[2][0]['nombreComm']+'</a></td>' +
+                            '<td class="taillePolice" align="center"><a href="afficheParticipants.php">'+actionDatas[3][0]['participant']+'</a></td>' +
+                            ' <td class="taillePolice" align="center" style="display: none" id="affichePourParticiper"> <div class="form-check">\n' +
+                            '<a href="ajoutParticipant.php" class="'+actionDatas[4]+'"> <input type="checkbox" class="form-check-input" id="'+actionDatas[4]+'"></a>\n' +
+                            '<td class="taillePolice" align="center" style="display:none;" id="modifierr"><a href="modifEvent.php"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fas fa-pen"></i></button></a></td>\n'+ //Bouton modification
+                            '<td class="taillePolice" align="center" style="display:none;" id="supprimerr"><a href="suppEvent.php"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fa fa-trash" aria-hidden="true"> </i></button></a></td>\n'+
+                            '</div></td>' +
+                        '</tr>';
+                    $('#infoSupp').html(tableNombre);
+                    evenements('#infoSupp');
                     break;
 
                 case 'test' :
@@ -213,6 +360,9 @@ function gererDonnes(retour){
                     tableInvites+=
                         '<tr> \n' +
                             '<th scope="row" id="'+ o++ +'">'+ j++ +'</th>\n' +
+                            '<td class="taillePolice" align="center" id="'+ p++ +'">'+data['pseudo']+'</td> \n' +
+                            '<td class="taillePolice" align="center"><a id="' + q++ +'" href="'+data['pseudo']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
+                            '<td class="taillePolice" align="center" id="'+ data['pseudo'] +'"></td> \n' +
                             '<td class="taillePolice" id="'+ p++ +'">'+data['pseudo']+'</td> \n' +
                             '<td class="taillePolice"><a id="' + q++ +'" href="'+data['pseudo']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
                             '<td class="taillePolice" id="'+ data['pseudo'] +'"></td> \n' +
@@ -229,7 +379,7 @@ function gererDonnes(retour){
                     break;
 
                 case 'ajoutInv' : //Ajout des invites
-                    $('#intro').html(alert(actionDatas));
+                    $('.intro-text').html(alert(actionDatas));
                     break;
                 case 'tousLesPseudos' : //Affiche tous les pseudos
                     let pseudos = [];
@@ -249,6 +399,9 @@ function gererDonnes(retour){
                     tableFournitures+=
                         '<tr>\n' +
                             '<th scope="row">'+ k++ +'</th>\n' +
+                            '<td class="taillePolice" align="center">'+ data['fourniture']+'</td>\n' +
+                            '<td class="taillePolice" align="center"><input type="number" name="fourniture['+ data['fourniture']+']" value="'+data['quantite']+'"  min="0" style="width: 40px"></td>\n' +
+                            '<td class="taillePolice" align="center"><a href="'+data['fourniture']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
                             '<td class="taillePolice">'+ data['fourniture']+'</td>\n' +
                             '<td class="taillePolice"><input type="number" name="fourniture['+ data['fourniture']+']" value="'+data['quantite']+'"  min="0" style="width: 40px"></td>\n' +
                             '<td class="taillePolice"><a href="'+data['fourniture']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
@@ -266,6 +419,8 @@ function gererDonnes(retour){
                             listeCommentaire+=
                                 ' <tr>\n' +
                                     '<th scope="row">'+ l++ +'</th>\n' +
+                                    '<td class="taillePolice" align="center">'+data['commentaire']+'</td>\n' +
+                                    '<td class="taillePolice" align="center"><a href="'+data['commentaire']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
                                     '<td class="taillePolice">'+data['commentaire']+'</td>\n' +
                                     '<td class="taillePolice"><a href="'+data['commentaire']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
                                 '</tr>';
@@ -274,11 +429,30 @@ function gererDonnes(retour){
                     $('#listeCommentaire').html(listeCommentaire);
                     evenements('#listeCommentaire');
                     break;
+                /**
+                 * Les valeurs du formulaiure de modification de l'événement prédéfinies
+                  */
+                case 'champEvent' :
+                    actionDatas.forEach(function (data) {
+                        $('#nom').val(data['nomEvent']);
+                        $('#adresse').val(data['adresse']);
+                        $('#date').val(data['dateEvent']);
+                        $('#heure').val(data['heure']);
+                    });
+                    break;
 
                 case 'afficherSuppr' : //Affichage des liens de suppression en tant que hote
                     $('a').show();
                     $('#formInv').show();
                     $('#suppr').show();
+                    $('#modifier').show();
+                    $('#supprimer').show();
+                    $('#modifierr').show();
+                    $('#supprimerr').show();
+                    break;
+                case 'afficheParticipe':
+                    $('#participerEvent').show();
+                    $('#affichePourParticiper').css('display', 'block');
                     break;
 
                 /**
@@ -304,6 +478,12 @@ function gererDonnes(retour){
                     break;*/
                 case 'Probleme JSON' : //On affiche si il y a un problème JSON
                     $('.intro-text').html(actionDatas['donnes']);
+                    break;
+                    //Gestion des erreurs
+                case 'errorUser' :
+                case 'errorMail' :
+                case 'errorPass' :
+                    $('#errorForm').html('<div class="alert alert-danger" role="alert">'+actionDatas);
                     break;
                     //Gestion des erreurs
                 case 'errorUser' :

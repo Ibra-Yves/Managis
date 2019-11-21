@@ -1,4 +1,5 @@
 
+
 <div class="panel-heading">
      <h3 class="panel-title gestionDeCompteTitre" align="center">Créez votre propre événement!</h3>
  </div>
@@ -25,6 +26,12 @@
                          <p class="help-block text-danger"></p>
                      </div>
                  </div>
+                 <div class="col-md-6">
+                     <div class="form-group">
+                         <input class="form-control" id="heure" name="heure" type="time" placeholder="Heure de l'événement *" required="required">
+                         <p class="help-block text-danger"></p>
+                     </div>
+                 </div>
                  <div class="clearfix"></div>
                  <div class="col-lg-12 text-center">
                      <div id="success"></div>
@@ -33,6 +40,7 @@
              </div>
          </form>
      </div>
+ </div>
  </div>
  <div class="container">
             <div class="row centered-form">

@@ -7,6 +7,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title gestionDeCompteTitre" align="center">Inscrivez-vous pour organiser vos soirées</h3>
                 </div>
+                <a href="inscriptionFacebook.php">Inscrivez vous via facebook</a>
                 <div class="panel-body">
                     <form id="formInscription" class="formInscription" name="formInscription" method="post" action="validation.html">
                         <div id="errorForm"></div>
@@ -26,7 +27,8 @@
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <input type="password" id="mdp" name="mdp" class="form-control input-sm" placeholder="Mot de passe" required minlength="8">
-    <div class="row centered-form">
+    
+                                  <div class="row centered-form">
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
             <div class="panel panel-default">
                 <div class="panel-heading">

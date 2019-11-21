@@ -1,0 +1,131 @@
+import React, { Component } from 'react'
+
+import {Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
+
+export default class AjoutEvenement extends Component {
+  render() {
+    return (
+      <ScrollView>
+        <View style={styles.containerTitre}>
+        <TouchableOpacity
+          onPress={() => this.props.navigation.openDrawer('myNav')}
+          style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Image
+            source={require('../image/icons8-menu-arrondi-50.png')}
+              style={styles.icon}
+              />
+          </TouchableOpacity>
+          <View style={{flex: 6, justifyContent: 'center'}}>
+            <Text style={styles.titrePage}>Créer un événement !</Text>
+          </View>
+          <View style={{flex : 1}}>
+          </View>
+        </View>
+        <View >
+        <View style={styles.inputContainer}>
+          <Text style={styles.com}>Ajoutez un nom à votre événement !</Text>
+          <TextInput
+            style = {styles.inputBox}
+            underlineColorAndroid="transparent"
+            placeholder = 'Nom'
+            placeholderTextColor = '#FFFFFF'
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text>Indiquez le lieu de votre événement</Text>
+          <TextInput
+            style = {styles.inputBox}
+            underlineColorAndroid="transparent"
+            placeholder = 'Adresse'
+            placeholderTextColor = '#FFFFFF'
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text>Indiquez la date de l'événement</Text>
+          <TextInput
+            style = {styles.inputBox}
+            underlineColorAndroid="transparent"
+            placeholder = 'Date'
+            placeholderTextColor = '#FFFFFF'
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text>Indiquez l'heure de l'événement</Text>
+          <TextInput
+            underlineColorAndroid="transparent"
+            style = {styles.inputBox}
+            placeholder = 'Heure'
+            placeholderTextColor = '#FFFFFF'
+          />
+        </View>
+        <View style={styles.submitContainer}>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.openDrawer('EventList')}>
+            <Text style={styles.submitButton}>Valider</Text>
+          </TouchableOpacity>
+        </View>
+        </View>
+      </ScrollView>
+    )
+  }
+}
+const styles = StyleSheet.create({
+  logo: {
+    width: 350,
+    height: 350
+  },
+  logoContainer: {
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
+  inputContainer: {
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
+  submitContainer: {
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
+  inputBox : {
+		width:300,
+		backgroundColor:'#3A4750',
+		borderRadius: 25,
+		paddingVertical:12,
+		fontSize:16,
+		color:'#FFFFFF',
+		textAlign:'center',
+		marginVertical: 10
+	},
+  submitButton: {
+    backgroundColor:'#3A4750',
+		width:100,
+		borderRadius: 25,
+		marginVertical: 10,
+		paddingVertical: 13,
+    textAlign: 'center',
+    color: '#FFFFFF'
+  },
+  titrePage: {
+      color: '#FFFFFF',
+      fontSize: 18,
+      textAlign: 'center'
+    },
+  containerTitre: {
+    backgroundColor:'#3A4750',
+    flexDirection: 'row',
+    height: 60
+  },
+  signupButton: {
+    textAlign: 'center',
+    marginVertical: 10,
+    paddingVertical: 13,
+    color: '#3A4750'
+  },
+  icon: {
+    height: 30,
+    width: 30
+  },
+  com: {
+    marginTop: 10,
+  }
+})

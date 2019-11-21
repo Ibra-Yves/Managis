@@ -36,6 +36,7 @@
         </div>
     </div>
 </div>
+</div>
 <div class="row text-center ajustement-div">
     <div class="col-md-6 text-center">
         <div class="card mb-3 transparent " style="max-width: 110rem;">

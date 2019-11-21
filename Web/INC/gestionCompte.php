@@ -1,4 +1,3 @@
-
 <div class="col-lg-12 pasColler">
     <div class="panel-default ">
         <div class="panel-heading">
