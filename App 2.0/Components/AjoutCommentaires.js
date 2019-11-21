@@ -2,40 +2,24 @@ import React, { Component } from 'react'
 
 import {Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 
-export default class ConnexionInscription extends Component {
+
+export default class AjoutCommentaires extends Component {
   render() {
     return (
       <ScrollView>
-        <View style={styles.logoContainer}>
-          <Image
-            source={require('../Images/logo_transparent.png')}
-            style={styles.logo}/>
-        </View>
+      <View style={styles.containerTitre}>
+        <Text style={styles.titrePage}>Ajoute un commentaire !</Text>
+      </View>
         <View style={styles.inputContainer}>
           <TextInput
             style = {styles.inputBox}
-            placeholder = 'Pseudo - email'
-            placeholderTextColor = '#FFFFFF'
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style = {styles.inputBox}
-            placeholder = 'Mot de passe'
-            secureTextEntry = {true}
+            placeholder = 'Commentaire'
             placeholderTextColor = '#FFFFFF'
           />
         </View>
         <View style={styles.submitContainer}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('EventList')}
-            >
-            <Text style={styles.submitButton}>Se connecter</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.signupButton}>
           <TouchableOpacity>
-            <Text>Pas encore de compte ?</Text>
+            <Text style={styles.submitButton}>Valider</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -78,6 +62,18 @@ const styles = StyleSheet.create({
 		paddingVertical: 13,
     textAlign: 'center',
     color: '#FFFFFF'
+  },
+  titrePage: {
+      color: '#FFFFFF',
+      fontSize: 18
+    },
+  containerTitre: {
+    backgroundColor:'#3A4750',
+    width:200,
+    borderRadius: 25,
+    marginVertical: 10,
+    paddingVertical: 13,
+    textAlign: 'center',
   },
   signupButton: {
     textAlign: 'center',

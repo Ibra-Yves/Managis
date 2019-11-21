@@ -2,40 +2,35 @@ import React, { Component } from 'react'
 
 import {Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 
-export default class ConnexionInscription extends Component {
+
+export default class AjoutEvenement extends Component {
   render() {
     return (
       <ScrollView>
-        <View style={styles.logoContainer}>
-          <Image
-            source={require('../Images/logo_transparent.png')}
-            style={styles.logo}/>
-        </View>
         <View style={styles.inputContainer}>
           <TextInput
             style = {styles.inputBox}
-            placeholder = 'Pseudo - email'
+            placeholder = 'Nom event'
             placeholderTextColor = '#FFFFFF'
           />
         </View>
         <View style={styles.inputContainer}>
           <TextInput
             style = {styles.inputBox}
-            placeholder = 'Mot de passe'
-            secureTextEntry = {true}
+            placeholder = 'Adresse hote'
+            placeholderTextColor = '#FFFFFF'
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style = {styles.inputBox}
+            placeholder = 'Date event'
             placeholderTextColor = '#FFFFFF'
           />
         </View>
         <View style={styles.submitContainer}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('EventList')}
-            >
-            <Text style={styles.submitButton}>Se connecter</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.signupButton}>
           <TouchableOpacity>
-            <Text>Pas encore de compte ?</Text>
+            <Text style={styles.submitButton}>Valider</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

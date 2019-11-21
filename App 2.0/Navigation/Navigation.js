@@ -3,15 +3,99 @@ import { StyleSheet, Image } from 'react-native'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createAppContainer } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
+import { createDrawerNavigator } from 'react-navigation-drawer'
 import ConnexionInscription from '../Components/ConnexionInscription'
 import Quid from '../Components/Quid'
+import CreateEvent from '../Components/CreateEvent'
+import EventList from '../Components/EventList'
+import Invitation from '../Components/Invitation'
+import Restes from '../Components/Restes'
+import Historique from '../Components/Historique'
+import EventDetails from '../Components/EventDetails'
+import EventItem from '../Components/EventItem'
+import CreateAnnonce from '../Components/CreateAnnonce'
+import AnnoncePerso from '../Components/AnnoncePerso'
+import Settings from '../Components/Settings'
 
+
+
+const EventStackNav = createStackNavigator({
+  EventList: {
+    screen: EventList,
+    navigationOptions : {
+      headerShown: false
+    }
+  },
+  EventDetails: {
+    screen: EventDetails,
+    navigationOptions: {
+      title: 'Details event'
+    }
+  }
+})
+
+const EventDrawerNav = createDrawerNavigator({
+  EventList: {
+    screen: EventStackNav,
+    navigationOptions: {
+      title: 'Liste des événements'
+    }
+  },
+  CreateEvent: {
+    screen: CreateEvent,
+    navigationOptions: {
+      title: 'Créer un événement'
+    }
+  },
+  Invitation: {
+    screen: Invitation,
+    navigationOptions: {
+      title: 'Vos invitations'
+    }
+  },
+  Historique: {
+    screen: Historique,
+    navigationOptions: {
+      title: 'Vos événements passés'
+    }
+  },
+  Restes: {
+    screen: Restes,
+    navigationOptions: {
+      title: 'Marché des restes'
+    }
+  },
+  CreateAnnonce: {
+    screen: CreateAnnonce,
+    navigationOptions: {
+      title: 'Créer une annonce'
+    }
+  },
+  AnnoncePerso: {
+    screen: AnnoncePerso,
+    navigationOptions: {
+      title:'Vos annonces'
+    }
+  },
+  Settings: {
+    screen: Settings,
+    navigationOptions: {
+      title: 'Paramètres'
+    }
+  }
+})
 
 const ConnexionInscriptionStackNavigator = createStackNavigator({
   ConnexionInscription: {
     screen: ConnexionInscription,
     navigationOptions: {
       title: 'Connexion/Inscription',
+      headerShown: false
+    }
+  },
+  EventList: {
+    screen: EventDrawerNav,
+    navigationOptions: {
       headerShown: false
     }
   }
@@ -27,6 +111,8 @@ const QuidStackNavigator = createStackNavigator({
     }
   }
 })
+
+
 
 
 const ManagisTabNavigator = createBottomTabNavigator({
@@ -49,7 +135,7 @@ const ManagisTabNavigator = createBottomTabNavigator({
           style={styles.icon}/>
       }
     }
-  }
+  },
 }, {
   tabBarOptions: {
     showLabel: false,
