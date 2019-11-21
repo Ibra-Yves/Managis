@@ -4,9 +4,6 @@
 --
 -- Hôte : 127.0.0.1:3306
 -- Généré le :  ven. 15 nov. 2019 à 13:33
-
--- Généré le :  Dim 03 nov. 2019 à 12:41
-
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -16,6 +13,10 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de données :  `projet`
@@ -91,7 +92,6 @@ select nomEvent, adresse, dateEvent, heure from evenement
 where idEvent = evenement.idEvent;
 END$$
 
-
 DROP PROCEDURE IF EXISTS `listeCommentaire`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listeCommentaire` (IN `idEvent` INT)  BEGIN
 select commentaire from commentaires
@@ -132,7 +132,6 @@ update evenement
 set evenement.nomEvent= nomEvent, evenement.adresse = adresse, evenement.dateEvent = dateEvent,evenement.heure = heure 
 where evenement.idEvent = idEvent;
 END$$
-
 
 DROP PROCEDURE IF EXISTS `modifMdp`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `modifMdp` (IN `psd` VARCHAR(50), IN `mdp` VARCHAR(255))  BEGIN
@@ -222,8 +221,6 @@ END$$
 DROP PROCEDURE IF EXISTS `vosEventFutur`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `vosEventFutur` (IN `hote` VARCHAR(100))  BEGIN
 select idEvent, nomEvent, hote, adresse, dateEvent, heure
-
-select idEvent, nomEvent, hote, adresse, dateEvent
 from evenement
 where hote = evenement.hote AND dateEvent > now();
 END$$
@@ -300,7 +297,6 @@ CREATE TABLE IF NOT EXISTS `evenement` (
   KEY `fk_hote` (`hote`),
   KEY `fk_eventComm` (`idEvent`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `evenement`
@@ -322,22 +318,6 @@ INSERT INTO `evenement` (`idEvent`, `nomEvent`, `hote`, `adresse`, `dateEvent`, 
 (38, 'walibi', 'dominik', 'rue des 3 combattants, 1348 LLN', '2019-11-03', NULL),
 (40, 'Soiree monopoly', 'toto', 'rue des 3 combattants, 1348 LLN', '2019-11-30', '18:00'),
 (41, 'alo', 'dominik', 'alo', '2019-11-22', NULL);
-INSERT INTO `evenement` (`idEvent`, `nomEvent`, `hote`, `adresse`, `dateEvent`) VALUES
-(25, 'Soiree cartes', 'ambroise', 'rue des 3 combattants', '2019-10-15'),
-(26, 'Soiree walibi', 'ambroise', 'rue des 52 combattants', '2019-10-21'),
-(27, 'soiree php', 'ambroise', 'Rue de bruxelles 38, 1348 LLN', '2019-10-08'),
-(28, 'sqsqsq', 'ambroise', 'rue des 3 combattants', '2019-10-06'),
-(29, 'Soiree monopoly', 'dominik', 'Rue de bruxelles 38, 1348 LLN', '2019-10-24'),
-(30, 'Soiree monopoly', 'dominik', 'rue', '2019-10-15'),
-(31, 'walibi', 'dominik', 'rue des 3 combattants, 1348 LLN', '2019-10-09'),
-(32, 'Â§jjÂ§jtttuj,tug,kut,gk', 'dominik', 'rue des 3 combattants', '2019-10-09'),
-(33, 'zzzzzzz', 'dominik', 'rue des ciseaux', '2019-10-25'),
-(34, 'kkkkkkkkkkkkkkkkk', 'dominik', 'kk@kk', '2019-10-26'),
-(35, 'Soiree cartes', 'toto', 'rue des 3 combattants', '2019-10-26'),
-(36, 'epheccccccccccccc', 'toto', 'Avenue du ciseau, 1348 Louvain-la-Neuve', '2019-10-30'),
-(37, 'soiree php', 'toto', 'rue des 3 combattants', '2019-11-03'),
-(38, 'walibi', 'dominik', 'rue des 3 combattants, 1348 LLN', '2019-11-03'),
-(39, 'Soiree monopoly', 'toto', 'rue des 3 combattants, 1348 LLN', '2019-11-16');
 
 -- --------------------------------------------------------
 
@@ -385,9 +365,6 @@ CREATE TABLE IF NOT EXISTS `invite` (
 --
 
 INSERT INTO `invite` (`idUser`, `idEvent`, `participe`) VALUES
-(64, 25, 0),
-(62, 25, NULL),
-(63, 25, NULL),
 (64, 26, NULL),
 (63, 26, NULL),
 (64, 27, NULL),
@@ -414,8 +391,6 @@ INSERT INTO `invite` (`idUser`, `idEvent`, `participe`) VALUES
 (62, 40, 0),
 (63, 41, 0),
 (64, 40, 0);
-(62, 39, 0),
-(63, 39, 1);
 
 -- --------------------------------------------------------
 
@@ -434,7 +409,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `fk_pseudo` (`pseudo`),
   KEY `fk_hote` (`pseudo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `users`
@@ -446,7 +420,6 @@ INSERT INTO `users` (`idUser`, `pseudo`, `email`, `passwd`, `dateCreation`) VALU
 (64, 'ambroise', 'ambroise@alo', '4bc92a7aeb9478e6bf3f989025232b22', '2019-10-20 10:26:42'),
 (65, 'momo', 'momo@momo', '18f3af6147ba96618064459da6dd90b1', '2019-11-04 14:33:30'),
 (66, 'alo', 'alo@aluile', '18f3af6147ba96618064459da6dd90b1', '2019-11-04 14:36:05');
-(64, 'ambroise', 'ambroise@alo', '4bc92a7aeb9478e6bf3f989025232b22', '2019-10-20 10:26:42');
 
 --
 -- Contraintes pour les tables déchargées
