@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import {Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 
+import AnnoncePerso from '../components/annoncePerso.js';
+
 export default class CreateAnnonce extends Component {
   render() {
     return (
@@ -60,7 +62,7 @@ export default class CreateAnnonce extends Component {
         </View>
         <View style={styles.submitContainer}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.openDrawer('AnnoncePerso')}>
+            onPress={() => this.props.navigation.navigate('AnnoncePerso')}>
             <Text style={styles.submitButton}>Créer</Text>
           </TouchableOpacity>
         </View>

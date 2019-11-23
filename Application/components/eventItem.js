@@ -12,7 +12,7 @@ class EventItem extends React.Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity
-          onPress={() => this.props.navigation.openDrawer("Event")}
+          onPress={() => this.props.navigation.navigate("Event")}
           style={styles.event}>
           <View style={{flex: 1}}>
             <View style={styles.header}>

@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 
 import {Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 
-export default class AjoutEvenement extends Component {
+export default class CreateEvent extends Component {
   render() {
     return (
       <ScrollView>
         <View style={styles.containerTitre}>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.openDrawer('myNav')}
-          style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Image
-            source={require('../image/icons8-menu-arrondi-50.png')}
+          <TouchableOpacity
+            onPress={() => this.props.navigation.openDrawer('myNav')}
+            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Image
+              source={require('../image/icons8-menu-arrondi-50.png')}
               style={styles.icon}
               />
           </TouchableOpacity>
@@ -52,15 +52,15 @@ export default class AjoutEvenement extends Component {
         <View style={styles.inputContainer}>
           <Text>Indiquez l'heure de l'événement</Text>
           <TextInput
-            underlineColorAndroid="transparent"
             style = {styles.inputBox}
+            underlineColorAndroid="transparent"
             placeholder = 'Heure'
             placeholderTextColor = '#FFFFFF'
           />
         </View>
         <View style={styles.submitContainer}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.openDrawer('EventList')}>
+            onPress={() => this.props.navigation.navigate('EventList')}>
             <Text style={styles.submitButton}>Valider</Text>
           </TouchableOpacity>
         </View>
