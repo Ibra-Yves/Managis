@@ -35,7 +35,7 @@
                             </div>
                             <input type="checkbox" required style="margin-left:5%">   Lu et accepté le <a href="CGU.php"> CGU</a>
                         </div>
-                        <div class="g-recaptcha" id="captcha" data-sitekey="6Ldy2r0UAAAAADWwvNHnYzltYCCChGywMHOyR1nQ">
+                        <div class="g-recaptcha" id="captcha" data-sitekey="6Lc-sL0UAAAAAFARONKANY5SoxGECXqbRNBbxHo7">
                         </div>
                         <button class="btn btn-primary btn-xl text-uppercase" name="form" type="submit">Inscription</button>
                     </form>

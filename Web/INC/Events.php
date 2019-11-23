@@ -147,7 +147,7 @@ class Events
      * Envoi de mail pour le contact
      */
     private function contactForm(){
-        mail('HE201451@students.ephec.be', 'Contact de '.$_POST['name'],'Mail de contact '.$_POST['email']. ' Message: '. $_POST['message']);
+        mail('contact.managis@gmail.com', 'Contact de '.$_POST['name'],'Mail de contact '.$_POST['email']. ' Message: '. $_POST['message']);
     }
 
     /**
@@ -169,7 +169,7 @@ class Events
 
             //Captcha
             $reponse = [];
-            $clePriv = "6Ldy2r0UAAAAAFaQRBM9ungieu74xM2W2fnYOFcj";
+            $clePriv = "6Lc-sL0UAAAAAM06U8ciIUC48QsChvDALNetZr4n";
             $rep = $_POST['g-recaptcha-response'];
             $remoteIp = $_SERVER['REMOTE_ADDR'];
 
@@ -583,7 +583,7 @@ class Events
 
         //On renvoie vers le client le message d'erreur si le pseudo transmis n'existe pas
         if($_POST['pseudoInv'] == '' || !$user || $resultatSansEspaces || $resultatAvecEspaces){
-            mail($pseudo, 'Invitation dans un nouvel événement', 'Bonjour, un de vos amis vous a invité à son événement rejoignez le ici: http://localhost/Managis/Web/index.php?rq='.$_SESSION['idEvent']);
+            mail($pseudo, 'Invitation dans un nouvel événement', 'Bonjour, un de vos amis vous a invité à son événement rejoignez le ici: https://managis.be/index.php?rq='.$_SESSION['idEvent']);
         }
 
         //Sinon on rajoute l'invite et on l'affiche dans la liste
