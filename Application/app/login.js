@@ -15,16 +15,6 @@ import { StackNavigator } from 'react-navigation';
 
 
 export default class login extends Component {
-	static navigationOptions= ({navigation}) =>({
-		  title: 'Connexion',
-		  headerRight:
-		  <TouchableOpacity
-			onPress={() => navigation.navigate('Home')}
-			style={{margin:10,backgroundColor:'#3A4750',padding:10}}>
-			<Text style={{color:'#ffffff'}}>Home</Text>
-		  </TouchableOpacity>
-
-	});
 	constructor(props){
 		super(props)
 		this.state={
@@ -54,7 +44,7 @@ export default class login extends Component {
 		}
 		else{
 
-		fetch('http://192.168.1.45/IbraManagis/connexion/User_Login.php',{
+		fetch('http://192.168.0.9/IbraManagis/connexion/User_Login.php',{
 			method:'POST',
 			header:{
 				'Accept': 'application/json',
@@ -74,7 +64,7 @@ export default class login extends Component {
 				 alert("Vous êtes connecté ! ");
 				 this.props.navigation.navigate("Menu");
 
-        			AsyncStorage.setItem('UserEmail',UserEmail);
+        AsyncStorage.setItem('UserEmail',UserEmail);
 
 			 }else{
 				 alert("Mot de passe ou adresse mail incorect!");

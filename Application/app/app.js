@@ -26,7 +26,7 @@ import CreateAnnonce from '../components/createAnnonce.js';
 import AnnoncePerso from '../components/annoncePerso.js';
 
 const myNav = DrawerNavigator({
-	"Liste des événement": {screen: EventList},
+	"Liste des événements": {screen: EventList},
 	"Créer un événement": {screen: CreateEvent},
 	"Vos invitations": {screen: Invitation},
 	"Vos événements passés": {screen: Historique},
@@ -35,14 +35,57 @@ const myNav = DrawerNavigator({
 	"Vos annonces": {screen: AnnoncePerso}
 });
 
+
 const Managis = StackNavigator({
-	Home: { screen: HomeScreen },
-	Login: { screen: Login },
-	Register: {screen: Register},
-	WhoIs: {screen: WhoIs},
-	Menu: {screen: Menu},
-	Profile: {screen: Profile},
-	EventList: {screen: myNav},
+	Home :{
+		screen: HomeScreen,
+		navigationOptions: () => ({
+			header: null,
+		}),
+	},
+	Login: {
+		screen: Login,
+		navigationOptions: {
+		  title: 'Connexion'
+		}
+	  },
+
+	Register: {
+		screen: Register,
+		navigationOptions: {
+		  title: 'Inscription'
+		}
+	  },
+
+	WhoIs: {
+		screen: WhoIs,
+		navigationOptions: {
+		  title: 'Qui sommes-nous ?'
+		}
+	},
+
+	Menu: {
+		screen: Menu,
+		navigationOptions: {
+		  title: 'Menu'
+		}
+	},
+
+	Profile: {
+		screen: Profile,
+		navigationOptions: {
+		  title: 'Profil'
+		}
+	},
+
+	EventList :{
+		screen: myNav,
+		navigationOptions: () => ({
+			header: null,
+		}),
+	},
+	EventDetails: {screen: EventDetails},
+	EventItem: {screen: EventItem},
 	Settings: {screen: Settings}
  });
 

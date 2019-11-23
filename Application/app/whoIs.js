@@ -16,17 +16,6 @@ import { StackNavigator } from 'react-navigation';
 
 
 export default class WhoIs extends Component {
-	static navigationOptions= ({navigation}) =>({
-		  title: 'Qui sommes-nous ?',
-		  headerRight:
-		  <TouchableOpacity
-			onPress={() => navigation.navigate('Home')}
-			style={{margin:10,backgroundColor:'#3A4750',padding:10}}>
-			<Text style={{color:'#ffffff'}}>Home</Text>
-		  </TouchableOpacity>
-
-	});
-
   render() {
    return (
      <ScrollView contentContainerStyle={{ flexGrow: 1}}>

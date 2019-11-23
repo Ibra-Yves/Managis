@@ -12,7 +12,6 @@ import { AppRegistry,
 
 export default class menu extends Component{
 static navigationOptions= ({navigation}) =>({
-		  title: 'Menu',
 			headerRight:
 		  <TouchableOpacity
 			onPress={() => navigation.navigate('Home')}
@@ -33,17 +32,12 @@ static navigationOptions= ({navigation}) =>({
 		<TouchableOpacity
 		onPress={()=> navigate('Profile')}
 		style={styles.btn2}>
-		<Text style={styles.btnText}>Profile</Text>
+		<Text style={styles.btnText}>Profil</Text>
 		</TouchableOpacity>
 		<TouchableOpacity
 		onPress={()=> navigate('EventList')}
 		style={styles.btn2}>
 		<Text style={styles.btnText}>Gestion des evenements</Text>
-		</TouchableOpacity>
-		<TouchableOpacity
-		onPress={()=> navigate('Settings')}
-		style={styles.btn2}>
-		<Text style={styles.btnText}>Parametres</Text>
 		</TouchableOpacity>
     </View>
 		</ScrollView>
@@ -58,16 +52,17 @@ const styles = StyleSheet.create({
 		justifyContent:'center'
 	},
 	logo: {
-    width: 330,
-    height: 290
+    width: 400,
+    height: 350
 	},
 	btn2:{
 		backgroundColor:'#3A4750',
 		padding:10,
-		margin:10,
-		width:'auto',
+		margin:15,
+		width:'80%',
 		alignItems:'center',
-		justifyContent:'center'
+		justifyContent:'center',
+		borderRadius: 10
 	},
 	btnText:{
 		color:'white',
