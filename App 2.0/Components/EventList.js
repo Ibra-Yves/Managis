@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, ScrollView } from 'react-native'
 import EventDetails from '../Components/EventDetails'
 import Constants from 'expo-constants'
-import EventItem from '../Components/EventItem'
+//import EventItem from '../Components/EventItem'
 
 /*je declare ici une serie d'event afin de tester la liste*/
 const EVENT = [
@@ -12,72 +12,63 @@ const EVENT = [
     title: 'Soiree Monopoly',
     date: '20 novembre 2019',
     heure: '22h00',
-    lieu: '12 rue de la paix',
-    invites: ['ibra','ambroise', 'nico', 'max']
+    lieu: '12 rue de la paix'
   },
   {
     id: '2',
     title: 'Soiree react',
     date: '16 novembre 2019',
     heure: '18h00',
-    lieu: '2 avenue du js',
-    invites: ['ibra','ambroise', 'nico', 'max']
+    lieu: '2 avenue du js'
   },
   {
     id: '3',
     title: 'Soiree php',
     date: '12 decembre 2020',
     heure: '19h30',
-    lieu: '4 boulevard delvigne',
-    invites: ['ibra','ambroise', 'nico', 'max']
+    lieu: '4 boulevard delvigne'
   },
   {
     id: '4',
     title: 'Soiree Monopoly',
     date: '20 novembre 2019',
     heure: '22h00',
-    lieu: '12 rue de la paix',
-    invites: ['ibra','ambroise', 'nico', 'max']
+    lieu: '12 rue de la paix'
   },
   {
     id: '5',
     title: 'Soiree react',
     date: '16 novembre 2019',
     heure: '18h00',
-    lieu: '2 avenue du js',
-    invites: ['ibra','ambroise', 'nico', 'max']
+    lieu: '2 avenue du js'
   },
   {
     id: '6',
     title: 'Soiree php',
     date: '12 decembre 2020',
     heure: '19h30',
-    lieu: '4 boulevard delvigne',
-    invites: ['ibra','ambroise', 'nico', 'max']
+    lieu: '4 boulevard delvigne'
   },
   {
     id: '7',
     title: 'Soiree Monopoly',
     date: '20 novembre 2019',
     heure: '22h00',
-    lieu: '12 rue de la paix',
-    invites: ['ibra','ambroise', 'nico', 'max']
+    lieu: '12 rue de la paix'
   },
   {
     id: '8',
     title: 'Soiree react',
     date: '16 novembre 2019',
     heure: '18h00',
-    lieu: '2 avenue du js',
-    invites: ['ibra','ambroise', 'nico', 'max']
+    lieu: '2 avenue du js'
   },
   {
     id: '9',
     title: 'Soiree php',
     date: '12 decembre 2020',
     heure: '19h30',
-    lieu: '4 boulevard delvigne',
-    invites: ['ibra','ambroise', 'nico', 'max']
+    lieu: '4 boulevard delvigne'
   }
 ]
 
@@ -107,17 +98,26 @@ class EventList extends Component {
       <ScrollView style={{marginTop: Constants.statusBarHeight}}>
         <View style={styles.containerTitre}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.openDrawer('EventDrawerNav')}
+            onPress={() => this.props.navigation.navigate("ConnexionInscription")}
             style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Image
-              source={require('../Images/icons8-menu-arrondi-50.png')}
-                style={styles.icon}
-                />
+              source={require('../Images/icons8-gauche-50.png')}
+              style={styles.icon}
+              />
           </TouchableOpacity>
           <View style={{flex: 6, justifyContent: 'center'}}>
             <Text style={styles.titrePage}>Liste des événements</Text>
           </View>
           <View style={{flex : 1}}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.openDrawer("EventDrawerNav")}
+              style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+              <Image
+                source={require('../Images/icons8-menu-arrondi-50.png')}
+                style={styles.icon}
+                />
+            </TouchableOpacity>
+
           </View>
         </View>
           <FlatList
