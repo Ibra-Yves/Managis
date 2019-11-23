@@ -1,4 +1,4 @@
-<script src="https://www.google.com/recaptcha/api.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <div class="container">
 
     <div class="row centered-form">
@@ -35,9 +35,8 @@
                             </div>
                             <input type="checkbox" required style="margin-left:5%">   Lu et accepté le <a href="CGU.php"> CGU</a>
                         </div>
-                        <div class="g-recaptcha" id="captcha" data-sitekey="6Lc-sL0UAAAAAFARONKANY5SoxGECXqbRNBbxHo7">
-                        </div>
-                        <button class="btn btn-primary btn-xl text-uppercase" name="form" type="submit">Inscription</button>
+                        <div class="g-recaptcha" data-sitekey="6Lf1PsQUAAAAAEEZbvu-67ds-7KAigR8s7pnFMhb"></div>
+                        <input class="btn btn-primary btn-xl text-uppercase" type="submit" value="Inscription">
                     </form>
                 </div>
             </div>

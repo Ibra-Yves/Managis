@@ -169,7 +169,7 @@ class Events
 
             //Captcha
             $reponse = [];
-            $clePriv = "6Lc-sL0UAAAAAM06U8ciIUC48QsChvDALNetZr4n";
+            $clePriv = "6Lf1PsQUAAAAAAlTkF4jj-uRn93zUJQ-b_LuBetz";
             $rep = $_POST['g-recaptcha-response'];
             $remoteIp = $_SERVER['REMOTE_ADDR'];
 
@@ -190,6 +190,7 @@ class Events
             } //Si on ne cooche pas captcha
             else if ($reponse[0] == false) {
                 $this->action->ajouterAction('errorUser', 'Veuillez valider le reCAPTCHA');
+                $this->action->ajouterAction('test', $rep);
             } //On verifie si les deux champs de mot de passe existe
             else if ($_POST['mdp'] != $_POST['confirmationMdp']) {
                 $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
@@ -216,7 +217,7 @@ class Events
 
             //Captcha
             $reponse = [];
-            $clePriv = "6Ldy2r0UAAAAAFaQRBM9ungieu74xM2W2fnYOFcj";
+            $clePriv = "6Lf1PsQUAAAAAAlTkF4jj-uRn93zUJQ-b_LuBetz";
             $rep = $_POST['g-recaptcha-response'];
             $remoteIp = $_SERVER['REMOTE_ADDR'];
 
