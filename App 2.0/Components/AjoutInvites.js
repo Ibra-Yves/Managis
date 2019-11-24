@@ -1,51 +1,96 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-import {Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
+import {Text, View, Image, TouchableOpacity, StyleSheet, ScrollView, TextInput, FlatList} from 'react-native'
 
+const USER=[
+  {
+    id: '1',
+    nom: 'Chirac',
+    prenom: 'Patrick',
+    mail: 'patrick.chirac@camping.com'
+  },
+  {
+    id: '2',
+    nom: 'Tuning',
+    prenom: 'Jacky',
+    mail: 'jacky.tuning@keke.com'
+  }
+]
 
-export default class AjoutInvites extends Component {
+export default class AjoutInvites extends React.Component {
   render() {
     return (
       <ScrollView>
-      <View style={styles.containerTitre}>
-        <Text style={styles.titrePage}>Ajoute des invités !</Text>
-      </View>
-        <View style={styles.inputContainer}>
+        <View style={styles.containerTitre}>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.goBack()}
+            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Image
+              source={require('../Images/icons8-gauche-50.png')}
+              style={styles.icon}
+              />
+          </TouchableOpacity>
+          <View style={{flex: 6, justifyContent: 'center'}}>
+            <Text style={styles.titrePage}>Ajoutez un invité</Text>
+          </View>
+          <View style={{flex : 1}}>
+          </View>
+        </View>
+        <View style={{margin: 5, alignItems: 'center'}}>
           <TextInput
-            style = {styles.inputBox}
-            placeholder = 'Adresse mail'
-            placeholderTextColor = '#FFFFFF'
+            style={styles.textinput}
+            placeholder='Rechercher un utilisateur'
+            placeholderTextColor='#FFFFFF'
+          />
+          <View>
+            <TouchableOpacity style={{flexDirection: 'row'}}>
+              <Image
+                source={require('../Images/icons8-chercher-50.png')}
+                style={styles.iconSearch}/>
+              <Text style={styles.searchText}>Rechercher</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View>
+          <FlatList
+            data={USER}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({item}) => <Text>{item.nom}</Text>}
           />
         </View>
-        <View style={styles.submitContainer}>
-          <TouchableOpacity>
-            <Text style={styles.submitButton}>Valider</Text>
-          </TouchableOpacity>
-        </View>
       </ScrollView>
+
     )
   }
 }
 
-const styles = StyleSheet.create({
-  logo: {
-    width: 350,
-    height: 350
+const styles= StyleSheet.create({
+  icon: {
+    width: 30,
+    height: 30
   },
-  logoContainer: {
+  containerTitre: {
+    backgroundColor:'#3A4750',
+    flexDirection: 'row',
+    height: 60
+  },
+  titrePage: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    textAlign: 'center'
+  },
+  iconSearch: {
+    width: 20,
+    height: 20,
+    margin: 2
+  },
+  searchText: {
     alignItems: 'center',
-    justifyContent: 'flex-end'
+    fontSize: 16,
+    color: '#3A4750'
   },
-  inputContainer: {
-    alignItems: 'center',
-    justifyContent: 'flex-end'
-  },
-  submitContainer: {
-    alignItems: 'center',
-    justifyContent: 'flex-end'
-  },
-  inputBox : {
-		width:300,
+  textinput: {
+    width:300,
 		backgroundColor:'#3A4750',
 		borderRadius: 25,
 		paddingVertical:12,
@@ -53,33 +98,5 @@ const styles = StyleSheet.create({
 		color:'#FFFFFF',
 		textAlign:'center',
 		marginVertical: 10
-	},
-  submitButton: {
-    backgroundColor:'#3A4750',
-		width:100,
-		borderRadius: 25,
-		marginVertical: 10,
-		paddingVertical: 13,
-    textAlign: 'center',
-    color: '#FFFFFF'
   },
-  titrePage: {
-      color: '#FFFFFF',
-      fontSize: 18
-    },
-  containerTitre: {
-    backgroundColor:'#3A4750',
-    width:200,
-    borderRadius: 25,
-    marginVertical: 10,
-    paddingVertical: 13,
-    textAlign: 'center',
-  },
-  signupButton: {
-    textAlign: 'center',
-    marginVertical: 10,
-    paddingVertical: 13,
-    color: '#3A4750'
-
-  }
 })

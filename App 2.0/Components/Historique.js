@@ -36,7 +36,7 @@ const HISTORIQUE = [
   {
     id: '5',
     name: 'sprint 5',
-    date: '5 novemebre 2019',
+    date: '5 novembre 2019',
     heure: '8h30',
     lieu: 'EPHEC'
   }

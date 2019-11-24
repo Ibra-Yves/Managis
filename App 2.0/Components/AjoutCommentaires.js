@@ -1,85 +1,42 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-import {Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
+import {Text, View, Image, TouchableOpacity, StyleSheet} from 'react-native'
 
-
-export default class AjoutCommentaires extends Component {
+export default class AjoutCommentaires extends React.Component {
   render() {
     return (
-      <ScrollView>
       <View style={styles.containerTitre}>
-        <Text style={styles.titrePage}>Ajoute un commentaire !</Text>
+        <TouchableOpacity
+          onPress={() => this.props.navigation.goBack()}
+          style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Image
+            source={require('../Images/icons8-gauche-50.png')}
+            style={styles.icon}
+            />
+        </TouchableOpacity>
+        <View style={{flex: 6, justifyContent: 'center'}}>
+          <Text style={styles.titrePage}>Ajoutez un commentaire</Text>
+        </View>
+        <View style={{flex : 1}}>
+        </View>
       </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style = {styles.inputBox}
-            placeholder = 'Commentaire'
-            placeholderTextColor = '#FFFFFF'
-          />
-        </View>
-        <View style={styles.submitContainer}>
-          <TouchableOpacity>
-            <Text style={styles.submitButton}>Valider</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
     )
   }
 }
 
-const styles = StyleSheet.create({
-  logo: {
-    width: 350,
-    height: 350
+const styles= StyleSheet.create({
+  icon: {
+    width: 30,
+    height: 30
   },
-  logoContainer: {
-    alignItems: 'center',
-    justifyContent: 'flex-end'
-  },
-  inputContainer: {
-    alignItems: 'center',
-    justifyContent: 'flex-end'
-  },
-  submitContainer: {
-    alignItems: 'center',
-    justifyContent: 'flex-end'
-  },
-  inputBox : {
-		width:300,
-		backgroundColor:'#3A4750',
-		borderRadius: 25,
-		paddingVertical:12,
-		fontSize:16,
-		color:'#FFFFFF',
-		textAlign:'center',
-		marginVertical: 10
-	},
-  submitButton: {
-    backgroundColor:'#3A4750',
-		width:100,
-		borderRadius: 25,
-		marginVertical: 10,
-		paddingVertical: 13,
-    textAlign: 'center',
-    color: '#FFFFFF'
-  },
-  titrePage: {
-      color: '#FFFFFF',
-      fontSize: 18
-    },
   containerTitre: {
     backgroundColor:'#3A4750',
-    width:200,
-    borderRadius: 25,
-    marginVertical: 10,
-    paddingVertical: 13,
-    textAlign: 'center',
+    flexDirection: 'row',
+    height: 60
   },
-  signupButton: {
-    textAlign: 'center',
-    marginVertical: 10,
-    paddingVertical: 13,
-    color: '#3A4750'
-
+  titrePage: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    textAlign: 'center'
   }
 })
