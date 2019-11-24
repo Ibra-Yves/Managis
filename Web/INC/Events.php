@@ -188,9 +188,9 @@ class Events
                 $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
                 $this->action->ajouterAction('errorUser', 'Le pseudo ou le mail est déjà utilisé');//On renvoie vers la balise error user avec le texte a afficher
             } //Si on ne cooche pas captcha
-            else if ($reponse[0] == false) {
+            else if (empty($rep)) {
                 $this->action->ajouterAction('errorUser', 'Veuillez valider le reCAPTCHA');
-                $this->action->ajouterAction('test', $rep);
+                //$this->action->ajouterAction('test', $decode);
             } //On verifie si les deux champs de mot de passe existe
             else if ($_POST['mdp'] != $_POST['confirmationMdp']) {
                 $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
