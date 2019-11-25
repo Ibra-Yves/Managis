@@ -585,6 +585,7 @@ class Events
         //On renvoie vers le client le message d'erreur si le pseudo transmis n'existe pas
         if($_POST['pseudoInv'] == '' || !$user || $resultatSansEspaces || $resultatAvecEspaces){
             mail($pseudo, 'Invitation dans un nouvel événement', 'Bonjour, un de vos amis vous a invité à son événement rejoignez le ici: https://managis.be/index.php?rq='.$_SESSION['idEvent']);
+            $this->action->ajouterAction('succInv', "Un mail d'invitation a été envoyé");
         }
 
         //Sinon on rajoute l'invite et on l'affiche dans la liste
