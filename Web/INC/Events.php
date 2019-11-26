@@ -54,6 +54,7 @@ class Events
         $this->db = new Db(); //Instance de la classe db
         if(isset($_GET['rq'])) $this->rq = $_GET['rq'];
         $this->gestionRequetes($this->rq);
+        $this->popUp();
     }
 
     /**
@@ -100,6 +101,12 @@ class Events
      */
     private function inscription(){
         $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
+    }
+
+    private function popUp(){
+        $info = $this->db->procCall('infoPopUp', [$_SESSION['user']['idUser']]);
+        $infoPopUp = $info[0]['invitations'];
+        if(!empty($_SESSION['user'])) $this->action->ajouterAction('popUp', $infoPopUp);
     }
 
     /**
@@ -625,7 +632,7 @@ class Events
             $this->action->ajouterAction('tousLesPseudos', $pseudos);
             $this->action->ajouterAction('listeInvites', $invites);
             $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
-            mail($mail, "Invitation à l'événement", "Vous avez été invité à l'événement, veuillez vous connecter pour précisez si vous participez à l'événement");
+            mail($mail, "Invitation à l'événement", "Vous avez été invité à l'événement, veuillez vous connecter pour précisez si vous participez à l'événement https://managis.be");
 
             if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
         }

@@ -43,7 +43,7 @@ function gererDonnes(retour){
                 case 'affiche' : //Affichage par défaut
                     let dest = actionDatas['dest'];
                     $(actionDatas['dest']).html(actionDatas['content']);
-                    $('#difSection').html('');
+                    $('#difSection').empty();
                     evenements(dest);
                     break;
 
@@ -51,7 +51,6 @@ function gererDonnes(retour){
                     location.reload();
                     $('.panel-heading').replaceWith('<h3> Connexion reussie </h3>');
                     $('.panel-body').replaceWith('<h1>Bienvenue '+actionDatas['pseudo'] + '</h1>');
-                    $('main').html('');
                     break;
 
                 case 'deconnexion' : //Gestion de la deconnexion
@@ -62,6 +61,13 @@ function gererDonnes(retour){
                         console.log(actionDatas);
                     break;
 
+                case 'popUp' :
+                    /*$('.footer').dialog({
+                        modal: true,
+                        title: "Alo"
+                    });*/
+                    console.log(actionDatas);
+                     break;
                 case 'espaceMembre' : //Espace memebre affiché
                     let content = '';
                     actionDatas.forEach(function(data){
@@ -310,18 +316,6 @@ function gererDonnes(retour){
                     let hrefIndex =  hrefActuel.split('?');
                     window.location.replace(hrefIndex[0]);
                     break;
-                    //On cache toutes les balises nécessaires qui ruisquent d'être modifié dans l'historique des events
-                /*case 'hideModif' :
-                    //$('a').hide();
-                    $('#formInv').css('display', 'none');
-                    $('#suppr').hide();
-                    $('#ajoutFour').css('display', 'none');
-                    $('#ajoutCom').hide();
-                    $('#submit').hide();
-                    $('#invites a').hide();
-                    $('#listeFournitures a').hide();
-                    $('#listeCommentaire a').hide();
-                    break;*/
                 case 'Probleme JSON' : //On affiche si il y a un problème JSON
                     $('.intro-text').html(actionDatas['donnes']);
                     break;

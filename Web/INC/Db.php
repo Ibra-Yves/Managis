@@ -51,6 +51,7 @@ class Db
             case 'infoEvent' :
             case 'mailSupprInvite':
             case 'mailInv' :
+            case 'infoPopUp' :
                 array_push($params, '?');
             case 'tousLesUsers' :
                 try {
