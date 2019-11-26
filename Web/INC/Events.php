@@ -116,9 +116,15 @@ class Events
      * On insère dans la base de données toutes les données
      */
     private function formModifEvent(){
-        //$this->action->ajouterAction('test', $_POST);
-            $this->db->procCall('modifEvent', [$_SESSION['idEvent'],$_POST['nomEvent'], $_POST['adresse'], $_POST['date'], $_POST['heure']]);
-            $this->vosEvenements();
+        $this->db->procCall('modifEvent', [$_SESSION['idEvent'],$_POST['nomEvent'], $_POST['adresse'], $_POST['date'], $_POST['heure']]);
+        $invites = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+        $emails =[];
+        foreach ($invites as $key => $value){
+            $emails [] = $invites[$key]['email'];
+        }
+        $sendEmail = implode(", ", $emails);
+        mail($sendEmail, "Modification de l'événement", "L'événement auquel vous avez été invité a été modifié, veuillez vous rendre sur notre page pour les voir");
+        $this->vosEvenements();
     }
 
     /**
@@ -500,7 +506,6 @@ class Events
         foreach($afficheInv as $key => $value){
             $afficheParticip [] = $value['pseudo'];
         }
-        $listePres = array_intersect($afficheParticip,[$_SESSION['user']['pseudo']]);
 
         //On affiche le formulaire ainsi que le tableau niveau client
         $this->action->affichageDefaut('#afficheInfos', $this->lectureForm('listeInvites'));
@@ -511,7 +516,6 @@ class Events
 
         //Affichage de la possibilité de suppression si le user est hote
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
-        if($listePres) $this->action->ajouterAction('test', $listePres);
 
     }
 
@@ -578,26 +582,41 @@ class Events
 
         //Verifie si le pseudo mis dans le formulaire existe dans la BDD
         $resultatSansEspaces = array_intersect($list, [$_POST['pseudoInv']]);
-        $enleverEspaces = trim($_POST['pseudoInv']);
+        $enleverEspaces = trim($pseudo);
         $resultatAvecEspaces = array_intersect($list, [$enleverEspaces]);
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
+        $testMail = strpos($pseudo, '@');
 
         //On renvoie vers le client le message d'erreur si le pseudo transmis n'existe pas
-        if($_POST['pseudoInv'] == '' || !$user || $resultatSansEspaces || $resultatAvecEspaces){
+        if(!$user && !$resultatSansEspaces && !$resultatAvecEspaces && !empty($pseudo) && $testMail){
             mail($pseudo, 'Invitation dans un nouvel événement', 'Bonjour, un de vos amis vous a invité à son événement rejoignez le ici: https://managis.be/index.php?rq='.$_SESSION['idEvent']);
             $this->action->ajouterAction('succInv', "Un mail d'invitation a été envoyé");
+        }
+
+        else if(empty($pseudo)){
+            $this->action->ajouterAction('errorInv', "Veuillez spécifier le pseudo");
+        }
+
+        else if($resultatAvecEspaces || $resultatSansEspaces){
+            $this->action->ajouterAction('errorInv', "La personne invité se trouve dans la liste");
+        }
+
+        else if(empty($user)) {
+            $this->action->ajouterAction('errorInv', "La personne specifé n'est inscrite, veuillez spécifier son mail pour l'inviter à votre événement !");
         }
 
         //Sinon on rajoute l'invite et on l'affiche dans la liste
         else {
             $this->db->procCall('ajouterInvites',[$_POST['pseudoInv'], $_SESSION['idEvent']]);
-
             $invites= $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
             $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
             $nombreComm = $this->db->procCall('nombreComm', [$_SESSION['idEvent']]);
             $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
             $nombreParticipant =  $this->db->procCall('nombreParticipant', [$_SESSION['idEvent']]);
             $pseudos = $this->db->procCall('tousLesUsers', ['']);
+            $mailInv = $this->db->procCall('mailInv', [$user[0]['idUser']]);
+            $mail= $mailInv[0]['email'];
+            $this->action->ajouterAction('test', $resultatAvecEspaces);
 
             $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
             $this->action->affichageDefaut('#nombreInvFourComm', $this->lectureForm('infoSup'));
@@ -606,6 +625,7 @@ class Events
             $this->action->ajouterAction('tousLesPseudos', $pseudos);
             $this->action->ajouterAction('listeInvites', $invites);
             $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
+            mail($mail, "Invitation à l'événement", "Vous avez été invité à l'événement, veuillez vous connecter pour précisez si vous participez à l'événement");
 
             if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
         }
