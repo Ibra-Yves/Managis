@@ -97,7 +97,6 @@ var COMMENTAIRES = [
     FOURNITURES=[{}]
     this.buildTab(this.props.navigation.state.params.event.fournitures, FOURNITURES)
     this.handlerButtonOnPressFournitures()
-    this.updateFournitures()
   }
 
   inviteCombines(){
@@ -110,6 +109,17 @@ var COMMENTAIRES = [
     COMMENTAIRES=[{}]
     this.buildTab(this.props.navigation.state.params.event.commentaires, COMMENTAIRES)
     this.handlerButtonOnPressCommentaires()
+
+  }
+
+  addFourniture(idFourniture){
+    for(let i = 0; i<FOURNITURES.length; i++){
+      if(idFourniture == FOURNITURES[i].id ){
+        FOURNITURES[i].quantite++
+        console.log(FOURNITURES[i].quantite)
+      }
+    }
+    //this.buildTab(this.props.navigation.state.params.event.fournitures, FOURNITURES)
   }
 
   updateFournitures() {
@@ -253,7 +263,7 @@ var COMMENTAIRES = [
               </View>
               <View style={{flex: 2, flexDirection: 'row', justifyContent: 'center'}}>
                 <TouchableOpacity
-                  onPress={() => console.log('on ajoute à la quantité nécessaire pour la fourniture : ' + item.libelle)}
+                  onPress={() => this.addFourniture(item.id)}
                   style={{justifyContent:'center'}}>
                   <Image
                     style={{height: 30, width: 30}}
