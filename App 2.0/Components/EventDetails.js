@@ -8,6 +8,18 @@ var INVITES = [
   }
 ]
 
+var FOURNITURES = [
+  {
+
+  }
+]
+
+var COMMENTAIRES = [
+  {
+
+  }
+]
+
  class EventDetails extends Component {
 
 
@@ -71,23 +83,32 @@ var INVITES = [
     }
   }
 
-  buildTabInvites(tab) {
-    for (let i=0; i<tab.length; i++) {
-      if (i === 0) {
-        INVITES[0] = (tab[i])
+  buildTab(tabSource, tabCible) {
+    for(let i=0; i<tabSource.length; i++) {
+      if(i===0) {
+        tabCible[0] = (tabSource[i])
       } else {
-        INVITES.push(tab[i])
+        tabCible.push(tabSource[i])
       }
-
     }
-    //return invites
-    //console.log('liste des invites : ' + INVITES)
+  }
+
+  fournitureCombines() {
+    FOURNITURES=[{}]
+    this.buildTab(this.props.navigation.state.params.event.fournitures, FOURNITURES)
+    this.handlerButtonOnPressFournitures()
   }
 
   inviteCombines(){
     INVITES=[{}]
-    this.buildTabInvites(this.props.navigation.state.params.event.invites)
+    this.buildTab(this.props.navigation.state.params.event.invites, INVITES)
     this.handlerButtonOnPressInvites()
+  }
+
+  commentairesCombines() {
+    COMMENTAIRES=[{}]
+    this.buildTab(this.props.navigation.state.params.event.commentaires, COMMENTAIRES)
+    this.handlerButtonOnPressCommentaires()
   }
 
   render() {
@@ -166,12 +187,12 @@ var INVITES = [
         	</TouchableOpacity>
         	<TouchableOpacity
             style={styles.choix}
-            onPress={() => this.handlerButtonOnPressFournitures()}>
+            onPress={() => this.fournitureCombines()}>
         		<Text style={{color: '#FFFFFF', fontSize: 16}}>Fournitures</Text>
         	</TouchableOpacity>
         	<TouchableOpacity
             style={styles.choix}
-            onPress={() => this.handlerButtonOnPressCommentaires()}>
+            onPress={() => this.commentairesCombines()}>
         		<Text style={{color: '#FFFFFF', fontSize: 16}}>Commentaires</Text>
         	</TouchableOpacity>
         </View>
@@ -184,7 +205,7 @@ var INVITES = [
               <View style={{borderColor: '#3A4750', borderWidth: 2, borderRadius: 25, margin: 3, marginLeft: 6, marginRight: 6, padding: 2, flexDirection: 'row', height: 50}}>
                 <View style={{flex: 1}}>
                 </View>
-                <View style={{flex: 4, alignItems: 'center', justifyContent: 'center'}}>
+                <View >
                   <Text style={{textAlign: 'center', color: '#3A4750'}}>{item.pseudo}</Text>
                 </View>
                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -211,11 +232,37 @@ var INVITES = [
         <View style={_styleFournitures}>
           <Text style={{textAlign: 'center', fontSize: 16, margin: 6, color: "#3A4750", justifyContent: 'center'}}>Liste des fournitures</Text>
           <FlatList
-            data={this.props.navigation.state.params.event.fournitures}
+            data={FOURNITURES}
             renderItem={({item}) =>
-              <View style={{backgroundColor: '#3A4750', margin: 3, marginLeft: 6, marginRight: 6, padding: 2}}>
-                <Text style={{textAlign: 'center', color: '#FFFFFF'}}>{item}</Text>
-              </View>}
+            <View style={{borderColor: '#3A4750', borderWidth: 2, borderRadius: 25, margin: 3, marginLeft: 6, marginRight: 6, padding: 2, height: 50, flexDirection : 'row', justifyContent: 'center'}}>
+              <View style={{flex: 1}}>
+              </View>
+              <View style={{flex: 3, justifyContent: 'center'}}>
+              <View>
+                <Text style={{textAlign: 'left', color: '#3A4750'}}>Nom : {item.libelle}</Text>
+              </View>
+              <View>
+                <Text style={{textAlign: 'left', color: '#3A4750'}}>Quantité : {item.quantite}</Text>
+              </View>
+            </View>
+              <View style={{flex: 2, flexDirection: 'row', justifyContent: 'center'}}>
+                <TouchableOpacity>
+                  <Image
+                    style={{height: 30, width: 30}}
+                    source={require('../Images/icons8-plus-50.png')}/>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Image
+                    style={{height: 30, width: 30}}
+                    source={require('../Images/icons8-moins-50.png')}/>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Image
+                    style={{height: 30, width: 30}}
+                    source={require('../Images/icons8-poubelle-50.png')}/>
+                </TouchableOpacity>
+              </View>
+            </View>}
           />
           <View style={{alignItems: 'center'}}>
             <TouchableOpacity
@@ -231,10 +278,10 @@ var INVITES = [
         <View style={_styleCommentaires}>
           <Text style={{textAlign: 'center', fontSize: 16, margin: 6, justifyContent: 'center', color: "#3A4750"}}>Commentaires</Text>
           <FlatList
-            data={this.props.navigation.state.params.event.commentaires}
+            data={COMMENTAIRES}
             renderItem={({item}) =>
               <View style={{backgroundColor: '#3A4750', margin: 3, marginLeft: 6, marginRight: 6, padding: 2}}>
-                <Text style={{textAlign: 'center', color: '#FFFFFF'}}>{item}</Text>
+                <Text style={{textAlign: 'center', color: '#FFFFFF'}}>{item.libelle}</Text>
               </View>}
           />
           <View style={{alignItems: 'center'}}>

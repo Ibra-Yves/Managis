@@ -30,8 +30,33 @@ const EVENT = [
         status: 'invites'
       }
     ],
-    fournitures: ['2 bacs de bieres', '1 jeu de monopoly', '2 bouteilles de vodka'],
-    commentaires: ['tout tada ca', 'eh sahbi']
+    fournitures: [
+      {
+        id: '1',
+        libelle: 'bac de biere',
+        quantite: 2
+      },
+      {
+        id: '2',
+        libelle: 'jeu de monopoly',
+        quantite: 1
+      },
+      {
+        id: '3',
+        libelle: 'bouteille de vodka',
+        quantite: 2
+      }
+    ],
+    commentaires: [
+      {
+        id: '1',
+        libelle: 'tout tada ca'
+      },
+      {
+        id: '2',
+        libelle: 'eh sahbi'
+      }
+    ]
   },
   {
     id: '2',
