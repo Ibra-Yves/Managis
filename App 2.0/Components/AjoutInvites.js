@@ -5,15 +5,28 @@ import {Text, View, Image, TouchableOpacity, StyleSheet, ScrollView, TextInput, 
 const USER=[
   {
     id: '1',
-    nom: 'Chirac',
-    prenom: 'Patrick',
-    mail: 'patrick.chirac@camping.com'
+    pseudo: 'Athos',
+    mail: 'a.chelle@students.ephec.be'
   },
   {
     id: '2',
-    nom: 'Tuning',
-    prenom: 'Jacky',
-    mail: 'jacky.tuning@keke.com'
+    pseudo: 'Playmobiiatch',
+    mail: 'remy.vase3@hotmail.fr'
+  },
+  {
+    id: '3',
+    pseudo: 'ibra',
+    mail: ''
+  },
+  {
+    id: '4',
+    pseudo: 'nico7',
+    mail: ''
+  },
+  {
+    id: '5',
+    pseudo: 'satantoaster',
+    mail: ''
   }
 ]
 
@@ -55,7 +68,25 @@ export default class AjoutInvites extends React.Component {
           <FlatList
             data={USER}
             keyExtractor={(item) => item.id.toString()}
-            renderItem={({item}) => <Text>{item.nom}</Text>}
+            renderItem={({item}) =>
+            <View style={{flexDirection: 'row', margin: 6, marginTop: 3, marginBottom: 3, height: 50, borderWidth: 2, borderRadius: 25, borderColor: '#3A4750'}}>
+              <View style={{flex: 1}}>
+              </View>
+              <View style={{justifyContent: 'center', flexDirection: 'row', flex: 4, alignItems: 'center'}}>
+                <View>
+                  <Text>{item.pseudo}</Text>
+                </View>
+              </View>
+              <TouchableOpacity
+                onPress={() => console.log("on ajoute l'utilisateur avec l'id : " + item.id)}
+                style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <Image
+                  source={require('../Images/icons8-ajouter-administrateur-50.png')}
+                  style={{width: 30, height: 30}}/>
+              </TouchableOpacity>
+              <View style={{flex: 1}}>
+              </View>
+            </View>}
           />
         </View>
       </ScrollView>

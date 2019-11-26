@@ -13,7 +13,23 @@ const EVENT = [
     date: '20 novembre 2019',
     heure: '22h00',
     lieu: '12 rue de la paix',
-    invites: ['ibra', 'nico', 'max', 'dom', 'ambroise', 'remy', 'adri'],
+    invites: [
+      {
+        id: '1',
+        pseudo: 'ibra',
+        status: 'invites'
+      },
+      {
+        id: '2',
+        pseudo: 'nico',
+        status: 'invites'
+      },
+      {
+        id: '3',
+        pseudo: 'remy',
+        status: 'invites'
+      }
+    ],
     fournitures: ['2 bacs de bieres', '1 jeu de monopoly', '2 bouteilles de vodka'],
     commentaires: ['tout tada ca', 'eh sahbi']
   },

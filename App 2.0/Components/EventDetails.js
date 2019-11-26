@@ -2,7 +2,15 @@ import React, { Component } from 'react'
 
 import { Text, StyleSheet, View, TouchableOpacity, FlatList, ScrollView, Image } from 'react-native'
 
+var INVITES = [
+  {
+
+  }
+]
+
  class EventDetails extends Component {
+
+
 
   constructor(props) {
     super(props)
@@ -61,6 +69,25 @@ import { Text, StyleSheet, View, TouchableOpacity, FlatList, ScrollView, Image }
         onPressedCommentaires: false
       })
     }
+  }
+
+  buildTabInvites(tab) {
+    for (let i=0; i<tab.length; i++) {
+      if (i === 0) {
+        INVITES[0] = (tab[i])
+      } else {
+        INVITES.push(tab[i])
+      }
+
+    }
+    //return invites
+    //console.log('liste des invites : ' + INVITES)
+  }
+
+  inviteCombines(){
+    INVITES=[{}]
+    this.buildTabInvites(this.props.navigation.state.params.event.invites)
+    this.handlerButtonOnPressInvites()
   }
 
   render() {
@@ -134,7 +161,7 @@ import { Text, StyleSheet, View, TouchableOpacity, FlatList, ScrollView, Image }
         <View style={{flexDirection: 'row', flex: 1}}>
         	<TouchableOpacity
         		style={styles.choix}
-        		onPress={() => this.handlerButtonOnPressInvites()}>
+        		onPress={() => this.inviteCombines()}>
         		<Text style={{color: '#FFFFFF', fontSize: 16}}>Invités</Text>
         	</TouchableOpacity>
         	<TouchableOpacity
@@ -149,12 +176,25 @@ import { Text, StyleSheet, View, TouchableOpacity, FlatList, ScrollView, Image }
         	</TouchableOpacity>
         </View>
         <View style={_styleInvites}>
-          <Text style={{textAlign: 'center', fontSize: 16, margin: 6, justifyContent: 'center'}}>Liste des invités</Text>
+          <Text style={{textAlign: 'center', fontSize: 16, margin: 6, justifyContent: 'center', color: "#3A4750"}}>Liste des invités</Text>
         	<FlatList
-        		data={this.props.navigation.state.params.event.invites}
+        		data={INVITES}
+            //keyExtractor={invites.id}
         		renderItem={({item}) =>
-              <View style={{backgroundColor: '#3A4750', margin: 3, marginLeft: 6, marginRight: 6, padding: 2}}>
-                <Text style={{textAlign: 'center', color: '#FFFFFF'}}>{item}</Text>
+              <View style={{borderColor: '#3A4750', borderWidth: 2, borderRadius: 25, margin: 3, marginLeft: 6, marginRight: 6, padding: 2, flexDirection: 'row', height: 50}}>
+                <View style={{flex: 1}}>
+                </View>
+                <View style={{flex: 4, alignItems: 'center', justifyContent: 'center'}}>
+                  <Text style={{textAlign: 'center', color: '#3A4750'}}>{item.pseudo}</Text>
+                </View>
+                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                  <TouchableOpacity
+                    onPress={() => console.log("on retire l'invite avec le pseudo : " + item.pseudo)}>
+                    <Image
+                      style={{height: 30, width: 30}}
+                      source={require('../Images/icons8-retirer-administrateur-50.png')}/>
+                  </TouchableOpacity>
+                </View>
               </View>}
         	/>
           <View style={{alignItems: 'center'}}>
@@ -169,7 +209,7 @@ import { Text, StyleSheet, View, TouchableOpacity, FlatList, ScrollView, Image }
           </View>
         </View>
         <View style={_styleFournitures}>
-          <Text style={{textAlign: 'center', fontSize: 16, margin: 6}}>Liste des fournitures</Text>
+          <Text style={{textAlign: 'center', fontSize: 16, margin: 6, color: "#3A4750", justifyContent: 'center'}}>Liste des fournitures</Text>
           <FlatList
             data={this.props.navigation.state.params.event.fournitures}
             renderItem={({item}) =>
@@ -189,7 +229,7 @@ import { Text, StyleSheet, View, TouchableOpacity, FlatList, ScrollView, Image }
           </View>
         </View>
         <View style={_styleCommentaires}>
-          <Text style={{textAlign: 'center', fontSize: 16, margin: 6}}>Commentaires</Text>
+          <Text style={{textAlign: 'center', fontSize: 16, margin: 6, justifyContent: 'center', color: "#3A4750"}}>Commentaires</Text>
           <FlatList
             data={this.props.navigation.state.params.event.commentaires}
             renderItem={({item}) =>
