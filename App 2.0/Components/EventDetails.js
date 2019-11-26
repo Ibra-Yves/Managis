@@ -97,6 +97,7 @@ var COMMENTAIRES = [
     FOURNITURES=[{}]
     this.buildTab(this.props.navigation.state.params.event.fournitures, FOURNITURES)
     this.handlerButtonOnPressFournitures()
+    this.updateFournitures()
   }
 
   inviteCombines(){
@@ -109,6 +110,11 @@ var COMMENTAIRES = [
     COMMENTAIRES=[{}]
     this.buildTab(this.props.navigation.state.params.event.commentaires, COMMENTAIRES)
     this.handlerButtonOnPressCommentaires()
+  }
+
+  updateFournitures() {
+    console.log(this.props.navigation.state.params.event.fournitures)
+    
   }
 
   render() {
@@ -202,10 +208,10 @@ var COMMENTAIRES = [
         		data={INVITES}
             //keyExtractor={invites.id}
         		renderItem={({item}) =>
-              <View style={{borderColor: '#3A4750', borderWidth: 2, borderRadius: 25, margin: 3, marginLeft: 6, marginRight: 6, padding: 2, flexDirection: 'row', height: 50}}>
+              <View style={{borderColor: '#3A4750', borderWidth: 2, borderRadius: 25, margin: 3, marginLeft: 6, marginRight: 6, padding: 2, flexDirection: 'row', height: 50, justifyContent: 'center'}}>
                 <View style={{flex: 1}}>
                 </View>
-                <View >
+                <View style={{justifyContent: 'center'}}>
                   <Text style={{textAlign: 'center', color: '#3A4750'}}>{item.pseudo}</Text>
                 </View>
                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -238,25 +244,27 @@ var COMMENTAIRES = [
               <View style={{flex: 1}}>
               </View>
               <View style={{flex: 3, justifyContent: 'center'}}>
-              <View>
-                <Text style={{textAlign: 'left', color: '#3A4750'}}>Nom : {item.libelle}</Text>
+                <View>
+                  <Text style={{textAlign: 'left', color: '#3A4750'}}>Nom : {item.libelle}</Text>
+                </View>
+                <View>
+                  <Text style={{textAlign: 'left', color: '#3A4750'}}>Quantité : {item.quantite}</Text>
+                </View>
               </View>
-              <View>
-                <Text style={{textAlign: 'left', color: '#3A4750'}}>Quantité : {item.quantite}</Text>
-              </View>
-            </View>
               <View style={{flex: 2, flexDirection: 'row', justifyContent: 'center'}}>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => console.log('on ajoute à la quantité nécessaire pour la fourniture : ' + item.libelle)}
+                  style={{justifyContent:'center'}}>
                   <Image
                     style={{height: 30, width: 30}}
                     source={require('../Images/icons8-plus-50.png')}/>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity style={{justifyContent:'center'}}>
                   <Image
                     style={{height: 30, width: 30}}
                     source={require('../Images/icons8-moins-50.png')}/>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity style={{justifyContent:'center'}}>
                   <Image
                     style={{height: 30, width: 30}}
                     source={require('../Images/icons8-poubelle-50.png')}/>
