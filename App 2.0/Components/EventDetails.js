@@ -2,43 +2,31 @@ import React, { Component } from 'react'
 
 import { Text, StyleSheet, View, TouchableOpacity, FlatList, ScrollView, Image } from 'react-native'
 
-var INVITES = [
-  {
-
-  }
-]
-
-var FOURNITURES = [
-  {
-
-  }
-]
-
-var COMMENTAIRES = [
-  {
-
-  }
-]
+var FOURNITURES=[{}]
+var INVITES=[{}]
+var COMMENTAIRES=[{}]
 
  class EventDetails extends Component {
-
-
 
   constructor(props) {
     super(props)
     this.state = {
       onPressedInvites: false,
       onPressedFournitures: false,
-      onPressedCommentaires: false
+      onPressedCommentaires: false,
+      //fourniture: FOURNITURES
     }
     this.handlerButtonOnPressInvites = this.handlerButtonOnPressInvites.bind(this)
     this.handlerButtonOnPressFournitures = this.handlerButtonOnPressFournitures.bind(this)
     this.handlerButtonOnPressCommentaires = this.handlerButtonOnPressCommentaires.bind(this)
-    this.forceUpdateHandler = this.forceUpdateHandler.bind(this)
+
   }
 
-  forceUpdateHandler() {
-    this.forceUpdate()
+  back() {
+    FOURNITURES=[{}]
+    INVITES=[{}]
+    COMMENTAIRES=[{}]
+    this.props.navigation.goBack()
   }
 
   handlerButtonOnPressInvites() {
@@ -90,71 +78,74 @@ var COMMENTAIRES = [
   }
 
   buildTab(tabSource, tabCible) {
-    for(let i=0; i<tabSource.length; i++) {
-      if(i===0) {
-        tabCible[0] = (tabSource[i])
-      } else {
-        tabCible.push(tabSource[i])
+    if (tabCible.length > 1) {
+      console.log("pas besoin de construire le tableau")
+
+    } else if (tabCible.length == 1){
+      for(let i=0; i<tabSource.length; i++) {
+        if(i===0) {
+          tabCible[0] = (tabSource[i])
+        } else {
+          tabCible.push(tabSource[i])
+        }
       }
     }
   }
 
   fournitureCombines() {
-
-    this.buildTab(this.props.navigation.state.params.event.fournitures, FOURNITURES)
     this.handlerButtonOnPressFournitures()
   }
 
   inviteCombines(){
-    INVITES=[{}]
-    this.buildTab(this.props.navigation.state.params.event.invites, INVITES)
     this.handlerButtonOnPressInvites()
   }
 
   commentairesCombines() {
-    COMMENTAIRES=[{}]
-    this.buildTab(this.props.navigation.state.params.event.commentaires, COMMENTAIRES)
     this.handlerButtonOnPressCommentaires()
-
   }
 
   addOneFourniture(idFourniture){
     for(let i = 0; i<FOURNITURES.length; i++){
       if(idFourniture == FOURNITURES[i].id ){
         FOURNITURES[i].quantite++
-        console.log(FOURNITURES[i].quantite)
       }
     }
-    this.forceUpdateHandler()
   }
 
   removeOneFourniture(idFourniture) {
     for(let i=0; i<FOURNITURES.length; i++) {
     if(idFourniture == FOURNITURES[i].id && FOURNITURES[i].quantite > 0) {
         FOURNITURES[i].quantite--
-        console.log(FOURNITURES[i].quantite)
+
       } else if (FOURNITURES[i].quantite == 0){
-        FOURNITURES.splice(i, 1)
+        alert("Vous ne pouvez pas en retirer plus !")
       }
     }
-    this.forceUpdateHandler()
   }
 
   deleteFourniture(idFourniture) {
+    console.log(idFourniture)
+
     for(let i=0; i<FOURNITURES.length; i++) {
-      if(idFourniture == FOURNITURES[i].id) {
+
+      if(idFourniture === FOURNITURES[i].id) {
+        //console.log("on supprime " + FOURNITURES[i].libelle)
         FOURNITURES.splice(i, 1)
+        console.log(FOURNITURES)
+      }
+      else {
+        console.log("on supprime pas")
       }
     }
-    this.forceUpdateHandler()
   }
 
-  updateFournitures() {
-    console.log(this.props.navigation.state.params.event.fournitures)
 
-  }
 
   render() {
+
+    this.buildTab(this.props.navigation.state.params.event.fournitures, FOURNITURES)
+    this.buildTab(this.props.navigation.state.params.event.invites, INVITES)
+    this.buildTab(this.props.navigation.state.params.event.commentaires, COMMENTAIRES)
 
     var _styleInvites
     var _styleFournitures
@@ -196,7 +187,7 @@ var COMMENTAIRES = [
       <View style={{flex: 1}}>
       	<View style={styles.containerTitre}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.goBack()}
+            onPress={() => this.back()}
             style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Image
               style={{width: 30, height: 30}}
@@ -276,6 +267,7 @@ var COMMENTAIRES = [
           <Text style={{textAlign: 'center', fontSize: 16, margin: 6, color: "#3A4750", justifyContent: 'center'}}>Liste des fournitures</Text>
           <FlatList
             data={FOURNITURES}
+            extraData={this.state.fourniture}
             renderItem={({item}) =>
             <View style={{borderColor: '#3A4750', borderWidth: 2, borderRadius: 25, margin: 3, marginLeft: 6, marginRight: 6, padding: 2, height: 50, flexDirection : 'row', justifyContent: 'center'}}>
               <View style={{flex: 1}}>

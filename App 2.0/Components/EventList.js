@@ -63,7 +63,22 @@ const EVENT = [
     title: 'Soiree react',
     date: '16 novembre 2019',
     heure: '18h00',
-    lieu: '2 avenue du js'
+    lieu: '2 avenue du js',
+    invites: [
+      {
+
+      }
+    ],
+    fournitures: [
+      {
+
+      }
+    ],
+    commentaires: [
+      {
+
+      }
+    ]
   },
   {
     id: '3',
@@ -136,6 +151,7 @@ class EventList extends Component {
 
 
   render() {
+    console.log(this)
     return (
       <ScrollView style={{marginTop: Constants.statusBarHeight}}>
         <View style={styles.containerTitre}>
