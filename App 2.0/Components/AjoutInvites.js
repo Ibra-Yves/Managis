@@ -37,9 +37,22 @@ export default class AjoutInvites extends React.Component {
   filtreInvites(pseudoInv){
     for(let i = 0; i < USER.length; i++){
       if(pseudoInv === USER[i].pseudo){
-        return USER[i].pseudo
+        this.username = USER[i].pseudo
+        break
+      }
+      else{
+        this.username = "Caca"
       }
     }
+  }
+
+  afficheListe(){
+    this.setState({showForm: 0})
+  }
+
+  rechercheFonction(){
+    this.filtreInvites(this.username)
+    this.afficheListe()
   }
 
 
@@ -73,13 +86,12 @@ export default class AjoutInvites extends React.Component {
           <TextInput
             style={styles.textinput}
             onChangeText={(text) => this.username = text}
-            //value={this.state.username}
             placeholder='Rechercher un utilisateur'
             placeholderTextColor='#FFFFFF'
           />
           <View>
             <TouchableOpacity style={{flexDirection: 'row'}}
-              onPress={() => this.filtreInvites(this.username)}>
+              onPress={() => this.rechercheFonction()}>
               <Image
                 source={require('../Images/icons8-chercher-50.png')}
                 style={styles.iconSearch}/>
@@ -88,17 +100,17 @@ export default class AjoutInvites extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-        <View>
+          <View>
             <View style={{flexDirection: 'row', margin: 6, marginTop: 3, marginBottom: 3, height: 50, borderWidth: 2, borderRadius: 25, borderColor: '#3A4750'}}>
               <View style={{flex: 1}}>
               </View>
               <View style={{justifyContent: 'center', flexDirection: 'row', flex: 4, alignItems: 'center'}}>
                 <View>
-                  <Text>{this.filtreInvites(this.username)}</Text>
+                  <Text>{this.username}</Text>
                 </View>
               </View>
               <TouchableOpacity
-                onPress={() => console.log("on ajoute l'utilisateur avec l'id : " + item.id)}
+                onPress={() => console.log("on ajoute l'utilisateur : " + this.username)}
                 style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 <Image
                   source={require('../Images/icons8-ajouter-administrateur-50.png')}
@@ -107,9 +119,8 @@ export default class AjoutInvites extends React.Component {
               <View style={{flex: 1}}>
               </View>
             </View>
-        </View>
+          </View>  
       </ScrollView>
-
     )
   }
 }
