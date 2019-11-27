@@ -52,7 +52,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="index.php">Managis</a>
+      <a class="navbar-brand js-scroll-trigger" id="index" href="index.php">Managis</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -114,19 +114,29 @@
       <div class="intro-text">
           <div class="intro-lead-in">Bienvenue sur Managis</div>
           <div class="intro-heading text-uppercase">Organisez au mieux vos événements! </div>
-          <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Commencez dès maintenant !</a>
+          <?php
+          $commencez =  '<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Commencez dès maintenant !</a>';
+            if(!empty($_SESSION['user'])) {
+                echo '<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="addEvent.php">Commencez dès maintenant !</a>';
+            }
+            else {
+                echo $commencez;
+            }
+          ?>
       </div>
     </div>
   </header>
+<div id="popUp"></div>
+<?php
 
-<div id="difSection">
+$difSection = '<div id="difSection">
   <!-- Services -->
   <section class="bg-white page-section" id="services">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
           <h2 class="section-heading text-uppercase">Services</h2>
-          <h3 class="section-subheading text-muted">Nous vous accompagnons lors de l'organisation de vos événements.</h3>
+          <h3 class="section-subheading text-muted">Nous vous accompagnons lors de l\'organisation de vos événements.</h3>
         </div>
       </div>
       <div class="row text-center">
@@ -144,7 +154,7 @@
             <i class="fas fa-eye fa-stack-1x fa-inverse"></i>
           </span>
           <h4 class="service-heading">Checkez vos événements</h4>
-          <p class="text-muted">Recevez toutes vos invitations et regardez ce dont l'hôte a besoin pour son événement.</p>
+          <p class="text-muted">Recevez toutes vos invitations et regardez ce dont l\'hôte a besoin pour son événement.</p>
         </div>
       </div>
     </div>
@@ -172,7 +182,7 @@
                   <h4 class="subheading">Notre commencement</h4>
                 </div>
                 <div class="timeline-body">
-                  <p class="text-muted">Nous sommes des étudiants en 3eme technologie de l'informatique à l'EPHEC de Louvain-La-Neuve. Dans le cadre de notre cours de projet d'intégration, nous avons comme tâche d'effectuer un projet qui nous serait utile dans la vie de tous les jours</p>
+                  <p class="text-muted">Nous sommes des étudiants en 3eme technologie de l\'informatique à l\'EPHEC de Louvain-La-Neuve. Dans le cadre de notre cours de projet d\'intégration, nous avons comme tâche d\'effectuer un projet qui nous serait utile dans la vie de tous les jours</p>
                 </div>
               </div>
             </li>
@@ -183,10 +193,10 @@
               <div class="timeline-panel">
                 <div class="timeline-heading">
                   <h4>Mi-Septembre 2019</h4>
-                  <h4 class="subheading">L'idée!</h4>
+                  <h4 class="subheading">L\'idée!</h4>
                 </div>
                 <div class="timeline-body">
-                  <p class="text-muted">Lors de notre voyage de fin d'étude nous sommes passé par l'étape d'organisation. C'est alors que nous nous sommes dit que nous allions créer une plateforme afin de faciliter cette tâche!</p>
+                  <p class="text-muted">Lors de notre voyage de fin d\'étude nous sommes passé par l\'étape d\'organisation. C\'est alors que nous nous sommes dit que nous allions créer une plateforme afin de faciliter cette tâche!</p>
                 </div>
               </div>
             </li>
@@ -209,7 +219,7 @@
       <div class="row">
         <div class="col-lg-12 text-center">
           <h2 class="section-heading text-uppercase">Notre équipe !</h2>
-          <h3 class="section-subheading text-muted">Voici l'équipe qui a travaillé sur ce projet.</h3>
+          <h3 class="section-subheading text-muted">Voici l\'équipe qui a travaillé sur ce projet.</h3>
         </div>
       </div>
       <div class="row">
@@ -434,7 +444,9 @@
       </div>
     </div>
   </section>
-</div>
+</div>';
+    if(empty($_SESSION['user'])) echo $difSection;
+?>
 
   <!-- Footer -->
   <footer class="footer">

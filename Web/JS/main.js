@@ -47,12 +47,6 @@ function gererDonnes(retour){
                     evenements(dest);
                     break;
 
-                case 'connexion' : //Gestion de la connexion et remplacement des elements qu'il faut
-                    location.reload();
-                    $('.panel-heading').replaceWith('<h3> Connexion reussie </h3>');
-                    $('.panel-body').replaceWith('<h1>Bienvenue '+actionDatas['pseudo'] + '</h1>');
-                    break;
-
                 case 'deconnexion' : //Gestion de la deconnexion
                         location.reload();
                     break;
@@ -62,11 +56,14 @@ function gererDonnes(retour){
                     break;
 
                 case 'popUp' :
-                    /*$('.footer').dialog({
-                        modal: true,
-                        title: "Alo"
-                    });*/
-                    console.log(actionDatas);
+                        $('#popUp').dialog({
+                            title: "Notification",
+                            position: {
+                                my: 'right bottom',
+                                at: 'right bottom',
+                                of: window
+                            },
+                        }).html("Vous avez été invité à "+ actionDatas+ " événement(s)");
                      break;
                 case 'espaceMembre' : //Espace memebre affiché
                     let content = '';

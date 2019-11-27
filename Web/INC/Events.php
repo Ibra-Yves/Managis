@@ -54,7 +54,6 @@ class Events
         $this->db = new Db(); //Instance de la classe db
         if(isset($_GET['rq'])) $this->rq = $_GET['rq'];
         $this->gestionRequetes($this->rq);
-        $this->popUp();
     }
 
     /**
@@ -103,10 +102,10 @@ class Events
         $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
     }
 
-    private function popUp(){
+    public function popUp(){
         $info = $this->db->procCall('infoPopUp', [$_SESSION['user']['idUser']]);
-        $infoPopUp = $info[0]['invitations'];
-        if(!empty($_SESSION['user'])) $this->action->ajouterAction('popUp', $infoPopUp);
+        $infoPopUp =  $info[0]['invitations'];
+        $this->action->ajouterAction('popUp', $infoPopUp);
     }
 
     /**
@@ -220,7 +219,7 @@ class Events
                     $datas = [
                         'pseudo' => $_SESSION['user']['pseudo']
                     ];
-                    $this->action->ajouterAction('connexion', $datas);
+                    $this->affichageConnecte();
                 }
             }
         }
@@ -269,7 +268,7 @@ class Events
                     $datas = [
                         'pseudo' => $_SESSION['user']['pseudo']
                     ];
-                    $this->action->ajouterAction('connexion', $datas);
+                    $this->affichageConnecte();
                 }
             }
         }
@@ -289,22 +288,51 @@ class Events
      */
     private function formConnexion(){
        $user = $this->db->procCall('connexionUser', [$_POST['pseudo'], hash('md5', $_POST['mdp'])]); //Porcedure qui permet de se connecter appellé
-
        //Si la procèdure renvoie quelque chose
        if($user){
            //On memorise les données retournés dans la superglobale
            $_SESSION['user'] = $user[0];
            $_SESSION['user']['idUser'] = $user[0]['idUser'];
            $_SESSION['user']['pseudo'] = $user[0]['pseudo'];
-           $datas = [
-               'pseudo' =>  $_SESSION['user']['pseudo']
-           ];
-           $this->action->ajouterAction( 'connexion', $datas); //On envoie vers le JS le données du user
+           $this->affichageConnecte();
        }
        //Sinon on renvoie ceci à l'utilisateur
        else {
            $this->action->ajouterAction( 'errorUser',"Le pseudo ou le mot de passe est incorrect");
        }
+    }
+
+    /**
+     * Affiche la nouvelle navbar après la connexion
+     *
+     */
+    private function affichageConnecte(){
+        $vosEvenements =
+            '<li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle btn btn-outline-light" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-calendar"></span> Gestion des événements
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="addEvent.php">CREER VOTRE EVENEMENT</a>
+                    <a class="dropdown-item" href="vosEvenements.php">EVENEMENTS A VENIR</a>
+                    <a class="dropdown-item" href="historiqueEvents.php">HISTORIQUE DE VOS EVENEMENTS</a>
+                </div>
+                </li>';
+        $gestionCompte =
+            '<li class="nav-item">
+                <a href="espaceMembre.php" id="espaceMembre" class="nav-link js-scroll-trigger">Gestion de  compte</a>
+            </li>';
+        $deconnexion =
+            '<li class="nav-item">
+                <a href="deconnexion.php" id="deconnexion" class="nav-link js-scroll-trigger"> Déconnexion</a>
+            </li>';
+        $introText =
+            '<div class="intro-lead-in">Bienvenue sur Managis</div>
+             <div class="intro-heading text-uppercase">Organisez au mieux vos événements! </div>
+             <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="addEvent.php">Commencez dès maintenant !</a>';
+        $this->action->affichageDefaut('#navbarResponsive', '<ul class="navbar-nav text-uppercase ml-auto">'.$vosEvenements. $gestionCompte. $deconnexion.'</ul>');
+        $this->action->affichageDefaut('.intro-text', $introText);
+        $this->popUp();
     }
 
     /**
