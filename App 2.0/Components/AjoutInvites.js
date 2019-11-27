@@ -59,6 +59,14 @@ export default class AjoutInvites extends React.Component {
             <Text style={styles.titrePage}>Ajoutez un invité</Text>
           </View>
           <View style={{flex : 1}}>
+		  <TouchableOpacity
+              onPress={() => this.props.navigation.openDrawer("EventDrawerNav")}
+              style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+              <Image
+                source={require('../Images/icons8-menu-arrondi-50.png')}
+                style={styles.icon}
+                />
+            </TouchableOpacity>
           </View>
         </View>
         <View style={{margin: 5, alignItems: 'center'}}>

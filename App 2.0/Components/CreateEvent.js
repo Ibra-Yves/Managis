@@ -31,44 +31,44 @@ export default class CreateEvent extends Component {
           </View>
         </View>
         <View >
-        <View style={styles.inputContainer}>
-          <Text style={styles.com}>Ajoutez un nom à votre événement !</Text>
-          <TextInput
-            style = {styles.inputBox}
-            placeholder = 'Nom'
-            placeholderTextColor = '#FFFFFF'
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text>Indiquez le lieu de votre événement</Text>
-          <TextInput
-            style = {styles.inputBox}
-            placeholder = 'Adresse'
-            placeholderTextColor = '#FFFFFF'
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text>Indiquez la date de l'événement</Text>
-          <TextInput
-            style = {styles.inputBox}
-            placeholder = 'Date'
-            placeholderTextColor = '#FFFFFF'
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text>Indiquez l'heure de l'événement</Text>
-          <TextInput
-            style = {styles.inputBox}
-            placeholder = 'Heure'
-            placeholderTextColor = '#FFFFFF'
-          />
-        </View>
-        <View style={styles.submitContainer}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('EventList')}>
-            <Text style={styles.submitButton}>Valider</Text>
-          </TouchableOpacity>
-        </View>
+			<View style={styles.inputContainer}>
+			  <Text style={styles.com}>Ajoutez un nom à votre événement !</Text>
+			  <TextInput
+				style = {styles.inputBox}
+				placeholder = 'Nom'
+				placeholderTextColor = '#FFFFFF'
+			  />
+			</View>
+			<View style={styles.inputContainer}>
+			  <Text>Indiquez le lieu de votre événement</Text>
+			  <TextInput
+				style = {styles.inputBox}
+				placeholder = 'Adresse'
+				placeholderTextColor = '#FFFFFF'
+			  />
+			</View>
+			<View style={styles.inputContainer}>
+			  <Text>Indiquez la date de l'événement</Text>
+			  <TextInput
+				style = {styles.inputBox}
+				placeholder = 'Date'
+				placeholderTextColor = '#FFFFFF'
+			  />
+			</View>
+			<View style={styles.inputContainer}>
+			  <Text>Indiquez l'heure de l'événement</Text>
+			  <TextInput
+				style = {styles.inputBox}
+				placeholder = 'Heure'
+				placeholderTextColor = '#FFFFFF'
+			  />
+			</View>
+			<View style={styles.submitContainer}>
+			  <TouchableOpacity
+				onPress={() => this.props.navigation.navigate('EventList')}>
+				<Text style={styles.submitButton}>Valider</Text>
+			  </TouchableOpacity>
+			</View>
         </View>
       </ScrollView>
     )

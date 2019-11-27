@@ -3,6 +3,13 @@ import React from 'react'
 import {Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
 import Constants from 'expo-constants'
 
+var COMMENTAIRE = [
+  {
+	id: '1',
+    title: 'Trop drole l\'elastique',
+  }
+]
+
 export default class AjoutCommentaires extends React.Component {
   render() {
     return (
@@ -37,13 +44,14 @@ export default class AjoutCommentaires extends React.Component {
 			  <Text style={styles.com}>Ajoutez un commentaire!</Text>
 			  <TextInput
 				style = {styles.inputBox}
+				onChangeText={(text) => this.commentaire = text}
 				placeholder = 'Commentaire'
 				placeholderTextColor = '#FFFFFF'
 			  />
 			</View>
 			<View style={styles.submitContainer}>
 			  <TouchableOpacity
-				onPress={() => this.props.navigation.navigate('EventList')}>
+				onPress={() => console.log(this.commentaire)}>
 				<Text style={styles.submitButton}>Valider</Text>
 			  </TouchableOpacity>
 			</View>
