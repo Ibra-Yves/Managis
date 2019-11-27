@@ -34,7 +34,13 @@ var COMMENTAIRES = [
     this.handlerButtonOnPressInvites = this.handlerButtonOnPressInvites.bind(this)
     this.handlerButtonOnPressFournitures = this.handlerButtonOnPressFournitures.bind(this)
     this.handlerButtonOnPressCommentaires = this.handlerButtonOnPressCommentaires.bind(this)
+    this.forceUpdateHandler = this.forceUpdateHandler.bind(this)
   }
+
+  forceUpdateHandler() {
+    this.forceUpdate()
+  }
+
   handlerButtonOnPressInvites() {
     if (this.state.onPressedInvites == false) {
       this.setState({
@@ -94,7 +100,7 @@ var COMMENTAIRES = [
   }
 
   fournitureCombines() {
-    FOURNITURES=[{}]
+
     this.buildTab(this.props.navigation.state.params.event.fournitures, FOURNITURES)
     this.handlerButtonOnPressFournitures()
   }
@@ -112,22 +118,44 @@ var COMMENTAIRES = [
 
   }
 
-  addFourniture(idFourniture){
+  addOneFourniture(idFourniture){
     for(let i = 0; i<FOURNITURES.length; i++){
       if(idFourniture == FOURNITURES[i].id ){
         FOURNITURES[i].quantite++
         console.log(FOURNITURES[i].quantite)
       }
     }
-    //this.buildTab(this.props.navigation.state.params.event.fournitures, FOURNITURES)
+    this.forceUpdateHandler()
+  }
+
+  removeOneFourniture(idFourniture) {
+    for(let i=0; i<FOURNITURES.length; i++) {
+    if(idFourniture == FOURNITURES[i].id && FOURNITURES[i].quantite > 0) {
+        FOURNITURES[i].quantite--
+        console.log(FOURNITURES[i].quantite)
+      } else if (FOURNITURES[i].quantite == 0){
+        FOURNITURES.splice(i, 1)
+      }
+    }
+    this.forceUpdateHandler()
+  }
+
+  deleteFourniture(idFourniture) {
+    for(let i=0; i<FOURNITURES.length; i++) {
+      if(idFourniture == FOURNITURES[i].id) {
+        FOURNITURES.splice(i, 1)
+      }
+    }
+    this.forceUpdateHandler()
   }
 
   updateFournitures() {
     console.log(this.props.navigation.state.params.event.fournitures)
-    
+
   }
 
   render() {
+
     var _styleInvites
     var _styleFournitures
     var _styleCommentaires
@@ -184,7 +212,6 @@ var COMMENTAIRES = [
         	<Text style={styles.titre2}>Date de l'événement: </Text>
         </View>
         	<Text style={styles.text}>{event.date}</Text>
-
         <View style={styles.containerTitre2}>
         	<Text style={styles.titre2}>Heure de l'événement: </Text>
         </View>
@@ -263,18 +290,22 @@ var COMMENTAIRES = [
               </View>
               <View style={{flex: 2, flexDirection: 'row', justifyContent: 'center'}}>
                 <TouchableOpacity
-                  onPress={() => this.addFourniture(item.id)}
+                  onPress={() => this.addOneFourniture(item.id)}
                   style={{justifyContent:'center'}}>
                   <Image
                     style={{height: 30, width: 30}}
                     source={require('../Images/icons8-plus-50.png')}/>
                 </TouchableOpacity>
-                <TouchableOpacity style={{justifyContent:'center'}}>
+                <TouchableOpacity
+                  onPress={() => this.removeOneFourniture(item.id)}
+                  style={{justifyContent:'center'}}>
                   <Image
                     style={{height: 30, width: 30}}
                     source={require('../Images/icons8-moins-50.png')}/>
                 </TouchableOpacity>
-                <TouchableOpacity style={{justifyContent:'center'}}>
+                <TouchableOpacity
+                  onPress={() => this.deleteFourniture(item.id)}
+                  style={{justifyContent:'center'}}>
                   <Image
                     style={{height: 30, width: 30}}
                     source={require('../Images/icons8-poubelle-50.png')}/>
