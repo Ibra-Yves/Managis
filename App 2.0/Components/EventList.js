@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, Image, StyleSheet, FlatList, ScrollView } from 'react-native'
 import EventDetails from '../Components/EventDetails'
 import Constants from 'expo-constants'
-//import EventItem from '../Components/EventItem'
+
 
 /*je declare ici une serie d'event afin de tester la liste*/
 const EVENT = [
@@ -63,7 +63,22 @@ const EVENT = [
     title: 'Soiree react',
     date: '16 novembre 2019',
     heure: '18h00',
-    lieu: '2 avenue du js'
+    lieu: '2 avenue du js',
+    invites: [
+      {
+
+      }
+    ],
+    fournitures: [
+      {
+
+      }
+    ],
+    commentaires: [
+      {
+
+      }
+    ]
   },
   {
     id: '3',
@@ -130,14 +145,13 @@ class EventList extends Component {
   }
 
   _displayEventDetail = (idEvent) => {
-    //console.log("display details event :" + idEvent)
     this.props.navigation.navigate("EventDetails", {idEvent: idEvent})
   }
 
 
 
   render() {
-    //console.log(this.props.events)
+    console.log(this)
     return (
       <ScrollView style={{marginTop: Constants.statusBarHeight}}>
         <View style={styles.containerTitre}>

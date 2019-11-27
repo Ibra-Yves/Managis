@@ -8,7 +8,20 @@ export default class CreateAnnonce extends Component {
     return (
       <ScrollView style={{marginTop: Constants.statusBarHeight}}>
         <View style={styles.containerTitre}>
-          <TouchableOpacity
+		<TouchableOpacity
+          onPress={() => this.props.navigation.goBack()}
+          style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Image
+            source={require('../Images/icons8-gauche-50.png')}
+            style={styles.icon}
+            />
+        </TouchableOpacity>
+          
+          <View style={{flex: 6, justifyContent: 'center'}}>
+            <Text style={styles.titrePage}>Créer une annonce !</Text>
+          </View>
+          <View style={{flex : 1}}>
+		  <TouchableOpacity
             onPress={() => this.props.navigation.openDrawer('EventDrawerNav')}
             style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Image
@@ -16,10 +29,6 @@ export default class CreateAnnonce extends Component {
               style={styles.icon}
               />
           </TouchableOpacity>
-          <View style={{flex: 6, justifyContent: 'center'}}>
-            <Text style={styles.titrePage}>Créer une annonce !</Text>
-          </View>
-          <View style={{flex : 1}}>
           </View>
         </View>
         <View >

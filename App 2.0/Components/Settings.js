@@ -9,7 +9,20 @@ import { Text, StyleSheet, View, TouchableOpacity, ScrollView, Image } from 'rea
     return (
       <ScrollView>
         <View style={styles.containerTitre}>
-          <TouchableOpacity
+		<TouchableOpacity
+          onPress={() => this.props.navigation.goBack()}
+          style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Image
+            source={require('../Images/icons8-gauche-50.png')}
+            style={styles.icon}
+            />
+        </TouchableOpacity>
+          
+          <View style={{flex: 6, justifyContent: 'center'}}>
+            <Text style={styles.titrePage}>Paramètres</Text>
+          </View>
+          <View style={{flex : 1}}>
+		  <TouchableOpacity
             onPress={() => this.props.navigation.openDrawer('EventDrawerNav')}
             style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Image
@@ -17,10 +30,6 @@ import { Text, StyleSheet, View, TouchableOpacity, ScrollView, Image } from 'rea
               style={styles.icon}
             />
           </TouchableOpacity>
-          <View style={{flex: 6, justifyContent: 'center'}}>
-            <Text style={styles.titrePage}>Paramètres</Text>
-          </View>
-          <View style={{flex : 1}}>
           </View>
         </View>
       </ScrollView>

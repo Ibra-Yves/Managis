@@ -30,7 +30,32 @@ const USER=[
   }
 ]
 
+
+
 export default class AjoutInvites extends React.Component {
+
+  filtreInvites(pseudoInv){
+    for(let i = 0; i < USER.length; i++){
+      if(pseudoInv === USER[i].pseudo){
+        this.username = USER[i].pseudo
+        break
+      }
+      else{
+        this.username = "Caca"
+      }
+    }
+  }
+
+  afficheListe(){
+    this.setState({showForm: 0})
+  }
+
+  rechercheFonction(){
+    this.filtreInvites(this.username)
+    this.afficheListe()
+  }
+
+
   render() {
     return (
       <ScrollView>
@@ -47,38 +72,45 @@ export default class AjoutInvites extends React.Component {
             <Text style={styles.titrePage}>Ajoutez un invité</Text>
           </View>
           <View style={{flex : 1}}>
+		  <TouchableOpacity
+              onPress={() => this.props.navigation.openDrawer("EventDrawerNav")}
+              style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+              <Image
+                source={require('../Images/icons8-menu-arrondi-50.png')}
+                style={styles.icon}
+                />
+            </TouchableOpacity>
           </View>
         </View>
         <View style={{margin: 5, alignItems: 'center'}}>
           <TextInput
             style={styles.textinput}
+            onChangeText={(text) => this.username = text}
             placeholder='Rechercher un utilisateur'
             placeholderTextColor='#FFFFFF'
           />
           <View>
-            <TouchableOpacity style={{flexDirection: 'row'}}>
+            <TouchableOpacity style={{flexDirection: 'row'}}
+              onPress={() => this.rechercheFonction()}>
               <Image
                 source={require('../Images/icons8-chercher-50.png')}
                 style={styles.iconSearch}/>
               <Text style={styles.searchText}>Rechercher</Text>
+              
             </TouchableOpacity>
           </View>
         </View>
-        <View>
-          <FlatList
-            data={USER}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({item}) =>
+          <View>
             <View style={{flexDirection: 'row', margin: 6, marginTop: 3, marginBottom: 3, height: 50, borderWidth: 2, borderRadius: 25, borderColor: '#3A4750'}}>
               <View style={{flex: 1}}>
               </View>
               <View style={{justifyContent: 'center', flexDirection: 'row', flex: 4, alignItems: 'center'}}>
                 <View>
-                  <Text>{item.pseudo}</Text>
+                  <Text>{this.username}</Text>
                 </View>
               </View>
               <TouchableOpacity
-                onPress={() => console.log("on ajoute l'utilisateur avec l'id : " + item.id)}
+                onPress={() => console.log("on ajoute l'utilisateur : " + this.username)}
                 style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 <Image
                   source={require('../Images/icons8-ajouter-administrateur-50.png')}
@@ -86,11 +118,9 @@ export default class AjoutInvites extends React.Component {
               </TouchableOpacity>
               <View style={{flex: 1}}>
               </View>
-            </View>}
-          />
-        </View>
+            </View>
+          </View>  
       </ScrollView>
-
     )
   }
 }
