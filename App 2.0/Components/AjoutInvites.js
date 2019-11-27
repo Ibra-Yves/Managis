@@ -30,7 +30,19 @@ const USER=[
   }
 ]
 
+
+
 export default class AjoutInvites extends React.Component {
+
+  filtreInvites(pseudoInv){
+    for(let i = 0; i < USER.length; i++){
+      if(pseudoInv === USER[i].pseudo){
+        return USER[i].pseudo
+      }
+    }
+  }
+
+
   render() {
     return (
       <ScrollView>
@@ -52,29 +64,29 @@ export default class AjoutInvites extends React.Component {
         <View style={{margin: 5, alignItems: 'center'}}>
           <TextInput
             style={styles.textinput}
+            onChangeText={(text) => this.username = text}
+            //value={this.state.username}
             placeholder='Rechercher un utilisateur'
             placeholderTextColor='#FFFFFF'
           />
           <View>
-            <TouchableOpacity style={{flexDirection: 'row'}}>
+            <TouchableOpacity style={{flexDirection: 'row'}}
+              onPress={() => this.filtreInvites(this.username)}>
               <Image
                 source={require('../Images/icons8-chercher-50.png')}
                 style={styles.iconSearch}/>
               <Text style={styles.searchText}>Rechercher</Text>
+              
             </TouchableOpacity>
           </View>
         </View>
         <View>
-          <FlatList
-            data={USER}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({item}) =>
             <View style={{flexDirection: 'row', margin: 6, marginTop: 3, marginBottom: 3, height: 50, borderWidth: 2, borderRadius: 25, borderColor: '#3A4750'}}>
               <View style={{flex: 1}}>
               </View>
               <View style={{justifyContent: 'center', flexDirection: 'row', flex: 4, alignItems: 'center'}}>
                 <View>
-                  <Text>{item.pseudo}</Text>
+                  <Text>{this.filtreInvites(this.username)}</Text>
                 </View>
               </View>
               <TouchableOpacity
@@ -86,8 +98,7 @@ export default class AjoutInvites extends React.Component {
               </TouchableOpacity>
               <View style={{flex: 1}}>
               </View>
-            </View>}
-          />
+            </View>
         </View>
       </ScrollView>
 
