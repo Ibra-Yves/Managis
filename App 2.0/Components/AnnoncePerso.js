@@ -1,8 +1,32 @@
 import React, { Component } from 'react'
 
-import { Text, StyleSheet, View, TouchableOpacity, ScrollView, Image } from 'react-native'
+import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView, TextInput, FlatList } from 'react-native'
+import Constants from 'expo-constants'
+import ResteItem from '../Components/ResteItem'
 
-
+const RESTES = [
+  {
+    id: '1',
+    name: 'bieres',
+    quantity: '15',
+    place: '12 rue de la paix',
+    description: "15 bières restantes d'un bac de jupiler"
+  },
+  {
+    id: '2',
+    name: 'pizza',
+    quantity: '2',
+    place: "2 avenue du js",
+    description: "pizza 4 fromages et pizza champignon"
+  },
+  {
+    id: '3',
+    name: 'bouteille alcool',
+    quantity: '4',
+    place: '5 boulevard Noisette',
+    description: '1 bouteille de rhum et 3 de vodka'
+  }
+]
 
 class AnnoncePerso extends Component {
    render() {
@@ -31,6 +55,13 @@ class AnnoncePerso extends Component {
             />
           </TouchableOpacity>
           </View>
+        </View>
+		<View>
+          <FlatList
+            data={RESTES}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({item}) => <ResteItem reste={item}/>}
+          />
         </View>
       </ScrollView>
 
