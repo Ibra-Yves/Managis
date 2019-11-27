@@ -15,10 +15,19 @@ export default class AjoutFournitures extends React.Component {
             />
         </TouchableOpacity>
         <View style={{flex: 6, justifyContent: 'center'}}>
-          <Text style={styles.titrePage}>Ajoutez des fournitures</Text>
+          <Text style={styles.titrePage}>Ajoutez des fournitures !</Text>
         </View>
         <View style={{flex : 1}}>
+		<TouchableOpacity
+              onPress={() => this.props.navigation.openDrawer("EventDrawerNav")}
+              style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+              <Image
+                source={require('../Images/icons8-menu-arrondi-50.png')}
+                style={styles.icon}
+                />
+            </TouchableOpacity>
         </View>
+		
       </View>
     )
   }

@@ -33,7 +33,20 @@ class Restes extends Component {
     return (
       <ScrollView>
         <View style={styles.containerTitre}>
-          <TouchableOpacity
+		<TouchableOpacity
+          onPress={() => this.props.navigation.goBack()}
+          style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Image
+            source={require('../Images/icons8-gauche-50.png')}
+            style={styles.icon}
+            />
+        </TouchableOpacity>
+          
+          <View style={{flex: 6, justifyContent: 'center'}}>
+            <Text style={styles.titrePage}>Marché des restes</Text>
+          </View>
+          <View style={{flex : 1}}>
+		  <TouchableOpacity
             onPress={() => this.props.navigation.openDrawer('EventDrawerNav')}
             style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Image
@@ -41,10 +54,6 @@ class Restes extends Component {
               style={styles.icon}
             />
           </TouchableOpacity>
-          <View style={{flex: 6, justifyContent: 'center'}}>
-            <Text style={styles.titrePage}>Marché des restes</Text>
-          </View>
-          <View style={{flex : 1}}>
           </View>
         </View>
         <View style={{margin: 5, alignItems: 'center'}}>

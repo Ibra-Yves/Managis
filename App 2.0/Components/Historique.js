@@ -50,6 +50,18 @@ class Historique extends Component {
       <ScrollView>
         <View style={styles.containerTitre}>
           <TouchableOpacity
+          onPress={() => this.props.navigation.goBack()}
+          style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Image
+            source={require('../Images/icons8-gauche-50.png')}
+            style={styles.icon}
+            />
+        </TouchableOpacity>
+          <View style={{flex: 6, justifyContent: 'center'}}>
+            <Text style={styles.titrePage}>Vos événements passés</Text>
+          </View>
+          <View style={{flex : 1}}>
+		  <TouchableOpacity
             onPress={() => this.props.navigation.openDrawer('EventDrawerNav')}
             style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Image
@@ -57,10 +69,6 @@ class Historique extends Component {
               style={styles.icon}
             />
           </TouchableOpacity>
-          <View style={{flex: 6, justifyContent: 'center'}}>
-            <Text style={styles.titrePage}>Vos événements passés</Text>
-          </View>
-          <View style={{flex : 1}}>
           </View>
         </View>
         <FlatList
