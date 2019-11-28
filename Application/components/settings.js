@@ -1,12 +1,24 @@
-import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+EventList = () => {
+    const {UsernomEvent,UserHote,Useradresse,UserdateEvent} = this.state;
 
-export default class Settings extends Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>En construction</Text>
-      </View>
-    );
-  }
-}
+    fetch('http://10.99.1.13/ManagisApp/DBEvent/listeEvent.php',{
+      method:'POST',
+      header:{
+        'Accept': 'application/json',
+        'Content-type': 'application/json'
+      },
+      body:JSON.stringify({
+
+        nomEvent: UsernomEvent,
+        hote: UserHote,
+        adresse: Useradresse,
+        dateEvent: UserdateEvent
+      })
+
+    })
+    .then((response) => response.json())
+     .then((responseJson)=>{
+
+       this.props.navigation.navigate("EventDetails", {idEvent: idEvent});
+     }
+   }
