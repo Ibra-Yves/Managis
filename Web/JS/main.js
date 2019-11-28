@@ -70,9 +70,9 @@ function gererDonnes(retour){
                     actionDatas.forEach(function(data){
                         content+=
                             '<tr>\n' +
-                                '<td class="gestionDeCompteInfos" align="center">'+data['pseudo'] +'</td>\n' + //Pseudo de l'user
-                                '<td class="gestionDeCompteInfos" align="center">'+data['dateCrea']+'</td>\n' + //Date de la création du compte
-                                '<td class="gestionDeCompteInfos" align="center">'+data['email']+'</td>\n' + //Le mail de l'utilisateur
+                                '<td class="taillePolice" align="center">'+data['pseudo'] +'</td>\n' + //Pseudo de l'user
+                                '<td class="taillePolice" align="center">'+data['dateCrea']+'</td>\n' + //Date de la création du compte
+                                '<td class="taillePolice" align="center">'+data['email']+'</td>\n' + //Le mail de l'utilisateur
                             '</tr>';
                     });
                     $('main').html('');

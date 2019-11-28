@@ -142,16 +142,20 @@ $difSection = '<div id="difSection">
       <div class="row text-center">
         <div class="col-md-6">
           <span class="fa-stack fa-4x">
-            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+          <a  href="connexion.php"> 
+            <i class="fas fa-circle fa-stack-2x text-primary" ></i>
             <i class="fas fa-plus fa-stack-1x fa-inverse"></i>
+           </a>
           </span>
-          <h4 class="service-heading">Créez vos événements</h4>
+          <h4 class="service-heading"  href="connexion.php">Créez vos événements</h4>
           <p class="text-muted">Préparez votre soirée au mieux en invitant tous vos amis tout en leur partageant les informations nécessaires pour le bon déroulement de celui-ci.</p>
         </div>
         <div class="col-md-6">
           <span class="fa-stack fa-4x">
+          <a  href="connexion.php"> 
             <i class="fas fa-circle fa-stack-2x text-primary"></i>
             <i class="fas fa-eye fa-stack-1x fa-inverse"></i>
+           </a>
           </span>
           <h4 class="service-heading">Checkez vos événements</h4>
           <p class="text-muted">Recevez toutes vos invitations et regardez ce dont l\'hôte a besoin pour son événement.</p>

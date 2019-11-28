@@ -5,7 +5,7 @@
      <div class="row text-center ">
          <div class="col-md-12">
              <div class="col mb-6" style="max-width: 110rem;">
-                 <div>
+                 <div class="table responsive">
                      <!--Accordion wrapper-->
                      <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
 
