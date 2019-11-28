@@ -41,7 +41,19 @@ export default class AjoutInvites extends React.Component {
         break
       }
       else{
-        this.username = "Caca"
+        this.username = "Cet utilisateur n'existe pas"
+      }
+    }
+  }
+
+  checkInvite(inv){
+    for(let i = 0; i < USER.length; i++){
+      if(inv == USER[i].pseudo){
+        console.log("Ajout de l'invité avec succès")
+        break
+      }
+      else{
+        console.log("L'invité est peut-être déjà invité")
       }
     }
   }
@@ -88,6 +100,7 @@ export default class AjoutInvites extends React.Component {
             onChangeText={(text) => this.username = text}
             placeholder='Rechercher un utilisateur'
             placeholderTextColor='#FFFFFF'
+            onSubmitEditing={() => this.rechercheFonction()}
           />
           <View>
             <TouchableOpacity style={{flexDirection: 'row'}}
@@ -110,7 +123,7 @@ export default class AjoutInvites extends React.Component {
                 </View>
               </View>
               <TouchableOpacity
-                onPress={() => console.log("on ajoute l'utilisateur : " + this.username)}
+                onPress={() => this.checkInvite(this.username)}
                 style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 <Image
                   source={require('../Images/icons8-ajouter-administrateur-50.png')}
