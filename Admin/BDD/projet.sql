@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  sam. 23 nov. 2019 à 10:42
--- Version du serveur :  5.7.26
--- Version de PHP :  7.2.18
+-- Généré le :  ven. 29 nov. 2019 à 12:41
+-- Version du serveur :  10.4.10-MariaDB
+-- Version de PHP :  7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -348,6 +348,29 @@ INSERT INTO `fournitures` (`idEvent`, `fourniture`, `quantite`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `gestionrestes`
+--
+
+DROP TABLE IF EXISTS `gestionrestes`;
+CREATE TABLE IF NOT EXISTS `gestionrestes` (
+  `idUser` int(11) NOT NULL,
+  `nomReste` varchar(255) NOT NULL,
+  `quantiteReste` int(255) NOT NULL,
+  `descriptionReste` varchar(255) NOT NULL,
+  `adresse` varchar(255) NOT NULL,
+  KEY `fk_user` (`idUser`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `gestionrestes`
+--
+
+INSERT INTO `gestionrestes` (`idUser`, `nomReste`, `quantiteReste`, `descriptionReste`, `adresse`) VALUES
+(65, 'alo', 10, 'alo', 'alo');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `invite`
 --
 
@@ -355,7 +378,7 @@ DROP TABLE IF EXISTS `invite`;
 CREATE TABLE IF NOT EXISTS `invite` (
   `idUser` int(11) NOT NULL,
   `idEvent` int(11) NOT NULL,
-  `participe` int(11) DEFAULT '0',
+  `participe` int(11) DEFAULT 0,
   KEY `fk_nomEvent` (`idEvent`),
   KEY `fk_pseudo` (`idUser`),
   KEY `fk_fournEvent` (`idEvent`)
@@ -406,7 +429,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `pseudo` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   `passwd` varchar(255) NOT NULL,
-  `dateCreation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `dateCreation` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idUser`),
   KEY `fk_pseudo` (`pseudo`),
   KEY `fk_hote` (`pseudo`)
@@ -444,6 +467,12 @@ ALTER TABLE `evenement`
 --
 ALTER TABLE `fournitures`
   ADD CONSTRAINT `fk_fournEvent` FOREIGN KEY (`idEvent`) REFERENCES `evenement` (`idEvent`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `gestionrestes`
+--
+ALTER TABLE `gestionrestes`
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `invite`
