@@ -23,7 +23,6 @@ static navigationOptions= ({navigation}) =>({
 	render(){
 		const { navigate } = this.props.navigation;
 		return(
-		<ImageBackground source={require('../image/test.jpg')} style={{width: '100%', height: '100%'}}>
 		<ScrollView>
 	  <View style={styles.container}>
 		<Image
@@ -35,13 +34,12 @@ static navigationOptions= ({navigation}) =>({
 		<Text style={styles.btnText}>Profil</Text>
 		</TouchableOpacity>
 		<TouchableOpacity
-		onPress={()=> navigate('EventList')}
+		onPress={()=> navigate('Restes')}
 		style={styles.btn2}>
-		<Text style={styles.btnText}>Gestion des evenements</Text>
+		<Text style={styles.btnText}>Marché des Restes</Text>
 		</TouchableOpacity>
     </View>
 		</ScrollView>
-		</ImageBackground>
 		);
 	}
 }
