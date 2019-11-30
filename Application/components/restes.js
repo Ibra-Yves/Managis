@@ -1,22 +1,31 @@
 import React, { Component } from 'react'
 
-import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView, TextInput, FlatList } from 'react-native'
+import { View,
+        Text,
+        TouchableOpacity,
+        Image, StyleSheet,
+        ScrollView,
+        TextInput } from 'react-native'
 
 class Restes extends Component {
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <ScrollView>
         <View style={styles.containerTitre}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("Menu")}
-            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <Image
-              source={require('../image/icons8-gauche-50.png')}
-              style={styles.icon}
-              />
-          </TouchableOpacity>
-          <TouchableOpacity
+		<TouchableOpacity
+          onPress={() => this.props.navigation.navigate("Menu")}
+          style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Image
+            source={require('../image/icons8-gauche-50.png')}
+            style={styles.icon}
+            />
+        </TouchableOpacity>
+
+          <View style={{flex: 6, justifyContent: 'center'}}>
+            <Text style={styles.titrePage}>Marché des restes</Text>
+          </View>
+          <View style={{flex : 1}}>
+		  <TouchableOpacity
             onPress={() => this.props.navigation.openDrawer('myNav')}
             style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Image
@@ -24,10 +33,6 @@ class Restes extends Component {
               style={styles.icon}
             />
           </TouchableOpacity>
-          <View style={{flex: 6, justifyContent: 'center'}}>
-            <Text style={styles.titrePage}>Marché des restes</Text>
-          </View>
-          <View style={{flex : 1}}>
           </View>
         </View>
         <View style={{margin: 5, alignItems: 'center'}}>

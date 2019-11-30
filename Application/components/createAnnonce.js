@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 
-import {Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
+import {Text,
+        View,
+        StyleSheet,
+        Image,
+        TextInput,
+        TouchableOpacity,
+        ScrollView} from 'react-native'
 
 export default class CreateAnnonce extends Component {
   constructor(props){
   super(props)
   this.state={
-    userIdUser:'',
+    userEmail:'',
     userNomReste:'',
     userQuantiteReste:'',
     userDescriptionReste:'',
@@ -15,31 +21,27 @@ export default class CreateAnnonce extends Component {
 }
 
 userCreateAnnonce = () =>{
-
-  const {userIdUser} = this.state;
+  const {userEmail} = this.state;
   const {userNomReste} = this.state;
   const {userQuantiteReste} = this.state;
   const {userDescriptionReste} = this.state;
   const {userAdresse} = this.state;
 
-  if(userIdUser==""){
+  if(userEmail==""){
 
-    this.setState({idUser:'Entrez ID !'})
+    this.setState({email:'Entrez votre email !'})
 
-  }
-  else if(userNomReste==""){
-  this.setState({nomReste:"Entrez le nom!"})
   }
   else{
 
   fetch('http://192.168.0.9/ManagisApp/DBRestes/createAnnonce.php', {
-    method: 'post',
+    method: 'POST',
     header:{
       'Accept': 'application/json',
       'Content-type': 'application/json'
     },
     body:JSON.stringify({
-      idUser: userIdUser,
+      email: userEmail,
       nomReste: userNomReste,
       quantiteReste: userQuantiteReste,
       descriptionReste: userDescriptionReste,
@@ -61,9 +63,8 @@ userCreateAnnonce = () =>{
     return (
       <ScrollView>
         <View style={styles.containerTitre}>
-        <Text style={{padding:10,margin:10,color:'red'}}>{this.state.idUser}</Text>
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate("Restes")}
+          onPress={() => this.props.navigation.navigate("AnnoncePerso")}
           style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <Image
             source={require('../image/icons8-gauche-50.png')}
@@ -71,7 +72,7 @@ userCreateAnnonce = () =>{
             />
         </TouchableOpacity>
           <View style={{flex: 6, justifyContent: 'center'}}>
-            <Text style={styles.titrePage}>Créer une annonce !</Text>
+            <Text style={styles.titrePage}>Créer une annonce </Text>
           </View>
           <View style={{flex : 1}}>
 		  <TouchableOpacity
@@ -85,15 +86,15 @@ userCreateAnnonce = () =>{
           </View>
         </View>
         <View style={styles.inputContainer}>
-          <Text style={styles.com}>Entrez votre ID </Text>
+        <Text style={{padding:2,margin:2,color:'red'}}>{this.state.email}</Text>
+          <Text style={styles.com}>Entrez votre adresse email</Text>
           <TextInput
             style = {styles.inputBox}
-            placeholder = 'ID'
+            placeholder = 'contact@managis.be'
             placeholderTextColor = '#FFFFFF'
-            onChangeText= {userIdUser => this.setState({userIdUser})}
+            onChangeText= {userEmail => this.setState({userEmail})}
           />
         </View>
-
         <View >
         <View style={styles.inputContainer}>
           <Text style={styles.com}>Quel est votre reste ?</Text>
