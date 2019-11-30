@@ -1,6 +1,6 @@
 <?php
 $HostName = "localhost";
-$DatabaseName = "projet";
+$DatabaseName = "test";
 $HostUser = "root";
 $HostPass = "";
 ?>
