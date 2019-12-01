@@ -12,7 +12,7 @@ export default class CreateAnnonce extends Component {
   constructor(props){
   super(props)
   this.state={
-    userEmail:'',
+    userIdUser:'',
     userNomReste:'',
     userQuantiteReste:'',
     userDescriptionReste:'',
@@ -21,15 +21,15 @@ export default class CreateAnnonce extends Component {
 }
 
 userCreateAnnonce = () =>{
-  const {userEmail} = this.state;
+  const {userIdUser} = this.state;
   const {userNomReste} = this.state;
   const {userQuantiteReste} = this.state;
   const {userDescriptionReste} = this.state;
   const {userAdresse} = this.state;
 
-  if(userEmail==""){
+  if(userIdUser==""){
 
-    this.setState({email:'Entrez votre email !'})
+    this.setState({idUser:'Entrez votre email !'})
 
   }
   else{
@@ -41,7 +41,7 @@ userCreateAnnonce = () =>{
       'Content-type': 'application/json'
     },
     body:JSON.stringify({
-      email: userEmail,
+      idUser: userIdUser,
       nomReste: userNomReste,
       quantiteReste: userQuantiteReste,
       descriptionReste: userDescriptionReste,
@@ -86,13 +86,13 @@ userCreateAnnonce = () =>{
           </View>
         </View>
         <View style={styles.inputContainer}>
-        <Text style={{padding:2,margin:2,color:'red'}}>{this.state.email}</Text>
-          <Text style={styles.com}>Entrez votre adresse email</Text>
+        <Text style={{padding:2,margin:2,color:'red'}}>{this.state.idUser}</Text>
+          <Text style={styles.com}>Entrez votre ID</Text>
           <TextInput
             style = {styles.inputBox}
-            placeholder = 'contact@managis.be'
+            placeholder = 'ID user'
             placeholderTextColor = '#FFFFFF'
-            onChangeText= {userEmail => this.setState({userEmail})}
+            onChangeText= {userIdUser => this.setState({userIdUser})}
           />
         </View>
         <View >
