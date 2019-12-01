@@ -27,18 +27,6 @@
     <div class="col-md-6" id="nombreInvFourComm"></div>
 </div>
 
-<div class="container-fluid centered-form " >
-    <div class="panel-heading">
-        <h3 class="panel-title gestionDeCompteTitre pasColler" align="center">Détails événement</h3>
-    </div>
-    <div class="row text-center ">
-        <div class="col-md-12">
-            <div class="col mb-6" style="max-width: 110rem;">
-
-            </div>
-        </div>
-        <div class="col-md-6" id="nombreInvFourComm"></div>
-    </div>
 
 
 

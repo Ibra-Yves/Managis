@@ -44,7 +44,8 @@ class Events
         'index',
         'modifEvent',
         'suppEvent',
-        'formModifEvent'
+        'formModifEvent',
+        'privacy'
     ];
 
     public function __construct()
@@ -152,7 +153,18 @@ class Events
      * Rnvoie la page des conditions generales
      */
     private function CGU(){
-        $this->action->affichageDefaut('.intro-text', $this->lectureForm('CGU'));
+        $cgu['title'] = "Conditions générales d'utilisation";
+        $cgu['text'] = "En acceptant nos termes de condition générales d'utilisation vous acceptez de partager vos données";
+        $this->action->ajouterAction('cgu', $cgu);
+    }
+
+    /**
+     * Termes de protection de vie privée
+     */
+    private function privacy(){
+        $privacy['title'] = "Protection de votre vie privée";
+        $privacy['text'] = "Nous protegerons votre vie privée";
+        $this->action->ajouterAction('privacy', $privacy);
     }
 
     /**
@@ -350,6 +362,7 @@ class Events
      */
     private function addEvent(){
        $this->action->affichageDefaut('.intro-text', $this->lectureForm('addEvent'));
+       $this->popUp();
     }
 
     /**
@@ -405,6 +418,7 @@ class Events
         $this->action->ajouterAction('vosEventFutur', $vosEventFutur);//On envois les données vers le client sur les event futur crées pas l'utilisateur
         $this->action->ajouterAction('vosInvitFutur', $vosInvitFutur);//On envbois les données vers le client sur les event futur où le user a été invité
 
+        $this->popUp();
 
     }
 
@@ -437,7 +451,6 @@ class Events
 
             //On renvoie le tableau à la page
             $this->action->affichageDefaut('#nombreInvFourComm', $this->lectureForm('infoSup'));
-
             //On appelle les procèdures nécessaires
             $nombreInv = $this->db->procCall('nombreInv', [$id]);
             $nombreComm = $this->db->procCall('nombreComm', [$id]);

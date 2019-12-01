@@ -63,8 +63,27 @@ function gererDonnes(retour){
                                 at: 'right bottom',
                                 of: window
                             },
-                        }).html("Vous avez été invité à "+ actionDatas+ " événement(s)");
+                        }).html("Vous avez été invité à <strong> "+ actionDatas+ "</strong> événement(s)");
                      break;
+
+                case 'cgu' :
+                    $('#cgu-priv').dialog({
+                        modal: true,
+                        title: actionDatas['title'],
+                        width: 500,
+                        height: 500
+
+                    }).html(actionDatas['text']);
+                    break;
+                case 'privacy' :
+                    $('#cgu-priv').dialog({
+                        modal: true,
+                        title: actionDatas['title'],
+                        width: 500,
+                        height: 500
+
+                    }).html(actionDatas['text']);
+                    break;
                 case 'espaceMembre' : //Espace memebre affiché
                     let content = '';
                     actionDatas.forEach(function(data){
