@@ -336,6 +336,14 @@ where idUser = invite.idUser AND participe=0;
 END;
 /
 
+delimiter /
+CREATE DEFINER=`admin`@`%` PROCEDURE `mailInv`(IN idUser INT)
+BEGIN
+select email from users 
+where idUser = users.idUser;
+END;
+/
+
 CREATE USER 'root'@'%' IDENTIFIED BY '4TujbpbjXV6FK6h2';
 CREATE USER 'admin'@'%' IDENTIFIED BY 'yVLsgfgsQa3R4HRP';
 GRANT ALL PRIVILEGES ON * . * TO 'admin'@'%';
