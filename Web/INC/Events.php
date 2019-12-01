@@ -106,7 +106,7 @@ class Events
     public function popUp(){
         $info = $this->db->procCall('infoPopUp', [$_SESSION['user']['idUser']]);
         $infoPopUp =  $info[0]['invitations'];
-        $this->action->ajouterAction('popUp', $infoPopUp);
+        if($infoPopUp != 0) $this->action->ajouterAction('popUp', $infoPopUp);
     }
 
     /**
