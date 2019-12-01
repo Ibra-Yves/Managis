@@ -1,54 +1,44 @@
 import React, { Component } from 'react'
 
-import {Text,
-        View,
-        StyleSheet,
-        Image,
-        TextInput,
-        TouchableOpacity,
-        ScrollView} from 'react-native'
+import {Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
+import Constants from 'expo-constants'
 
 export default class CreateAnnonce extends Component {
   constructor(props){
-  super(props)
-  this.state={
-    userEmail:'',
-    userNomReste:'',
-    userQuantiteReste:'',
-    userDescriptionReste:'',
-    userAdresse:'',
+		super(props)
+		this.state={
+			idUser:'',
+			nomReste:'',
+      quantiteReste:'',
+      descriptionReste:'',
+      adresse:''
+		}
   }
-}
+  ajoutReste = () =>{
 
-userCreateAnnonce = () =>{
-  const {userEmail} = this.state;
-  const {userNomReste} = this.state;
-  const {userQuantiteReste} = this.state;
-  const {userDescriptionReste} = this.state;
-  const {userAdresse} = this.state;
+		const {idUser} = this.state;
+		const {nomReste} = this.state;
+    const {quantiteReste} = this.state;
+    const {descriptionReste} = this.state;
+    const {adresse} = this.state;
+    if(nomReste==""){
 
-  if(userEmail==""){
-
-    this.setState({email:'Entrez votre email !'})
-
-  }
-  else{
-
-  fetch('http://192.168.0.9/ManagisApp/DBRestes/createAnnonce.php', {
-    method: 'POST',
+  fetch('http://192.168.1.10/Managis/ResteDB/AjoutAnnonce.php', {
+    method: 'post',
     header:{
       'Accept': 'application/json',
       'Content-type': 'application/json'
     },
     body:JSON.stringify({
-      email: userEmail,
-      nomReste: userNomReste,
-      quantiteReste: userQuantiteReste,
-      descriptionReste: userDescriptionReste,
-      adresse: userAdresse,
+      idUser: idUser,
+      nomReste: nomReste,
+      quantiteReste: quantiteReste,
+      descriptionReste: descriptionReste,
+      adresse: adresse,
     })
 
   })
+  
   .then((response) => response.json())
     .then((responseJson) =>{
       alert(responseJson);
@@ -56,53 +46,44 @@ userCreateAnnonce = () =>{
     .catch((error)=>{
       console.error(error);
     });
-}
-}
+    }
+  }
 
   render() {
     return (
-      <ScrollView>
+      <ScrollView style={{marginTop: Constants.statusBarHeight}}>
         <View style={styles.containerTitre}>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate("AnnoncePerso")}
-          style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Image
-            source={require('../image/icons8-gauche-50.png')}
-            style={styles.icon}
-            />
-        </TouchableOpacity>
-          <View style={{flex: 6, justifyContent: 'center'}}>
-            <Text style={styles.titrePage}>Créer une annonce </Text>
-          </View>
-          <View style={{flex : 1}}>
-		  <TouchableOpacity
-            onPress={() => this.props.navigation.openDrawer('myNav')}
+          <TouchableOpacity
+            onPress={() => this.props.navigation.openDrawer('EventDrawerNav')}
             style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Image
-              source={require('../image/icons8-menu-arrondi-50.png')}
+              source={require('../Images/icons8-menu-arrondi-50.png')}
               style={styles.icon}
               />
           </TouchableOpacity>
+          <View style={{flex: 6, justifyContent: 'center'}}>
+            <Text style={styles.titrePage}>Créer une annonce !</Text>
+          </View>
+          <View style={{flex : 1}}>
           </View>
         </View>
+        <View >
         <View style={styles.inputContainer}>
-        <Text style={{padding:2,margin:2,color:'red'}}>{this.state.email}</Text>
-          <Text style={styles.com}>Entrez votre adresse email</Text>
+          <Text style={styles.com}>Quel est votre idUser ?</Text>
           <TextInput
             style = {styles.inputBox}
-            placeholder = 'contact@managis.be'
+            placeholder = 'Ex : bac de bière'
             placeholderTextColor = '#FFFFFF'
-            onChangeText= {userEmail => this.setState({userEmail})}
+            onChangeText={(idUser) => this.idUser = idUser}
           />
         </View>
-        <View >
         <View style={styles.inputContainer}>
           <Text style={styles.com}>Quel est votre reste ?</Text>
           <TextInput
             style = {styles.inputBox}
             placeholder = 'Ex : bac de bière'
             placeholderTextColor = '#FFFFFF'
-            onChangeText= {userNomReste => this.setState({userNomReste})}
+            onChangeText={(nomReste) => this.nomReste = nomReste}
           />
         </View>
         <View style={styles.inputContainer}>
@@ -111,7 +92,7 @@ userCreateAnnonce = () =>{
             style = {styles.inputBox}
             placeholder = 'Quantité'
             placeholderTextColor = '#FFFFFF'
-            onChangeText= {userQuantiteReste => this.setState({userQuantiteReste})}
+            onChangeText={(quantiteReste) => this.quantiteReste = quantiteReste}
           />
         </View>
         <View style={styles.inputContainer}>
@@ -120,31 +101,31 @@ userCreateAnnonce = () =>{
             style = {styles.inputBox}
             placeholder = 'Description'
             placeholderTextColor = '#FFFFFF'
-            onChangeText= {userDescriptionReste => this.setState({userDescriptionReste})}
+            onChangeText={(descriptionReste) => this.descriptionReste = descriptionReste}
           />
         </View>
-
         <View style={styles.inputContainer}>
           <Text>Ajoutez le lieu de l'échange</Text>
           <TextInput
             style = {styles.inputBox}
             placeholder = 'Ex: 2 rue du ciseau'
             placeholderTextColor = '#FFFFFF'
-            onChangeText= {userAdresse => this.setState({userAdresse})}
+            onChangeText={(adresse) => this.adresse = adresse}
           />
         </View>
+
         <View style={styles.submitContainer}>
-        <TouchableOpacity
-          onPress={this.userCreateAnnonce}
-          style = {styles.submitButton}>
-          <Text style={{color:'white',textAlign:'center'}}>Créer</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.ajoutReste}>
+            <Text style={styles.submitButton}>Créer</Text>
+          </TouchableOpacity>
         </View>
         </View>
       </ScrollView>
     )
   }
-}
+} 
+
 const styles = StyleSheet.create({
   logo: {
     width: 350,

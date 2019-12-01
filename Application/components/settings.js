@@ -1,24 +1,50 @@
-EventList = () => {
-    const {UsernomEvent,UserHote,Useradresse,UserdateEvent} = this.state;
+import React, { Component } from 'react'
 
-    fetch('http://10.99.1.13/ManagisApp/DBEvent/listeEvent.php',{
-      method:'POST',
-      header:{
-        'Accept': 'application/json',
-        'Content-type': 'application/json'
-      },
-      body:JSON.stringify({
+import { Text, StyleSheet, View, TouchableOpacity, ScrollView, Image } from 'react-native'
 
-        nomEvent: UsernomEvent,
-        hote: UserHote,
-        adresse: Useradresse,
-        dateEvent: UserdateEvent
-      })
 
-    })
-    .then((response) => response.json())
-     .then((responseJson)=>{
 
-       this.props.navigation.navigate("EventDetails", {idEvent: idEvent});
-     }
-   }
+ class Settings extends Component {
+  render() {
+    return (
+      <ScrollView>
+        <View style={styles.containerTitre}>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.openDrawer('myNav')}
+            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Image
+              source={require('../image/icons8-menu-arrondi-50.png')}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+          <View style={{flex: 6, justifyContent: 'center'}}>
+            <Text style={styles.titrePage}>Paramètres</Text>
+          </View>
+          <View style={{flex : 1}}>
+          </View>
+        </View>
+      </ScrollView>
+
+    )
+  }
+}
+
+
+const styles= StyleSheet.create({
+  containerTitre: {
+    backgroundColor:'#3A4750',
+    flexDirection: 'row',
+    height: 60
+  },
+  titrePage: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    textAlign: 'center'
+  },
+  icon: {
+    width: 30,
+    height: 30
+  }
+})
+
+export default Settings

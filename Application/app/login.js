@@ -44,7 +44,7 @@ export default class login extends Component {
 		}
 		else{
 
-		fetch('http://192.168.0.9/IbraManagis/connexion/User_Login.php',{
+		fetch('http://192.168.0.9/ManagisApp/connexion/User_Login.php',{
 			method:'POST',
 			header:{
 				'Accept': 'application/json',
