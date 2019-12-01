@@ -26,7 +26,6 @@ function requetes(event){
    }
 
 
-    console.log('rq: ' +request);
 
     envoyerData.append('request', request); //Le nom de formulaire on le remplace par le nom du vrai formulaire
     $.post('?rq=' + request, envoyerData,  gererDonnes); //Requete ajax vers le php pour lui passer les données de la requete
@@ -35,7 +34,6 @@ function requetes(event){
 //Ce qu'on recoit du PHP
 function gererDonnes(retour){
     retour = lireJSON(retour); //On lit les données envoyés par PHP qui sont encodés en JSON
-   console.log(retour);
     retour.forEach(function(action){ //Double boucle pour le retour pour lire les données
         $.each(action, function(actionName, actionDatas){ //Nom de l'action passé en paramètres dans action.php ainsi que les données transmises
             switch(actionName){ //Changements sur le nom de l'action
@@ -51,9 +49,6 @@ function gererDonnes(retour){
                         location.reload();
                     break;
 
-                case 'test' :
-                        console.log(actionDatas);
-                    break;
 
                 case 'popUp' :
                         $('#popUp').dialog({
@@ -211,7 +206,6 @@ function gererDonnes(retour){
                     //Affiche le nombre d'invites commentaires etc. pour l'event
                 case 'infoEvent':
                     let tableNombre = '';
-                    console.log(actionDatas);
                         tableNombre =
                         '<tr>' +
                             '<td class="taillePolice" align="center"><a href="afficheInv.php">'+actionDatas[0][0]['nombreInv']+'</a></td>' +

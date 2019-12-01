@@ -328,6 +328,14 @@ where id = invite.idUser AND evenement.hote != psd AND dateEvent < now();
 END; 
 /
 
+delimiter / 
+CREATE DEFINER=`admin`@`%` PROCEDURE `infoPopUp`(IN idUser INT)
+BEGIN
+select count(participe) as invitations from invite
+where idUser = invite.idUser AND participe=0;
+END;
+/
+
 CREATE USER 'root'@'%' IDENTIFIED BY '4TujbpbjXV6FK6h2';
 CREATE USER 'admin'@'%' IDENTIFIED BY 'yVLsgfgsQa3R4HRP';
 GRANT ALL PRIVILEGES ON * . * TO 'admin'@'%';
