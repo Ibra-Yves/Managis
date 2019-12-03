@@ -207,11 +207,11 @@ function gererDonnes(retour){
                 case 'infoEvent':
                     let tableNombre = '';
                         tableNombre =
-                        '<tr>' +
-                            '<td class="taillePolice" align="center">'+actionDatas[0][0]['nombreInv']+'<a href="afficheInv.php"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fas fa-eye"></i></button></a></td>' +
-                            '<td class="taillePolice" align="center">'+actionDatas[1][0]['nombreFour']+'<a href="afficheFour.php"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fas fa-eye"></i></button></a></td>' +
-                            '<td class="taillePolice" align="center">'+actionDatas[2][0]['nombreComm']+'<a href="afficheComm.php"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fas fa-eye"></i></button></a></td>' +
-                            '<td class="taillePolice" align="center">'+actionDatas[3][0]['participant']+'<a href="afficheParticipants.php"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fas fa-eye"></i></button></a></td>' +
+                        '<tr> \n' +
+                            '<td class="taillePolice" align="center">'+actionDatas[0][0]['nombreInv']+'<a href="afficheInv.php"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fas fa-eye"></i></button></a></td> \n' +
+                            '<td class="taillePolice" align="center">'+actionDatas[1][0]['nombreFour']+'<a href="afficheFour.php"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fas fa-eye"></i></button></a></td>\n' +
+                            '<td class="taillePolice" align="center">'+actionDatas[2][0]['nombreComm']+'<a href="afficheComm.php"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fas fa-eye"></i></button></a></td>\n' +
+                            '<td class="taillePolice" align="center">'+actionDatas[3][0]['participant']+'<a href="afficheParticipants.php"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fas fa-eye"></i></button></a></td>\n' +
                             '<td class="taillePolice" align="center" style="display: none" id="affichePourParticiper"> <div class="form-check">\n' +
                             '<a href="ajoutParticipant.php" class="'+actionDatas[4]+'"> <input type="checkbox" class="form-check-input" id="'+actionDatas[4]+'"></a>\n' +
                             '<td class="taillePolice" align="center" style="display:none;" id="modifierr"><a href="modifEvent.php"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fas fa-pen"></i></button></a></td>\n'+ //Bouton modification
@@ -229,11 +229,12 @@ function gererDonnes(retour){
                     let q = 2;
                     actionDatas.forEach(function(data){
                     tableInvites+=
-                        '<tr> \n' +
+                        '<div> \n' +
                             '<th scope="row" id="'+ o++ +'">'+ j++ +'</th>\n' +
                             '<td class="taillePolice" align="center" id="'+ p++ +'">'+data['pseudo']+'</td> \n' +
                             '<td class="taillePolice" align="center"><a id="' + q++ +'" href="'+data['pseudo']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
                             '<td class="taillePolice" align="center" id="'+ data['pseudo'] +'"></td> \n' +
+                        '</div></td>'
                         '</tr>';
 
                     });
