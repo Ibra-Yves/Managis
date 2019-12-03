@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 
-import { AppRegistry, Image, ScrollView, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator, Text, View, Alert } from 'react-native';
+import { AppRegistry,
+        Image,
+        ScrollView,
+        TextInput,
+        TouchableOpacity,
+        StyleSheet,
+        ActivityIndicator,
+        Text,
+        View,
+        Alert } from 'react-native';
+
 import ListView from "deprecated-react-native-listview";
 
 class Restes extends Component {
@@ -10,17 +20,12 @@ class Restes extends Component {
     this.state = {
       isLoading: true
     }
+    this.arrayholder = [] ;
   }
-GetItem (nomReste) {
-
-  Alert.alert(nomReste);
-
-  }
-
 
   componentDidMount() {
 
-    return fetch('http://192.168.0.9/ManagisApp/DBRestes/restes.php')
+    return fetch('http://192.168.0.3/ManagisApp/DBRestes/restes.php')
       .then((response) => response.json())
       .then((responseJson) => {
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -29,6 +34,7 @@ GetItem (nomReste) {
           dataSource: ds.cloneWithRows(responseJson),
         }, function() {
           // In this block you can do something with new state.
+          this.arrayholder = responseJson;
         });
       })
       .catch((error) => {
@@ -36,13 +42,26 @@ GetItem (nomReste) {
       });
   }
 
+  SearchFilterFunction(text){
+
+       const newData = this.arrayholder.filter(function(item){
+           const itemData = item.nomReste.toUpperCase()
+           const textData = text.toUpperCase()
+           return itemData.indexOf(textData) > -1
+       })
+       this.setState({
+           dataSource: this.state.dataSource.cloneWithRows(newData),
+           text: text
+       })
+   }
+
   ListViewItemSeparator = () => {
     return (
       <View
         style={{
           height: .5,
           width: "100%",
-          backgroundColor: "#000",
+          backgroundColor: "#3A4750",
         }}
       />
     );
@@ -72,46 +91,58 @@ GetItem (nomReste) {
         </TouchableOpacity>
 
           <View style={{flex: 6, justifyContent: 'center'}}>
-            <Text style={styles.titrePage}>Marché des restes</Text>
+            <Text style={styles.titrePage}>Marché des Restes</Text>
           </View>
           </View>
           <View style={{flex : 1}}>
           <TouchableOpacity
                 onPress={() => this.props.navigation.openDrawer('myNav')}
-                style={{flex: 1, marginTop: 10, justifyContent: 'center',alignItems:'center'}}>
+                style={{flex: 1, flexDirection: 'row-reverse', marginTop: -40}}>
                 <Image
                   source={require('../image/icons8-menu-arrondi-50.png')}
                   style={styles.icon}
                   />
               </TouchableOpacity>
           </View>
-        <View style={{margin: 5, alignItems: 'center'}}>
-          <TextInput
-            style={styles.textinput}
-            placeholder='Rechercher des restes'
-            placeholderTextColor='#FFFFFF'
-          />
-          <View>
-            <TouchableOpacity style={{flexDirection: 'row'}}>
-              <Image
-                source={require('../image/icons8-chercher-50.png')}
-                style={styles.iconSearch}/>
-              <Text style={styles.searchText}>Rechercher</Text>
-            </TouchableOpacity>
-          </View>
+
       <View style={styles.MainContainer}>
+       <TextInput
+        style={styles.textinput}
+        onChangeText={(text) => this.SearchFilterFunction(text)}
+        value={this.state.text}
+        placeholder='Rechercher des restes'
+        placeholderTextColor='#FFFFFF'
+         />
 
-        <ListView
+      <ListView
 
-          dataSource={this.state.dataSource}
+        dataSource={this.state.dataSource}
 
-          renderSeparator= {this.ListViewItemSeparator}
+        renderSeparator= {this.ListViewItemSeparator}
 
-          renderRow={(rowData) => <Text style={styles.rowViewContainer}
-          onPress={this.GetItem.bind(this, rowData.nomReste , rowData.adresse)} >{rowData.nomReste}</Text>}
-        />
-      </View>
-      </View>
+        renderRow={(rowData) =>
+
+       <View style={{flex:1, flexDirection: 'column'}} >
+
+         <TouchableOpacity>
+
+         <Text style={styles.textViewContainer} >{'Nom: ' + rowData.nomReste}</Text>
+
+         <Text style={styles.textViewContainer} >{'Quantité: ' + rowData.quantiteReste}</Text>
+
+         <Text style={styles.textViewContainer} >{'Description: ' + rowData.descriptionReste}</Text>
+
+         <Text style={styles.textViewContainer} >{'Adresse:' + rowData.adresse}</Text>
+
+
+         </TouchableOpacity>
+
+       </View>
+
+        }
+      />
+
+    </View>
       </ScrollView>
     );
   }
@@ -137,6 +168,12 @@ titrePage: {
     fontSize: 16,
 
   },
+  textViewContainer: {
+ textAlignVertical:'center',
+ padding:10,
+ fontSize: 16
+
+},
 
   icon: {
     width: 30,
@@ -150,14 +187,13 @@ titrePage: {
   },
 
   textinput: {
-   width:300,
+   width:400,
    backgroundColor:'#3A4750',
-   borderRadius: 25,
+   borderRadius: 15,
    paddingVertical:12,
    fontSize:16,
    color:'#FFFFFF',
-   textAlign:'center',
-   marginVertical: 10
+   textAlign:'center'
  },
 
 containerTitre: {

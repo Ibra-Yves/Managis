@@ -12,7 +12,6 @@ export default class CreateAnnonce extends Component {
   constructor(props){
   super(props)
   this.state={
-    userIdUser:'',
     userNomReste:'',
     userQuantiteReste:'',
     userDescriptionReste:'',
@@ -20,8 +19,11 @@ export default class CreateAnnonce extends Component {
   }
 }
 
+GetItem (idUser) {
+  Alert.alert(idUser);
+  }
+
 userCreateAnnonce = () =>{
-  const {userIdUser} = this.state;
   const {userNomReste} = this.state;
   const {userQuantiteReste} = this.state;
   const {userDescriptionReste} = this.state;
@@ -29,12 +31,12 @@ userCreateAnnonce = () =>{
 
   if(userIdUser==""){
 
-    this.setState({idUser:'Entrez votre email !'})
+    this.setState({idUser:'Entrez votre ID !'})
 
   }
   else{
 
-  fetch('http://192.168.0.9/ManagisApp/DBRestes/createAnnonce.php', {
+  fetch('http://192.168.0.3/ManagisApp/DBRestes/createAnnonce.php', {
     method: 'POST',
     header:{
       'Accept': 'application/json',
@@ -51,6 +53,7 @@ userCreateAnnonce = () =>{
   })
   .then((response) => response.json())
     .then((responseJson) =>{
+
       alert(responseJson);
     })
     .catch((error)=>{
@@ -63,14 +66,7 @@ userCreateAnnonce = () =>{
     return (
       <ScrollView>
         <View style={styles.containerTitre}>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate("AnnoncePerso")}
-          style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Image
-            source={require('../image/icons8-gauche-50.png')}
-            style={styles.icon}
-            />
-        </TouchableOpacity>
+
           <View style={{flex: 6, justifyContent: 'center'}}>
             <Text style={styles.titrePage}>Créer une annonce </Text>
           </View>

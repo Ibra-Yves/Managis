@@ -9,7 +9,7 @@ $quantiteReste = $obj['quantiteReste'];
 $descriptionReste = $obj['descriptionReste'];
 $adresse = $obj['adresse'];
 
-$CheckSQL = "SELECT * FROM gestionrestes WHERE idUser='$idUser'";
+$CheckSQL = "SELECT * FROM gestionrestes WHERE nomReste='$nomReste'";
 $check = mysqli_fetch_array(mysqli_query($con,$CheckSQL));
 if(isset($check)){
  $RestExistMSG = 'Cette annonce a déjà été crée !';
