@@ -14,7 +14,7 @@
 
                              <!-- Card header -->
                              <div class="card-header" role="tab" id="headingOne1">
-                                 <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="false"
+                                 <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
                                     aria-controls="collapseOne1">
                                      <h5 class="mb-0 gestionDeCompteSousTitre">
                                          Vos événements à venir<i class="fas fa-angle-down rotate-icon"></i>
@@ -72,7 +72,7 @@
                                                  <th style="width: 5%" scope="col" class="taillePoliceTitre" >#</th>
                                                  <th style="width: 25%" scope="col" class="taillePoliceTitre">Nom de l'événement</th>
                                                  <th style="width: 25%" scope="col" class="taillePoliceTitre">Nom de l'hôte</th>
-                                                 <th style="width: 20%" scope="col" class="taillePoliceTitre">Date de l'événement</th>
+                                                 <th style="width: 25%" scope="col" class="taillePoliceTitre">Date de l'événement</th>
                                                  <th style="width: 25%" scope="col" class="taillePoliceTitre">Adresse</th>
                                                  <th style="width: 25%" scope="col" class="taillePoliceTitre">Heure</th>
                                              </tr>

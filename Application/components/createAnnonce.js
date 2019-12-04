@@ -12,7 +12,6 @@ export default class CreateAnnonce extends Component {
   constructor(props){
   super(props)
   this.state={
-    userEmail:'',
     userNomReste:'',
     userQuantiteReste:'',
     userDescriptionReste:'',
@@ -20,28 +19,31 @@ export default class CreateAnnonce extends Component {
   }
 }
 
+GetItem (idUser) {
+  Alert.alert(idUser);
+  }
+
 userCreateAnnonce = () =>{
-  const {userEmail} = this.state;
   const {userNomReste} = this.state;
   const {userQuantiteReste} = this.state;
   const {userDescriptionReste} = this.state;
   const {userAdresse} = this.state;
 
-  if(userEmail==""){
+  if(userIdUser==""){
 
-    this.setState({email:'Entrez votre email !'})
+    this.setState({idUser:'Entrez votre ID !'})
 
   }
   else{
 
-  fetch('http://192.168.0.9/ManagisApp/DBRestes/createAnnonce.php', {
+  fetch('http://192.168.0.3/ManagisApp/DBRestes/createAnnonce.php', {
     method: 'POST',
     header:{
       'Accept': 'application/json',
       'Content-type': 'application/json'
     },
     body:JSON.stringify({
-      email: userEmail,
+      idUser: userIdUser,
       nomReste: userNomReste,
       quantiteReste: userQuantiteReste,
       descriptionReste: userDescriptionReste,
@@ -51,6 +53,7 @@ userCreateAnnonce = () =>{
   })
   .then((response) => response.json())
     .then((responseJson) =>{
+
       alert(responseJson);
     })
     .catch((error)=>{
@@ -63,14 +66,7 @@ userCreateAnnonce = () =>{
     return (
       <ScrollView>
         <View style={styles.containerTitre}>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate("AnnoncePerso")}
-          style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Image
-            source={require('../image/icons8-gauche-50.png')}
-            style={styles.icon}
-            />
-        </TouchableOpacity>
+
           <View style={{flex: 6, justifyContent: 'center'}}>
             <Text style={styles.titrePage}>Créer une annonce </Text>
           </View>
@@ -86,13 +82,13 @@ userCreateAnnonce = () =>{
           </View>
         </View>
         <View style={styles.inputContainer}>
-        <Text style={{padding:2,margin:2,color:'red'}}>{this.state.email}</Text>
-          <Text style={styles.com}>Entrez votre adresse email</Text>
+        <Text style={{padding:2,margin:2,color:'red'}}>{this.state.idUser}</Text>
+          <Text style={styles.com}>Entrez votre ID</Text>
           <TextInput
             style = {styles.inputBox}
-            placeholder = 'contact@managis.be'
+            placeholder = 'ID user'
             placeholderTextColor = '#FFFFFF'
-            onChangeText= {userEmail => this.setState({userEmail})}
+            onChangeText= {userIdUser => this.setState({userIdUser})}
           />
         </View>
         <View >
