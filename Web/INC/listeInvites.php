@@ -1,4 +1,3 @@
-<h3 class="panel-title gestionDeCompteTitre pasColler" align="center">Détails de l' événement</h3>
 <div class="row text-center">
     <div class="table responsive col-md-6"  text-center" id="formInv" style="display: none">
         <div class="mb-3 transparent" style="max-width: 110rem;">

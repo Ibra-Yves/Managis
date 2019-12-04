@@ -229,12 +229,13 @@ function gererDonnes(retour){
                     let q = 2;
                     actionDatas.forEach(function(data){
                     tableInvites+=
+                        '<tr> \n' +
                         '<div> \n' +
                             '<th scope="row" id="'+ o++ +'">'+ j++ +'</th>\n' +
                             '<td class="taillePolice" align="center" id="'+ p++ +'">'+data['pseudo']+'</td> \n' +
                             '<td class="taillePolice" align="center"><a id="' + q++ +'" href="'+data['pseudo']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
                             '<td class="taillePolice" align="center" id="'+ data['pseudo'] +'"></td> \n' +
-                        '</div></td>'
+                        '</div>'
                         '</tr>';
 
                     });
