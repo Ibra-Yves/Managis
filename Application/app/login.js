@@ -19,12 +19,13 @@ export default class login extends Component {
 		super(props)
 		this.state={
 			UserEmail:'',
+      UserName:'',
 			UserPassword:''
 		}
 	}
 
 	login = () =>{
-		const {UserEmail,UserPassword} = this.state;
+		const {UserEmail,UserPassword,UserName} = this.state;
 		let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
 		if(UserEmail==""){
 
@@ -40,11 +41,11 @@ export default class login extends Component {
 		  }
 
 		else if(UserPassword==""){
-		this.setState({email:"Entrez votre mot de passe!"})
+		this.setState({passwd:"Entrez votre mot de passe!"})
 		}
 		else{
 
-		fetch('http://192.168.0.9/ManagisApp/connexion/User_Login.php',{
+		fetch('http://192.168.0.3/ManagisApp/connexion/User_Login.php',{
 			method:'POST',
 			header:{
 				'Accept': 'application/json',
@@ -53,6 +54,7 @@ export default class login extends Component {
 			body:JSON.stringify({
 
 				email: UserEmail,
+        pseudo: UserName,
 				passwd: UserPassword
 			})
 
@@ -65,6 +67,7 @@ export default class login extends Component {
 				 this.props.navigation.navigate("Menu");
 
         AsyncStorage.setItem('UserEmail',UserEmail);
+        AsyncStorage.setItem('UserName',UserName);
 
 			 }else{
 				 alert("Mot de passe ou adresse mail incorect!");

@@ -6,13 +6,54 @@ import {
   Image,
   TouchableOpacity,
   AppRegistry,
-  AsyncStorage
+  AsyncStorage,
+  Linking
 } from 'react-native';
 
+import Login from './login.js';
+
+import ImagePicker from 'react-native-image-picker';
+
+const options={
+title: 'Photo de profil',
+takePhotoButtonTitle: 'Prendre une photo avec votre camera',
+chooseFromLibraryButtonTitle: 'Choisir dans la librarie',
+}
+
 export default class Profile extends Component {
-  state = {
-    UserEmail: [],
+  constructor(props){
+    super(props);
+    this.state={
+      avatarSource: null,
+      pic:null,
+      UserEmail: [],
+    }
   }
+
+  myfun=()=>{
+
+  ImagePicker.showImagePicker(options, (response) => {
+    console.log('Response = ', response);
+
+    if (response.didCancel) {
+      console.log('User cancelled image picker');
+    }
+    else if (response.error) {
+      console.log('Image Picker Error: ', response.error);
+    }
+
+    else {
+      let source = { uri: response.uri };
+
+
+
+      this.setState({
+        avatarSource: source,
+        pic:response.data
+      });
+    }
+  });
+}
 
   componentDidMount(){
     this._loadInitialState().done();
@@ -22,18 +63,38 @@ export default class Profile extends Component {
     if (value !==null) {
       this.setState({UserEmail: value});
     }
+
   }
   render() {
     return (
       <View style={styles.container}>
           <View style={styles.header}></View>
-          <Image style={styles.avatar} source={{uri: 'https://raw.githubusercontent.com/Ibra-Yves/Managis/Sprint-4/Application/image/inconnu.png'}}/>
+          <Image source={this.state.avatarSource}  style={styles.avatar}/>
+          <TouchableOpacity style={{margin:20,padding:20}}
+              onPress={this.myfun}>
+              <Text style={{color:'black', fontSize: 16, textAlign: 'center', fontWeight: 'bold', marginTop: 20}}>Edit</Text>
+              </TouchableOpacity>
           <View style={styles.body}>
             <View style={styles.bodyContent}>
               <Text style={styles.name}> {this.state.UserEmail}</Text>
-              <TouchableOpacity style={styles.buttonContainer}>
-                <Text style={styles.phrase}>Modifier</Text>
-              </TouchableOpacity>
+            </View>
+            <View>
+            <TouchableOpacity
+              onPress={() => Linking.openURL('https://www.facebook.com/')}
+              style={{padding: 5}}>
+              <Image
+                source={require('../image/icons8-facebook-48.png')}
+                style={styles.icon}/>
+                <Text style={styles.txtIcon}> Facebook</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => Linking.openURL('https://twitter.com/')}
+              style={{padding: 5}}>
+              <Image
+                source={require('../image/icons8-twitter-32.png')}
+                style={styles.icon}/>
+                <Text style={styles.txtIcon}> Twitter</Text>
+            </TouchableOpacity>
             </View>
         </View>
       </View>
@@ -51,16 +112,18 @@ const styles = StyleSheet.create({
     height: 130,
     borderRadius: 63,
     borderWidth: 4,
-    borderColor: "white",
+    borderColor: 'white',
     marginBottom:10,
     alignSelf:'center',
     position: 'absolute',
-    marginTop:130
+    marginTop:130,
+    backgroundColor: '#D3D3D3'
   },
   name:{
     fontSize:22,
     color:"white",
     fontWeight:'600',
+    marginTop:-40
   },
   body:{
     marginTop:40,
@@ -73,7 +136,8 @@ const styles = StyleSheet.create({
   name:{
     fontSize:28,
     color: "black",
-    fontWeight: "600"
+    fontWeight: "600",
+    margin:-70
   },
   info:{
     fontSize:16,
@@ -85,6 +149,18 @@ const styles = StyleSheet.create({
     color: "#696969",
     marginTop:10,
     textAlign: 'center'
+  },
+  icon: {
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf:'center',
+  },
+  txtIcon: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign:'center',
   },
   buttonContainer: {
     marginTop:50,
