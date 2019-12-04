@@ -284,16 +284,7 @@ La durée du présent contrat est indéterminée. Le contrat produit ses effets 
         $this->action->ajouterAction('cgu', $cgu);
     }
 
-    /**
-     * Termes de protection de vie privée
-     */
-    private function privacy(){
-        $privacy['title'] = "Protection de votre vie privée";
-        $privacy['text'] = "Nous protegerons votre vie privée";
-        $this->action->ajouterAction('privacy', $privacy);
-    }
-
-    /**
+        /**
      * Envoi de mail pour le contact
      */
     private function contactForm(){

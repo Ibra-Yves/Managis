@@ -482,9 +482,6 @@ $difSection = '<div id="difSection">
         <div class="col-md-4">
           <ul class="list-inline quicklinks">
             <li class="list-inline-item">
-              <a href="privacy.php">Privacy Policy</a>
-            </li>
-            <li class="list-inline-item">
               <a href="CGU.php">Terms of Use</a>
             </li>
           </ul>
