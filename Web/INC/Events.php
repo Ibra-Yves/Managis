@@ -130,7 +130,7 @@ class Events
             $emails [] = $invites[$key]['email'];
         }
         $sendEmail = implode(", ", $emails);
-        mail($sendEmail, "Modification de l'événement", "L'événement auquel vous avez été invité a été modifié, veuillez vous rendre sur notre page pour les voir");
+        mail($sendEmail, "Modification de l'evenement",  "L'événement auquel vous avez été invité a été modifié, veuillez vous rendre sur notre page pour les voir");
         $this->vosEvenements();
     }
 
@@ -144,7 +144,7 @@ class Events
             $emails [] = $invites[$key]['email'];
         }
         $sendEmail = implode(", ", $emails);
-        mail($sendEmail, "Suppression de l'événement", "L'événement auquel vous avez été invité a été annulé par l'hôte de la soirée");
+        mail($sendEmail, "Suppression de l'evenement", "L'événement auquel vous avez été invité a été annulé par l'hôte de la soirée");
         $this->db->procCall('suppEvent',[$_SESSION['idEvent']]);
         $this->vosEvenements();
     }
@@ -759,7 +759,7 @@ La durée du présent contrat est indéterminée. Le contrat produit ses effets 
 
         //On renvoie vers le client le message d'erreur si le pseudo transmis n'existe pas
         if(!$user && !$resultatSansEspaces && !$resultatAvecEspaces && !empty($pseudo) && $testMail){
-            mail($pseudo, 'Invitation dans un nouvel événement', 'Bonjour, un de vos amis vous a invité à son événement rejoignez le ici: https://managis.be/index.php?rq='.$_SESSION['idEvent']);
+            mail($pseudo, 'Invitation dans un nouvel evenement', 'Bonjour, un de vos amis vous a invité à son événement rejoignez le ici: https://managis.be/index.php?rq='.$_SESSION['idEvent']);
             $this->action->ajouterAction('succInv', "Un mail d'invitation a été envoyé");
         }
 
@@ -795,7 +795,7 @@ La durée du présent contrat est indéterminée. Le contrat produit ses effets 
             $this->action->ajouterAction('tousLesPseudos', $pseudos);
             $this->action->ajouterAction('listeInvites', $invites);
             $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
-            mail($mail, "Invitation à l'événement", "Vous avez été invité à l'événement, veuillez vous connecter pour précisez si vous participez à l'événement https://managis.be");
+            mail($mail, "Invitation à l'evenement", "Vous avez été invité à l'événement, veuillez vous connecter pour précisez si vous participez à l'événement https://managis.be");
 
             if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
         }
@@ -1025,7 +1025,7 @@ La durée du présent contrat est indéterminée. Le contrat produit ses effets 
             $requeteInv = $value;
         }
         $mailInv = $this->db->procCall('mailSupprInvite', [$requeteInv]);
-        mail($mailInv[0]['email'], "Votre suppression de la liste d'invités", "Vous avez été retiré de la liste d'invités pour plus d'informations veuillez contacter l'hôte");
+        mail($mailInv[0]['email'], "Votre suppression de la liste d'invites", "Vous avez été retiré de la liste d'invités pour plus d'informations veuillez contacter l'hôte");
         //On enleve l'invite de la liste
         $this->db->procCall('supprInvites', [$_SESSION['idEvent'],$requeteInv]);
         $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
