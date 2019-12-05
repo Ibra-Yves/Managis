@@ -1,28 +1,62 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import {Text, View, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native'
+import Constants from 'expo-constants'
 
-
-export default class AjoutFournitures extends Component {
+export default class AjoutFournitures extends React.Component {
   render() {
     return (
-      <ScrollView>
+	<ScrollView style={{marginTop: Constants.statusBarHeight}}>
       <View style={styles.containerTitre}>
-        <Text style={styles.titrePage}>Ajoute des invités !</Text>
+        <TouchableOpacity
+          onPress={() => this.props.navigation.goBack()}
+          style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Image
+            source={require('../Images/icons8-gauche-50.png')}
+            style={styles.icon}
+            />
+        </TouchableOpacity>
+        
+		<View style={{flex: 6, justifyContent: 'center'}}>
+          <Text style={styles.titrePage}>Ajoutez des fournitures !</Text>
+        </View>
+		
+        <View style={{flex : 1}}>
+			<TouchableOpacity
+              onPress={() => this.props.navigation.openDrawer("EventDrawerNav")}
+              style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+              <Image
+                source={require('../Images/icons8-menu-arrondi-50.png')}
+                style={styles.icon}
+                />
+            </TouchableOpacity>
+        </View>
       </View>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style = {styles.inputBox}
-            placeholder = 'Nom founiture'
-            placeholderTextColor = '#FFFFFF'
-          />
-        </View>
-        <View style={styles.submitContainer}>
-          <TouchableOpacity>
-            <Text style={styles.submitButton}>Valider</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
+	  <View>
+		  <View style={styles.inputContainer}>
+			  <Text style={styles.com}>Ajoutez le nom de votre fourniture !</Text>
+			  <TextInput
+				style = {styles.inputBox}
+				placeholder = 'Nom'
+				placeholderTextColor = '#FFFFFF'
+			  />
+			</View>
+			  <View style={styles.inputContainer}>
+			  <Text style={styles.com}>Ajoutez la quantité !</Text>
+			  <TextInput
+				style = {styles.inputBox}
+				placeholder = 'Quantité'
+				placeholderTextColor = '#FFFFFF'
+			  />
+			</View>
+			<View style={styles.submitContainer}>
+			  <TouchableOpacity
+				onPress={() => this.props.navigation.navigate('EventList')}>
+				<Text style={styles.submitButton}>Valider</Text>
+			  </TouchableOpacity>
+			</View>
+	  </View>
+	  </ScrollView>
     )
   }
 }
@@ -65,21 +99,25 @@ const styles = StyleSheet.create({
   },
   titrePage: {
       color: '#FFFFFF',
-      fontSize: 18
+      fontSize: 18,
+      textAlign: 'center'
     },
   containerTitre: {
     backgroundColor:'#3A4750',
-    width:200,
-    borderRadius: 25,
-    marginVertical: 10,
-    paddingVertical: 13,
-    textAlign: 'center',
+    flexDirection: 'row',
+    height: 60
   },
   signupButton: {
     textAlign: 'center',
     marginVertical: 10,
     paddingVertical: 13,
     color: '#3A4750'
-
+  },
+  icon: {
+    height: 30,
+    width: 30
+  },
+  com: {
+    marginTop: 10,
   }
 })

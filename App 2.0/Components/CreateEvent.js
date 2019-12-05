@@ -9,58 +9,66 @@ export default class CreateEvent extends Component {
       <ScrollView style={{marginTop: Constants.statusBarHeight}}>
         <View style={styles.containerTitre}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.openDrawer('EventDrawerNav')}
-            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <Image
-              source={require('../Images/icons8-menu-arrondi-50.png')}
-              style={styles.icon}
-              />
-          </TouchableOpacity>
+          onPress={() => this.props.navigation.goBack()}
+          style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Image
+            source={require('../Images/icons8-gauche-50.png')}
+            style={styles.icon}
+            />
+        </TouchableOpacity>
           <View style={{flex: 6, justifyContent: 'center'}}>
             <Text style={styles.titrePage}>Créer un événement !</Text>
           </View>
           <View style={{flex : 1}}>
+		  <TouchableOpacity
+              onPress={() => this.props.navigation.openDrawer("EventDrawerNav")}
+              style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+              <Image
+                source={require('../Images/icons8-menu-arrondi-50.png')}
+                style={styles.icon}
+                />
+            </TouchableOpacity>
           </View>
         </View>
         <View >
-        <View style={styles.inputContainer}>
-          <Text style={styles.com}>Ajoutez un nom à votre événement !</Text>
-          <TextInput
-            style = {styles.inputBox}
-            placeholder = 'Nom'
-            placeholderTextColor = '#FFFFFF'
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text>Indiquez le lieu de votre événement</Text>
-          <TextInput
-            style = {styles.inputBox}
-            placeholder = 'Adresse'
-            placeholderTextColor = '#FFFFFF'
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text>Indiquez la date de l'événement</Text>
-          <TextInput
-            style = {styles.inputBox}
-            placeholder = 'Date'
-            placeholderTextColor = '#FFFFFF'
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text>Indiquez l'heure de l'événement</Text>
-          <TextInput
-            style = {styles.inputBox}
-            placeholder = 'Heure'
-            placeholderTextColor = '#FFFFFF'
-          />
-        </View>
-        <View style={styles.submitContainer}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('EventList')}>
-            <Text style={styles.submitButton}>Valider</Text>
-          </TouchableOpacity>
-        </View>
+			<View style={styles.inputContainer}>
+			  <Text style={styles.com}>Ajoutez un nom à votre événement !</Text>
+			  <TextInput
+				style = {styles.inputBox}
+				placeholder = 'Nom'
+				placeholderTextColor = '#FFFFFF'
+			  />
+			</View>
+			<View style={styles.inputContainer}>
+			  <Text>Indiquez le lieu de votre événement</Text>
+			  <TextInput
+				style = {styles.inputBox}
+				placeholder = 'Adresse'
+				placeholderTextColor = '#FFFFFF'
+			  />
+			</View>
+			<View style={styles.inputContainer}>
+			  <Text>Indiquez la date de l'événement</Text>
+			  <TextInput
+				style = {styles.inputBox}
+				placeholder = 'Date'
+				placeholderTextColor = '#FFFFFF'
+			  />
+			</View>
+			<View style={styles.inputContainer}>
+			  <Text>Indiquez l'heure de l'événement</Text>
+			  <TextInput
+				style = {styles.inputBox}
+				placeholder = 'Heure'
+				placeholderTextColor = '#FFFFFF'
+			  />
+			</View>
+			<View style={styles.submitContainer}>
+			  <TouchableOpacity
+				onPress={() => this.props.navigation.navigate('EventList')}>
+				<Text style={styles.submitButton}>Valider</Text>
+			  </TouchableOpacity>
+			</View>
         </View>
       </ScrollView>
     )

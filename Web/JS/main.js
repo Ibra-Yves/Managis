@@ -26,7 +26,6 @@ function requetes(event){
    }
 
 
-    console.log('rq: ' +request);
 
     envoyerData.append('request', request); //Le nom de formulaire on le remplace par le nom du vrai formulaire
     $.post('?rq=' + request, envoyerData,  gererDonnes); //Requete ajax vers le php pour lui passer les données de la requete
@@ -35,7 +34,6 @@ function requetes(event){
 //Ce qu'on recoit du PHP
 function gererDonnes(retour){
     retour = lireJSON(retour); //On lit les données envoyés par PHP qui sont encodés en JSON
-   console.log(retour);
     retour.forEach(function(action){ //Double boucle pour le retour pour lire les données
         $.each(action, function(actionName, actionDatas){ //Nom de l'action passé en paramètres dans action.php ainsi que les données transmises
             switch(actionName){ //Changements sur le nom de l'action
@@ -43,33 +41,43 @@ function gererDonnes(retour){
                 case 'affiche' : //Affichage par défaut
                     let dest = actionDatas['dest'];
                     $(actionDatas['dest']).html(actionDatas['content']);
-                    $('#difSection').html('');
+                    $('#difSection').empty();
                     evenements(dest);
-                    break;
-
-                case 'connexion' : //Gestion de la connexion et remplacement des elements qu'il faut
-                    location.reload();
-                    $('.panel-heading').replaceWith('<h3> Connexion reussie </h3>');
-                    $('.panel-body').replaceWith('<h1>Bienvenue '+actionDatas['pseudo'] + '</h1>');
-                    $('main').html('');
                     break;
 
                 case 'deconnexion' : //Gestion de la deconnexion
                         location.reload();
                     break;
 
-                case 'test' :
-                        console.log(actionDatas);
-                    break;
 
-                case 'espaceMembre' : //Espace memebre affiché
+                case 'popUp' :
+                        $('#popUp').dialog({
+                            title: "Notification",
+                            position: {
+                                my: 'right bottom',
+                                at: 'right bottom',
+                                of: window
+                            },
+                        }).html("Vous avez été invité à <strong> "+ actionDatas+ "</strong> événement(s)");
+                     break;
+
+                case 'cgu' :
+                    $('#cgu-priv').dialog({
+                        modal: true,
+                        title: actionDatas['title'],
+                        width: 500,
+                        height: 500
+
+                    }).html(actionDatas['text']);
+                    break;
+                                case 'espaceMembre' : //Espace memebre affiché
                     let content = '';
                     actionDatas.forEach(function(data){
                         content+=
                             '<tr>\n' +
-                                '<td class="gestionDeCompteInfos" align="center">'+data['pseudo'] +'</td>\n' + //Pseudo de l'user
-                                '<td class="gestionDeCompteInfos" align="center">'+data['dateCrea']+'</td>\n' + //Date de la création du compte
-                                '<td class="gestionDeCompteInfos" align="center">'+data['email']+'</td>\n' + //Le mail de l'utilisateur
+                                '<td class="taillePolice" align="center">'+data['pseudo'] +'</td>\n' + //Pseudo de l'user
+                                '<td class="taillePolice" align="center">'+data['dateCrea']+'</td>\n' + //Date de la création du compte
+                                '<td class="taillePolice" align="center">'+data['email']+'</td>\n' + //Le mail de l'utilisateur
                             '</tr>';
                     });
                     $('main').html('');
@@ -83,7 +91,7 @@ function gererDonnes(retour){
                         tableVosEvent+=
                             '<tr> \n' +
                                 '<th scope="row">'+ i++ +'</th>\n' +
-                                '<td class="taillePolice" align="center"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' + //Nom de l'événement
+                                '<td class="taillePolice" align="center"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a> </td>\n' + //Nom de l'événement
                                 '<td class="taillePolice" align="center">'+data['hote']+'</td>\n' + //Hote
                                 '<td class="taillePolice" align="center">'+data['dateEvent']+'</td>\n' + //Date de l'évènement
                                 '<td class="taillePolice" align="center"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+' </a></td>\n' + //Adresse de l'évent
@@ -189,14 +197,13 @@ function gererDonnes(retour){
                     //Affiche le nombre d'invites commentaires etc. pour l'event
                 case 'infoEvent':
                     let tableNombre = '';
-                    console.log(actionDatas);
                         tableNombre =
-                        '<tr>' +
-                            '<td class="taillePolice" align="center"><a href="afficheInv.php">'+actionDatas[0][0]['nombreInv']+'</a></td>' +
-                            '<td class="taillePolice" align="center"><a href="afficheFour.php">'+actionDatas[1][0]['nombreFour']+'</a></td>' +
-                            '<td class="taillePolice" align="center"><a href="afficheComm.php">'+actionDatas[2][0]['nombreComm']+'</a></td>' +
-                            '<td class="taillePolice" align="center"><a href="afficheParticipants.php">'+actionDatas[3][0]['participant']+'</a></td>' +
-                            ' <td class="taillePolice" align="center" style="display: none" id="affichePourParticiper"> <div class="form-check">\n' +
+                        '<tr> \n' +
+                            '<td class="taillePolice" align="center">'+actionDatas[0][0]['nombreInv']+'<a href="afficheInv.php"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fas fa-eye"></i></button></a></td> \n' +
+                            '<td class="taillePolice" align="center">'+actionDatas[1][0]['nombreFour']+'<a href="afficheFour.php"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fas fa-eye"></i></button></a></td>\n' +
+                            '<td class="taillePolice" align="center">'+actionDatas[2][0]['nombreComm']+'<a href="afficheComm.php"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fas fa-eye"></i></button></a></td>\n' +
+                            '<td class="taillePolice" align="center">'+actionDatas[3][0]['participant']+'<a href="afficheParticipants.php"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fas fa-eye"></i></button></a></td>\n' +
+                            '<td class="taillePolice" align="center" style="display: none" id="affichePourParticiper"> <div class="form-check">\n' +
                             '<a href="ajoutParticipant.php" class="'+actionDatas[4]+'"> <input type="checkbox" class="form-check-input" id="'+actionDatas[4]+'"></a>\n' +
                             '<td class="taillePolice" align="center" style="display:none;" id="modifierr"><a href="modifEvent.php"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fas fa-pen"></i></button></a></td>\n'+ //Bouton modification
                             '<td class="taillePolice" align="center" style="display:none;" id="supprimerr"><a href="suppEvent.php"><button type="button" class="btn btn-xs btn-primary" style="background-color: #FF8C00"><i class="fa fa-trash" aria-hidden="true"> </i></button></a></td>\n'+
@@ -214,10 +221,12 @@ function gererDonnes(retour){
                     actionDatas.forEach(function(data){
                     tableInvites+=
                         '<tr> \n' +
+                        '<div> \n' +
                             '<th scope="row" id="'+ o++ +'">'+ j++ +'</th>\n' +
                             '<td class="taillePolice" align="center" id="'+ p++ +'">'+data['pseudo']+'</td> \n' +
                             '<td class="taillePolice" align="center"><a id="' + q++ +'" href="'+data['pseudo']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
                             '<td class="taillePolice" align="center" id="'+ data['pseudo'] +'"></td> \n' +
+                        '</div>'
                         '</tr>';
 
                     });
@@ -310,18 +319,6 @@ function gererDonnes(retour){
                     let hrefIndex =  hrefActuel.split('?');
                     window.location.replace(hrefIndex[0]);
                     break;
-                    //On cache toutes les balises nécessaires qui ruisquent d'être modifié dans l'historique des events
-                /*case 'hideModif' :
-                    //$('a').hide();
-                    $('#formInv').css('display', 'none');
-                    $('#suppr').hide();
-                    $('#ajoutFour').css('display', 'none');
-                    $('#ajoutCom').hide();
-                    $('#submit').hide();
-                    $('#invites a').hide();
-                    $('#listeFournitures a').hide();
-                    $('#listeCommentaire a').hide();
-                    break;*/
                 case 'Probleme JSON' : //On affiche si il y a un problème JSON
                     $('.intro-text').html(actionDatas['donnes']);
                     break;

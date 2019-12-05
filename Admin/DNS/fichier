@@ -1,1 +1,18 @@
-Configuration DNS
+$TTL 3600
+@	IN SOA dns107.ovh.net. tech.ovh.net. (2019111300 86400 3600 3600000 300)
+                          IN NS     ns107.ovh.net.
+                          IN NS     dns107.ovh.net.
+                          IN MX     1 mail.managis.be.
+                          IN A      85.201.34.220
+                          IN TXT    "1|www.managis.be"
+                      600 IN TXT    "v=spf1 include:mx.ovh.com ~all"
+_autodiscover._tcp        IN SRV    0 0 443 mailconfig.ovh.net.
+autoconfig                IN CNAME  mailconfig.ovh.net.
+autodiscover              IN CNAME  mailconfig.ovh.net.
+ftp                       IN CNAME  managis.be.
+imap                      IN CNAME  mail.managis.be.
+mail                      IN A      85.201.34.220
+pop3                      IN CNAME  mail.managis.be.
+smtp                      IN CNAME  mail.managis.be.
+www                       IN MX     1 mail.managis.be.
+www                       IN A      85.201.34.220

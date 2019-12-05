@@ -9,6 +9,9 @@ import { AppRegistry,
 				Image } from 'react-native';
 
 export default class home extends Component{
+	static navigationOptions = ({ navigation }) => ({
+		tabBarVisible: false
+	});
 
 	render(){
 		const { navigate } = this.props.navigation;
@@ -58,19 +61,22 @@ const styles = StyleSheet.create({
 		backgroundColor:'#3A4750',
 		padding:10,margin:10,width:'85%',
 		alignItems:'center',
-		justifyContent:'center'
+		justifyContent:'center',
+		borderRadius: 15
 	},
 	btn2:{
 		backgroundColor:'#3A4750',
 		padding:10,margin:10,width:'85%',
 		alignItems:'center',
-		justifyContent:'center'
+		justifyContent:'center',
+		borderRadius: 15
 	},
 	btnText:{
 		color:'#fff',
 		fontWeight:'bold',
 		alignItems:'center',
-		justifyContent:'center'
+		justifyContent:'center',
+		fontSize: 16
 	},
 
 });

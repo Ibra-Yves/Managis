@@ -52,7 +52,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">Managis</a>
+      <a class="navbar-brand js-scroll-trigger" id="index" href="index.php">Managis</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -92,7 +92,6 @@
                             </div>
                 </li>';
             if (!empty($_SESSION['user'])) {
-                //$ajouterEvent = str_replace("<a href=\"inscription.php\" class=\"btn btn-outline-dark\">Inscription</a>", '<a href="addEvent.php"  class="btn btn-outline-dark">Créer votre evenement </a>', $inscription);
                 $espaceMembre = str_replace("<a class=\"nav-link js-scroll-trigger\" id=\"connexion\" href=\"connexion.php\">Connexion</a>", "<a href=\"espaceMembre.php\" id=\"espaceMembre\" class=\"nav-link js-scroll-trigger\">Gestion de  compte</a>", $connexion);
                 $deconnexion= str_replace("<a class=\"nav-link js-scroll-trigger\" href=\"#team\">L'équipe</a>", "<a href=\"deconnexion.php\" id=\"deconnexion\" class=\"nav-link js-scroll-trigger\"> Déconnexion</a>", $quiSommesNous);
                 echo $vosEvenements  . $espaceMembre . $deconnexion;
@@ -113,40 +112,54 @@
   <header class="masthead">
     <div class="container">
       <div class="intro-text">
-
-              <div class="intro-lead-in">Bienvenue sur Managis</div>
-              <div class="intro-heading text-uppercase">Organisez au mieux vos événements! </div>
-              <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Commencez dès maintenant !</a>
-          </div>
+          <div class="intro-lead-in">Bienvenue sur Managis</div>
+          <div class="intro-heading text-uppercase">Organisez au mieux vos événements! </div>
+          <?php
+          $commencez =  '<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Commencez dès maintenant !</a>';
+            if(!empty($_SESSION['user'])) {
+                echo '<a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="addEvent.php">Commencez dès maintenant !</a>';
+            }
+            else {
+                echo $commencez;
+            }
+          ?>
+      </div>
     </div>
   </header>
+<div id="popUp"></div>
+<div id="cgu-priv"></div>
+<?php
 
-<div id="difSection">
+$difSection = '<div id="difSection">
   <!-- Services -->
   <section class="bg-white page-section" id="services">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
           <h2 class="section-heading text-uppercase">Services</h2>
-          <h3 class="section-subheading text-muted">Nous vous accompagnons lors de l'organisation de vos événements.</h3>
+          <h3 class="section-subheading text-muted">Nous vous accompagnons lors de l\'organisation de vos événements.</h3>
         </div>
       </div>
       <div class="row text-center">
         <div class="col-md-6">
           <span class="fa-stack fa-4x">
-            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+          <a  href="connexion.php"> 
+            <i class="fas fa-circle fa-stack-2x text-primary" ></i>
             <i class="fas fa-plus fa-stack-1x fa-inverse"></i>
+           </a>
           </span>
-          <h4 class="service-heading">Créez vos événements</h4>
+          <h4 class="service-heading"  href="connexion.php">Créez vos événements</h4>
           <p class="text-muted">Préparez votre soirée au mieux en invitant tous vos amis tout en leur partageant les informations nécessaires pour le bon déroulement de celui-ci.</p>
         </div>
         <div class="col-md-6">
           <span class="fa-stack fa-4x">
+          <a  href="connexion.php"> 
             <i class="fas fa-circle fa-stack-2x text-primary"></i>
             <i class="fas fa-eye fa-stack-1x fa-inverse"></i>
+           </a>
           </span>
           <h4 class="service-heading">Checkez vos événements</h4>
-          <p class="text-muted">Recevez toutes vos invitations et regardez ce dont l'hôte a besoin pour son événement.</p>
+          <p class="text-muted">Recevez toutes vos invitations et regardez ce dont l\'hôte a besoin pour son événement.</p>
         </div>
       </div>
     </div>
@@ -166,7 +179,7 @@
           <ul class="timeline">
             <li>
               <div class="timeline-image">
-                <img class="rounded-circle img-fluid" src="img/about/1.jpg" alt="">
+                <img class="rounded-circle img-fluid" src="IMG/about/1.jpg" alt="">
               </div>
               <div class="timeline-panel">
                 <div class="timeline-heading">
@@ -174,21 +187,21 @@
                   <h4 class="subheading">Notre commencement</h4>
                 </div>
                 <div class="timeline-body">
-                  <p class="text-muted">Nous sommes des étudiants en 3eme technologie de l'informatique à l'EPHEC de Louvain-La-Neuve. Dans le cadre de notre cours de projet d'intégration, nous avons comme tâche d'effectuer un projet qui nous serait utile dans la vie de tous les jours</p>
+                  <p class="text-muted">Nous sommes des étudiants en 3eme technologie de l\'informatique à l\'EPHEC de Louvain-La-Neuve. Dans le cadre de notre cours de projet d\'intégration, nous avons comme tâche d\'effectuer un projet qui nous serait utile dans la vie de tous les jours</p>
                 </div>
               </div>
             </li>
             <li class="timeline-inverted">
               <div class="timeline-image">
-                <img class="rounded-circle img-fluid" src="img/about/2.jpg" alt="">
+                <img class="rounded-circle img-fluid" src="IMG/about/2.jpg" alt="">
               </div>
               <div class="timeline-panel">
                 <div class="timeline-heading">
                   <h4>Mi-Septembre 2019</h4>
-                  <h4 class="subheading">L'idée!</h4>
+                  <h4 class="subheading">L\'idée!</h4>
                 </div>
                 <div class="timeline-body">
-                  <p class="text-muted">Lors de notre voyage de fin d'étude nous sommes passé par l'étape d'organisation. C'est alors que nous nous sommes dit que nous allions créer une plateforme afin de faciliter cette tâche!</p>
+                  <p class="text-muted">Lors de notre voyage de fin d\'étude nous sommes passé par l\'étape d\'organisation. C\'est alors que nous nous sommes dit que nous allions créer une plateforme afin de faciliter cette tâche!</p>
                 </div>
               </div>
             </li>
@@ -211,13 +224,13 @@
       <div class="row">
         <div class="col-lg-12 text-center">
           <h2 class="section-heading text-uppercase">Notre équipe !</h2>
-          <h3 class="section-subheading text-muted">Voici l'équipe qui a travaillé sur ce projet.</h3>
+          <h3 class="section-subheading text-muted">Voici l\'équipe qui a travaillé sur ce projet.</h3>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-4">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="img/team/adri.png" alt="">
+            <img class="mx-auto rounded-circle" src="IMG/team/adri.png" alt="">
             <h4>Adrien Chellé</h4>
             <p class="text-muted">Product owner/Dev App</p>
             <ul class="list-inline social-buttons">
@@ -241,7 +254,7 @@
         </div>
         <div class="col-sm-4">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="img/team/nico.png" alt="">
+            <img class="mx-auto rounded-circle" src="IMG/team/nico.png" alt="">
             <h4>Nicolas Viroux</h4>
             <p class="text-muted">Dev App/Admin</p>
             <ul class="list-inline social-buttons">
@@ -265,7 +278,7 @@
         </div>
         <div class="col-sm-4">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="img/team/ibra.png" alt="">
+            <img class="mx-auto rounded-circle" src="IMG/team/ibra.png" alt="">
             <h4>Ibrahima Conde</h4>
             <p class="text-muted">Dev App/Admin</p>
             <ul class="list-inline social-buttons">
@@ -291,7 +304,7 @@
       <div class="row">
         <div class="col-sm-4">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="img/team/dominik.png" alt="">
+            <img class="mx-auto rounded-circle" src="IMG/team/dominik.png" alt="">
             <h4>Dominik Fiedorczuk</h4>
             <p class="text-muted">Chef Dev Web</p>
             <ul class="list-inline social-buttons">
@@ -315,7 +328,7 @@
         </div>
         <div class="col-sm-4">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="img/team/Maxime.png" alt="">
+            <img class="mx-auto rounded-circle" src="IMG/team/Maxime.png" alt="">
             <h4>Maxime Liber</h4>
             <p class="text-muted">Dev Web</p>
             <ul class="list-inline social-buttons">
@@ -339,7 +352,7 @@
         </div>
         <div class="col-sm-4">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="img/team/remy.png" alt="">
+            <img class="mx-auto rounded-circle" src="IMG/team/remy.png" alt="">
             <h4>Rémy Vase</h4>
             <p class="text-muted">Dev Web</p>
             <ul class="list-inline social-buttons">
@@ -365,7 +378,7 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="img/team/ambroise.png" alt="">
+            <img class="mx-auto rounded-circle" src="IMG/team/ambroise.png" alt="">
             <h4>Ambroise Mostin</h4>
             <p class="text-muted">Scrum Master/Dev App</p>
             <ul class="list-inline social-buttons">
@@ -390,7 +403,7 @@
       </div>
       <div class="row">
         <div class="col-lg-8 mx-auto text-center">
-          <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+          <p class="large text-muted"></p>
         </div>
       </div>
     </div>
@@ -436,7 +449,9 @@
       </div>
     </div>
   </section>
-</div>
+</div>';
+    if(empty($_SESSION['user'])) echo $difSection;
+?>
 
   <!-- Footer -->
   <footer class="footer">
@@ -467,10 +482,7 @@
         <div class="col-md-4">
           <ul class="list-inline quicklinks">
             <li class="list-inline-item">
-              <a href="#">Privacy Policy</a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">Terms of Use</a>
+              <a href="CGU.php">Terms of Use</a>
             </li>
           </ul>
         </div>
@@ -495,10 +507,10 @@
               <div class="modal-body">
                 <!-- Project Details Go Here -->
                 <h2 class="text-uppercase">Project Name</h2>
-                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                <img class="img-fluid d-block mx-auto" src="img/portfolio/01-full.jpg" alt="">
-                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                <ul class="list-inline">
+                <p class="item-intro text-muted"></p>
+                <img class="img-fluid d-block mx-auto" src="IMG/portfolio/01-full.jpg" alt="">
+                  <p></p>
+                  <ul class="list-inline">
                   <li>Date: January 2017</li>
                   <li>Client: Threads</li>
                   <li>Category: Illustration</li>
@@ -529,9 +541,9 @@
               <div class="modal-body">
                 <!-- Project Details Go Here -->
                 <h2 class="text-uppercase">Project Name</h2>
-                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                <img class="img-fluid d-block mx-auto" src="img/portfolio/02-full.jpg" alt="">
-                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                <p class="item-intro text-muted"></p>
+                <img class="img-fluid d-block mx-auto" src="IMG/portfolio/02-full.jpg" alt="">
+                <p></p>
                 <ul class="list-inline">
                   <li>Date: January 2017</li>
                   <li>Client: Explore</li>
@@ -563,10 +575,10 @@
               <div class="modal-body">
                 <!-- Project Details Go Here -->
                 <h2 class="text-uppercase">Project Name</h2>
-                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                <img class="img-fluid d-block mx-auto" src="img/portfolio/03-full.jpg" alt="">
-                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                <ul class="list-inline">
+                <p class="item-intro text-muted"></p>
+                <img class="img-fluid d-block mx-auto" src="IMG/portfolio/03-full.jpg" alt="">
+                 <p></p>
+                  <ul class="list-inline">
                   <li>Date: January 2017</li>
                   <li>Client: Finish</li>
                   <li>Category: Identity</li>
@@ -597,9 +609,9 @@
               <div class="modal-body">
                 <!-- Project Details Go Here -->
                 <h2 class="text-uppercase">Project Name</h2>
-                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                <img class="img-fluid d-block mx-auto" src="img/portfolio/04-full.jpg" alt="">
-                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                <p class="item-intro text-muted"></p>
+                <img class="img-fluid d-block mx-auto" src="IMG/portfolio/04-full.jpg" alt="">
+                <p></p>
                 <ul class="list-inline">
                   <li>Date: January 2017</li>
                   <li>Client: Lines</li>
@@ -631,9 +643,9 @@
               <div class="modal-body">
                 <!-- Project Details Go Here -->
                 <h2 class="text-uppercase">Project Name</h2>
-                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                <img class="img-fluid d-block mx-auto" src="img/portfolio/05-full.jpg" alt="">
-                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                <p class="item-intro text-muted"></p>
+                <img class="img-fluid d-block mx-auto" src="IMG/portfolio/05-full.jpg" alt="">
+                <p></p>
                 <ul class="list-inline">
                   <li>Date: January 2017</li>
                   <li>Client: Southwest</li>
@@ -665,9 +677,9 @@
               <div class="modal-body">
                 <!-- Project Details Go Here -->
                 <h2 class="text-uppercase">Project Name</h2>
-                <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                <img class="img-fluid d-block mx-auto" src="img/portfolio/06-full.jpg" alt="">
-                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                <p class="item-intro text-muted"></p>
+                <img class="img-fluid d-block mx-auto" src="IMG/portfolio/06-full.jpg" alt="">
+                <p></p>
                 <ul class="list-inline">
                   <li>Date: January 2017</li>
                   <li>Client: Window</li>
@@ -690,10 +702,10 @@
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Contact form JavaScript -->
-  <script src="js/jqBootstrapValidation.js"></script>
+  <script src="JS/jqBootstrapValidation.js"></script>
 
   <!-- Custom scripts for this template -->
-  <script src="js/agency.min.js"></script>
+  <script src="JS/agency.min.js"></script>
 
 </body>
 

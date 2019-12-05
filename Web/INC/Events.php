@@ -44,7 +44,8 @@ class Events
         'index',
         'modifEvent',
         'suppEvent',
-        'formModifEvent'
+        'formModifEvent',
+        'privacy'
     ];
 
     public function __construct()
@@ -102,6 +103,12 @@ class Events
         $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
     }
 
+    public function popUp(){
+        $info = $this->db->procCall('infoPopUp', [$_SESSION['user']['idUser']]);
+        $infoPopUp =  $info[0]['invitations'];
+        if($infoPopUp != 0) $this->action->ajouterAction('popUp', $infoPopUp);
+    }
+
     /**
      * Renvoie la page de modification d'event
      */
@@ -116,9 +123,15 @@ class Events
      * On insère dans la base de données toutes les données
      */
     private function formModifEvent(){
-        //$this->action->ajouterAction('test', $_POST);
-            $this->db->procCall('modifEvent', [$_SESSION['idEvent'],$_POST['nomEvent'], $_POST['adresse'], $_POST['date'], $_POST['heure']]);
-            $this->vosEvenements();
+        $this->db->procCall('modifEvent', [$_SESSION['idEvent'],$_POST['nomEvent'], $_POST['adresse'], $_POST['date'], $_POST['heure']]);
+        $invites = $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
+        $emails =[];
+        foreach ($invites as $key => $value){
+            $emails [] = $invites[$key]['email'];
+        }
+        $sendEmail = implode(", ", $emails);
+        mail($sendEmail, "Modification de l'evenement",  "L'événement auquel vous avez été invité a été modifié, veuillez vous rendre sur notre page pour les voir");
+        $this->vosEvenements();
     }
 
     /**
@@ -131,7 +144,7 @@ class Events
             $emails [] = $invites[$key]['email'];
         }
         $sendEmail = implode(", ", $emails);
-        mail($sendEmail, "Suppression de l'événement", "L'événement auquel vous avez été invité a été annulé par l'hôte de la soirée");
+        mail($sendEmail, "Suppression de l'evenement", "L'événement auquel vous avez été invité a été annulé par l'hôte de la soirée");
         $this->db->procCall('suppEvent',[$_SESSION['idEvent']]);
         $this->vosEvenements();
     }
@@ -140,14 +153,142 @@ class Events
      * Rnvoie la page des conditions generales
      */
     private function CGU(){
-        $this->action->affichageDefaut('.intro-text', $this->lectureForm('CGU'));
+        $cgu['title'] = "Conditions générales d'utilisation - MANAGIS";
+        $cgu['text'] = "
+
+ <h2>ARTICLE 1 : Objet </h2>
+
+Les présentes « conditions générales d'utilisation » ont pour objet l'encadrement juridique de l’utilisation du site [votre site] et de ses services.
+
+Ce contrat est conclu entre :
+
+Le gérant du site internet, ci-après désigné « l’Éditeur »,
+
+Toute personne physique ou morale souhaitant accéder au site et à ses services, ci-après appelé « l’Utilisateur ».
+
+Les conditions générales d'utilisation doivent être acceptées par tout Utilisateur, et son accès au site vaut acceptation de ces conditions.
+
+
+<h2>ARTICLE 2 : Mentions légales</h2>
+
+Pour les personnes morales :
+
+Le site [nom du site] est édité par la société [nom de la société], [statut juridique (SAS, SARL, etc.)] au capital de [montant en euros] €, dont le siège social est situé au [adresse du siège social].
+
+La société est représentée par [nom et prénom du responsable].
+
+
+Pour les personnes physiques : 
+
+Le site [nom du site] est édité par [nom et prénom du responsable], domicilié au [adresse postale].
+
+
+
+<h2>ARTICLE 3 : accès aux services</h2>
+
+L’Utilisateur du site [votre site] a accès aux services suivants : 
+<ul>
+<li>Creer un evenement</li>
+<li>Participer à un evenement</li>
+</ul>
+
+Tout Utilisateur ayant accès a internet peut accéder gratuitement et depuis n’importe où au site. Les frais supportés par l’Utilisateur pour y accéder (connexion internet, matériel informatique, etc.) ne sont pas à la charge de l’Éditeur.
+<br> 
+Le site et ses différents services peuvent être interrompus ou suspendus par l’Éditeur, notamment à l’occasion d’une maintenance, sans obligation de préavis ou de justification.
+
+
+<h2>ARTICLE 4 : Responsabilité de l’Utilisateur</h2>
+
+L'Utilisateur est responsable des risques liés à l’utilisation de son identifiant de connexion et de son mot de passe. 
+<br>
+Le mot de passe de l’Utilisateur doit rester secret. En cas de divulgation de mot de passe, l’Éditeur décline toute responsabilité.
+<br>
+L’Utilisateur assume l’entière responsabilité de l’utilisation qu’il fait des informations et contenus présents sur le site [votre site].
+<br>
+Tout usage du service par l'Utilisateur ayant directement ou indirectement pour conséquence des dommages doit faire l'objet d'une indemnisation au profit du site.
+<br>
+Le site permet aux membres de publier sur le site :
+<ul>
+<li>[Commentaires] ;</li>
+<li>Fournitures ;</li>
+<li>Etc.</li>
+</ul>
+
+Le membre s’engage à tenir des propos respectueux des autres et de la loi et accepte que ces publications soient modérées ou refusées par l’Éditeur, sans obligation de justification. 
+<br>
+En publiant sur le site, l’Utilisateur cède à la société éditrice le droit non exclusif et gratuit de représenter, reproduire, adapter, modifier, diffuser et distribuer sa publication, directement ou par un tiers autorisé.
+<br>
+L’Éditeur s'engage toutefois à citer le membre en cas d’utilisation de  sa publication
+<br>
+
+
+<h2>ARTICLE 5 : Responsabilité de l’Éditeur</h2>
+
+Tout dysfonctionnement du serveur ou du réseau ne peut engager la responsabilité de l’Éditeur.
+<br>
+De même, la responsabilité du site ne peut être engagée en cas de force majeure ou du fait imprévisible et insurmontable d'un tiers.
+<br>
+Le site [votre site] s'engage à mettre en œuvre tous les moyens nécessaires pour garantir la sécurité et la confidentialité des données. Toutefois, il n’apporte pas une garantie de sécurité totale.
+<br>
+L’Éditeur se réserve la faculté d’une non-garantie de la fiabilité des sources, bien que les informations diffusées su le site soient réputées fiables.
+<br>
+
+<h2>ARTICLE 6 : Propriété intellectuelle</h2>
+
+Les contenus du site [votre site] (logos, textes, éléments graphiques, vidéos, etc.) son protégés par le droit d’auteur, en vertu du Code de la propriété intellectuelle.
+<br>
+L’Utilisateur devra obtenir l’autorisation de l’éditeur du site avant toute reproduction, copie ou publication de ces différents contenus.
+<br>
+Ces derniers peuvent être utilisés par les utilisateurs à des fins privées ; tout usage commercial est interdit.
+<br>
+L’Utilisateur est entièrement responsable de tout contenu qu’il met en ligne et il s’engage à ne pas porter atteinte à un tiers.
+<br>
+L’Éditeur du site se réserve le droit de modérer ou de supprimer librement et à tout moment les contenus mis en ligne par les utilisateurs, et ce sans justification.
+<br>
+
+<h2>ARTICLE 7 : Données personnelles</h2>
+
+L’Utilisateur doit obligatoirement fournir des informations personnelles pour procéder à son inscription sur le site. 
+<br>
+L’adresse électronique (e-mail) de l’utilisateur pourra notamment être utilisée par le site [nom de votre site] pour la communication d’informations diverses et la gestion du compte.
+<br>
+Managis garantie le respect de la vie privée de l’utilisateur, conformément à la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés.
+<br>
+
+
+En vertu des articles 39 et 40 de la loi en date du 6 janvier 1978, l'Utilisateur dispose d'un droit d'accès, de rectification, de suppression et d'opposition de ses données personnelles. L'Utilisateur exerce ce droit via :
+<ul>
+<li>Son espace personnel sur le site ;</li>
+<li>Un formulaire de contact ;</li>
+<li>Par mail à contact/managis@gmail.com ;</li>
+</ul>
+
+
+<h2>ARTICLE 8 : Liens hypertextes</h2>
+
+Les domaines vers lesquels mènent les liens hypertextes présents sur le site n’engagent pas la responsabilité de l’Éditeur de [votre site], qui n’a pas de contrôle sur ces liens.
+<br>
+Il est possible pour un tiers de créer un lien vers une page du site [votre site] sans autorisation expresse de l’éditeur.
+<br>
+
+<h2>ARTICLE 9 : Évolution des conditions générales d’utilisation </h2>
+
+Le site Managis se réserve le droit de modifier les clauses de ces conditions générales d’utilisation à tout moment et sans justification.
+
+
+<h2>ARTICLE 10 : Durée du contrat</h2>
+
+La durée du présent contrat est indéterminée. Le contrat produit ses effets à l'égard de l'Utilisateur à compter du début de l’utilisation du service.
+
+";
+        $this->action->ajouterAction('cgu', $cgu);
     }
 
-    /**
+        /**
      * Envoi de mail pour le contact
      */
     private function contactForm(){
-        mail('HE201451@students.ephec.be', 'Contact de '.$_POST['name'],'Mail de contact '.$_POST['email']. ' Message: '. $_POST['message']);
+        mail('contact.managis@gmail.com', 'Contact de '.$_POST['name'],'Mail de contact '.$_POST['email']. ' Message: '. $_POST['message']);
     }
 
     /**
@@ -169,7 +310,7 @@ class Events
 
             //Captcha
             $reponse = [];
-            $clePriv = "6Ldy2r0UAAAAAFaQRBM9ungieu74xM2W2fnYOFcj";
+            $clePriv = "6Lf1PsQUAAAAAAlTkF4jj-uRn93zUJQ-b_LuBetz";
             $rep = $_POST['g-recaptcha-response'];
             $remoteIp = $_SERVER['REMOTE_ADDR'];
 
@@ -188,8 +329,9 @@ class Events
                 $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
                 $this->action->ajouterAction('errorUser', 'Le pseudo ou le mail est déjà utilisé');//On renvoie vers la balise error user avec le texte a afficher
             } //Si on ne cooche pas captcha
-            else if ($reponse[0] == false) {
+            else if (empty($rep)) {
                 $this->action->ajouterAction('errorUser', 'Veuillez valider le reCAPTCHA');
+                //$this->action->ajouterAction('test', $decode);
             } //On verifie si les deux champs de mot de passe existe
             else if ($_POST['mdp'] != $_POST['confirmationMdp']) {
                 $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
@@ -206,7 +348,7 @@ class Events
                     $datas = [
                         'pseudo' => $_SESSION['user']['pseudo']
                     ];
-                    $this->action->ajouterAction('connexion', $datas);
+                    $this->affichageConnecte();
                 }
             }
         }
@@ -216,7 +358,7 @@ class Events
 
             //Captcha
             $reponse = [];
-            $clePriv = "6Ldy2r0UAAAAAFaQRBM9ungieu74xM2W2fnYOFcj";
+            $clePriv = "6Lf1PsQUAAAAAAlTkF4jj-uRn93zUJQ-b_LuBetz";
             $rep = $_POST['g-recaptcha-response'];
             $remoteIp = $_SERVER['REMOTE_ADDR'];
 
@@ -255,7 +397,7 @@ class Events
                     $datas = [
                         'pseudo' => $_SESSION['user']['pseudo']
                     ];
-                    $this->action->ajouterAction('connexion', $datas);
+                    $this->affichageConnecte();
                 }
             }
         }
@@ -275,22 +417,51 @@ class Events
      */
     private function formConnexion(){
        $user = $this->db->procCall('connexionUser', [$_POST['pseudo'], hash('md5', $_POST['mdp'])]); //Porcedure qui permet de se connecter appellé
-
        //Si la procèdure renvoie quelque chose
        if($user){
            //On memorise les données retournés dans la superglobale
            $_SESSION['user'] = $user[0];
            $_SESSION['user']['idUser'] = $user[0]['idUser'];
            $_SESSION['user']['pseudo'] = $user[0]['pseudo'];
-           $datas = [
-               'pseudo' =>  $_SESSION['user']['pseudo']
-           ];
-           $this->action->ajouterAction( 'connexion', $datas); //On envoie vers le JS le données du user
+           $this->affichageConnecte();
        }
        //Sinon on renvoie ceci à l'utilisateur
        else {
            $this->action->ajouterAction( 'errorUser',"Le pseudo ou le mot de passe est incorrect");
        }
+    }
+
+    /**
+     * Affiche la nouvelle navbar après la connexion
+     *
+     */
+    private function affichageConnecte(){
+        $vosEvenements =
+            '<li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle btn btn-outline-light" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-calendar"></span> Gestion des événements
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="addEvent.php">CREER VOTRE EVENEMENT</a>
+                    <a class="dropdown-item" href="vosEvenements.php">EVENEMENTS A VENIR</a>
+                    <a class="dropdown-item" href="historiqueEvents.php">HISTORIQUE DE VOS EVENEMENTS</a>
+                </div>
+                </li>';
+        $gestionCompte =
+            '<li class="nav-item">
+                <a href="espaceMembre.php" id="espaceMembre" class="nav-link js-scroll-trigger">Gestion de  compte</a>
+            </li>';
+        $deconnexion =
+            '<li class="nav-item">
+                <a href="deconnexion.php" id="deconnexion" class="nav-link js-scroll-trigger"> Déconnexion</a>
+            </li>';
+        $introText =
+            '<div class="intro-lead-in">Bienvenue sur Managis</div>
+             <div class="intro-heading text-uppercase">Organisez au mieux vos événements! </div>
+             <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="addEvent.php">Commencez dès maintenant !</a>';
+        $this->action->affichageDefaut('#navbarResponsive', '<ul class="navbar-nav text-uppercase ml-auto">'.$vosEvenements. $gestionCompte. $deconnexion.'</ul>');
+        $this->action->affichageDefaut('.intro-text', $introText);
+        $this->popUp();
     }
 
     /**
@@ -308,6 +479,7 @@ class Events
      */
     private function addEvent(){
        $this->action->affichageDefaut('.intro-text', $this->lectureForm('addEvent'));
+       $this->popUp();
     }
 
     /**
@@ -363,6 +535,7 @@ class Events
         $this->action->ajouterAction('vosEventFutur', $vosEventFutur);//On envois les données vers le client sur les event futur crées pas l'utilisateur
         $this->action->ajouterAction('vosInvitFutur', $vosInvitFutur);//On envbois les données vers le client sur les event futur où le user a été invité
 
+        $this->popUp();
 
     }
 
@@ -392,10 +565,8 @@ class Events
         //On mémorise l'id du event dans la superglobale
         if(!empty($_SESSION['user'])) {
             $_SESSION['idEvent'] = $id;
-
             //On renvoie le tableau à la page
             $this->action->affichageDefaut('#nombreInvFourComm', $this->lectureForm('infoSup'));
-
             //On appelle les procèdures nécessaires
             $nombreInv = $this->db->procCall('nombreInv', [$id]);
             $nombreComm = $this->db->procCall('nombreComm', [$id]);
@@ -408,20 +579,22 @@ class Events
 
             $afficherSuppr = array_intersect([$afficheInv[0]['pseudo']], [$_SESSION['user']['pseudo']]);
 
-            //On affiche le tableau avec les données niveau client
+            $this->action->affichageDefaut('#afficheInfos', "");
+
+            //On affiche le tableau avec les données niveau
             $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant, $id]);
             if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
             if(empty($verif)){
                 $this->action->ajouterAction('afficheParticipe', $id);
             }
+
             $vosInvitFutur =  $this->db->procCall('vosInvitFutur', [$_SESSION['user']['idUser'],$_SESSION['user']['pseudo']]);
             foreach ($vosInvitFutur as $key => $value){
                 $participe =   $this->db->procCall('listeParticipant', [$vosInvitFutur[$key]['idEvent']]);
-                foreach ($participe as $key => $value){
+                foreach ($participe as $key => $value) {
                     $verif = array_intersect([$participe[$key]['pseudo']], [$_SESSION['user']['pseudo']]);
-                    if($verif) $this->action->ajouterAction('participe', $participe[$key]['idEvent']);
+                    if ($verif) $this->action->ajouterAction('participe', $participe[$key]['idEvent']);
                 }
-
             }
         }
         else {
@@ -448,6 +621,7 @@ class Events
 
         $this->db->procCall('ajoutParticipant', [$_SESSION['idEvent'], $_SESSION['user']['idUser']]);
         $nombreParticipant =  $this->db->procCall('nombreParticipant', [$_SESSION['idEvent']]);
+        $listeParticipant =  $this->db->procCall('listeParticipant', [$_SESSION['idEvent']]);
 
         $afficheInv =  $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
         $verif = array_intersect([$afficheInv[0]['pseudo']], [$_SESSION['user']['pseudo']]);
@@ -458,6 +632,7 @@ class Events
         }
 
         $this->action->ajouterAction('ajoutParticipant', $_SESSION['idEvent']);
+        $this->action->ajouterAction('listeParticipant', $listeParticipant);
 
     }
 
@@ -478,6 +653,8 @@ class Events
         
         $this->action->ajouterAction('supprParticipant', $_SESSION['idEvent']);
         $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
+        $listeParticipant =  $this->db->procCall('listeParticipant', [$_SESSION['idEvent']]);
+        $this->action->ajouterAction('listeParticipant', $listeParticipant);
 
         if(empty($verif)){
             $this->action->ajouterAction('afficheParticipe',  $_SESSION['idEvent']);
@@ -499,7 +676,6 @@ class Events
         foreach($afficheInv as $key => $value){
             $afficheParticip [] = $value['pseudo'];
         }
-        $listePres = array_intersect($afficheParticip,[$_SESSION['user']['pseudo']]);
 
         //On affiche le formulaire ainsi que le tableau niveau client
         $this->action->affichageDefaut('#afficheInfos', $this->lectureForm('listeInvites'));
@@ -510,7 +686,6 @@ class Events
 
         //Affichage de la possibilité de suppression si le user est hote
         if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
-        if($listePres) $this->action->ajouterAction('test', $listePres);
 
     }
 
@@ -577,25 +752,41 @@ class Events
 
         //Verifie si le pseudo mis dans le formulaire existe dans la BDD
         $resultatSansEspaces = array_intersect($list, [$_POST['pseudoInv']]);
-        $enleverEspaces = trim($_POST['pseudoInv']);
+        $enleverEspaces = trim($pseudo);
         $resultatAvecEspaces = array_intersect($list, [$enleverEspaces]);
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
+        $testMail = strpos($pseudo, '@');
 
         //On renvoie vers le client le message d'erreur si le pseudo transmis n'existe pas
-        if($_POST['pseudoInv'] == '' || !$user || $resultatSansEspaces || $resultatAvecEspaces){
-            mail($pseudo, 'Invitation dans un nouvel événement', 'Bonjour, un de vos amis vous a invité à son événement rejoignez le ici: http://localhost/Managis/Web/index.php?rq='.$_SESSION['idEvent']);
+        if(!$user && !$resultatSansEspaces && !$resultatAvecEspaces && !empty($pseudo) && $testMail){
+            mail($pseudo, 'Invitation dans un nouvel evenement', 'Bonjour, un de vos amis vous a invité à son événement rejoignez le ici: https://managis.be/index.php?rq='.$_SESSION['idEvent']);
+            $this->action->ajouterAction('succInv', "Un mail d'invitation a été envoyé");
+        }
+
+        else if(empty($pseudo)){
+            $this->action->ajouterAction('errorInv', "Veuillez spécifier le pseudo");
+        }
+
+        else if($resultatAvecEspaces || $resultatSansEspaces){
+            $this->action->ajouterAction('errorInv', "La personne invité se trouve dans la liste");
+        }
+
+        else if(empty($user)) {
+            $this->action->ajouterAction('errorInv', "La personne specifé n'est inscrite, veuillez spécifier son mail pour l'inviter à votre événement !");
         }
 
         //Sinon on rajoute l'invite et on l'affiche dans la liste
         else {
             $this->db->procCall('ajouterInvites',[$_POST['pseudoInv'], $_SESSION['idEvent']]);
-
             $invites= $this->db->procCall('listeInvites', [$_SESSION['idEvent']]);
             $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);
             $nombreComm = $this->db->procCall('nombreComm', [$_SESSION['idEvent']]);
             $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
             $nombreParticipant =  $this->db->procCall('nombreParticipant', [$_SESSION['idEvent']]);
             $pseudos = $this->db->procCall('tousLesUsers', ['']);
+            $mailInv = $this->db->procCall('mailInv', [$user[0]['idUser']]);
+            $mail= $mailInv[0]['email'];
+            $this->action->ajouterAction('test', $resultatAvecEspaces);
 
             $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
             $this->action->affichageDefaut('#nombreInvFourComm', $this->lectureForm('infoSup'));
@@ -604,6 +795,7 @@ class Events
             $this->action->ajouterAction('tousLesPseudos', $pseudos);
             $this->action->ajouterAction('listeInvites', $invites);
             $this->action->ajouterAction('infoEvent', [$nombreInv, $nombreFour, $nombreComm, $nombreParticipant]);
+            mail($mail, "Invitation à l'evenement", "Vous avez été invité à l'événement, veuillez vous connecter pour précisez si vous participez à l'événement https://managis.be");
 
             if($afficherSuppr) $this->action->ajouterAction('afficherSuppr', '');
         }
@@ -833,7 +1025,7 @@ class Events
             $requeteInv = $value;
         }
         $mailInv = $this->db->procCall('mailSupprInvite', [$requeteInv]);
-        mail($mailInv[0]['email'], "Votre suppression de la liste d'invités", "Vous avez été retiré de la liste d'invités pour plus d'informations veuillez contacter l'hôte");
+        mail($mailInv[0]['email'], "Votre suppression de la liste d'invites", "Vous avez été retiré de la liste d'invités pour plus d'informations veuillez contacter l'hôte");
         //On enleve l'invite de la liste
         $this->db->procCall('supprInvites', [$_SESSION['idEvent'],$requeteInv]);
         $nombreInv = $this->db->procCall('nombreInv', [$_SESSION['idEvent']]);

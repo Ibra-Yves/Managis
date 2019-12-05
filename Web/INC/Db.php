@@ -18,7 +18,7 @@ class Db
      */
     public function connexionBDD(){
         try {
-            $this->pdo = new PDO('mysql:host=localhost;dbname=projet', 'root', '');
+            $this->pdo = new PDO('mysql:host=172.17.0.4;dbname=managis', 'admin', 'yVLsgfgsQa3R4HRP');
         }
         catch (PDOException $e){
             print_r($e);
@@ -50,6 +50,8 @@ class Db
             case 'suppEvent':
             case 'infoEvent' :
             case 'mailSupprInvite':
+            case 'mailInv' :
+            case 'infoPopUp' :
                 array_push($params, '?');
             case 'tousLesUsers' :
                 try {

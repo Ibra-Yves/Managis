@@ -12,17 +12,6 @@ import {
 
 
 export default class register extends Component {
-	   static navigationOptions= ({navigation}) =>({
-		  title: "S'inscrire",
-		  headerRight:
-		  <TouchableOpacity
-			onPress={() => navigation.navigate('Home')}
-			style={{margin:10,backgroundColor:'#3A4750',padding:10}}>
-			<Text style={{color:'#ffffff'}}>Home</Text>
-		  </TouchableOpacity>
-
-	});
-
 	constructor(props){
 		super(props)
 		this.state={
@@ -56,7 +45,7 @@ export default class register extends Component {
     }
     else{
 
-		fetch('http://192.168.1.45/IbraManagis/inscription/user_registration.php', {
+		fetch('http://192.168.0.3/ManagisApp/inscription/user_registration.php', {
 			method: 'post',
 			header:{
 				'Accept': 'application/json',

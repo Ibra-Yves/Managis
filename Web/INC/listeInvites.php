@@ -1,5 +1,5 @@
 <div class="row text-center">
-    <div class="col-md-6  text-center" id="formInv" style="display: none">
+    <div class="table responsive col-md-6"  text-center" id="formInv" style="display: none">
         <div class="mb-3 transparent" style="max-width: 110rem;">
             <div class="card-header transparent gestionDeCompteSousTitre">Invités</div>
             <div class="card-body transparent">
