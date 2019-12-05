@@ -45,7 +45,7 @@ export default class register extends Component {
     }
     else{
 
-		fetch('http://192.168.0.3/ManagisApp/inscription/user_registration.php', {
+		fetch('http://10.99.1.188/ManagisApp/inscription/user_registration.php', {
 			method: 'post',
 			header:{
 				'Accept': 'application/json',

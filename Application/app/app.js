@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { AppRegistry,
 				View,
 				Text,
+				Image,
 				StyleSheet,
 				ScrollView,
-				TouchableOpacity } from 'react-native';
-import { StackNavigator,DrawerNavigator } from 'react-navigation';
+				TouchableOpacity,
+			 	Styles} from 'react-native';
+import { StackNavigator,DrawerNavigator, DrawerItems } from 'react-navigation';
 
 
 import HomeScreen from './home.js';
@@ -17,13 +19,61 @@ import Profile from './profile.js';
 import Restes from '../components/restes.js';
 import CreateAnnonce from '../components/createAnnonce.js';
 import AnnoncePerso from '../components/annoncePerso.js';
+import Settings from '../components/settings.js'
+
+import {Container,Content,Header,Body,Icon} from 'native-base'
+
+const CustomDrower = (props) =>(
+	<Container>
+		<Header style={{ height: 250}}>
+			<Body>
+			<Image
+					source={require('../image/logo_transparent.png')}
+					style={styles.drawerImage}
+					/>
+			</Body>
+		</Header>
+		<Content>
+			<DrawerItems {...props}/>
+		</Content>
+	</Container>
+)
 
 
 const myNav = DrawerNavigator({
-	"Marchés des Restes": {screen: Restes},
-	"Créer une annonce": {screen: CreateAnnonce},
-	"Vos annonces": {screen: AnnoncePerso}
-});
+	Restes: {
+		screen: Restes,
+		navigationOptions: {
+		  title: 'Marché des Restes'
+		}
+	  },
+		CreateAnnonce: {
+			screen: CreateAnnonce,
+			navigationOptions: {
+			  title: 'Créer une annonce'
+			}
+		  },
+
+		AnnoncePerso: {
+				screen: AnnoncePerso,
+				navigationOptions: {
+				  title: 'Mes annonces'
+				}
+	 },
+	 Settings:{
+		 screen: Settings,
+		 navigationOptions: {
+			 title: 'paramètre'
+		 }
+	 },
+
+},{
+		initialRouteName: 'Restes',
+		contentComponent: CustomDrower,
+		drawerOpenRoute: 'DrawerOpen',
+		drawerCloseRoute: 'DrawerClose',
+		drawerToggleRoute: 'DrawerToggle'
+})
 
 
 const Managis = StackNavigator({
@@ -88,7 +138,14 @@ const Managis = StackNavigator({
 			header: null,
 		}),
 	}
-
  });
+ const styles= StyleSheet.create({
+	 drawerImage: {
+		 height: 250,
+		 width: 250
+	 }
+
+})
+
 
 export default Managis;

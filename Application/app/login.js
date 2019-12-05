@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
+import { LoginButton, AccessToken, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 
 export default class login extends Component {
 	constructor(props){
@@ -20,7 +21,10 @@ export default class login extends Component {
 		this.state={
 			UserEmail:'',
       UserName:'',
-			UserPassword:''
+			UserPassword:'',
+      user_name: '',
+      avatar_url: '',
+      avatar_show: false
 		}
 	}
 
@@ -45,7 +49,7 @@ export default class login extends Component {
 		}
 		else{
 
-		fetch('http://192.168.0.3/ManagisApp/connexion/User_Login.php',{
+		fetch('http://10.99.1.188/ManagisApp/connexion/User_Login.php',{
 			method:'POST',
 			header:{
 				'Accept': 'application/json',
@@ -81,6 +85,27 @@ export default class login extends Component {
 		Keyboard.dismiss();
 	}
 
+  get_Response_Info = (error, result) => {
+    if (error) {
+      Alert.alert('Error fetching data: ' + error.toString());
+    } else {
+
+      this.setState({ user_name: 'Welcome' + ' ' + result.name });
+
+      this.setState({ avatar_url: this.props.navigation.navigate("Menu")});
+
+      this.setState({ avatar_show: true })
+
+      console.log(result);
+
+    }
+  }
+  onLogout = () => {
+
+    this.setState({ user_name: null, avatar_url: null, avatar_show: false });
+
+  }
+
   render() {
     return (
 	<View style={styles.container}>
@@ -114,6 +139,39 @@ export default class login extends Component {
   <Text style={{color:'white',textAlign:'center'}}>Se connecter</Text>
 	</TouchableOpacity>
 
+  {this.state.avatar_url ?
+         <Image
+           source={{ uri: this.state.avatar_url }}
+           style={styles.imageStyle} /> : null}
+
+       <Text style={styles.text}> {this.state.user_name} </Text>
+
+       <LoginButton
+         readPermissions={['public_profile']}
+         onLoginFinished={(error, result) => {
+           if (error) {
+             console.log(error.message);
+             console.log('login has error: ' + result.error);
+           } else if (result.isCancelled) {
+             console.log('login is cancelled.');
+           } else {
+             AccessToken.getCurrentAccessToken().then(data => {
+               console.log(data.accessToken.toString());
+
+               const processRequest = new GraphRequest(
+                 '/me?fields=name,picture.type(large)',
+                 null,
+                 this.get_Response_Info
+               );
+               // Start the graph request.
+               new GraphRequestManager().addRequest(processRequest).start();
+
+             });
+           }
+         }}
+         onLogoutFinished={this.onLogout}
+       />
+
      </View>
 
    );
@@ -131,6 +189,13 @@ const styles = StyleSheet.create({
     height: 300,
     margin: -50
   },
+  imageStyle: {
+
+    width: 200,
+    height: 300,
+    resizeMode: 'contain'
+  },
+
   inputBox : {
    width:300,
    backgroundColor:'#3A4750',
