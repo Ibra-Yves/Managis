@@ -7,7 +7,7 @@ if ($conn->connect_error) {
  die("La connexion à échoué: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM gestionrestes where idUser='$idUser'";
+$sql = "SELECT * FROM gestionrestes join users on gestionrestes.idUser=users.idUser";
 
 $result = $conn->query($sql);
 
