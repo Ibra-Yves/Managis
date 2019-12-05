@@ -11,7 +11,6 @@ $passwd = hash('md5', $obj['passwd']);
 $CheckSQL = "SELECT * FROM users WHERE email='$email'";
 $check = mysqli_fetch_array(mysqli_query($con,$CheckSQL));
 
-
 if(isset($check)){
 
  $EmailExistMSG = 'Ce compte existe déjà !';
