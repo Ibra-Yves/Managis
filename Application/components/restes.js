@@ -9,23 +9,33 @@ import { AppRegistry,
         ActivityIndicator,
         Text,
         View,
-        Alert } from 'react-native';
+        Alert,
+        RefreshControl} from 'react-native';
 
 import ListView from "deprecated-react-native-listview";
 
 class Restes extends Component {
+  static navigationOptions = {
+    drawerIcon:(
+      <Image source={require('../image/restes.png')}
+      style={{height:24,width:24}}/>
+    )
+  }
 
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true
+      isLoading: true,
+      refreshing: false,
+      text:''
     }
-    this.arrayholder = [] ;
+     this.webCall();
+     this.arrayholder = [] ;
   }
 
-  componentDidMount() {
+  webCall=()=>{
 
-    return fetch('http://192.168.0.3/ManagisApp/DBRestes/restes.php')
+    return fetch('http://10.99.1.188/ManagisApp/DBRestes/restes.php')
       .then((response) => response.json())
       .then((responseJson) => {
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -66,6 +76,16 @@ class Restes extends Component {
       />
     );
   }
+
+  onRefresh() {
+
+   const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+   this.setState({dataSource : ds.cloneWithRows([ ])})
+
+   this.webCall();
+
+ }
 
 
   render() {
@@ -120,11 +140,11 @@ class Restes extends Component {
 
         renderSeparator= {this.ListViewItemSeparator}
 
+        enableEmptySections = {true}
+
         renderRow={(rowData) =>
 
        <View style={{flex:1, flexDirection: 'column'}} >
-
-         <TouchableOpacity>
 
          <Text style={styles.textViewContainer} >{'Nom: ' + rowData.nomReste}</Text>
 
@@ -134,10 +154,8 @@ class Restes extends Component {
 
          <Text style={styles.textViewContainer} >{'Adresse:' + rowData.adresse}</Text>
 
-
-         </TouchableOpacity>
-
        </View>
+
 
         }
       />

@@ -15,21 +15,25 @@ import ListView from "deprecated-react-native-listview";
 
 class Restes extends Component {
 
+  static navigationOptions = {
+    drawerIcon:(
+      <Image source={require('../image/icons8-user-menu-male-30.png')}
+      style={{height:24,width:24}}/>
+    )
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true
+      isLoading: true,
+      userName: [],
     }
-  }
-GetItem (idUser,email) {
-  Alert.alert(idUser,email);
-
   }
 
 
   componentDidMount() {
 
-    return fetch('http://192.168.0.3/ManagisApp/DBRestes/restes.php')
+    return fetch('http://10.99.1.188/ManagisApp/DBRestes/annoncePerso.php')
       .then((response) => response.json())
       .then((responseJson) => {
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -108,7 +112,9 @@ GetItem (idUser,email) {
 
          <TouchableOpacity>
 
-         <Text style={styles.textViewContainer} >{'Id: ' + rowData.idUser}</Text>
+         <Text style={styles.textViewContainer} >{'Nom: ' + rowData.pseudo}</Text>
+
+         <Text style={styles.textViewContainer} >{'Reste: ' + rowData.nomReste}</Text>
 
          <Text style={styles.textViewContainer} >{'Quantité: ' + rowData.quantiteReste}</Text>
 

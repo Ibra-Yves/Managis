@@ -9,6 +9,13 @@ import {Text,
         ScrollView} from 'react-native'
 
 export default class CreateAnnonce extends Component {
+  static navigationOptions = {
+    drawerIcon:(
+      <Image source={require('../image/icons8-place-marker-24.png')}
+      style={{height:24,width:24}}/>
+    )
+  }
+
   constructor(props){
   super(props)
   this.state={
@@ -24,19 +31,20 @@ GetItem (idUser) {
   }
 
 userCreateAnnonce = () =>{
+  const {userIdUser} = this.state;
   const {userNomReste} = this.state;
   const {userQuantiteReste} = this.state;
   const {userDescriptionReste} = this.state;
   const {userAdresse} = this.state;
 
-  if(userIdUser==""){
+  if(userNomReste==""){
 
-    this.setState({idUser:'Entrez votre ID !'})
+    this.setState({userNomReste:'Entrez le nom de votre reste '})
 
   }
   else{
 
-  fetch('http://192.168.0.3/ManagisApp/DBRestes/createAnnonce.php', {
+  fetch('http://10.99.1.188/ManagisApp/DBRestes/createAnnonce.php', {
     method: 'POST',
     header:{
       'Accept': 'application/json',
@@ -82,7 +90,7 @@ userCreateAnnonce = () =>{
           </View>
         </View>
         <View style={styles.inputContainer}>
-        <Text style={{padding:2,margin:2,color:'red'}}>{this.state.idUser}</Text>
+        <Text style={{padding:2,margin:2,color:'red'}}>{this.state.nomReste}</Text>
           <Text style={styles.com}>Entrez votre ID</Text>
           <TextInput
             style = {styles.inputBox}
