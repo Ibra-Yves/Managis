@@ -1,5 +1,5 @@
 <?php
 $HostName = "localhost";
-$DatabaseName = "managis";
+$DatabaseName = "projet";
 $HostUser = "root";
 $HostPass = "";
