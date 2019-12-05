@@ -43,6 +43,7 @@ export default class AjoutCommentaires extends React.Component {
 		  <View style={styles.inputContainer}>
 			  <Text style={styles.com}>Ajoutez un commentaire!</Text>
 			  <TextInput
+				multiline
 				style = {styles.inputBox}
 				onChangeText={(text) => this.commentaire = text}
 				placeholder = 'Commentaire'

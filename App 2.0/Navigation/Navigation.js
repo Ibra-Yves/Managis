@@ -89,6 +89,74 @@ class DrawerMenu extends React.Component {
 }
 
 
+class DrawerMenu extends React.Component {
+  render() {
+    return (
+      <View>
+        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <Image
+            source={require('../Images/logo_transparent.png')}
+            style={{height: 200, width: 200}}
+            />
+        </View>
+        <View>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("EventList")}
+            style={styles.drawerItem}
+            >
+            <Text style={styles.drawerText}>Liste des événements</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("CreateEvent")}
+            style={styles.drawerItem}
+            >
+            <Text style={styles.drawerText}>Créer un événement</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("Invitation")}
+            style={styles.drawerItem}
+            >
+            <Text style={styles.drawerText}>Vos invitations</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("Historique")}
+            style={styles.drawerItem}
+            >
+            <Text style={styles.drawerText}>Vos événements passés</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("Restes")}
+            style={styles.drawerItem}
+            >
+            <Text style={styles.drawerText}>Marché des restes</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("CreateAnnonce")}
+            style={styles.drawerItem}
+            >
+            <Text style={styles.drawerText}>Créer votre annonce</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("AnnoncePerso")}
+            style={styles.drawerItem}
+            >
+            <Text style={styles.drawerText}>Vos annonces</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("Settings")}
+            style={styles.drawerItem}
+            >
+            <Text style={styles.drawerText}>Paramètres</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+
+    )
+  }
+}
+
+
 const EventStackNav = createStackNavigator({
   EventList: {
     screen: EventList,
@@ -119,6 +187,9 @@ const EventStackNav = createStackNavigator({
     screen: AjoutCommentaires,
     navigationOptions: {
       headerShown: false
+
+      title: "Détails de l'événement"
+
     }
   }
 })
@@ -172,6 +243,11 @@ const EventDrawerNav = createDrawerNavigator({
       title: 'Paramètres'
     }
   }
+},
+{
+  contentComponent: DrawerMenu,
+  drawerPosition: 'right'
+=======
 },
 {
   contentComponent: DrawerMenu,
@@ -242,6 +318,7 @@ const styles= StyleSheet.create({
   icon: {
     width: 30,
     height: 30
+
   },
   drawerItem: {
     backgroundColor: '#3A4750',
@@ -252,6 +329,17 @@ const styles= StyleSheet.create({
   drawerText: {
     fontSize: 20,
     color: '#FFFFFF'
+  },
+  drawerItem: {
+    backgroundColor: '#3A4750',
+     alignItems: 'flex-start',
+     margin: 5,
+     padding: 3
+  },
+  drawerText: {
+    fontSize: 20,
+    color: '#FFFFFF'
+
   }
 })
 
