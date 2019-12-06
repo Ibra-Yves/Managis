@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { AppRegistry,
-				View,
-				Text,
-				Image,
-				StyleSheet,
-				ScrollView,
-				TouchableOpacity,
-			 	Styles} from 'react-native';
-import { StackNavigator,DrawerNavigator, DrawerItems } from 'react-navigation';
+import {
+	AppRegistry,
+	View,
+	Text,
+	Image,
+	StyleSheet,
+	ScrollView,
+	TouchableOpacity,
+	Styles
+} from 'react-native';
+import { StackNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
 
 
 import HomeScreen from './home.js';
@@ -21,20 +23,20 @@ import CreateAnnonce from '../components/createAnnonce.js';
 import AnnoncePerso from '../components/annoncePerso.js';
 import Settings from '../components/settings.js'
 
-import {Container,Content,Header,Body,Icon} from 'native-base'
+import { Container, Content, Header, Body, Icon } from 'native-base'
 
-const CustomDrower = (props) =>(
+const CustomDrower = (props) => (
 	<Container>
-		<Header style={{ height: 250}}>
+		<Header style={{ height: 250 }}>
 			<Body>
-			<Image
+				<Image
 					source={require('../image/logo_transparent.png')}
 					style={styles.drawerImage}
-					/>
+				/>
 			</Body>
 		</Header>
 		<Content>
-			<DrawerItems {...props}/>
+			<DrawerItems {...props} />
 		</Content>
 	</Container>
 )
@@ -44,40 +46,40 @@ const myNav = DrawerNavigator({
 	Restes: {
 		screen: Restes,
 		navigationOptions: {
-		  title: 'Marché des Restes'
+			title: 'Marché des Restes'
 		}
-	  },
-		CreateAnnonce: {
-			screen: CreateAnnonce,
-			navigationOptions: {
-			  title: 'Créer une annonce'
-			}
-		  },
+	},
+	CreateAnnonce: {
+		screen: CreateAnnonce,
+		navigationOptions: {
+			title: 'Créer une annonce'
+		}
+	},
 
-		AnnoncePerso: {
-				screen: AnnoncePerso,
-				navigationOptions: {
-				  title: 'Mes annonces'
-				}
-	 },
-	 Settings:{
-		 screen: Settings,
-		 navigationOptions: {
-			 title: 'paramètre'
-		 }
-	 },
+	AnnoncePerso: {
+		screen: AnnoncePerso,
+		navigationOptions: {
+			title: 'Mes annonces'
+		}
+	},
+	Settings: {
+		screen: Settings,
+		navigationOptions: {
+			title: 'paramètre'
+		}
+	},
 
-},{
-		initialRouteName: 'Restes',
-		contentComponent: CustomDrower,
-		drawerOpenRoute: 'DrawerOpen',
-		drawerCloseRoute: 'DrawerClose',
-		drawerToggleRoute: 'DrawerToggle'
+}, {
+	initialRouteName: 'Restes',
+	contentComponent: CustomDrower,
+	drawerOpenRoute: 'DrawerOpen',
+	drawerCloseRoute: 'DrawerClose',
+	drawerToggleRoute: 'DrawerToggle'
 })
 
 
 const Managis = StackNavigator({
-	Home :{
+	Home: {
 		screen: HomeScreen,
 		navigationOptions: () => ({
 			header: null,
@@ -86,39 +88,39 @@ const Managis = StackNavigator({
 	Login: {
 		screen: Login,
 		navigationOptions: {
-		  title: 'Connexion'
+			title: 'Connexion'
 		}
-	  },
+	},
 
 	Register: {
 		screen: Register,
 		navigationOptions: {
-		  title: 'Inscription'
+			title: 'Inscription'
 		}
-	  },
+	},
 
 	WhoIs: {
 		screen: WhoIs,
 		navigationOptions: {
-		  title: 'Qui sommes-nous ?'
+			title: 'Qui sommes-nous ?'
 		}
 	},
 
 	Menu: {
 		screen: Menu,
 		navigationOptions: {
-		  title: 'Menu'
+			title: 'Menu'
 		}
 	},
 
 	Profile: {
 		screen: Profile,
 		navigationOptions: {
-		  title: 'Profil'
+			title: 'Profil'
 		}
 	},
 
-	Restes :{
+	Restes: {
 		screen: myNav,
 		navigationOptions: () => ({
 			header: null,
@@ -128,7 +130,7 @@ const Managis = StackNavigator({
 	CreateAnnonce: {
 		screen: CreateAnnonce,
 		navigationOptions: {
-		  title: 'Créer une annonce'
+			title: 'Créer une annonce'
 		}
 	},
 
@@ -138,12 +140,12 @@ const Managis = StackNavigator({
 			header: null,
 		}),
 	}
- });
- const styles= StyleSheet.create({
-	 drawerImage: {
-		 height: 250,
-		 width: 250
-	 }
+});
+const styles = StyleSheet.create({
+	drawerImage: {
+		height: 250,
+		width: 250
+	}
 
 })
 

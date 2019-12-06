@@ -1,24 +1,24 @@
 <?php
-include 'dbconfig.php';
-$con = mysqli_connect($HostName,$HostUser,$HostPass,$DatabaseName);
+include '../DBAccess/dbAccess.php';
+$db = new dbAccess();
 $json = file_get_contents('php://input');
 $obj = json_decode($json,true);
 $email = $obj['email'];
 $pseudo = $obj['pseudo'];
 $passwd = hash('md5', $obj['passwd']);
 
-$Sql_Query = "SELECT * FROM users where email='$email' and passwd='$passwd'";
-$check = mysqli_fetch_array(mysqli_query($con,$Sql_Query));
+$connect = $db->procCall('connexionUserApp', [$email, $passwd]);
 
-if(isset($check)){
+
+
+if(!empty($connect)){
 $SuccessLoginMsg = 'ok';
 
-$SuccessLoginJson = json_encode($SuccessLoginMsg);
+$SuccessLoginJson = json_encode(array('ok',$connect[0]['idUser'],$connect[0]['email'],$connect[0]['pseudo']));
 echo $SuccessLoginJson ;
  }else{
 $InvalidMSG = 'Email ou mot de passe incorrect ! ' ;
 $InvalidMSGJSon = json_encode($InvalidMSG);
 echo $InvalidMSGJSon ;
  }
-mysqli_close($con);
 ?>
