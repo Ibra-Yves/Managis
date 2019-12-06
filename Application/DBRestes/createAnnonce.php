@@ -1,29 +1,16 @@
 <?php
-include 'dbconfig.php';
-$con = mysqli_connect($HostName,$HostUser,$HostPass,$DatabaseName);
+include '../DBAccess/dbAccess.php';
+$db = new dbAccess();
 $json = file_get_contents('php://input');
 $obj = json_decode($json,true);
-$idUser = $obj['idUser'];
+$user = $obj['userId']; //Met l id de user connecte que tu as dans ton JS en JSON
 $nomReste = $obj['nomReste'];
-$quantiteReste = $obj['quantiteReste'];
+$quantiteReste =  $obj['quantiteReste'];
 $descriptionReste = $obj['descriptionReste'];
 $adresse = $obj['adresse'];
 
-$CheckSQL = "SELECT * FROM gestionrestes WHERE nomReste='$nomReste'";
-$check = mysqli_fetch_array(mysqli_query($con,$CheckSQL));
-if(isset($check)){
- $RestExistMSG = 'Cette annonce a déjà été crée !';
-$RestExistJson = json_encode($RestExistMSG);
- echo $RestExistJson ;
- }
- else{
-$Sql_Query = "insert into gestionrestes (idUser,nomReste,quantiteReste,descriptionReste,adresse)
-values ('$idUser','$nomReste','$quantiteReste','$descriptionReste','$adresse')";
- if(mysqli_query($con,$Sql_Query)){
-$MSG = 'Annonce enregistrée avec succès' ;
-$json = json_encode($MSG);
- echo $json ;
- }
- }
- mysqli_close($con);
-?>
+$ajoutAnnonce = $db->procCall('ajoutAnnonce', [$user,$nomReste, $quantiteReste, $descriptionReste, $adresse]);
+
+//Faites un foreach ou quoi pour pas avoir de problèmes ... je le fais au cas ou
+
+echo json_encode($ajoutAnnonce); //Decode le en JS

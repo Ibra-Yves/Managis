@@ -21,4 +21,3 @@ $InvalidMSG = 'Email ou mot de passe incorrect ! ' ;
 $InvalidMSGJSon = json_encode($InvalidMSG);
 echo $InvalidMSGJSon ;
  }
-?>

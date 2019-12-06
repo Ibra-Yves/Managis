@@ -41,6 +41,8 @@ class dbAccess
             case 'mailSupprInvite':
             case 'mailInv' :
             case 'infoPopUp' :
+            case 'marcheRestes'  : 
+            case 'mesAnnoncesMarche' :      
                 array_push($params, '?');
             case 'tousLesUsers' :
                 try {
@@ -83,6 +85,8 @@ class dbAccess
             break;
         }
         switch($procName) {
+            case 'ajoutAnnonce' : 
+                array_push($params, '?', '?', '?', '?', '?');
             case 'creerEvent' :
             array_push($params, '?', '?', '?', '?');
             case 'listeInvites' :
