@@ -86,9 +86,6 @@ function gererDonnes(retour){
                 case 'affichageNomEvent':
                     $('#details-evenement').html("Détails événement: "+actionDatas);
                     break;
-                case 'test' :
-                    console.log(actionDatas);
-                    break;
                 case 'vosEventFutur' : //Affichage des soirées futurs
                     let tableVosEvent = '';
                     let i=1;
@@ -278,7 +275,6 @@ function gererDonnes(retour){
                 case 'listeComm' : //Liste des commentaires
                     let listeCommentaire = '';
                     let l=1;
-                    console.log(actionDatas);
                         actionDatas.forEach(function(data){
                             listeCommentaire+=
                                 ' <tr>\n' +
@@ -381,5 +377,8 @@ function evenements(place = 'html') { //Gestion des evenements effecutes sur les
     $(place +' form').on('submit', requetes);
     $('#eventLocation').on('click', function(){
         window.open(this.href);
+    });
+    $("#collapse1, #collapse2").on('click', function(){
+        $('#nombreInvFourComm, #afficheInfos').html("");
     });
 }

@@ -4,7 +4,9 @@ USE managis;
 CREATE TABLE IF NOT EXISTS commentaires (
   idEvent int(11) NOT NULL,
   commentaire varchar(255) NOT NULL,
+  idUser int(11) NOT NULL,
   KEY fk_eventComm (idEvent)
+  KEY fk_userId (idUser)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -54,6 +56,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 ALTER TABLE commentaires
   ADD CONSTRAINT fk_eventComm FOREIGN KEY (idEvent) REFERENCES evenement (idEvent) ON DELETE NO ACTION ON UPDATE NO ACTION;
+   ADD CONSTRAINT fk_userId FOREIGN KEY (idUser) REFERENCES users (idUser) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 ALTER TABLE evenement
@@ -70,9 +73,10 @@ ALTER TABLE invite
 COMMIT;
 
 delimiter / 
-CREATE  PROCEDURE ajoutCommentaire (IN idEvent INT, IN commentaire VARCHAR(255))  BEGIN
-insert into commentaires (idEvent, commentaire) values (idEvent, commentaire);
-END; 
+CREATE  PROCEDURE ajoutCommentaire (IN idEvent INT, IN commentaire VARCHAR(255), IN userId INT)
+BEGIN
+insert into commentaires (idEvent, commentaire, idUser) values (idEvent, commentaire, userId);
+END;
 /
 
 delimiter / 
@@ -147,7 +151,8 @@ END;
 
 delimiter / 
 CREATE  PROCEDURE listeCommentaire (IN idEvent INT)  BEGIN
-select commentaire from commentaires
+select users.pseudo as pseudo, commentaire from commentaires
+natural join users
 where idEvent = commentaires.idEvent;
 END; 
 /
