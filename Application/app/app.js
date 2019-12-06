@@ -21,7 +21,8 @@ import Profile from './profile.js';
 import Restes from '../components/restes.js';
 import CreateAnnonce from '../components/createAnnonce.js';
 import AnnoncePerso from '../components/annoncePerso.js';
-import Settings from '../components/settings.js'
+import Settings from '../components/settings.js';
+import Evenement from '../components/evenement.js';
 
 import { Container, Content, Header, Body, Icon } from 'native-base'
 
@@ -61,6 +62,12 @@ const myNav = DrawerNavigator({
 		navigationOptions: {
 			title: 'Mes annonces'
 		}
+	},
+	Evenement: {
+		 	screen: Evenement,
+			navigationOptions: {
+				title: 'Gestion des événements'
+			}
 	},
 	Settings: {
 		screen: Settings,
