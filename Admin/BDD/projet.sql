@@ -18,6 +18,24 @@ DELIMITER $$
 --
 -- Procedures
 --
+DROP PROCEDURE IF EXISTS `ajoutAnnonce`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ajoutAnnonce` (IN `idUserr` INT, IN `nomRestee` VARCHAR(255), IN `quantiteRestee` INT, IN `descriptionRestee` VARCHAR(255), IN `adressee` VARCHAR(255))  BEGIN
+insert into gestionRestes (idUser, nomReste, quantiteReste, descriptionReste, adresse) 
+values (idUserr,  nomRestee, quantiteRestee,  descriptionRestee, adressee);
+END$$
+
+DROP PROCEDURE IF EXISTS `marcheRestes`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `marcheRestes` (IN `userId` INT)  BEGIN
+select * from gestionrestes 
+where userId != gestionrestes.idUser;
+END$$
+
+DROP PROCEDURE IF EXISTS `mesAnnoncesMarche`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `mesAnnoncesMarche` (IN `userId` INT)  BEGIN
+select * from gestionrestes
+where userId = gestionrestes.idUser;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ajoutCommentaire` (IN `idEvent` INT, IN `commentaire` VARCHAR(255))  BEGIN
 insert into commentaires (idEvent, commentaire) values (idEvent, commentaire);
 END$$
