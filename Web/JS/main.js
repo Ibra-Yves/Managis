@@ -183,6 +183,11 @@ function gererDonnes(retour){
                     });
                     $('#vosEventPasse').html(tableVosEventPasse); //Affichage sous un tableau
                     $('main').html('');
+                    actionDatas.forEach(function(data){
+                        $('a[href="https://maps.google.com/?q='+data['adresse']+'"]').on('click', function(){
+                            window.open(this.href);
+                        });
+                    });
                     evenements('#vosEventPasse');
                     break;
                 case 'vosInvitPasse': //Invitation à l'évent passé
@@ -203,8 +208,12 @@ function gererDonnes(retour){
 
                     });
                     $('#vosInvitPasse').html(tableVosInvitPasse); //Affichage sous un tableau
-                    $('#vosInvitPasse').html(tableVosInvitPasse); //Affichage sous un tableau
                     $('main').html('');
+                    actionDatas.forEach(function(data){
+                        $('a[href="https://maps.google.com/?q='+data['adresse']+'"]').on('click', function(){
+                            window.open(this.href);
+                        });
+                    });
                     evenements('#vosInvitPasse');
                     break;
                     //Affiche le nombre d'invites commentaires etc. pour l'event
