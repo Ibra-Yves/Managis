@@ -96,7 +96,7 @@ function gererDonnes(retour){
                                 '<td class="taillePolice" align="center"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a> </td>\n' + //Nom de l'événement
                                 '<td class="taillePolice" align="center">'+data['hote']+'</td>\n' + //Hote
                                 '<td class="taillePolice" align="center">'+data['dateEvent']+'</td>\n' + //Date de l'évènement
-                                '<td class="taillePolice" align="center"><a href="https://maps.google.com/?q='+data['adresse']+'" id="eventLocation" >'+data['adresse']+' </a></td>\n' + //Adresse de l'évent
+                                '<td class="taillePolice" align="center"><a href="https://maps.google.com/?q='+data['adresse']+'">'+data['adresse']+' </a></td>\n' + //Adresse de l'évent
                                 '<td class="taillePolice" align="center">'+data['heure']+'</td>\n' + //Heure
                                 ' <td class="taillePolice"> <div class="form-check">\n' +
                             '</div></td>' +
@@ -105,6 +105,12 @@ function gererDonnes(retour){
                     });
                     $('#vosEvent').html(tableVosEvent); //Affichage sous un tableau
                     $('main').html('');
+
+                    actionDatas.forEach(function(data){
+                        $('a[href="https://maps.google.com/?q='+data['adresse']+'"]').on('click', function(){
+                            window.open(this.href);
+                        });
+                    });
                     evenements('#vosEvent');
                     break;
                 case 'vosInvitFutur': //Affiche les invitation de user futurs
@@ -117,7 +123,7 @@ function gererDonnes(retour){
                             '<td class="taillePolice" align="center"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' + //Nom de l'évént
                             '<td class="taillePolice" align="center">'+data['hote']+'</td>\n' + //Hote
                             '<td class="taillePolice" align="center">'+data['dateEvent']+'</td>\n' + //Date
-                            '<td class="taillePolice" align="center"><a href="https://maps.google.com/?q='+data['adresse']+'" id="eventLocation">'+data['adresse']+'</a> </td>\n' + //Adresse
+                            '<td class="taillePolice" align="center"><a href="https://maps.google.com/?q='+data['adresse']+'">'+data['adresse']+'</a> </td>\n' + //Adresse
                             '<td class="taillePolice" align="center">'+data['heure']+'</td>\n' +
                             '</div></td>'+
                             '</tr>';
@@ -125,6 +131,11 @@ function gererDonnes(retour){
                     });
                     $('#vosInvit').html(tableVosInvit); //Affichage sous un tableau
                     $('main').html('');
+                    actionDatas.forEach(function(data){
+                        $('a[href="https://maps.google.com/?q='+data['adresse']+'"]').on('click', function(){
+                            window.open(this.href);
+                        });
+                    });
                     evenements('#vosInvit'); //On peut accèder à une page ou submit un formulaire
                     break;
 
@@ -375,9 +386,6 @@ function lireJSON(data){ //Decodage de JSON qui vient de action.php
 function evenements(place = 'html') { //Gestion des evenements effecutes sur les liens et les formulaires
     $(place +' a').on( 'click', requetes);
     $(place +' form').on('submit', requetes);
-    $('#eventLocation').on('click', function(){
-        window.open(this.href);
-    });
     $("#collapse1, #collapse2").on('click', function(){
         $('#nombreInvFourComm, #afficheInfos').html("");
     });
