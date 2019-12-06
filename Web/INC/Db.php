@@ -72,7 +72,6 @@ class Db
             case 'modifMdp'  :
             case 'ajouterInvites'    :
             case 'ajouterFournitures' :
-            case 'ajoutCommentaire' :
             case 'supprCommentaire' :
             case 'supprFourniture' :
             case 'supprInvites' :
@@ -98,7 +97,7 @@ class Db
             array_push($params, '?', '?', '?', '?');
             case 'listeInvites' :
             case 'listeFourniture' :
-            case 'listeCommentaire'    :
+            case 'listeCommentaire'  :
                 array_push($params, '?');
             try {
                 $this->connexionBDD();
@@ -130,6 +129,8 @@ class Db
         switch ($procName){
             case 'modifEvent' :
                 array_push($params, '?', '?', '?', '?', '?');
+            case 'ajoutCommentaire' :
+                array_push($params,'?', '?', '?');
                 try {
                     $this->connexionBDD();
                     $callProc = 'call '. $procName.'('.join(',', $params).')';

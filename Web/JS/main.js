@@ -83,7 +83,12 @@ function gererDonnes(retour){
                     $('main').html('');
                     $('#infoCompte').html(content); //Affichage sous un tableau
                     break;
-
+                case 'affichageNomEvent':
+                    $('#details-evenement').html("Détails événement: "+actionDatas);
+                    break;
+                case 'test' :
+                    console.log(actionDatas);
+                    break;
                 case 'vosEventFutur' : //Affichage des soirées futurs
                     let tableVosEvent = '';
                     let i=1;
@@ -94,7 +99,7 @@ function gererDonnes(retour){
                                 '<td class="taillePolice" align="center"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a> </td>\n' + //Nom de l'événement
                                 '<td class="taillePolice" align="center">'+data['hote']+'</td>\n' + //Hote
                                 '<td class="taillePolice" align="center">'+data['dateEvent']+'</td>\n' + //Date de l'évènement
-                                '<td class="taillePolice" align="center"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+' </a></td>\n' + //Adresse de l'évent
+                                '<td class="taillePolice" align="center"><a href="https://maps.google.com/?q='+data['adresse']+'" id="eventLocation" >'+data['adresse']+' </a></td>\n' + //Adresse de l'évent
                                 '<td class="taillePolice" align="center">'+data['heure']+'</td>\n' + //Heure
                                 ' <td class="taillePolice"> <div class="form-check">\n' +
                             '</div></td>' +
@@ -115,7 +120,7 @@ function gererDonnes(retour){
                             '<td class="taillePolice" align="center"><a href="'+data['idEvent']+'">'+data['nomEvent']+'</a></td>\n' + //Nom de l'évént
                             '<td class="taillePolice" align="center">'+data['hote']+'</td>\n' + //Hote
                             '<td class="taillePolice" align="center">'+data['dateEvent']+'</td>\n' + //Date
-                            '<td class="taillePolice" align="center"><a href="https://maps.google.com/?q='+data['adresse']+'" target="_blank">'+data['adresse']+'</a> </td>\n' + //Adresse
+                            '<td class="taillePolice" align="center"><a href="https://maps.google.com/?q='+data['adresse']+'" id="eventLocation">'+data['adresse']+'</a> </td>\n' + //Adresse
                             '<td class="taillePolice" align="center">'+data['heure']+'</td>\n' +
                             '</div></td>'+
                             '</tr>';
@@ -273,10 +278,12 @@ function gererDonnes(retour){
                 case 'listeComm' : //Liste des commentaires
                     let listeCommentaire = '';
                     let l=1;
+                    console.log(actionDatas);
                         actionDatas.forEach(function(data){
                             listeCommentaire+=
                                 ' <tr>\n' +
                                     '<th scope="row">'+ l++ +'</th>\n' +
+                                    '<td class="taillePolice" align="center">'+data['pseudo']+'</td>\n' +
                                     '<td class="taillePolice" align="center">'+data['commentaire']+'</td>\n' +
                                     '<td class="taillePolice" align="center"><a href="'+data['commentaire']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
                                 '</tr>';
@@ -372,4 +379,7 @@ function lireJSON(data){ //Decodage de JSON qui vient de action.php
 function evenements(place = 'html') { //Gestion des evenements effecutes sur les liens et les formulaires
     $(place +' a').on( 'click', requetes);
     $(place +' form').on('submit', requetes);
+    $('#eventLocation').on('click', function(){
+        window.open(this.href);
+    });
 }

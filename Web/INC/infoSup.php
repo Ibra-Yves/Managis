@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="md-6 transparent" style="max-width: 110rem;">
             <div class="table responsive">
-            <div class="card-header transparent gestionDeCompteSousTitre">Détails événement</div>
+            <div class="card-header transparent gestionDeCompteSousTitre" id="details-evenement">Détails événement</div>
             <div class="card-body transparent">
                 <div class="table-responsive">
                 <table class="table table-striped">

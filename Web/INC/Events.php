@@ -565,8 +565,10 @@ La durée du présent contrat est indéterminée. Le contrat produit ses effets 
         //On mémorise l'id du event dans la superglobale
         if(!empty($_SESSION['user'])) {
             $_SESSION['idEvent'] = $id;
+            $nomEvent = $this->db->procCall('infoEvent', [$id]);
             //On renvoie le tableau à la page
             $this->action->affichageDefaut('#nombreInvFourComm', $this->lectureForm('infoSup'));
+            $this->action->ajouterAction('affichageNomEvent', $nomEvent[0]['nomEvent']);
             //On appelle les procèdures nécessaires
             $nombreInv = $this->db->procCall('nombreInv', [$id]);
             $nombreComm = $this->db->procCall('nombreComm', [$id]);
@@ -889,7 +891,7 @@ La durée du présent contrat est indéterminée. Le contrat produit ses effets 
         }
         //Sinon on ajoute le commentaire à la liste et on l'affiche
         else {
-            $this->db->procCall('ajoutCommentaire', [$_SESSION['idEvent'], $commentaire]);
+            $this->db->procCall('ajoutCommentaire', [$_SESSION['idEvent'], $commentaire, $_SESSION['user']['idUser']]);
             $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
 
             $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
