@@ -35,7 +35,7 @@ class Restes extends Component {
 
   webCall=()=>{
 
-    return fetch('http://10.99.1.188/ManagisApp/DBRestes/restes.php')
+    return fetch('http://192.168.0.9/ManagisApp/DBRestes/restes.php')
       .then((response) => response.json())
       .then((responseJson) => {
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -69,9 +69,9 @@ class Restes extends Component {
     return (
       <View
         style={{
-          height: .5,
+          height: 2,
           width: "100%",
-          backgroundColor: "#3A4750",
+          backgroundColor: "#3A4750"
         }}
       />
     );
@@ -146,20 +146,27 @@ class Restes extends Component {
 
        <View style={{flex:1, flexDirection: 'column'}} >
 
-         <Text style={styles.textViewContainer} >{'Nom: ' + rowData.nomReste}</Text>
+         <Text style={styles.textViewContainer} >{'NOM DU RESTE: ' + '  ' + rowData.nomReste}</Text>
 
-         <Text style={styles.textViewContainer} >{'Quantité: ' + rowData.quantiteReste}</Text>
+         <Text style={styles.textViewContainer} >{'QUANTITE DU RESTE: ' +  '  ' + rowData.quantiteReste}</Text>
 
-         <Text style={styles.textViewContainer} >{'Description: ' + rowData.descriptionReste}</Text>
+         <Text style={styles.textViewContainer} >{'DESCRIPTION: ' + '  ' +  rowData.descriptionReste}</Text>
 
-         <Text style={styles.textViewContainer} >{'Adresse:' + rowData.adresse}</Text>
+         <Text style={styles.textViewContainer} >{'EMAIL:' + '  ' + rowData.email}</Text>
 
        </View>
 
 
         }
       />
+      <TouchableOpacity onPress={() => this.props.navigation.navigate("CreateAnnonce")} style={styles.TouchableOpacityStyle} >
 
+      <Image
+        source={require('../image/Floating_Button.png')}
+        style={styles.icon}
+        />
+
+        </TouchableOpacity>
     </View>
       </ScrollView>
     );
@@ -189,8 +196,8 @@ titrePage: {
   textViewContainer: {
  textAlignVertical:'center',
  padding:10,
- fontSize: 16
-
+ fontSize: 15,
+ fontWeight: 'bold'
 },
 
   icon: {
@@ -232,6 +239,19 @@ containerTitre: {
    fontSize: 16,
    color: '#3A4750'
  },
+ TouchableOpacityStyle:{
+    position: 'absolute',
+     width: 50,
+     height: 50,
+     alignItems: 'center',
+     justifyContent: 'center',
+     right: 30,
+     bottom: 30
+   },
+   FloatingButtonStyle: {
+     width: 100,
+     height: 100,
+   }
 
 });
 
