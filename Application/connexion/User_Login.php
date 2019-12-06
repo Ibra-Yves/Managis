@@ -7,7 +7,7 @@ $email = $obj['email'];
 $pseudo = $obj['pseudo'];
 $passwd = hash('md5', $obj['passwd']);
 
-$Sql_Query = "select * from users where email = '$email' or pseudo = '$pseudo' and passwd = '$passwd' ";
+$Sql_Query = "SELECT * FROM users where email='$email' and passwd='$passwd'";
 $check = mysqli_fetch_array(mysqli_query($con,$Sql_Query));
 
 if(isset($check)){
