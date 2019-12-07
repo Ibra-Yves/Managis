@@ -85,10 +85,8 @@ class dbAccess
             break;
         }
         switch($procName) {
-            case 'ajoutAnnonce' : 
-                array_push($params, '?', '?', '?', '?', '?');
             case 'creerEvent' :
-            array_push($params, '?', '?', '?', '?');
+                array_push($params, '?', '?', '?', '?');
             case 'listeInvites' :
             case 'listeFourniture' :
             case 'listeCommentaire'    :
@@ -122,6 +120,21 @@ class dbAccess
         }
         switch ($procName){
             case 'modifEvent' :
+                array_push($params, '?', '?', '?', '?', '?');
+                try {
+                    $this->connexionBDD();
+                    $callProc = 'call '. $procName.'('.join(',', $params).')';
+                    $request = $this->pdo->prepare($callProc);
+                    $request->execute($procParams);
+                    return $request->fetchAll();
+                }
+                catch (PDOException $e){
+                    $e->getMessage();
+                }
+                break;
+        }
+        switch ($procName){
+            case 'ajoutAnnonce' : 
                 array_push($params, '?', '?', '?', '?', '?');
                 try {
                     $this->connexionBDD();
