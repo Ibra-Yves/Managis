@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 
 import { Text, StyleSheet, View, TouchableOpacity, ScrollView, Image, Left, Right, Icon } from 'react-native'
 
-
-
  class Settings extends Component {
    static navigationOptions = {
      drawerIcon:(
@@ -16,7 +14,7 @@ import { Text, StyleSheet, View, TouchableOpacity, ScrollView, Image, Left, Righ
       <ScrollView>
         <View style={styles.containerTitre}>
 		<TouchableOpacity
-          onPress={() => this.props.navigation.goBack()}
+          onPress={() => this.props.navigation.navigate("Home")}
           style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <Image
             source={require('../image/icons8-gauche-50.png')}
@@ -29,7 +27,7 @@ import { Text, StyleSheet, View, TouchableOpacity, ScrollView, Image, Left, Righ
           </View>
           <View style={{flex : 1}}>
 		  <TouchableOpacity
-            onPress={() => this.props.navigation.openDrawer('EventDrawerNav')}
+            onPress={() => this.props.navigation.openDrawer('myNav')}
             style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Image
               source={require('../image/icons8-menu-arrondi-50.png')}

@@ -101,15 +101,6 @@ class Restes extends Component {
 
       <ScrollView>
         <View style={styles.containerTitre}>
-		<TouchableOpacity
-          onPress={() => this.props.navigation.navigate("Menu")}
-          style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Image
-            source={require('../image/icons8-gauche-50.png')}
-            style={styles.icon}
-            />
-        </TouchableOpacity>
-
           <View style={{flex: 6, justifyContent: 'center'}}>
             <Text style={styles.titrePage}>Marché des Restes</Text>
           </View>
@@ -117,7 +108,7 @@ class Restes extends Component {
           <View style={{flex : 1}}>
           <TouchableOpacity
                 onPress={() => this.props.navigation.openDrawer('myNav')}
-                style={{flex: 1, flexDirection: 'row-reverse', marginTop: -40}}>
+                style={{flex: 1, flexDirection: 'row-reverse', marginTop: -35}}>
                 <Image
                   source={require('../image/icons8-menu-arrondi-50.png')}
                   style={styles.icon}
@@ -152,7 +143,7 @@ class Restes extends Component {
 
          <Text style={styles.textViewContainer} >{'DESCRIPTION: ' + '  ' +  rowData.descriptionReste}</Text>
 
-         <Text style={styles.textViewContainer} >{'EMAIL:' + '  ' + rowData.email}</Text>
+         <Text style={styles.textViewContainer} >{'ADRESSE:' + '  ' + rowData.adresse}</Text>
 
        </View>
 
