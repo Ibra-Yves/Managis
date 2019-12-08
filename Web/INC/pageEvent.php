@@ -14,7 +14,7 @@
 
                              <!-- Card header -->
                              <div class="card-header" role="tab" id="headingOne1">
-                                 <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true"
+                                 <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" id="collapse1" aria-expanded="true"
                                     aria-controls="collapseOne1">
                                      <h5 class="mb-0 gestionDeCompteSousTitre">
                                          Vos événements à venir<i class="fas fa-angle-down rotate-icon"></i>
@@ -53,7 +53,7 @@
 
                              <!-- Card header -->
                              <div class="card-header" role="tab" id="headingTwo2">
-                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2"
+                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" id="collapse2" href="#collapseTwo2"
                                     aria-expanded="false" aria-controls="collapseTwo2">
                                      <h5 class="gestionDeCompteSousTitre">
                                          Vos invitations à venir<i class="fas fa-angle-down rotate-icon"></i>

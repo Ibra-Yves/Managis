@@ -22,6 +22,7 @@
                             <thead style="position: sticky; top: 0;">
                             <tr>
                                 <th style="width: 5%" scope="col" class="taillePoliceTitre">#</th>
+                                <th style="width: 150%" scope="col" class="taillePoliceTitre">Pseudo</th>
                                 <th style="width: 150%" scope="col" class="taillePoliceTitre">Commentaire</th>
                                 <th style="width: 95%; display: none " id="suppr" scope="col" class="taillePoliceTitre" >Supprimer le commentaire</th>
                             </tr>
