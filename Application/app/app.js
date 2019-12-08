@@ -15,7 +15,6 @@ import { StackNavigator, DrawerNavigator, DrawerItems } from 'react-navigation';
 import HomeScreen from './home.js';
 import Login from './login.js';
 import Register from './register.js';
-import Menu from './menu.js';
 import WhoIs from './whoIs.js';
 import Profile from './profile.js';
 import Restes from '../components/restes.js';
@@ -44,6 +43,12 @@ const CustomDrower = (props) => (
 
 
 const myNav = DrawerNavigator({
+	Profile: {
+		screen: Profile,
+		navigationOptions: {
+			title: 'Profil'
+		}
+	},
 	Restes: {
 		screen: Restes,
 		navigationOptions: {
@@ -110,20 +115,6 @@ const Managis = StackNavigator({
 		screen: WhoIs,
 		navigationOptions: {
 			title: 'Qui sommes-nous ?'
-		}
-	},
-
-	Menu: {
-		screen: Menu,
-		navigationOptions: {
-			title: 'Menu'
-		}
-	},
-
-	Profile: {
-		screen: Profile,
-		navigationOptions: {
-			title: 'Profil'
 		}
 	},
 
