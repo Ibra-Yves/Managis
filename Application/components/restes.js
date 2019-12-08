@@ -37,7 +37,7 @@ class Restes extends Component {
   componentDidMount() {
     this._loadInitialState().done();
   }
-  
+
   _loadInitialState = async () => {
     var value = await AsyncStorage.getItem('UserId');
     if (value !== null) {
@@ -48,7 +48,7 @@ class Restes extends Component {
   //on récupère les données sous forme de tableau qui sont envoyées par le fichier "restes.php" et on les met dans la variable data pour pouvoir les traiter.
   recuperationDonneeAnnonce = () => {
 
-    fetch('http://192.168.1.5:8878/ManagisApp/ManagisApp/DBRestes/restes.php', {
+    fetch('http://192.168.1.10:8878/ManagisApp/ManagisApp/DBRestes/restes.php', {
       method: 'POST',
       header: {
         'Accept': 'application/json',
@@ -61,8 +61,8 @@ class Restes extends Component {
     })
       .then((response) => response.json())
       .then((responseJson) => {
-        this.setState({ data: responseJson});
-        alert(data[1][3]);
+        this.setState({ data: responseJson });
+        alert(this.state.data);
       })
       .catch((error) => {
         console.error(error);
@@ -93,20 +93,21 @@ class Restes extends Component {
 
 
 
-        <View>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate("CreateAnnonce")} style={styles.TouchableOpacityStyle} >
-            <Image
-              source={require('../image/Floating_Button.png')}
-              style={styles.icon}
-            />
-          </TouchableOpacity>
-        </View>
+
 
         <View>
           <TouchableOpacity
             onPress={this.recuperationDonneeAnnonce}
             style={styles.submitButton}>
             <Text style={{ color: 'black', textAlign: 'center' }}>Voir restes</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate("CreateAnnonce")} style={styles.TouchableOpacityStyle} >
+            <Image
+              source={require('../image/Floating_Button.png')}
+              style={styles.icon}
+            />
           </TouchableOpacity>
         </View>
         {/*

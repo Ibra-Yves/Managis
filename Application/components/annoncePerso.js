@@ -1,136 +1,111 @@
 import React, { Component } from 'react';
 
-import { AppRegistry,
-        Image,
-        ScrollView,
-        TextInput,
-        TouchableOpacity,
-        StyleSheet,
-        ActivityIndicator,
-        Text,
-        View,
-        Alert } from 'react-native';
+import {
+  AppRegistry,
+  Image,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  ActivityIndicator,
+  Text,
+  View,
+  Alert,
+  AsyncStorage
+} from 'react-native';
+
 
 import ListView from "deprecated-react-native-listview";
 
-class Restes extends Component {
+class RestesPersos extends Component {
 
   static navigationOptions = {
-    drawerIcon:(
+    drawerIcon: (
       <Image source={require('../image/icons8-user-menu-male-30.png')}
-      style={{height:24,width:24}}/>
+        style={{ height: 24, width: 24 }} />
     )
   }
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      isLoading: true,
-      userName: [],
+      UserId: [],
+      data: [],
     }
   }
 
-
+  //On récupère l'id de l'utilisateur connecté pour n'afficher que ses annonces.
   componentDidMount() {
+    this._loadInitialState().done();
+  }
 
-    return fetch('http://10.99.1.188/ManagisApp/DBRestes/annoncePerso.php')
+  _loadInitialState = async () => {
+    var value = await AsyncStorage.getItem('UserId');
+    if (value !== null) {
+      this.setState({ UserId: value });
+    }
+  }
+
+  //on récupère les données sous forme de tableau qui sont envoyées par le fichier "restes.php" et on les met dans la variable data pour pouvoir les traiter.
+  recuperationDonneeAnnoncePerso = () => {
+
+    fetch('http://192.168.1.10:8878/ManagisApp/ManagisApp/DBRestes/annoncePerso.php', {
+      method: 'POST',
+      header: {
+        'Accept': 'application/json',
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        userId: this.state.UserId,
+      })
+
+    })
       .then((response) => response.json())
       .then((responseJson) => {
-        let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        this.setState({
-          isLoading: false,
-          dataSource: ds.cloneWithRows(responseJson),
-        }, function() {
-          // In this block you can do something with new state.
-        });
+        this.setState({ data: responseJson });
+        alert(this.state.data);
       })
       .catch((error) => {
         console.error(error);
       });
   }
 
-  ListViewItemSeparator = () => {
-    return (
-      <View
-        style={{
-          height: .5,
-          width: "100%",
-          backgroundColor: "#3A4750",
-        }}
-      />
-    );
-  }
-
 
   render() {
-    if (this.state.isLoading) {
-      return (
-        <View style={{flex: 1, paddingTop: 20}}>
-          <ActivityIndicator />
-        </View>
-      );
-    }
-
     return (
 
       <ScrollView>
         <View style={styles.containerTitre}>
-		<TouchableOpacity
-          onPress={() => this.props.navigation.navigate("Menu")}
-          style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Image
-            source={require('../image/icons8-gauche-50.png')}
-            style={styles.icon}
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate("Menu")}
+            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Image
+              source={require('../image/icons8-gauche-50.png')}
+              style={styles.icon}
             />
-        </TouchableOpacity>
+          </TouchableOpacity>
 
-          <View style={{flex: 6, justifyContent: 'center'}}>
+          <View style={{ flex: 6, justifyContent: 'center' }}>
             <Text style={styles.titrePage}>Mes annonces</Text>
           </View>
-          </View>
-          <View style={{flex : 1}}>
+        </View>
+        <View style={{ flex: 1 }}>
           <TouchableOpacity
-                onPress={() => this.props.navigation.openDrawer('myNav')}
-                style={{flex: 1, flexDirection: 'row-reverse', marginTop: -40}}>
-                <Image
-                  source={require('../image/icons8-menu-arrondi-50.png')}
-                  style={styles.icon}
-                  />
-              </TouchableOpacity>
-          </View>
-          <View style={styles.MainContainer}>
-
-      <ListView
-
-        dataSource={this.state.dataSource}
-
-        renderSeparator= {this.ListViewItemSeparator}
-
-        renderRow={(rowData) =>
-
-       <View style={{flex:1, flexDirection: 'column'}} >
-
-         <TouchableOpacity>
-
-         <Text style={styles.textViewContainer} >{'Nom: ' + rowData.pseudo}</Text>
-
-         <Text style={styles.textViewContainer} >{'Reste: ' + rowData.nomReste}</Text>
-
-         <Text style={styles.textViewContainer} >{'Quantité: ' + rowData.quantiteReste}</Text>
-
-         <Text style={styles.textViewContainer} >{'Description: ' + rowData.descriptionReste}</Text>
-
-         <Text style={styles.textViewContainer} >{'Adresse:' + rowData.adresse}</Text>
-
-
-         </TouchableOpacity>
-
-       </View>
-
-        }
-      />
-
-    </View>
+            onPress={() => this.props.navigation.openDrawer('myNav')}
+            style={{ flex: 1, flexDirection: 'row-reverse', marginTop: -40 }}>
+            <Image
+              source={require('../image/icons8-menu-arrondi-50.png')}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity
+            onPress={this.recuperationDonneeAnnoncePerso}
+            style={styles.submitButton}>
+            <Text style={{ color: 'black', textAlign: 'center' }}>Voir restes</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     );
   }
@@ -138,15 +113,15 @@ class Restes extends Component {
 
 const styles = StyleSheet.create({
 
-MainContainer :{
+  MainContainer: {
 
-justifyContent: 'center',
-flex:1,
-margin: 10
+    justifyContent: 'center',
+    flex: 1,
+    margin: 10
 
-},
+  },
 
-titrePage: {
+  titrePage: {
     color: '#FFFFFF',
     fontSize: 18,
     textAlign: 'center'
@@ -156,12 +131,12 @@ titrePage: {
     fontSize: 16,
 
   },
-//   textViewContainer: {
-//  textAlignVertical:'center',
-//  padding:10,
-//  fontSize: 20
-//
-// },
+  //   textViewContainer: {
+  //  textAlignVertical:'center',
+  //  padding:10,
+  //  fontSize: 20
+  //
+  // },
 
   icon: {
     width: 30,
@@ -175,35 +150,35 @@ titrePage: {
   },
 
   textinput: {
-   width:300,
-   backgroundColor:'#3A4750',
-   borderRadius: 25,
-   paddingVertical:12,
-   fontSize:16,
-   color:'#FFFFFF',
-   textAlign:'center',
-   marginVertical: 10
- },
+    width: 300,
+    backgroundColor: '#3A4750',
+    borderRadius: 25,
+    paddingVertical: 12,
+    fontSize: 16,
+    color: '#FFFFFF',
+    textAlign: 'center',
+    marginVertical: 10
+  },
 
-containerTitre: {
-    backgroundColor:'#3A4750',
+  containerTitre: {
+    backgroundColor: '#3A4750',
     flexDirection: 'row',
     height: 60
   },
 
-   rowViewContainer: {
-        fontSize: 20,
-        paddingRight: 10,
-        paddingTop: 10,
-        paddingBottom: 10,
-      },
+  rowViewContainer: {
+    fontSize: 20,
+    paddingRight: 10,
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
 
   searchText: {
-   alignItems: 'center',
-   fontSize: 16,
-   color: '#3A4750'
- },
+    alignItems: 'center',
+    fontSize: 16,
+    color: '#3A4750'
+  },
 
 });
 
-export default Restes
+export default RestesPersos
