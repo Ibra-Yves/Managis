@@ -70,7 +70,7 @@ export default class login extends Component {
 					if (responseJson[0] == "ok") {
 
 						alert("Bienvenue " + responseJson[3]);
-						this.props.navigation.navigate("Menu");
+						this.props.navigation.navigate("Restes");
 						
 						//Je crée la session ici et j'attribue des valeurs retournées par User_Login.php
 						AsyncStorage.setItem('UserId', responseJson[1]);
@@ -96,7 +96,7 @@ export default class login extends Component {
 
 			this.setState({ user_name: 'Welcome' + ' ' + result.name });
 
-			this.setState({ avatar_url: this.props.navigation.navigate("Menu") });
+			this.setState({ avatar_url: this.props.navigation.navigate("Restes") });
 
 			this.setState({ avatar_show: true })
 
