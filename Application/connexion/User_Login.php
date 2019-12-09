@@ -6,14 +6,9 @@ $obj = json_decode($json,true);
 $email = $obj['email'];
 $pseudo = $obj['pseudo'];
 $passwd = hash('md5', $obj['passwd']);
-
 $connect = $db->procCall('connexionUserApp', [$email, $passwd]);
-
-
-
 if(!empty($connect)){
 $SuccessLoginMsg = 'ok';
-
 $SuccessLoginJson = json_encode(array('ok',$connect[0]['idUser'],$connect[0]['email'],$connect[0]['pseudo']));
 echo $SuccessLoginJson ;
  }else{

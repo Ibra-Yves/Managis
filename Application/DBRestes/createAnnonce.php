@@ -8,9 +8,6 @@ $nomReste = $obj['nomReste'];
 $quantiteReste =  $obj['quantiteReste'];
 $descriptionReste = $obj['descriptionReste'];
 $adresse = $obj['adresse'];
-
 $ajoutAnnonce = $db->procCall('ajoutAnnonce', [$user,$nomReste, $quantiteReste, $descriptionReste, $adresse]);
-
 //Faites un foreach ou quoi pour pas avoir de problèmes ... je le fais au cas ou
-
 echo json_encode($ajoutAnnonce); //Decode le en JS

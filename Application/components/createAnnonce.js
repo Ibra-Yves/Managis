@@ -31,7 +31,16 @@ export default class CreateAnnonce extends Component {
     }
   }
 
+  componentDidMount(){
+    this._loadInitialState().done();
+  }
 
+  _loadInitialState = async () => {
+    var value = await AsyncStorage.getItem('UserId');
+    if (value !==null) {
+      this.setState({UserId: value});
+    }
+  }
 
   userCreateAnnonce = () => {
     const { userNomReste } = this.state;
@@ -46,7 +55,7 @@ export default class CreateAnnonce extends Component {
     }
     else {
 
-      fetch('http://192.168.0.9/ManagisApp/DBRestes/createAnnonce.php', {
+      fetch('http://192.168.1.10:8878/ManagisApp/ManagisApp/DBRestes/createAnnonce.php', {
         method: 'POST',
         header: {
           'Accept': 'application/json',
@@ -71,15 +80,6 @@ export default class CreateAnnonce extends Component {
     }
   }
 
-  componentDidMount(){
-    this._loadInitialState().done();
-  }
-  _loadInitialState = async () => {
-    var value = await AsyncStorage.getItem('UserId');
-    if (value !==null) {
-      this.setState({UserId: value});
-    }
-  }
 render() {
   return (
     <ScrollView>

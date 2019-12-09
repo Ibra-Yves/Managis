@@ -11,7 +11,8 @@ import {
   Text,
   View,
   Alert,
-  AsyncStorage
+  AsyncStorage,
+  FlatList
 } from 'react-native';
 
 
@@ -35,7 +36,7 @@ class RestesPersos extends Component {
   }
 
   //On récupère l'id de l'utilisateur connecté pour n'afficher que ses annonces.
-  componentDidMount() {
+  componentWillMount() {
     this._loadInitialState().done();
   }
 
@@ -44,6 +45,7 @@ class RestesPersos extends Component {
     if (value !== null) {
       this.setState({ UserId: value });
     }
+    this.recuperationDonneeAnnoncePerso()
   }
 
   //on récupère les données sous forme de tableau qui sont envoyées par le fichier "restes.php" et on les met dans la variable data pour pouvoir les traiter.
@@ -63,7 +65,6 @@ class RestesPersos extends Component {
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ data: responseJson });
-        alert(this.state.data);
       })
       .catch((error) => {
         console.error(error);
@@ -75,36 +76,50 @@ class RestesPersos extends Component {
     return (
 
       <ScrollView>
-        <View style={styles.containerTitre}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("Menu")}
-            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Image
-              source={require('../image/icons8-gauche-50.png')}
-              style={styles.icon}
-            />
-          </TouchableOpacity>
-
-          <View style={{ flex: 6, justifyContent: 'center' }}>
-            <Text style={styles.titrePage}>Mes annonces</Text>
+        <View style={{ flexDirection: 'row', backgroundColor: '#3A4750', height: 60 }}>
+          <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+          </View>
+            <View style={{ flex: 6, justifyContent: 'center' }}>
+              <Text style={styles.titrePage}>Mes annonces</Text>
+            </View>
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.openDrawer('myNav')}
+              >
+              <Image
+                source={require('../image/icons8-menu-arrondi-50.png')}
+                style={styles.icon}
+              />
+            </TouchableOpacity>
           </View>
         </View>
-        <View style={{ flex: 1 }}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.openDrawer('myNav')}
-            style={{ flex: 1, flexDirection: 'row-reverse', marginTop: -40 }}>
-            <Image
-              source={require('../image/icons8-menu-arrondi-50.png')}
-              style={styles.icon}
-            />
-          </TouchableOpacity>
-        </View>
+
+
         <View>
-          <TouchableOpacity
-            onPress={this.recuperationDonneeAnnoncePerso}
-            style={styles.submitButton}>
-            <Text style={{ color: 'black', textAlign: 'center' }}>Voir restes</Text>
-          </TouchableOpacity>
+          <FlatList
+            data={this.state.data}
+            keyExtractor={(item) => item.idReste.toString()}
+            renderItem={({ item }) =>
+              <View style={styles.container}>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate("ResteItemPerso", { reste: item })}
+                  style={styles.event}>
+                  <View style={{ flex: 1 }}>
+                    <View style={styles.header}>
+                      <View style={{ flex: 2 }}>
+                        <Text style={styles.textTitle}>{item.nomReste}</Text>
+                      </View>
+                      <View style={{ flex: 1 }}>
+                        <Text style={styles.textDate}>Quantité : {item.quantiteReste}</Text>
+                      </View>
+                    </View>
+                    <View style={styles.footer}>
+                      <Text style={styles.textPlace}>Adresse : {item.adresse}</Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              </View>}
+          />
         </View>
       </ScrollView>
     );
@@ -178,6 +193,41 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#3A4750'
   },
+  container: {
+    height: 100,
+    padding: 12,
+    paddingBottom: 3
+  },
+  event: {
+    flex: 1,
+    backgroundColor: '#3A4750'
+  },
+  header: {
+    flexDirection: 'row',
+    flex: 1
+  },
+  footer: {
+    flex: 1,
+    justifyContent: 'center',
+    marginLeft: 5
+  },
+  textTitle: {
+    color: '#FFFFFF',
+    fontSize: 22,
+    margin: 5,
+    marginTop: 2
+  },
+  textDate: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    margin: 5,
+    marginTop: 10
+  },
+  textPlace: {
+    color: '#FFFFFF',
+    fontSize: 16,
+
+  }
 
 });
 

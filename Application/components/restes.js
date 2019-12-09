@@ -12,10 +12,11 @@ import {
   View,
   Alert,
   RefreshControl,
-  AsyncStorage
+  AsyncStorage,
+  FlatList
 } from 'react-native';
 
-import ListView from "deprecated-react-native-listview";
+
 
 class Restes extends Component {
   static navigationOptions = {
@@ -32,9 +33,10 @@ class Restes extends Component {
       data: [],
     }
   }
+  
 
   //On récupère l'id de l'utilisateur connecté pour ne pas afficher ses annonces car il s'en fou de les voir.
-  componentDidMount() {
+  componentWillMount() {
     this._loadInitialState().done();
   }
 
@@ -43,6 +45,7 @@ class Restes extends Component {
     if (value !== null) {
       this.setState({ UserId: value });
     }
+    this.recuperationDonneeAnnonce()
   }
 
   //on récupère les données sous forme de tableau qui sont envoyées par le fichier "restes.php" et on les met dans la variable data pour pouvoir les traiter.
@@ -62,7 +65,6 @@ class Restes extends Component {
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ data: responseJson });
-        alert(this.state.data);
       })
       .catch((error) => {
         console.error(error);
@@ -72,6 +74,7 @@ class Restes extends Component {
 
 
   render() {
+    
     return (
 
       <ScrollView>
@@ -91,29 +94,32 @@ class Restes extends Component {
           </TouchableOpacity>
         </View>
 
-
-
-
-
         <View>
-          <TouchableOpacity
-            onPress={this.recuperationDonneeAnnonce}
-            style={styles.submitButton}>
-            <Text style={{ color: 'black', textAlign: 'center' }}>Voir restes</Text>
-          </TouchableOpacity>
+          <FlatList
+            data={this.state.data}
+            keyExtractor={(item) => item.idUser.toString()}
+            renderItem={({ item }) =>
+              <View style={styles.container}>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate("ResteItem", {reste: item})}
+                  style={styles.event}>
+                  <View style={{ flex: 1 }}>
+                    <View style={styles.header}>
+                      <View style={{ flex: 2 }}>
+                        <Text style={styles.textTitle}>{item.nomReste}</Text>
+                      </View>
+                      <View style={{ flex: 1 }}>
+                        <Text style={styles.textDate}>Quantité : {item.quantiteReste}</Text>
+                      </View>
+                    </View>
+                    <View style={styles.footer}>
+                      <Text style={styles.textPlace}>Adresse : {item.adresse}</Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              </View>}
+          />
         </View>
-        <View>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate("CreateAnnonce")} style={styles.TouchableOpacityStyle} >
-            <Image
-              source={require('../image/Floating_Button.png')}
-              style={styles.icon}
-            />
-          </TouchableOpacity>
-        </View>
-        {/*
-        <View>
-          <Text>{this.state.data[1][1]}</Text>
-        </View>*/}
       </ScrollView >
 
     );
@@ -198,6 +204,41 @@ const styles = StyleSheet.create({
   FloatingButtonStyle: {
     width: 100,
     height: 100,
+  },
+  container: {
+    height: 100,
+    padding: 12,
+    paddingBottom: 3
+  },
+  event: {
+    flex: 1,
+    backgroundColor: '#3A4750'
+  },
+  header: {
+    flexDirection: 'row',
+    flex: 1
+  },
+  footer: {
+    flex: 1,
+    justifyContent: 'center',
+    marginLeft: 5
+  },
+  textTitle: {
+    color: '#FFFFFF',
+    fontSize: 22,
+    margin: 5,
+    marginTop: 2
+  },
+  textDate: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    margin: 5,
+    marginTop: 10
+  },
+  textPlace: {
+    color: '#FFFFFF',
+    fontSize: 16,
+
   }
 
 });

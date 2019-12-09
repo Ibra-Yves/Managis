@@ -7,15 +7,13 @@ import {
 	View,
 	TouchableOpacity,
 	TextInput,
-	Button,
 	Keyboard,
 	AsyncStorage
 } from 'react-native';
-import { StackNavigator } from 'react-navigation';
 
-import { LoginButton, AccessToken, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 
 export default class login extends Component {
+
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -137,7 +135,6 @@ export default class login extends Component {
 					onChangeText={UserPassword => this.setState({ UserPassword })}
 
 				/>
-
 
 				<TouchableOpacity
 					onPress={this.login}

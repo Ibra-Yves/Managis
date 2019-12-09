@@ -3,14 +3,12 @@ import { AppRegistry,
 				View,
 				Text,
 				StyleSheet,
-				Button,
 				TouchableOpacity,
-				StatusBar,
 				Image } from 'react-native';
 
 export default class home extends Component{
 	static navigationOptions = ({ navigation }) => ({
-		tabBarVisible: false
+		
 	});
 
 	render(){

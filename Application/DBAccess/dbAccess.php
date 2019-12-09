@@ -42,7 +42,8 @@ class dbAccess
             case 'mailInv' :
             case 'infoPopUp' :
             case 'marcheRestes'  : 
-            case 'mesAnnoncesMarche' :      
+            case 'mesAnnoncesMarche' :
+            case 'deleteAnnonce' :      
                 array_push($params, '?');
             case 'tousLesUsers' :
                 try {
@@ -136,6 +137,21 @@ class dbAccess
         switch ($procName){
             case 'ajoutAnnonce' : 
                 array_push($params, '?', '?', '?', '?', '?');
+                try {
+                    $this->connexionBDD();
+                    $callProc = 'call '. $procName.'('.join(',', $params).')';
+                    $request = $this->pdo->prepare($callProc);
+                    $request->execute($procParams);
+                    return $request->fetchAll();
+                }
+                catch (PDOException $e){
+                    $e->getMessage();
+                }
+                break;
+        }
+        switch ($procName){
+            case 'modifAnnonce' :
+                array_push($params, '?', '?', '?', '?', '?','?');
                 try {
                     $this->connexionBDD();
                     $callProc = 'call '. $procName.'('.join(',', $params).')';
