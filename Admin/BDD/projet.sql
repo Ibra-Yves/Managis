@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Dec 06, 2019 at 04:20 PM
+-- Generation Time: Dec 09, 2019 at 05:57 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.3.8
 
@@ -18,22 +18,9 @@ DELIMITER $$
 --
 -- Procedures
 --
-DROP PROCEDURE IF EXISTS `ajoutAnnonce`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ajoutAnnonce` (IN `idUserr` INT, IN `nomRestee` VARCHAR(255), IN `quantiteRestee` INT, IN `descriptionRestee` VARCHAR(255), IN `adressee` VARCHAR(255))  BEGIN
-insert into gestionRestes (idUser, nomReste, quantiteReste, descriptionReste, adresse) 
-values (idUserr,  nomRestee, quantiteRestee,  descriptionRestee, adressee);
-END$$
-
-DROP PROCEDURE IF EXISTS `marcheRestes`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `marcheRestes` (IN `userId` INT)  BEGIN
-select * from gestionrestes 
-where userId != gestionrestes.idUser;
-END$$
-
-DROP PROCEDURE IF EXISTS `mesAnnoncesMarche`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `mesAnnoncesMarche` (IN `userId` INT)  BEGIN
-select * from gestionrestes
-where userId = gestionrestes.idUser;
+insert into reste (idReste, idUser, nomReste, quantiteReste, description, adresse) 
+values (NULL, idUserr,  nomRestee, quantiteRestee,  descriptionRestee, adressee);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ajoutCommentaire` (IN `idEvent` INT, IN `commentaire` VARCHAR(255))  BEGIN
@@ -87,6 +74,11 @@ where hote = users.pseudo
 group by idUser);
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deleteAnnonce` (IN `idReste` INT)  NO SQL
+BEGIN 
+DELETE FROM reste WHERE reste.idReste = idReste;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `espaceMembre` (IN `psd` VARCHAR(50))  BEGIN
 select pseudo, email, substring(dateCreation, 1,10) as dateCrea from users
 where psd = users.pseudo;
@@ -124,6 +116,22 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `mailSupprInvite` (IN `pseudo` VARCHAR(50))  BEGIN
 select email from users 
 where users.pseudo = pseudo;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `marcheRestes` (IN `userId` INT)  BEGIN
+select * from reste 
+where userId != reste.idUser;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `mesAnnoncesMarche` (IN `userId` INT)  BEGIN
+select * from reste
+where userId = reste.idUser;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modifAnnonce` (IN `idReste` INT, IN `nomReste` VARCHAR(255), IN `quantiteReste` INT, IN `description` VARCHAR(255), IN `adresse` VARCHAR(255), IN `idUser` INT)  NO SQL
+BEGIN 
+update reste set reste.nomReste = nomReste,reste.quantiteReste = quantiteReste, reste.adresse = adresse, reste.description = description, reste.idUser = idUser
+where reste.idReste = idReste;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `modifEvent` (IN `idEvent` INT, IN `nomEvent` VARCHAR(100), IN `adresse` VARCHAR(100), IN `dateEvent` VARCHAR(50), IN `heure` VARCHAR(45))  BEGIN
@@ -337,7 +345,16 @@ CREATE TABLE `gestionrestes` (
 
 INSERT INTO `gestionrestes` (`idUser`, `nomReste`, `quantiteReste`, `descriptionReste`, `adresse`) VALUES
 (65, 'alo', 10, 'alo', 'alo'),
-(69, 'Bière', 2, 'Fauthygkgb', 'Utfuyfiuyguyyuffyfig');
+(69, 'Bière', 2, 'Fauthygkgb', 'Utfuyfiuyguyyuffyfig'),
+(69, 'Biera', 15, 'POUR IBRA', '90 rue fica'),
+(69, 'Biera', 14, 'Vive la biere ', '9 rue de trazegnies'),
+(69, 'Biera', 10, 'Remy', '9 rue fica'),
+(69, 'Biera', 10, 'Remy', '9 rue ficus'),
+(69, 'Bierazzz', 12, 'Vive la gnôle', '90 rue fica'),
+(69, 'Bierazzz', 12, 'Vive la gnôle', '90 rue fica'),
+(70, 'Chips', 15, 'Lays au sel,poivre,paprika', '56 rue du poirier '),
+(70, 'Bouteille d’alcool', 4, 'Vodka, Rhum', '56 avenue pomme'),
+(70, 'Troupeau de vitre', 51, 'Meuh meuh', 'Dans le champ');
 
 -- --------------------------------------------------------
 
@@ -387,6 +404,30 @@ INSERT INTO `invite` (`idUser`, `idEvent`, `participe`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `reste`
+--
+
+CREATE TABLE `reste` (
+  `idReste` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `nomReste` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `quantiteReste` int(255) NOT NULL,
+  `description` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `adresse` varchar(255) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `reste`
+--
+
+INSERT INTO `reste` (`idReste`, `idUser`, `nomReste`, `quantiteReste`, `description`, `adresse`) VALUES
+(3, 69, 'Chips Lays', 2, 'Deux paquets de chips Lays Sel et Paprika', '2 rue de l\'église '),
+(4, 70, 'Bière Jupiter', 24, 'Un bac de Jupiter', '2 rue de la pinte'),
+(5, 70, 'testtest', 1, 'test test', 'test test');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -410,7 +451,8 @@ INSERT INTO `users` (`idUser`, `pseudo`, `email`, `passwd`, `dateCreation`) VALU
 (66, 'alo', 'alo@aluile', '18f3af6147ba96618064459da6dd90b1', '2019-11-04 14:36:05'),
 (67, 'test', 'test@hotmail.com', 'test', '2019-12-05 09:00:22'),
 (68, '', '', 'd41d8cd98f00b204e9800998ecf8427e', '2019-12-05 09:23:50'),
-(69, 'Jean', 'Jean@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', '2019-12-05 16:26:20');
+(69, 'Jean', 'Jean@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', '2019-12-05 16:26:20'),
+(70, 'Remy', 'Remy@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', '2019-12-08 15:55:34');
 
 --
 -- Indexes for dumped tables
@@ -452,6 +494,13 @@ ALTER TABLE `invite`
   ADD KEY `fk_fournEvent` (`idEvent`);
 
 --
+-- Indexes for table `reste`
+--
+ALTER TABLE `reste`
+  ADD PRIMARY KEY (`idReste`),
+  ADD KEY `fk_foreign_reste_user` (`idUser`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -470,10 +519,16 @@ ALTER TABLE `evenement`
   MODIFY `idEvent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
+-- AUTO_INCREMENT for table `reste`
+--
+ALTER TABLE `reste`
+  MODIFY `idReste` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- Constraints for dumped tables
@@ -509,3 +564,9 @@ ALTER TABLE `gestionrestes`
 ALTER TABLE `invite`
   ADD CONSTRAINT `fk_nomEvent` FOREIGN KEY (`idEvent`) REFERENCES `evenement` (`idEvent`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pseudo` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `reste`
+--
+ALTER TABLE `reste`
+  ADD CONSTRAINT `fk_foreign_reste_user` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`);
