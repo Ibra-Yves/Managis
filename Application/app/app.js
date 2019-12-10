@@ -19,6 +19,8 @@ import Settings from '../components/settings.js';
 import Evenement from '../components/evenement.js';
 import ResteItem from '../components/resteItem.js'
 import ResteItemPerso from '../components/resteItemPerso.js'
+import EventFutur from '../components/eventFutur.js'
+import Invitation from '../components/invitation.js'
 
 import { Container, Content, Header, Body, Icon } from 'native-base'
 
@@ -65,6 +67,18 @@ const RestesPersoNav = StackNavigator({
 	}
 })
 
+const EventNav = StackNavigator({
+	Evenement: {
+		screen: Evenement
+	},
+	EventFutur: {
+		screen: EventFutur
+	},
+	Invitation: {
+		screen: Invitation
+	}
+})
+
 
 const myNav = DrawerNavigator({
 	Profile: {
@@ -96,8 +110,8 @@ const myNav = DrawerNavigator({
 			
 		}
 	},
-	Evenement: {
-		screen: Evenement,
+	EvenementPerso: {
+		screen: EventNav,
 		navigationOptions: {
 			title: 'Gestion des événements',
 			

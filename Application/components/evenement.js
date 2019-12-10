@@ -38,19 +38,14 @@ class Evenement extends Component {
         </View>
         <Text style={styles.text}>Managis</Text>
         <TouchableOpacity
-        onPress={() => Linking.openURL('https://managis.be/')}
-        style={styles.btn1}>
-        <Text style={styles.btnText}>CREER VOTRE EVENEMENT</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-        onPress={() => Linking.openURL('https://managis.be/')}
+        onPress={() => this.props.navigation.navigate("EventFutur")}
         style={styles.btn2}>
-        <Text style={styles.btnText}>EVENEMENT A VENIR</Text>
+        <Text style={styles.btnText}>Vos événements</Text>
         </TouchableOpacity>
         <TouchableOpacity
-        onPress={() => Linking.openURL('https://managis.be/')}
+        onPress={() => this.props.navigation.navigate("Invitation")}
         style={styles.btn3}>
-        <Text style={styles.btnText}>HISTORIQUE DE VOS EVENEMENTS</Text>
+        <Text style={styles.btnText}>Voir vos invitations</Text>
         </TouchableOpacity>
       </ScrollView>
       </ImageBackground>
