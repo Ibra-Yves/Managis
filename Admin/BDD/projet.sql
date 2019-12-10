@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Dec 09, 2019 at 05:57 PM
+-- Generation Time: Dec 10, 2019 at 09:01 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.3.8
 
@@ -119,7 +119,8 @@ where users.pseudo = pseudo;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `marcheRestes` (IN `userId` INT)  BEGIN
-select * from reste 
+select *, users.email from reste
+JOIN users on reste.idUser = users.idUser
 where userId != reste.idUser;
 END$$
 
@@ -231,7 +232,7 @@ where idEvent = evenement.idEvent;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `vosInvitFutur` (IN `id` INT, IN `psd` VARCHAR(100))  BEGIN
-select evenement.idEvent, nomEvent, hote, adresse, dateEvent, heure from evenement
+select evenement.idEvent, nomEvent, hote, adresse, dateEvent, heure, invite.participe from evenement
 join invite on evenement.idEvent = invite.idEvent
 where id = invite.idUser AND evenement.hote != psd AND dateEvent > now() ;
 END$$
@@ -297,10 +298,12 @@ INSERT INTO `evenement` (`idEvent`, `nomEvent`, `hote`, `adresse`, `dateEvent`, 
 (35, 'Soiree cartes', 'toto', 'rue des 3 combattants', '2019-10-26', NULL),
 (36, 'epheccccccccccccc', 'toto', 'Avenue du ciseau, 1348 Louvain-la-Neuve', '2019-10-30', NULL),
 (37, 'soiree php', 'toto', 'rue des 3 combattants', '2019-11-03', NULL),
-(38, 'walibi', 'dominik', 'rue des 3 combattants, 1348 LLN', '2019-11-03', NULL),
+(38, 'walibi', 'dominik', 'rue des 3 combattants, 1348 LLN', '2020-11-03', NULL),
 (41, 'alo', 'dominik', 'alo', '2019-11-22', NULL),
 (42, 'Soiree monopoly', 'toto', 'rue des 3 combattants', '2020-01-15', '20:00'),
-(43, 'soiree php', 'dominik', 'Rue de bruxelles 38, 1348 LLN', '2020-12-16', '15:00');
+(43, 'soiree php', 'dominik', 'Rue de bruxelles 38, 1348 LLN', '2020-12-16', '15:00'),
+(60, 'Soirée foot à la barake', 'Remy', '90 rue de l\'eglise', '2020-06-25', '18:00'),
+(61, 'Soirée fricadelle', 'Remy', '90 rue de l\'eglise', '2020-11-2', '18:00');
 
 -- --------------------------------------------------------
 
@@ -399,7 +402,9 @@ INSERT INTO `invite` (`idUser`, `idEvent`, `participe`) VALUES
 (63, 41, 0),
 (62, 42, 0),
 (63, 43, 0),
-(62, 43, 0);
+(62, 43, 0),
+(70, 43, 0),
+(70, 38, 1);
 
 -- --------------------------------------------------------
 
@@ -422,8 +427,9 @@ CREATE TABLE `reste` (
 
 INSERT INTO `reste` (`idReste`, `idUser`, `nomReste`, `quantiteReste`, `description`, `adresse`) VALUES
 (3, 69, 'Chips Lays', 2, 'Deux paquets de chips Lays Sel et Paprika', '2 rue de l\'église '),
-(4, 70, 'Bière Jupiter', 24, 'Un bac de Jupiter', '2 rue de la pinte'),
-(5, 70, 'testtest', 1, 'test test', 'test test');
+(5, 70, 'testtest', 1, 'test test', 'test test'),
+(7, 70, 'Télé', 1, 'Grosse télé', 'Rue du gazomètre '),
+(8, 63, 'TestRefreshIIIINNNNGNGGGGGGG', 12, 'testResfreshINGGGGGGGGGGGG', 'resfreeeeeeeeeesh rue ');
 
 -- --------------------------------------------------------
 
@@ -516,13 +522,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `evenement`
 --
 ALTER TABLE `evenement`
-  MODIFY `idEvent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `idEvent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `reste`
 --
 ALTER TABLE `reste`
-  MODIFY `idReste` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idReste` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
