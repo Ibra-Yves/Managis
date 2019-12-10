@@ -5,11 +5,12 @@ $(function(){
 //On effecute les requetes
 function requetes(event){
     event.preventDefault();//On reste sur la meme page
-
-    $.ajaxSetup({
+    $.ajaxSetup(
+        {
         processData: false,
         contentType: false
-    });
+    }
+    );
 
     let request = 'noRequest';
     let envoyerData = new FormData(); //Creation du nouveau formulaire
@@ -70,7 +71,10 @@ function gererDonnes(retour){
 
                     }).html(actionDatas['text']);
                     break;
-                                case 'espaceMembre' : //Espace memebre affiché
+                case 'downloadAppli' :
+                    window.location.href = actionDatas;
+                    break;
+                    case 'espaceMembre' : //Espace memebre affiché
                     let content = '';
                     actionDatas.forEach(function(data){
                         content+=

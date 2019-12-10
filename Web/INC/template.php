@@ -33,10 +33,10 @@
     <link rel="icon" type="image/png" href="IMG/favicon.png" />
 
     <!-- JQuery -->
-    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="vendor/jquery/jquery.js"></script>
+    <link rel="stylesheet" href="vendor/jquery/jquery-ui.css">
+    <script src="vendor/jquery/jquery-1.12.4.js"></script>
+    <script src="vendor/jquery/jquery-ui.js"></script>
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="JS/popper.min.js"></script>
     <!-- MDB core JavaScript -->
@@ -80,6 +80,10 @@
                 '<li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
           </li>';
+            $telechargement =
+                '<li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="downloadAppli.php">Telecharger notre application</a>
+          </li>';
             $vosEvenements =
                 '<li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle btn btn-outline-light" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -97,7 +101,7 @@
                 echo $vosEvenements  . $espaceMembre . $deconnexion;
             }
             else {
-                echo $services . $aProposDeNous . $quiSommesNous . $contact . $connexion;
+                echo $services . $aProposDeNous . $quiSommesNous . $contact . $telechargement . $connexion;
             }
             ?>
 

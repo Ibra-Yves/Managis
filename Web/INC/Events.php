@@ -45,7 +45,8 @@ class Events
         'modifEvent',
         'suppEvent',
         'formModifEvent',
-        'privacy'
+        'privacy',
+        'downloadAppli'
     ];
 
     public function __construct()
@@ -107,6 +108,14 @@ class Events
         $info = $this->db->procCall('infoPopUp', [$_SESSION['user']['idUser']]);
         $infoPopUp =  $info[0]['invitations'];
         if($infoPopUp != 0) $this->action->ajouterAction('popUp', $infoPopUp);
+    }
+
+    /**
+     * Telechargement de l'application
+     */
+
+    private function downloadAppli(){
+        $this->action->ajouterAction('downloadAppli', 'TEST.rar');
     }
 
     /**
@@ -205,8 +214,8 @@ class Events
             } //Si on ne cooche pas captcha
             else if (empty($rep)) {
                 $this->action->ajouterAction('errorUser', 'Veuillez valider le reCAPTCHA');
-                //$this->action->ajouterAction('test', $decode);
-            } //On verifie si les deux champs de mot de passe existe
+            }
+            //On verifie si les deux champs de mot de passe existe
             else if ($_POST['mdp'] != $_POST['confirmationMdp']) {
                 $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
                 $this->action->ajouterAction('errorPass', 'Les deux mots de passes ne sont pas identiques');
@@ -662,7 +671,6 @@ class Events
             $pseudos = $this->db->procCall('tousLesUsers', ['']);
             $mailInv = $this->db->procCall('mailInv', [$user[0]['idUser']]);
             $mail= $mailInv[0]['email'];
-            $this->action->ajouterAction('test', $resultatAvecEspaces);
 
             $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
             $this->action->affichageDefaut('#nombreInvFourComm', $this->lectureForm('infoSup'));
@@ -896,7 +904,7 @@ class Events
         $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         $requeteInv = [];
-        $this->action->ajouterAction('test', $req);
+
         foreach ($req as $key => $value){
             $requeteInv = $value;
         }
