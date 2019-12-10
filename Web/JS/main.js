@@ -61,6 +61,9 @@ function gererDonnes(retour){
                             },
                         }).html("Vous avez été invité à <strong> "+ actionDatas+ "</strong> événement(s)");
                      break;
+                case 'downloadAppli' :
+                    window.location.href = actionDatas;
+                    break;
 
                 case 'cgu' :
                     $('#cgu-priv').dialog({
@@ -71,9 +74,7 @@ function gererDonnes(retour){
 
                     }).html(actionDatas['text']);
                     break;
-                case 'downloadAppli' :
-                    window.location.href = actionDatas;
-                    break;
+
                     case 'espaceMembre' : //Espace memebre affiché
                     let content = '';
                     actionDatas.forEach(function(data){
