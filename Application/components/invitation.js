@@ -11,7 +11,9 @@ import {
   View,
   Alert,
   AsyncStorage,
-  FlatList
+  FlatList, 
+  ActivityIndicator, 
+  RefreshControl
 } from 'react-native';
 
 
@@ -23,6 +25,7 @@ class Invitation extends Component {
       UserName: [],
       UserId: [],
       data: [],
+      refreshing: true
     }
   }
 
@@ -59,6 +62,7 @@ class Invitation extends Component {
     })
       .then((response) => response.json())
       .then((responseJson) => {
+        this.setState({ refreshing: false })
         this.setState({ data: responseJson });
       })
       .catch((error) => {
@@ -112,9 +116,33 @@ class Invitation extends Component {
     return ret
   }
 
+  onRefresh() {
+    //Clear old data of the list
+    this.setState({ data: [] });
+    //Call the Service to get the latest data
+    this.recuperationInvitationPerso();
+  }
+
   render() {
+
+    if (this.state.refreshing) {
+      return (
+        //loading view while data is loading
+        <View style={{ flex: 1, paddingTop: 20 }}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+
     return (
-      <ScrollView>
+      <ScrollView
+      refreshControl={
+        <RefreshControl
+          //refresh control used for the Pull to Refresh
+          refreshing={this.state.refreshing}
+          onRefresh={this.onRefresh.bind(this)}
+        />
+      }>
         <View style={{ flexDirection: 'row', backgroundColor: '#3A4750', height: 60 }}>
           <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
             <TouchableOpacity

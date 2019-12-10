@@ -31,9 +31,11 @@ class Restes extends Component {
     this.state = {
       UserId: [],
       data: [],
+      refreshing: true,
     }
   }
-  
+
+
 
   //On récupère l'id de l'utilisateur connecté pour ne pas afficher ses annonces car il s'en fou de les voir.
   componentWillMount() {
@@ -64,6 +66,7 @@ class Restes extends Component {
     })
       .then((response) => response.json())
       .then((responseJson) => {
+        this.setState({ refreshing: false });
         this.setState({ data: responseJson });
       })
       .catch((error) => {
@@ -71,13 +74,34 @@ class Restes extends Component {
       });
   }
 
+  onRefresh() {
+    //Clear old data of the list
+    this.setState({ data: [] });
+    //Call the Service to get the latest data
+    this.recuperationDonneeAnnonce();
+  }
 
 
   render() {
-    
+    if (this.state.refreshing) {
+      return (
+        //loading view while data is loading
+        <View style={{ flex: 1, paddingTop: 20 }}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+
     return (
 
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            //refresh control used for the Pull to Refresh
+            refreshing={this.state.refreshing}
+            onRefresh={this.onRefresh.bind(this)}
+          />
+        }>
         <View style={styles.containerTitre}>
           <View style={{ flex: 6, justifyContent: 'center' }}>
             <Text style={styles.titrePage}>Marché des Restes</Text>
@@ -101,7 +125,7 @@ class Restes extends Component {
             renderItem={({ item }) =>
               <View style={styles.container}>
                 <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate("ResteItem", {reste: item})}
+                  onPress={() => this.props.navigation.navigate("ResteItem", { reste: item })}
                   style={styles.event}>
                   <View style={{ flex: 1 }}>
                     <View style={styles.header}>

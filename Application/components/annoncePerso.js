@@ -12,7 +12,8 @@ import {
   View,
   Alert,
   AsyncStorage,
-  FlatList
+  FlatList, 
+  RefreshControl
 } from 'react-native';
 
 
@@ -32,6 +33,7 @@ class RestesPersos extends Component {
     this.state = {
       UserId: [],
       data: [],
+      refreshing: true
     }
   }
 
@@ -64,6 +66,7 @@ class RestesPersos extends Component {
     })
       .then((response) => response.json())
       .then((responseJson) => {
+        this.setState({ refreshing: false });
         this.setState({ data: responseJson });
       })
       .catch((error) => {
@@ -71,21 +74,45 @@ class RestesPersos extends Component {
       });
   }
 
+  onRefresh() {
+    //Clear old data of the list
+    this.setState({ data: [] });
+    //Call the Service to get the latest data
+    this.recuperationDonneeAnnoncePerso();
+  }
+
 
   render() {
+
+    if (this.state.refreshing) {
+      return (
+        //loading view while data is loading
+        <View style={{ flex: 1, paddingTop: 20 }}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+
     return (
 
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            //refresh control used for the Pull to Refresh
+            refreshing={this.state.refreshing}
+            onRefresh={this.onRefresh.bind(this)}
+          />
+        }>
         <View style={{ flexDirection: 'row', backgroundColor: '#3A4750', height: 60 }}>
-          <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+          <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
           </View>
-            <View style={{ flex: 6, justifyContent: 'center' }}>
-              <Text style={styles.titrePage}>Mes annonces</Text>
-            </View>
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <View style={{ flex: 6, justifyContent: 'center' }}>
+            <Text style={styles.titrePage}>Mes annonces</Text>
+          </View>
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <TouchableOpacity
               onPress={() => this.props.navigation.openDrawer('myNav')}
-              >
+            >
               <Image
                 source={require('../image/icons8-menu-arrondi-50.png')}
                 style={styles.icon}
