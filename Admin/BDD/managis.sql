@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS evenement (
   KEY fk_nomEvent (nomEvent),
   KEY fk_hote (hote),
   KEY fk_eventComm (idEvent)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE IF NOT EXISTS fournitures (
@@ -49,7 +49,16 @@ CREATE TABLE IF NOT EXISTS users (
   PRIMARY KEY (idUser),
   KEY fk_pseudo (pseudo),
   KEY fk_hote (pseudo)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE reste (
+  idReste int(11) NOT NULL,
+  idUser int(11) NOT NULL,
+  nomReste varchar(255) CHARACTER SET latin1 NOT NULL,
+  quantiteReste int(255) NOT NULL,
+  description varchar(255) CHARACTER SET latin1 NOT NULL,
+  adresse varchar(255) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 ALTER TABLE commentaires
@@ -67,7 +76,53 @@ ALTER TABLE fournitures
 ALTER TABLE invite
   ADD CONSTRAINT fk_nomEvent FOREIGN KEY (idEvent) REFERENCES evenement (idEvent) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT fk_pseudo FOREIGN KEY (idUser) REFERENCES users (idUser) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  
+ALTER TABLE reste
+  ADD PRIMARY KEY (idReste),
+  ADD KEY fk_foreign_reste_user (idUser);
+
+ALTER TABLE reste
+  ADD CONSTRAINT fk_foreign_reste_user FOREIGN KEY (idUser) REFERENCES users (idUser);
+  
 COMMIT;
+
+delimiter / 
+CREATE PROCEDURE ajoutAnnonce (IN idUserr INT, IN nomRestee VARCHAR(255), IN quantiteRestee INT, IN descriptionRestee VARCHAR(255), IN adressee VARCHAR(255))  BEGIN
+insert into reste (idReste, idUser, nomReste, quantiteReste, description, adresse) 
+values (NULL, idUserr,  nomRestee, quantiteRestee,  descriptionRestee, adressee);
+END; 
+/
+
+delimiter / 
+CREATE PROCEDURE deleteAnnonce (IN idReste INT) 
+BEGIN 
+DELETE FROM reste WHERE reste.idReste = idReste;
+END;
+/
+
+delimiter / 
+CREATE PROCEDURE marcheRestes (IN userId INT)  BEGIN
+select * from reste 
+where userId != reste.idUser;
+END;
+/
+
+delimiter / 
+CREATE PROCEDURE mesAnnoncesMarche (IN userId INT)  BEGIN
+select * from reste
+where userId = reste.idUser;
+END;
+/
+
+delimiter / 
+CREATE PROCEDURE modifAnnonce (IN idReste INT, IN nomReste VARCHAR(255), IN quantiteReste INT, IN description VARCHAR(255), IN adresse VARCHAR(255), IN idUser INT)  NO SQL
+BEGIN 
+update reste set reste.nomReste = nomReste,reste.quantiteReste = quantiteReste, reste.adresse = adresse, reste.description = description, reste.idUser = idUser
+where reste.idReste = idReste;
+END;
+/
+
+
 
 delimiter / 
 CREATE  PROCEDURE ajoutCommentaire (IN idEvent INT, IN commentaire VARCHAR(255))  BEGIN
@@ -329,7 +384,7 @@ END;
 /
 
 delimiter / 
-CREATE DEFINER=`admin`@`%` PROCEDURE `infoPopUp`(IN idUser INT)
+CREATE PROCEDURE infoPopUp(IN idUser INT)
 BEGIN
 select count(participe) as invitations from invite
 where idUser = invite.idUser AND participe=0;
@@ -337,7 +392,7 @@ END;
 /
 
 delimiter /
-CREATE DEFINER=`admin`@`%` PROCEDURE `mailInv`(IN idUser INT)
+CREATE PROCEDURE mailInv(IN idUser INT)
 BEGIN
 select email from users 
 where idUser = users.idUser;
@@ -346,6 +401,8 @@ END;
 
 CREATE USER 'root'@'%' IDENTIFIED BY '4TujbpbjXV6FK6h2';
 CREATE USER 'admin'@'%' IDENTIFIED BY 'yVLsgfgsQa3R4HRP';
+CREATE USER 'admin'@'localhost' IDENTIFIED BY '5UeW3qMmh8pFcLDa';
 GRANT ALL PRIVILEGES ON * . * TO 'admin'@'%';
 GRANT ALL PRIVILEGES ON * . * TO 'root'@'%';
+GRANT ALL PRIVILEGES ON * . * TO 'admin'@'localhost';
 FLUSH PRIVILEGES;

@@ -1,7 +1,7 @@
 Installation du service reverse proxy ainsi que le mail: 
 
 ATTENTION! LE SERVICE DOCKER EST REQUISE POUR L'INSTALLATION CORRECTE DU SERVICE WEB
-Le fichier de managis contient les tables à créer ainsi que les procèdures
+Le fichier de managis.sql contient les tables à créer ainsi que les procèdures
 
 1. Transférer tous les fichiers de BDD sur le serveur
 2. Aller dans le dossier où se trouve le dockerfile de la BDD
