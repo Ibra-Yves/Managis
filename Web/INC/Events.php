@@ -459,7 +459,6 @@ class Events
             $nombreParticipant =  $this->db->procCall('nombreParticipant', [$id]);
 
             $afficheInv =  $this->db->procCall('listeInvites', [$id]);
-
             $verif = array_intersect([$afficheInv[0]['pseudo']], [$_SESSION['user']['pseudo']]);
 
             $afficherSuppr = array_intersect([$afficheInv[0]['pseudo']], [$_SESSION['user']['pseudo']]);
@@ -773,7 +772,7 @@ class Events
         }
         //Sinon on ajoute le commentaire à la liste et on l'affiche
         else {
-            $this->db->procCall('ajoutCommentaire', [$_SESSION['idEvent'], $commentaire, $_SESSION['user']['idUser']]);
+            $this->db->procCall('ajoutCommentaire', [$_SESSION['idEvent'], $_SESSION['user']['idUser'], $commentaire]);
             $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
 
             $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);

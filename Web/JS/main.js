@@ -251,17 +251,16 @@ function gererDonnes(retour){
                         '<div> \n' +
                             '<th scope="row" id="'+ o++ +'">'+ j++ +'</th>\n' +
                             '<td class="taillePolice" align="center" id="'+ p++ +'">'+data['pseudo']+'</td> \n' +
-                            '<td class="taillePolice" align="center"><a id="' + q++ +'" href="'+data['pseudo']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
+                            '<td class="taillePolice" align="center"><a id="pseudo' + q++ +'" href="'+data['pseudo']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
                             '<td class="taillePolice" align="center" id="'+ data['pseudo'] +'"></td> \n' +
                         '</div>'
                         '</tr>';
 
                     });
-
                     $('#invites').html(tableInvites); //Affichage des invités sous le forme de tableau
                     $('#0').remove(); // On n'affiche pas lé premier invité car c'est un hote et si on le supprime faudra remodifier dans la BDD
                     $('#1').remove();
-                    $('#2').remove();
+                    $('#pseudo2').remove();
 
                     evenements('#invites');
                     break;
@@ -328,6 +327,7 @@ function gererDonnes(retour){
                     $('a').show();
                     $('#formInv').show();
                     $('#suppr').show();
+                    $('#pseudo2').remove();
                     $('#modifier').show();
                     $('#supprimer').show();
                     $('#modifierr').show();

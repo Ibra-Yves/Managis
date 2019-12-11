@@ -3,8 +3,10 @@ USE managis;
 
 CREATE TABLE IF NOT EXISTS commentaires (
   idEvent int(11) NOT NULL,
+  idUser int(11) NOT NULL,
   commentaire varchar(255) NOT NULL,
   KEY fk_eventComm (idEvent)
+  KEY fk_userId (idUser)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -63,6 +65,8 @@ CREATE TABLE reste (
 
 ALTER TABLE commentaires
   ADD CONSTRAINT fk_eventComm FOREIGN KEY (idEvent) REFERENCES evenement (idEvent) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT fk_userId FOREIGN KEY (idUser) REFERENCES users (idUser) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 
 
 ALTER TABLE evenement
@@ -125,8 +129,8 @@ END;
 
 
 delimiter / 
-CREATE  PROCEDURE ajoutCommentaire (IN idEvent INT, IN commentaire VARCHAR(255))  BEGIN
-insert into commentaires (idEvent, commentaire) values (idEvent, commentaire);
+CREATE  PROCEDURE ajoutCommentaire (IN idEvent INT, IN userId INT, IN commentaire VARCHAR(255))  BEGIN
+insert into commentaires (idEvent, idUser, commentaire) values (idEvent, userId,  commentaire);
 END; 
 /
 
@@ -179,7 +183,7 @@ delimiter /
 CREATE  PROCEDURE creerEvent (IN nomEvent VARCHAR(100), IN hote VARCHAR(50), IN adresse VARCHAR(100), IN dateEvent VARCHAR(50), IN heureEvent VARCHAR(50))  BEGIN
 INSERT into evenement (nomEvent, hote, adresse, dateEvent, heure) values (nomEvent, hote, adresse, dateEvent, heureEvent);
 insert into invite (idUser, idEvent) 
-(select idUser, MAX(idEvent) from users
+(select idUser, MAX(idEvent), 1 from users
 join evenement on users.pseudo = evenement.hote
 where hote = users.pseudo
 group by idUser);
@@ -202,7 +206,8 @@ END;
 
 delimiter / 
 CREATE  PROCEDURE listeCommentaire (IN idEvent INT)  BEGIN
-select commentaire from commentaires
+select pseudo,  commentaire from commentaires
+natural join users
 where idEvent = commentaires.idEvent;
 END; 
 /
