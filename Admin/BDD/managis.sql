@@ -399,6 +399,7 @@ where idUser = users.idUser;
 END;
 /
 
+delete from mysql.user where user = 'root';
 CREATE USER 'root'@'%' IDENTIFIED BY '4TujbpbjXV6FK6h2';
 CREATE USER 'admin'@'%' IDENTIFIED BY 'yVLsgfgsQa3R4HRP';
 CREATE USER 'admin'@'localhost' IDENTIFIED BY '5UeW3qMmh8pFcLDa';
