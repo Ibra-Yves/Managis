@@ -8,8 +8,10 @@ RUN apt-get update \
 #Les procedures ainsi que les tables
 ADD managis.sql /tmp/
 
+
 ##On demarre le service mysql
 RUN service mysql start
+
 
 ##On expose les ports 3306 et tcp
 EXPOSE 3306/tcp

@@ -1,15 +1,6 @@
 CREATE database managis;
 USE managis;
 
-CREATE TABLE IF NOT EXISTS commentaires (
-  idEvent int(11) NOT NULL,
-  idUser int(11) NOT NULL,
-  commentaire varchar(255) NOT NULL,
-  KEY fk_eventComm (idEvent)
-  KEY fk_userId (idUser)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
 CREATE TABLE IF NOT EXISTS evenement (
   idEvent int(11) NOT NULL AUTO_INCREMENT,
   nomEvent varchar(100) NOT NULL,
@@ -53,7 +44,15 @@ CREATE TABLE IF NOT EXISTS users (
   KEY fk_hote (pseudo)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE reste (
+CREATE TABLE IF NOT EXISTS commentaires (
+  idEvent int(11) NOT NULL,
+  idUser int(11) NOT NULL,
+  commentaire varchar(255) NOT NULL,
+  KEY fk_eventComm (idEvent),
+  KEY fk_userId (idUser)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE table IF NOT EXISTS reste (
   idReste int(11) NOT NULL,
   idUser int(11) NOT NULL,
   nomReste varchar(255) CHARACTER SET latin1 NOT NULL,
@@ -65,7 +64,6 @@ CREATE TABLE reste (
 
 ALTER TABLE commentaires
   ADD CONSTRAINT fk_eventComm FOREIGN KEY (idEvent) REFERENCES evenement (idEvent) ON DELETE NO ACTION ON UPDATE NO ACTION;
-  ADD CONSTRAINT fk_userId FOREIGN KEY (idUser) REFERENCES users (idUser) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 
@@ -142,7 +140,7 @@ END;
 
 delimiter / 
 CREATE  PROCEDURE ajouterInvites (IN pseudo VARCHAR(50), IN idEvent INT)  BEGIN
-insert into invite (idUser, idEvent) 
+insert into invite (idUser, idEvent, participe) 
 (select users.idUser, evenement.idEvent from users
 natural join evenement
 where users.pseudo = pseudo AND evenement.idEvent = idEvent
@@ -182,7 +180,7 @@ END;
 delimiter / 
 CREATE  PROCEDURE creerEvent (IN nomEvent VARCHAR(100), IN hote VARCHAR(50), IN adresse VARCHAR(100), IN dateEvent VARCHAR(50), IN heureEvent VARCHAR(50))  BEGIN
 INSERT into evenement (nomEvent, hote, adresse, dateEvent, heure) values (nomEvent, hote, adresse, dateEvent, heureEvent);
-insert into invite (idUser, idEvent) 
+insert into invite (idUser, idEvent, participe) 
 (select idUser, MAX(idEvent), 1 from users
 join evenement on users.pseudo = evenement.hote
 where hote = users.pseudo
