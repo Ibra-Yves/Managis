@@ -140,7 +140,7 @@ END;
 
 delimiter / 
 CREATE  PROCEDURE ajouterInvites (IN pseudo VARCHAR(50), IN idEvent INT)  BEGIN
-insert into invite (idUser, idEvent, participe) 
+insert into invite (idUser, idEvent) 
 (select users.idUser, evenement.idEvent from users
 natural join evenement
 where users.pseudo = pseudo AND evenement.idEvent = idEvent
