@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { Text, StyleSheet, View, TouchableOpacity, FlatList, ScrollView, Image, SafeAreaView } from 'react-native'
 
 
-class EventDetails extends Component {
+class InvitationDetails extends Component {
 
     constructor(props) {
         super(props)
@@ -11,6 +11,7 @@ class EventDetails extends Component {
             onPressedInvites: false,
             onPressedFournitures: false,
             onPressedCommentaires: false,
+            onPressedParticipe: true,
             invites: [],
             fournitures: [],
             commentaires: []
@@ -183,7 +184,24 @@ class EventDetails extends Component {
         return ret
     }
 
+    traductionPartcicipe(participe) {
+        ret = ''
+        if (participe == 1) {
+            ret = 'Vous participez'
+            this.setState.onPressedParticipe = true
+            
+        } else {
+            ret = 'Vous ne participez pas'
+            this.setState.onPressedParticipe = false
+            
+        }
+        return ret
+    }
+
     event = this.props.navigation.state.params.event
+
+    
+
 
     render() {
 
@@ -192,6 +210,24 @@ class EventDetails extends Component {
         var _styleInvites
         var _styleFournitures
         var _styleCommentaires
+        var _styleButtonParticipation
+        var _styleButtonAnnulation
+
+        if (this.state.onPressedParticipe == true) {
+            _styleButtonParticipation = {
+                display: 'none'
+            }
+            _styleButtonAnnulation = {
+                display: 'flex'
+            }
+        } else if (this.state.onPressedParticipe == false) {
+            _styleButtonParticipation = {
+                display: 'flex'
+            }
+            _styleButtonAnnulation = {
+                display: 'none'
+            }
+        }
 
         if (this.state.onPressedInvites) {
             _styleInvites = {
@@ -255,6 +291,8 @@ class EventDetails extends Component {
                             <Text style={styles.titre2}>Lieu de l'événement: </Text>
                         </View>
                         <Text style={styles.text}>{this.event.adresse}</Text>
+                        <Text style={styles.text}>{this.traductionPartcicipe(this.event.participe)}</Text>
+
                         <View style={{ flexDirection: 'row', flex: 1 }}>
                             <TouchableOpacity
                                 style={styles.choix}
@@ -383,4 +421,4 @@ const styles = StyleSheet.create({
         display: 'flex'
     }
 })
-export default EventDetails
+export default InvitationDetails

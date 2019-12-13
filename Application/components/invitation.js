@@ -11,9 +11,10 @@ import {
   View,
   Alert,
   AsyncStorage,
-  FlatList, 
-  ActivityIndicator, 
-  RefreshControl
+  FlatList,
+  ActivityIndicator,
+  RefreshControl,
+  SafeAreaView
 } from 'react-native';
 
 
@@ -48,7 +49,7 @@ class Invitation extends Component {
   //on récupère les données sous forme de tableau qui sont envoyées par le fichier "restes.php" et on les met dans la variable data pour pouvoir les traiter.
   recuperationInvitationPerso = () => {
 
-    fetch('http://192.168.1.10:8878/ManagisApp/ManagisApp/evenements/InvitationFutur.php', {
+    fetch('http://localhost:8878/ManagisApp/ManagisApp/evenements/InvitationFutur.php', {
       method: 'POST',
       header: {
         'Accept': 'application/json',
@@ -76,28 +77,39 @@ class Invitation extends Component {
     month = date.substring(5, 7)
     day = date.substring(8, 10)
     switch (month) {
-      case '1':
+      case '01':
         month = 'Janvier'
-      case '2':
+        break
+      case '02':
         month = 'Février'
-      case '3':
+        break
+      case '03':
         month = 'Mars'
-      case '4':
+        break
+      case '04':
         month = 'Avril'
-      case '5':
+        break
+      case '05':
         month = 'Mai'
-      case '6':
+        break
+      case '06':
         month = 'Juin'
-      case '7':
+        break
+      case '07':
         month = 'Juillet'
-      case '8':
+        break
+      case '08':
         month = 'Août'
-      case '9':
+        break
+      case '09':
         month = 'Septembre'
+        break
       case '10':
         month = 'Octobre'
+        break
       case '11':
         month = 'Novembre'
+        break
       case '12':
         month = 'Décembre'
     }
@@ -108,10 +120,20 @@ class Invitation extends Component {
 
   traductionPartcicipe(participe) {
     ret = ''
-    if (participe == 0) {
+    if (participe == 1) {
       ret = 'Oui'
     } else {
-      ret ='Non'
+      ret = 'Non'
+    }
+    return ret
+  }
+
+  verifHeure(heure) {
+    ret = ''
+    if (heure === null) {
+      ret = "Pas d'heure spécifiée"
+    } else {
+      ret = heure
     }
     return ret
   }
@@ -135,65 +157,70 @@ class Invitation extends Component {
     }
 
     return (
-      <ScrollView
-      refreshControl={
-        <RefreshControl
-          //refresh control used for the Pull to Refresh
-          refreshing={this.state.refreshing}
-          onRefresh={this.onRefresh.bind(this)}
-        />
-      }>
-        <View style={{ flexDirection: 'row', backgroundColor: '#3A4750', height: 60 }}>
-          <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.goBack()}
-            >
-              <Image
-                source={require('../image/icons8-gauche-50.png')}
-                style={styles.icon}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={{ flex: 6, justifyContent: 'center' }}>
-            <Text style={styles.titrePage}>Vos invitations</Text>
-          </View>
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-
-          </View>
-        </View>
-        <FlatList
-          data={this.state.data}
-          keyExtractor={(item) => item.idEvent.toString()}
-          renderItem={({ item }) =>
-            <View style={styles.container}>
-              <View style={{ flex: 1 }}>
-                <View style={styles.header}>
-                  <View style={{ flex: 2 }}>
-                    <Text style={styles.textTitle}>Evenement : {item.nomEvent}</Text>
-                  </View>
-                </View>
-              </View>
-              <View style={{ margin: 3, marginLeft: 5, marginTop: 0 }}>
-                <Text style={{ color: '#FFFFFF' }}>Hôte : {item.hote}</Text>
-              </View>
-              <View style={{ margin: 3, marginLeft: 5 }}>
-                <Text style={{ color: '#FFFFFF' }}>Adresse : {item.adresse}</Text>
-              </View>
-              <View style={{ margin: 3, marginLeft: 5 }}>
-                <Text style={{ color: '#FFFFFF' }}>Date : {this.traductionDate(item.dateEvent)}</Text>
-              </View>
-              <View style={{ margin: 3, marginLeft: 5 }}>
-                <Text style={{ color: '#FFFFFF' }}>Heure : {item.heure}</Text>
-              </View>
-              <View style={{ margin: 3, marginBottom: 5, marginLeft: 5 }}>
-                <Text style={{ color: '#FFFFFF' }}>Vous participez : {this.traductionPartcicipe(item.participe)}</Text>
-              </View>
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              //refresh control used for the Pull to Refresh
+              refreshing={this.state.refreshing}
+              onRefresh={this.onRefresh.bind(this)}
+            />
+          }>
+          <View style={{ flexDirection: 'row', backgroundColor: '#3A4750', height: 60 }}>
+            <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.goBack()}
+              >
+                <Image
+                  source={require('../image/icons8-gauche-50.png')}
+                  style={styles.icon}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={{ flex: 6, justifyContent: 'center' }}>
+              <Text style={styles.titrePage}>Vos invitations</Text>
+            </View>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
             </View>
+          </View>
+          <FlatList
+            data={this.state.data}
+            keyExtractor={(item) => item.idEvent.toString()}
+            renderItem={({ item }) =>
+              <TouchableOpacity
+                onPress={()=> this.props.navigation.navigate("InvitationDetails", {event: item})}>
+                <View style={styles.container}>
+                  <View style={{ flex: 1 }}>
+                    <View style={styles.header}>
+                      <View style={{ flex: 2 }}>
+                        <Text style={styles.textTitle}>Evenement : {item.nomEvent}</Text>
+                      </View>
+                    </View>
+                  </View>
+                  <View style={{ margin: 3, marginLeft: 5, marginTop: 0 }}>
+                    <Text style={{ color: '#FFFFFF' }}>Hôte : {item.hote}</Text>
+                  </View>
+                  <View style={{ margin: 3, marginLeft: 5 }}>
+                    <Text style={{ color: '#FFFFFF' }}>Adresse : {item.adresse}</Text>
+                  </View>
+                  <View style={{ margin: 3, marginLeft: 5 }}>
+                    <Text style={{ color: '#FFFFFF' }}>Date : {this.traductionDate(item.dateEvent)}</Text>
+                  </View>
+                  <View style={{ margin: 3, marginLeft: 5 }}>
+                    <Text style={{ color: '#FFFFFF' }}>Heure : {this.verifHeure(item.heure)}</Text>
+                  </View>
+                  <View style={{ margin: 3, marginBottom: 5, marginLeft: 5 }}>
+                    <Text style={{ color: '#FFFFFF' }}>Vous participez : {this.traductionPartcicipe(item.participe)}</Text>
+                  </View>
 
-          }
-        />
-      </ScrollView>
+                </View>
+              </TouchableOpacity>
+
+            }
+          />
+        </ScrollView>
+      </SafeAreaView>
     )
   }
 }

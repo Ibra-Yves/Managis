@@ -2,5 +2,5 @@
 $HostName = "localhost";
 $DatabaseName = "projet";
 $HostUser = "root";
-$HostPass = "";
+$HostPass = "root";
 ?>
