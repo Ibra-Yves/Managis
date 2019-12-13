@@ -15,12 +15,13 @@ import Profile from './profile.js';
 import Restes from '../components/restes.js';
 import CreateAnnonce from '../components/createAnnonce.js';
 import AnnoncePerso from '../components/annoncePerso.js';
-import Settings from '../components/settings.js';
 import Evenement from '../components/evenement.js';
 import ResteItem from '../components/resteItem.js'
 import ResteItemPerso from '../components/resteItemPerso.js'
 import EventFutur from '../components/eventFutur.js'
 import Invitation from '../components/invitation.js'
+import EventDetails from '../components/eventDetails.js'
+import InvitationDetails from '../components/invitationDetails.js'
 
 import { Container, Content, Header, Body, Icon } from 'native-base'
 
@@ -44,11 +45,14 @@ const RestesNav = StackNavigator({
 	ListeRestes: {
 		screen: Restes, 
 		navigationOptions: {
-			 
-		} 
+			header: null
+		}
 	}, 
 	ResteItem: {
-		screen: ResteItem
+		screen: ResteItem, 
+		navigationOptions: {
+			header: null
+		}
 	}
 })
 
@@ -56,49 +60,84 @@ const RestesPersoNav = StackNavigator({
 	RestesPerso: {
 		screen: AnnoncePerso,
 		navigationOptions: {
-			
+			header: null
 		}
 	},
 	ResteItemPerso: {
 		screen: ResteItemPerso,
 		navigationOptions: {
-			
+			header: null
 		}
 	}
 })
 
 const EventNav = StackNavigator({
 	Evenement: {
-		screen: Evenement
+		screen: Evenement, 
+		navigationOptions: {
+			header: null
+		}
 	},
 	EventFutur: {
-		screen: EventFutur
+		screen: EventFutur,
+		navigationOptions: {
+			header: null
+		}
 	},
 	Invitation: {
-		screen: Invitation
+		screen: Invitation,
+		navigationOptions: {
+			header: null
+		}
+	}, 
+	EventDetails: {
+		screen: EventDetails,
+		navigationOptions: {
+			header: null
+		}
+	},
+	InvitationDetails: {
+		screen: InvitationDetails,
+		navigationOptions: {
+			header: null
+		}
 	}
 })
 
 
 const myNav = DrawerNavigator({
-	Profile: {
-		screen: Profile,
+	EvenementPerso: {
+		screen: EventNav,
 		navigationOptions: {
-			title: 'Profil',
-			
+			header: null,
+			title: 'Evénements & Invitations',
+			drawerIcon: (
+				<Image source={require('../image/calendar.png')}
+				  style={{ height: 24, width: 24, color: 'black' }} />
+			)
 		}
 	},
 	Restes: {
 		screen: RestesNav,
 		navigationOptions: {
-			title: 'Marché des Restes',
+			header: null,
+			title: 'Annonces de restes',
+			drawerIcon: (
+				<Image source={require('../image/search.png')}
+				  style={{ height: 24, width: 24 }} />
+			)
 			
 		}
 	},
 	CreateAnnonce: {
 		screen: CreateAnnonce,
 		navigationOptions: {
-			title: 'Créer une annonce',
+			header: null,
+			title: 'Créez votre annonce',
+			drawerIcon: (
+				<Image source={require('../image/plus.png')}
+				  style={{ height: 24, width: 24 }} />
+			)
 			
 		}
 	},
@@ -106,22 +145,25 @@ const myNav = DrawerNavigator({
 	AnnoncePerso: {
 		screen: RestesPersoNav,
 		navigationOptions: {
-			title: 'Mes annonces',
+			header: null,
+			title: 'Vos annonces',
+			drawerIcon: (
+				<Image source={require('../image/vosannonces.png')}
+				  style={{ height: 24, width: 24 }} />
+			)
 			
 		}
 	},
-	EvenementPerso: {
-		screen: EventNav,
+	
+	Profile: {
+		screen: Profile,
 		navigationOptions: {
-			title: 'Gestion des événements',
-			
-		}
-	},
-	Settings: {
-		screen: Settings,
-		navigationOptions: {
-			title: 'paramètre',
-			
+			header: null,
+			title : 'Votre profil',
+			drawerIcon: (
+				<Image source={require('../image/profil.png')}
+				  style={{ height: 24, width: 24 }} />
+			)
 		}
 	},
 
@@ -141,36 +183,34 @@ const Managis = StackNavigator({
 	Home: {
 		screen: HomeScreen,
 		navigationOptions: {
-			
+			header: null
 		},
 	},
 	Login: {
 		screen: Login,
 		navigationOptions: {
-			
+			header: null
 		}
 	},
 
 	Register: {
 		screen: Register,
 		navigationOptions: {
-			title: 'Inscription'
+			header: null
 		}
 	},
 
 	WhoIs: {
 		screen: WhoIs,
-		
 		navigationOptions: {
-			title: 'Qui sommes-nous ?',
-			
+			header: null
 		}
 	},
 
 	Drawer: {
 		screen: myNav, 
 		navigationOptions: {
-			
+			header: null
 		}
 	}
 

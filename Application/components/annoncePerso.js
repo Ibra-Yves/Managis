@@ -12,8 +12,9 @@ import {
   View,
   Alert,
   AsyncStorage,
-  FlatList, 
-  RefreshControl
+  FlatList,
+  RefreshControl,
+  SafeAreaView
 } from 'react-native';
 
 
@@ -21,12 +22,7 @@ import ListView from "deprecated-react-native-listview";
 
 class RestesPersos extends Component {
 
-  static navigationOptions = {
-    drawerIcon: (
-      <Image source={require('../image/icons8-user-menu-male-30.png')}
-        style={{ height: 24, width: 24 }} />
-    )
-  }
+
 
   constructor(props) {
     super(props)
@@ -53,7 +49,7 @@ class RestesPersos extends Component {
   //on récupère les données sous forme de tableau qui sont envoyées par le fichier "restes.php" et on les met dans la variable data pour pouvoir les traiter.
   recuperationDonneeAnnoncePerso = () => {
 
-    fetch('http://192.168.1.10:8878/ManagisApp/ManagisApp/DBRestes/annoncePerso.php', {
+    fetch('http://localhost:8878/ManagisApp/ManagisApp/DBRestes/annoncePerso.php', {
       method: 'POST',
       header: {
         'Accept': 'application/json',
@@ -94,61 +90,62 @@ class RestesPersos extends Component {
     }
 
     return (
-
-      <ScrollView
-        refreshControl={
-          <RefreshControl
-            //refresh control used for the Pull to Refresh
-            refreshing={this.state.refreshing}
-            onRefresh={this.onRefresh.bind(this)}
-          />
-        }>
-        <View style={{ flexDirection: 'row', backgroundColor: '#3A4750', height: 60 }}>
-          <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              //refresh control used for the Pull to Refresh
+              refreshing={this.state.refreshing}
+              onRefresh={this.onRefresh.bind(this)}
+            />
+          }>
+          <View style={{ flexDirection: 'row', backgroundColor: '#3A4750', height: 60 }}>
+            <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+            </View>
+            <View style={{ flex: 6, justifyContent: 'center' }}>
+              <Text style={styles.titrePage}>Mes annonces</Text>
+            </View>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.openDrawer('myNav')}
+              >
+                <Image
+                  source={require('../image/icons8-menu-arrondi-50.png')}
+                  style={styles.icon}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
-          <View style={{ flex: 6, justifyContent: 'center' }}>
-            <Text style={styles.titrePage}>Mes annonces</Text>
-          </View>
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.openDrawer('myNav')}
-            >
-              <Image
-                source={require('../image/icons8-menu-arrondi-50.png')}
-                style={styles.icon}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
 
 
-        <View>
-          <FlatList
-            data={this.state.data}
-            keyExtractor={(item) => item.idReste.toString()}
-            renderItem={({ item }) =>
-              <View style={styles.container}>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate("ResteItemPerso", { reste: item })}
-                  style={styles.event}>
-                  <View style={{ flex: 1 }}>
-                    <View style={styles.header}>
-                      <View style={{ flex: 2 }}>
-                        <Text style={styles.textTitle}>{item.nomReste}</Text>
+          <View>
+            <FlatList
+              data={this.state.data}
+              keyExtractor={(item) => item.idReste.toString()}
+              renderItem={({ item }) =>
+                <View style={styles.container}>
+                  <TouchableOpacity
+                    onPress={() => this.props.navigation.navigate("ResteItemPerso", { reste: item })}
+                    style={styles.event}>
+                    <View style={{ flex: 1 }}>
+                      <View style={styles.header}>
+                        <View style={{ flex: 2 }}>
+                          <Text style={styles.textTitle}>{item.nomReste}</Text>
+                        </View>
+                        <View style={{ flex: 1 }}>
+                          <Text style={styles.textDate}>Quantité : {item.quantiteReste}</Text>
+                        </View>
                       </View>
-                      <View style={{ flex: 1 }}>
-                        <Text style={styles.textDate}>Quantité : {item.quantiteReste}</Text>
+                      <View style={styles.footer}>
+                        <Text style={styles.textPlace}>Adresse : {item.adresse}</Text>
                       </View>
                     </View>
-                    <View style={styles.footer}>
-                      <Text style={styles.textPlace}>Adresse : {item.adresse}</Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              </View>}
-          />
-        </View>
-      </ScrollView>
+                  </TouchableOpacity>
+                </View>}
+            />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }

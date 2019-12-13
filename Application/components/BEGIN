@@ -1,0 +1,49 @@
+TO DO :
+
+Faire l'affichage des Event futur et invitations futures.      VVVVVVVVV
+
+
+Faire l'affichage des détails des restes marcher des restes (titre et arrondis).    VVVVVVVVVVVV
+
+
+Rajouter l'email de l'utilisateur dans les détails des annonces.   VVVVVVV
+
+
+Mettre le truc de refresh sur les différentes listes d'annonces et details d'annonce      VVVVVVVVVVV
+
+
+Faire le système de recherche dans le marcher des restes VVVVVVVV
+
+
+Corriger les erreurs de stack VVVVVVVV
+
+
+Gérer la déconnexion  VVVVVVVVVVV
+
+
+Mail envoyé pour les annonces 
+
+
+Regler le design de l'app en entier (icone, page des events et verifier les erreurs) VVVVVV 
+
+ca me semble ok, mais faudrait voir le design avec les autres 
+
+
+
+
+login.js 
+
+fetch('https://managis.be/GestionApp/User_Login.php', {
+
+
+register.js
+
+fetch('https://managis.be/GestionApp/user_registration.php', {
+
+
+
+dbAccess
+
+$this->pdo = new PDO('mysql:host=172.17.0.4;dbname=managis', 'admin', 'yVLsgfgsQa3R4HRP');
+
+

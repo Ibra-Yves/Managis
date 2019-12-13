@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Text, TextInput, TouchableOpacity, View, StyleSheet, AsyncStorage } from 'react-native'
+import { Text, TextInput, TouchableOpacity, View, StyleSheet, AsyncStorage, Image, SafeAreaView } from 'react-native'
 
 export default class ResteItemPerso extends Component {
     reste = this.props.navigation.state.params.reste
@@ -41,7 +41,7 @@ export default class ResteItemPerso extends Component {
         }
         else {
 
-            fetch('http://192.168.1.10:8878/ManagisApp/ManagisApp/DBRestes/modifAnnonce.php', {
+            fetch('http://localhost:8878/ManagisApp/ManagisApp/DBRestes/modifAnnonce.php', {
                 method: 'POST',
                 header: {
                     'Accept': 'application/json',
@@ -80,7 +80,7 @@ export default class ResteItemPerso extends Component {
         }
         else {
 
-            fetch('http://192.168.1.10:8878/ManagisApp/ManagisApp/DBRestes/deleteAnnonce.php', {
+            fetch('http://localhost:8878/ManagisApp/ManagisApp/DBRestes/deleteAnnonce.php', {
                 method: 'POST',
                 header: {
                     'Accept': 'application/json',
@@ -103,69 +103,86 @@ export default class ResteItemPerso extends Component {
 
     render() {
         return (
-            <View>
-                <View style={{alignItems: 'center', justifyContent: 'center', backgroundColor: '#3A4750'}}>
-                    <Text style={{color: '#FFFFF', fontSize: 20}}>Détails de l'annonce</Text>
+            <SafeAreaView style={{ flex: 1 }}>
+                <View>
+                    <View style={styles.containerTitre}>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <TouchableOpacity
+                                onPress={() => this.props.navigation.goBack()}>
+                                <Image
+                                    style={styles.icon}
+                                    source={require('../image/icons8-gauche-50.png')}
+                                />
+                            </TouchableOpacity>
+
+                        </View>
+                        <View style={{ flex: 6, justifyContent: 'center' }}>
+                            <Text style={styles.titrePage}>Détails de votre annonce</Text>
+                        </View>
+                        <View style={{ flex: 1 }}>
+
+                        </View>
+                    </View>
+                    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                        <Text style={{ color: '#3A4750', marginTop: 10 }}>Nom de votre annonce</Text>
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            style={styles.inputBox}
+                            placeholder={this.reste.nomReste}
+                            placeholderTextColor='#FFFFFF'
+                            onChangeText={userNomReste => this.setState({ userNomReste })}
+                        />
+                    </View>
+                    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                        <Text style={{ color: '#3A4750', marginTop: 10, marginBottom: 8 }}>Quantité</Text>
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            style={styles.inputBox}
+                            placeholder={this.reste.quantiteReste}
+                            placeholderTextColor='#FFFFFF'
+                            onChangeText={userQuantiteReste => this.setState({ userQuantiteReste })}
+                        />
+                    </View>
+                    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                        <Text style={{ color: '#3A4750', marginTop: 10, marginBottom: 8 }}>Description</Text>
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            style={styles.inputBox}
+                            placeholder={this.reste.description}
+                            placeholderTextColor='#FFFFFF'
+                            onChangeText={userDescriptionReste => this.setState({ userDescriptionReste })}
+                        />
+                    </View>
+                    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                        <Text style={{ color: '#3A4750', marginTop: 10, marginBottom: 8 }}>Adresse</Text>
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            style={styles.inputBox}
+                            placeholder={this.reste.adresse}
+                            placeholderTextColor='#FFFFFF'
+                            onChangeText={userAdresse => this.setState({ userAdresse })}
+                        />
+                    </View>
+                    <View style={styles.submitContainer}>
+                        <TouchableOpacity
+                            onPress={this.userModifAnnonce}
+                            style={styles.submitButton}>
+                            <Text style={{ color: 'white', textAlign: 'center' }}>Modifier</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.submitContainer}>
+                        <TouchableOpacity
+                            onPress={this.userDeleteAnnonce}
+                            style={styles.submitButton}>
+                            <Text style={{ color: 'white', textAlign: 'center' }}>Supprimer</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-                <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                    <Text style={{color: '#3A4750', marginTop: 10}}>Nom de votre annonce</Text>
-                </View>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.inputBox}
-                        placeholder={this.reste.nomReste}
-                        placeholderTextColor='#000000'
-                        onChangeText={userNomReste => this.setState({ userNomReste })}
-                    />
-                </View>
-                <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                    <Text style={{color: '#3A4750', marginTop: 10, marginBottom: 8}}>Quantité</Text>
-                </View>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.inputBox}
-                        placeholder={this.reste.quantiteReste}
-                        placeholderTextColor='#000000'
-                        onChangeText={userQuantiteReste => this.setState({ userQuantiteReste })}
-                    />
-                </View>
-                <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                    <Text style={{color: '#3A4750', marginTop: 10, marginBottom: 8}}>Description</Text>
-                </View>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.inputBox}
-                        placeholder={this.reste.description}
-                        placeholderTextColor='#000000'
-                        onChangeText={userDescriptionReste => this.setState({ userDescriptionReste })}
-                    />
-                </View>
-                <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                    <Text style={{color: '#3A4750', marginTop: 10, marginBottom: 8}}>Adresse</Text>
-                </View>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                        style={styles.inputBox}
-                        placeholder={this.reste.adresse}
-                        placeholderTextColor='#000000'
-                        onChangeText={userAdresse => this.setState({ userAdresse })}
-                    />
-                </View>
-                <View style={styles.submitContainer}>
-                    <TouchableOpacity
-                        onPress={this.userModifAnnonce}
-                        style={styles.submitButton}>
-                        <Text style={{ color: 'white', textAlign: 'center' }}>Modifier</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.submitContainer}>
-                    <TouchableOpacity
-                        onPress={this.userDeleteAnnonce}
-                        style={styles.submitButton}>
-                        <Text style={{ color: 'white', textAlign: 'center' }}>Supprimer</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+            </SafeAreaView>
 
         )
     }
@@ -198,6 +215,20 @@ const styles = StyleSheet.create({
     inputContainer: {
         alignItems: 'center',
         justifyContent: 'flex-end'
-    }
+    },
+    titrePage: {
+        color: '#FFFFFF',
+        fontSize: 18,
+        textAlign: 'center'
+    },
+    containerTitre: {
+        backgroundColor: '#3A4750',
+        flexDirection: 'row',
+        height: 60
+    },
+    icon: {
+        height: 30,
+        width: 30
+    },
 
 })

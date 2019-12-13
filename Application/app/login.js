@@ -8,7 +8,8 @@ import {
 	TouchableOpacity,
 	TextInput,
 	Keyboard,
-	AsyncStorage
+	AsyncStorage,
+	SafeAreaView
 } from 'react-native';
 
 
@@ -30,25 +31,20 @@ export default class login extends Component {
 
 	login = () => {
 		const { UserEmail, UserPassword, UserName } = this.state;
-		let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		//let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 		if (UserEmail == "") {
 
 			this.setState({ email: 'Entrez votre adresse mail!' })
 
 		}
-
-		else if (reg.test(UserEmail) === false) {
-
-			this.setState({ email: "Adresse mail n'est pas correct!" })
-			return false;
-		}
-
+		
 		else if (UserPassword == "") {
 			this.setState({ passwd: "Entrez votre mot de passe!" })
 		}
 		else {
 
-			fetch('http://192.168.1.10:8878/ManagisApp/ManagisApp/connexion/User_Login.php',{
+				//fetch('https://managis.be/GestionApp/User_Login.php', {
+				fetch('http://localhost:8878/ManagisApp/ManagisApp/connexion/User_login.php',{
 				method: 'POST',
 				header: {
 					'Accept': 'application/json',
@@ -59,7 +55,7 @@ export default class login extends Component {
 					email: UserEmail,
 					pseudo: UserName,
 					passwd: UserPassword,
-					
+
 				})
 
 			})
@@ -67,16 +63,16 @@ export default class login extends Component {
 				.then((responseJson) => {
 					if (responseJson[0] == "ok") {
 
-						alert("Bienvenue " + responseJson[3]);
+
 						this.props.navigation.navigate("Restes");
-						
+
 						//Je crée la session ici et j'attribue des valeurs retournées par User_Login.php
 						AsyncStorage.setItem('UserId', responseJson[1]);
 						AsyncStorage.setItem('UserEmail', responseJson[2]);
 						AsyncStorage.setItem('UserName', responseJson[3]);
 
 					} else {
-						alert("Mot de passe ou adresse mail incorect!");
+						alert("Mot de passe ou adresse mail incorrect!");
 					}
 				})
 				.catch((error) => {
@@ -102,55 +98,55 @@ export default class login extends Component {
 
 		}
 	}
-	onLogout = () => {
-
-		this.setState({ user_name: null, avatar_url: null, avatar_show: false });
-		AsyncStorage.setItem('UserId', '');
-		AsyncStorage.setItem('UserEmail', '');
-		AsyncStorage.setItem('UserName', '');
-	}
+	
 
 	render() {
 		return (
-			<View style={styles.container}>
-				<Image
-					source={require('../image/logo_transparent.png')}
-					style={styles.logo} />
-				<Text style={{ padding: 10, margin: 10, color: 'red' }}>{this.state.email}</Text>
-
-				<TextInput
-					style={styles.inputBox}
-					placeholder="Email"
-					underlineColorAndroid="transparent"
-					onChangeText={UserEmail => this.setState({ UserEmail })}
-					placeholderTextColor='#FFFFFF'
-				/>
-
-				<TextInput
-					style={styles.inputBox}
-					placeholder="Mot de passe"
-					secureTextEntry={true}
-					placeholderTextColor='#FFFFFF'
-					underlineColorAndroid="transparent"
-					onChangeText={UserPassword => this.setState({ UserPassword })}
-
-				/>
-
-				<TouchableOpacity
-					onPress={this.login}
-					style={styles.submitButton}>
-					<Text style={{ color: 'white', textAlign: 'center' }}>Se connecter</Text>
-				</TouchableOpacity>
-
-				{this.state.avatar_url ?
+			<SafeAreaView style={{ flex: 1 }}>
+				<View style={styles.container}>
 					<Image
-						source={{ uri: this.state.avatar_url }}
-						style={styles.imageStyle} /> : null}
+						source={require('../image/logo_transparent.png')}
+						style={styles.logo} />
+					<Text style={{ padding: 10, margin: 10, color: 'red' }}>{this.state.email}</Text>
 
-				<Text style={styles.text}> {this.state.user_name} </Text>
+					<TextInput
+						style={styles.inputBox}
+						placeholder="Email"
+						underlineColorAndroid="transparent"
+						onChangeText={UserEmail => this.setState({ UserEmail })}
+						placeholderTextColor='#FFFFFF'
+					/>
 
-			</View>
+					<TextInput
+						style={styles.inputBox}
+						placeholder="Mot de passe"
+						secureTextEntry={true}
+						placeholderTextColor='#FFFFFF'
+						underlineColorAndroid="transparent"
+						onChangeText={UserPassword => this.setState({ UserPassword })}
 
+					/>
+
+					<TouchableOpacity
+						onPress={this.login}
+						style={styles.submitButton}>
+						<Text style={{ color: 'white', textAlign: 'center' }}>Se connecter</Text>
+					</TouchableOpacity>
+
+					<TouchableOpacity
+						onPress={() => this.props.navigation.navigate("Register")}>
+						<Text>Pas encore de compte ? Inscrivez vous !</Text>
+					</TouchableOpacity>
+
+					{this.state.avatar_url ?
+						<Image
+							source={{ uri: this.state.avatar_url }}
+							style={styles.imageStyle} /> : null}
+
+					<Text style={styles.text}> {this.state.user_name} </Text>
+
+				</View>
+			</SafeAreaView>
 		);
 	}
 }

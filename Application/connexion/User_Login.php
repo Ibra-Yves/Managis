@@ -4,7 +4,6 @@ $db = new dbAccess();
 $json = file_get_contents('php://input');
 $obj = json_decode($json,true);
 $email = $obj['email'];
-$pseudo = $obj['pseudo'];
 $passwd = hash('md5', $obj['passwd']);
 $connect = $db->procCall('connexionUserApp', [$email, $passwd]);
 if(!empty($connect)){

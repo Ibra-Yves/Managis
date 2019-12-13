@@ -44,7 +44,8 @@ export default class register extends Component {
     }
     else {
 
-      fetch('http://192.168.1.10:8878/ManagisApp/ManagisApp/inscription/user_registration.php', {
+      //fetch('https://managis.be/GestionApp/user_registration.php', {
+        fetch('http://localhost:8878/ManagisApp/ManagisApp/inscription/user_registration.php',{
         method: 'post',
         header: {
           'Accept': 'application/json',
@@ -107,6 +108,11 @@ export default class register extends Component {
           <Text style={{ color: 'white', textAlign: 'center' }}>S'inscrire</Text>
         </TouchableOpacity>
 
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate("Login")}>
+          <Text>Vous avez déjà un compte ? Connectez vous !</Text>
+        </TouchableOpacity>
+
 
       </View>
 
@@ -118,8 +124,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    alignItems: 'center'
   },
   logo: {
     width: 350,
