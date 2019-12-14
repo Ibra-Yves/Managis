@@ -2,21 +2,21 @@
 -- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Dec 10, 2019 at 09:01 PM
--- Server version: 5.7.26
--- PHP Version: 7.3.8
+-- Hôte : localhost:8889
+-- Généré le :  sam. 14 déc. 2019 à 16:37
+-- Version du serveur :  5.7.26
+-- Version de PHP :  7.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `projet`
+-- Base de données :  `projet`
 --
 
 DELIMITER $$
 --
--- Procedures
+-- Procédures
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ajoutAnnonce` (IN `idUserr` INT, IN `nomRestee` VARCHAR(255), IN `quantiteRestee` INT, IN `descriptionRestee` VARCHAR(255), IN `adressee` VARCHAR(255))  BEGIN
 insert into reste (idReste, idUser, nomReste, quantiteReste, description, adresse) 
@@ -85,7 +85,7 @@ where psd = users.pseudo;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `infoEvent` (IN `idEvent` INT)  BEGIN
-select nomEvent, adresse, dateEvent, heure from evenement
+select idEvent, nomEvent, adresse, dateEvent, heure from evenement
 where idEvent = evenement.idEvent;
 END$$
 
@@ -248,7 +248,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `commentaires`
+-- Structure de la table `commentaires`
 --
 
 CREATE TABLE `commentaires` (
@@ -257,19 +257,21 @@ CREATE TABLE `commentaires` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `commentaires`
+-- Déchargement des données de la table `commentaires`
 --
 
 INSERT INTO `commentaires` (`idEvent`, `commentaire`) VALUES
 (29, 'saleeee'),
 (38, 'DALTON TERROR !!!!!!!!'),
 (37, 'saleeee'),
-(38, 'saleeee');
+(38, 'saleeee'),
+(43, 'trop bien ce commentaire'),
+(60, 'trop bien ce commentaire bis');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `evenement`
+-- Structure de la table `evenement`
 --
 
 CREATE TABLE `evenement` (
@@ -282,7 +284,7 @@ CREATE TABLE `evenement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `evenement`
+-- Déchargement des données de la table `evenement`
 --
 
 INSERT INTO `evenement` (`idEvent`, `nomEvent`, `hote`, `adresse`, `dateEvent`, `heure`) VALUES
@@ -308,7 +310,7 @@ INSERT INTO `evenement` (`idEvent`, `nomEvent`, `hote`, `adresse`, `dateEvent`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `fournitures`
+-- Structure de la table `fournitures`
 --
 
 CREATE TABLE `fournitures` (
@@ -318,7 +320,7 @@ CREATE TABLE `fournitures` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `fournitures`
+-- Déchargement des données de la table `fournitures`
 --
 
 INSERT INTO `fournitures` (`idEvent`, `fourniture`, `quantite`) VALUES
@@ -326,12 +328,14 @@ INSERT INTO `fournitures` (`idEvent`, `fourniture`, `quantite`) VALUES
 (34, 'tartines', 6),
 (38, 'tartines', 5),
 (38, 'bac de biere', 0),
-(37, 'tartines', 3);
+(37, 'tartines', 3),
+(43, 'cannettes de coca', 4),
+(60, 'cannette de cara', 45);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gestionrestes`
+-- Structure de la table `gestionrestes`
 --
 
 CREATE TABLE `gestionrestes` (
@@ -343,7 +347,7 @@ CREATE TABLE `gestionrestes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `gestionrestes`
+-- Déchargement des données de la table `gestionrestes`
 --
 
 INSERT INTO `gestionrestes` (`idUser`, `nomReste`, `quantiteReste`, `descriptionReste`, `adresse`) VALUES
@@ -362,7 +366,7 @@ INSERT INTO `gestionrestes` (`idUser`, `nomReste`, `quantiteReste`, `description
 -- --------------------------------------------------------
 
 --
--- Table structure for table `invite`
+-- Structure de la table `invite`
 --
 
 CREATE TABLE `invite` (
@@ -372,7 +376,7 @@ CREATE TABLE `invite` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `invite`
+-- Déchargement des données de la table `invite`
 --
 
 INSERT INTO `invite` (`idUser`, `idEvent`, `participe`) VALUES
@@ -404,12 +408,14 @@ INSERT INTO `invite` (`idUser`, `idEvent`, `participe`) VALUES
 (63, 43, 0),
 (62, 43, 0),
 (70, 43, 0),
-(70, 38, 1);
+(70, 38, 1),
+(62, 43, 1),
+(66, 60, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reste`
+-- Structure de la table `reste`
 --
 
 CREATE TABLE `reste` (
@@ -422,19 +428,21 @@ CREATE TABLE `reste` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `reste`
+-- Déchargement des données de la table `reste`
 --
 
 INSERT INTO `reste` (`idReste`, `idUser`, `nomReste`, `quantiteReste`, `description`, `adresse`) VALUES
 (3, 69, 'Chips Lays', 2, 'Deux paquets de chips Lays Sel et Paprika', '2 rue de l\'église '),
-(5, 70, 'testtest', 1, 'test test', 'test test'),
-(7, 70, 'Télé', 1, 'Grosse télé', 'Rue du gazomètre '),
-(8, 63, 'TestRefreshIIIINNNNGNGGGGGGG', 12, 'testResfreshINGGGGGGGGGGGG', 'resfreeeeeeeeeesh rue ');
+(7, 70, 'Télévision 4K', 1, 'Grosse télé', 'Rue du gazomètre '),
+(8, 63, 'TestRefreshIIIINNNNGNGGGGGGG', 12, 'testResfreshINGGGGGGGGGGGG', 'resfreeeeeeeeeesh rue '),
+(10, 73, 'Nico', 1, 'Ttessst', 'Ère'),
+(11, 69, 'Chips Pringles', 2, 'deux paquets de pringles au seul', '24 rue de l\'église '),
+(12, 69, 'chips pringles', 4, '4 pots de pringles Sel', '90 rue de l\'eglise');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Structure de la table `users`
 --
 
 CREATE TABLE `users` (
@@ -446,11 +454,11 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
+-- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`idUser`, `pseudo`, `email`, `passwd`, `dateCreation`) VALUES
-(62, 'toto', 'toto@ici.be', '3691308f2a4c2f6983f2880d32e29c84', '2019-10-20 10:25:53'),
+(62, 'toto', 'toto@ici.be', '098f6bcd4621d373cade4e832627b4f6', '2019-10-20 10:25:53'),
 (63, 'dominik', 'HE201451@students.ephec.be', 'd73bc916993092a2f670042a8dcc8961', '2019-10-20 10:26:17'),
 (64, 'ambroise', 'ambroise@alo', '4bc92a7aeb9478e6bf3f989025232b22', '2019-10-20 10:26:42'),
 (65, 'momo', 'momo@momo', '18f3af6147ba96618064459da6dd90b1', '2019-11-04 14:33:30'),
@@ -458,20 +466,23 @@ INSERT INTO `users` (`idUser`, `pseudo`, `email`, `passwd`, `dateCreation`) VALU
 (67, 'test', 'test@hotmail.com', 'test', '2019-12-05 09:00:22'),
 (68, '', '', 'd41d8cd98f00b204e9800998ecf8427e', '2019-12-05 09:23:50'),
 (69, 'Jean', 'Jean@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', '2019-12-05 16:26:20'),
-(70, 'Remy', 'Remy@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', '2019-12-08 15:55:34');
+(70, 'Remy', 'Remy@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', '2019-12-08 15:55:34'),
+(71, 'Test', 'Test@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', '2019-12-12 08:32:40'),
+(72, 'Test', 'Test@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', '2019-12-12 11:20:57'),
+(73, 'Toto', 'Toto@hotmail.com', '098f6bcd4621d373cade4e832627b4f6', '2019-12-12 11:23:40');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `commentaires`
+-- Index pour la table `commentaires`
 --
 ALTER TABLE `commentaires`
   ADD KEY `fk_eventComm` (`idEvent`);
 
 --
--- Indexes for table `evenement`
+-- Index pour la table `evenement`
 --
 ALTER TABLE `evenement`
   ADD PRIMARY KEY (`idEvent`),
@@ -480,19 +491,19 @@ ALTER TABLE `evenement`
   ADD KEY `fk_eventComm` (`idEvent`);
 
 --
--- Indexes for table `fournitures`
+-- Index pour la table `fournitures`
 --
 ALTER TABLE `fournitures`
   ADD KEY `fk_fournEvent` (`idEvent`);
 
 --
--- Indexes for table `gestionrestes`
+-- Index pour la table `gestionrestes`
 --
 ALTER TABLE `gestionrestes`
   ADD KEY `fk_user` (`idUser`);
 
 --
--- Indexes for table `invite`
+-- Index pour la table `invite`
 --
 ALTER TABLE `invite`
   ADD KEY `fk_nomEvent` (`idEvent`),
@@ -500,14 +511,14 @@ ALTER TABLE `invite`
   ADD KEY `fk_fournEvent` (`idEvent`);
 
 --
--- Indexes for table `reste`
+-- Index pour la table `reste`
 --
 ALTER TABLE `reste`
   ADD PRIMARY KEY (`idReste`),
   ADD KEY `fk_foreign_reste_user` (`idUser`);
 
 --
--- Indexes for table `users`
+-- Index pour la table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`idUser`),
@@ -515,64 +526,64 @@ ALTER TABLE `users`
   ADD KEY `fk_hote` (`pseudo`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `evenement`
+-- AUTO_INCREMENT pour la table `evenement`
 --
 ALTER TABLE `evenement`
   MODIFY `idEvent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
--- AUTO_INCREMENT for table `reste`
+-- AUTO_INCREMENT pour la table `reste`
 --
 ALTER TABLE `reste`
-  MODIFY `idReste` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idReste` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `commentaires`
+-- Contraintes pour la table `commentaires`
 --
 ALTER TABLE `commentaires`
   ADD CONSTRAINT `fk_eventComm` FOREIGN KEY (`idEvent`) REFERENCES `evenement` (`idEvent`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `evenement`
+-- Contraintes pour la table `evenement`
 --
 ALTER TABLE `evenement`
   ADD CONSTRAINT `fk_hote` FOREIGN KEY (`hote`) REFERENCES `users` (`pseudo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `fournitures`
+-- Contraintes pour la table `fournitures`
 --
 ALTER TABLE `fournitures`
   ADD CONSTRAINT `fk_fournEvent` FOREIGN KEY (`idEvent`) REFERENCES `evenement` (`idEvent`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `gestionrestes`
+-- Contraintes pour la table `gestionrestes`
 --
 ALTER TABLE `gestionrestes`
   ADD CONSTRAINT `fk_user` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `invite`
+-- Contraintes pour la table `invite`
 --
 ALTER TABLE `invite`
   ADD CONSTRAINT `fk_nomEvent` FOREIGN KEY (`idEvent`) REFERENCES `evenement` (`idEvent`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pseudo` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `reste`
+-- Contraintes pour la table `reste`
 --
 ALTER TABLE `reste`
   ADD CONSTRAINT `fk_foreign_reste_user` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`);
