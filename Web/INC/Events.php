@@ -172,6 +172,7 @@ class Events
      */
     private function contactForm(){
         mail('contact.managis@gmail.com', 'Contact de '.$_POST['name'],'Mail de contact '.$_POST['email']. ' Message: '. $_POST['message']);
+        $this->action->ajouterAction('successMail', 'Nous avons reçu votre demande, nous essayeront de vous répondre le plus vite possible! ');
     }
 
     /**

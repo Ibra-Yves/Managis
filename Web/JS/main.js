@@ -372,7 +372,9 @@ function gererDonnes(retour){
                 case 'errorComm' :
                     $('#errorFormmm').html('<div class="alert alert-danger" role="alert">'+actionDatas);
                     break;
-
+                case 'successMail':
+                    $('#successMail').html('<div class="alert alert-success" role="alert">'+actionDatas);
+                    break;
                 default :
                    console.log('Action inconnue '+ actionName); //Affichage des actions inconnues
            }

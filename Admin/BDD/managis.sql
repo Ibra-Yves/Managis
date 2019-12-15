@@ -52,14 +52,16 @@ CREATE TABLE IF NOT EXISTS commentaires (
   KEY fk_userId (idUser)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE table IF NOT EXISTS reste (
+CREATE TABLE IF NOT EXISTS reste (
   idReste int(11) NOT NULL AUTO_INCREMENT,
   idUser int(11) NOT NULL,
   nomReste varchar(255) CHARACTER SET latin1 NOT NULL,
   quantiteReste int(255) NOT NULL,
   description varchar(255) CHARACTER SET latin1 NOT NULL,
-  adresse varchar(255) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  adresse varchar(255) CHARACTER SET latin1 NOT NULL,
+  PRIMARY KEY (idReste),
+  KEY fk_foreign_reste_user (idUser)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 ALTER TABLE commentaires
@@ -80,12 +82,8 @@ ALTER TABLE invite
   ADD CONSTRAINT fk_pseudo FOREIGN KEY (idUser) REFERENCES users (idUser) ON DELETE NO ACTION ON UPDATE NO ACTION;
   
 ALTER TABLE reste
-  
-  ADD KEY fk_foreign_reste_user (idUser);
+ ADD CONSTRAINT fk_foreign_reste_user FOREIGN KEY (idUser) REFERENCES users (idUser) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
-ALTER TABLE reste
-  ADD CONSTRAINT fk_foreign_reste_user FOREIGN KEY (idUser) REFERENCES users (idUser);
-  
 COMMIT;
 
 delimiter / 

@@ -417,9 +417,12 @@ $difSection = '<div id="difSection">
   <section class="page-section" id="contact">
     <div class="container">
       <div class="row">
+      
         <div class="col-lg-12 text-center">
+       
           <h2 class="section-heading text-uppercase">Contactez-nous</h2>
           <h3 class="section-subheading text-muted">Un soucis ? Nous sommes là pour répondre à vos questions.</h3>
+          <div id="successMail"></div>
         </div>
       </div>
       <div class="row">
