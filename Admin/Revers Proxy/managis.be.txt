@@ -11,9 +11,9 @@ server {
 }
 server{
     listen 443 ssl http2; # managed by Certbot
-        server_name  managis.be www.managis.be;
-   ssl_certificate /etc/nginx/letsencrypt/live/managis.be/fullchain.pem; # managed by                                                                                
-    ssl_certificate_key /etc/nginx/letsencrypt/live/managis.be/privkey.pem; # managed                                                                                 
+    server_name  managis.be www.managis.be;
+	#ssl_certificate /etc/nginx/letsencrypt/live/managis.be/fullchain.pem; # managed by                                                                                
+    #ssl_certificate_key /etc/nginx/letsencrypt/live/managis.be/privkey.pem; # managed                                                                                 
 
 
 

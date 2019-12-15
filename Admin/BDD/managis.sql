@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS commentaires (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE table IF NOT EXISTS reste (
-  idReste int(11) NOT NULL,
+  idReste int(11) NOT NULL AUTO_INCREMENT,
   idUser int(11) NOT NULL,
   nomReste varchar(255) CHARACTER SET latin1 NOT NULL,
   quantiteReste int(255) NOT NULL,
@@ -80,7 +80,7 @@ ALTER TABLE invite
   ADD CONSTRAINT fk_pseudo FOREIGN KEY (idUser) REFERENCES users (idUser) ON DELETE NO ACTION ON UPDATE NO ACTION;
   
 ALTER TABLE reste
-  ADD PRIMARY KEY (idReste),
+  
   ADD KEY fk_foreign_reste_user (idUser);
 
 ALTER TABLE reste
@@ -166,10 +166,11 @@ END;
 
 delimiter / 
 CREATE  PROCEDURE connexionUser (IN psd VARCHAR(255), IN pswd VARCHAR(255))  BEGIN
-select idUser, pseudo  from users
+select idUser, email, pseudo  from users
 where psd = users.pseudo AND pswd = users.passwd;
 END; 
 /
+
 
 delimiter / 
 CREATE  PROCEDURE creationUser (IN psd VARCHAR(50), IN mail VARCHAR(255), IN pswd VARCHAR(255))  BEGIN
