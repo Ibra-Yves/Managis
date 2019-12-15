@@ -48,8 +48,8 @@ class RestesPersos extends Component {
 
   //on récupère les données sous forme de tableau qui sont envoyées par le fichier "restes.php" et on les met dans la variable data pour pouvoir les traiter.
   recuperationDonneeAnnoncePerso = () => {
-
-    fetch('http://localhost:8878/ManagisApp/ManagisApp/DBRestes/annoncePerso.php', {
+    fetch('https://managis.be/GestionApp/annoncePerso.php', {
+    //fetch('http://localhost:8878/ManagisApp/ManagisApp/DBRestes/annoncePerso.php', {
       method: 'POST',
       header: {
         'Accept': 'application/json',

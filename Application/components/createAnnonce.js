@@ -49,8 +49,8 @@ export default class CreateAnnonce extends Component {x
     }
     else {
 
-      //fetch('https://managis.be/GestionApp/createAnnonce.php', {
-        fetch('http://localhost:8878/ManagisApp/ManagisApp/DBRestes/createAnnonce.php', {
+      fetch('https://managis.be/GestionApp/createAnnonce.php', {
+        //fetch('http://localhost:8878/ManagisApp/ManagisApp/DBRestes/createAnnonce.php', {
         method: 'POST',
         header: {
           'Accept': 'application/json',
@@ -67,7 +67,7 @@ export default class CreateAnnonce extends Component {x
       })
         .then((response) => response.json())
         .then((responseJson) => {
-          alert(responseJson);
+          alert("L'annonce a bien été créé.");
         })
         .catch((error) => {
           console.error(error);

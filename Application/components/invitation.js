@@ -48,8 +48,8 @@ class Invitation extends Component {
 
   //on récupère les données sous forme de tableau qui sont envoyées par le fichier "restes.php" et on les met dans la variable data pour pouvoir les traiter.
   recuperationInvitationPerso = () => {
-
-    fetch('http://localhost:8878/ManagisApp/ManagisApp/evenements/InvitationFutur.php', {
+    fetch('https://managis.be/GestionApp/InvitationFutur.php', {
+    //fetch('http://localhost:8878/ManagisApp/ManagisApp/evenements/InvitationFutur.php', {
       method: 'POST',
       header: {
         'Accept': 'application/json',

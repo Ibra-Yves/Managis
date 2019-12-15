@@ -22,7 +22,8 @@ class EventDetails extends Component {
     }
 
     afficherInvite() {
-        fetch('http://localhost:8878/ManagisApp/ManagisApp/evenements/takeInvite.php', {
+        fetch('https://managis.be/GestionApp/takeInvite.php', {
+        //fetch('http://localhost:8878/ManagisApp/ManagisApp/evenements/takeInvite.php', {
             method: 'POST',
             header: {
                 'Accept': 'application/json',
@@ -43,7 +44,8 @@ class EventDetails extends Component {
     }
 
     afficherCommentaire() {
-        fetch('http://localhost:8878/ManagisApp/ManagisApp/evenements/takeCommentaire.php', {
+        fetch('https://managis.be/GestionApp/takeCommentaire.php', {
+        //fetch('http://localhost:8878/ManagisApp/ManagisApp/evenements/takeCommentaire.php', {
             method: 'POST',
             header: {
                 'Accept': 'application/json',
@@ -64,7 +66,8 @@ class EventDetails extends Component {
     }
 
     afficherFourniture() {
-        fetch('http://localhost:8878/ManagisApp/ManagisApp/evenements/takeFourniture.php', {
+        fetch('https://managis.be/GestionApp/takeFourniture.php', {
+        //fetch('http://localhost:8878/ManagisApp/ManagisApp/evenements/takeFourniture.php', {
             method: 'POST',
             header: {
                 'Accept': 'application/json',

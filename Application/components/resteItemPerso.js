@@ -40,8 +40,8 @@ export default class ResteItemPerso extends Component {
 
         }
         else {
-
-            fetch('http://localhost:8878/ManagisApp/ManagisApp/DBRestes/modifAnnonce.php', {
+            fetch('https://managis.be/GestionApp/modifAnnonce.php', {
+            //fetch('http://localhost:8878/ManagisApp/ManagisApp/DBRestes/modifAnnonce.php', {
                 method: 'POST',
                 header: {
                     'Accept': 'application/json',
@@ -59,7 +59,7 @@ export default class ResteItemPerso extends Component {
             })
                 .then((response) => response.json())
                 .then((responseJson) => {
-                    alert(responseJson);
+                    alert("L'annonce a bien été modifiée");
                 })
                 .catch((error) => {
                     console.error(error);
@@ -79,8 +79,8 @@ export default class ResteItemPerso extends Component {
 
         }
         else {
-
-            fetch('http://localhost:8878/ManagisApp/ManagisApp/DBRestes/deleteAnnonce.php', {
+            fetch('https://managis.be/GestionApp/deleteAnnonce.php', {
+            //fetch('http://localhost:8878/ManagisApp/ManagisApp/DBRestes/deleteAnnonce.php', {
                 method: 'POST',
                 header: {
                     'Accept': 'application/json',
@@ -93,7 +93,7 @@ export default class ResteItemPerso extends Component {
             })
                 .then((response) => response.json())
                 .then((responseJson) => {
-                    alert(responseJson);
+                    alert("L'annonce a bien été supprimée");
                 })
                 .catch((error) => {
                     console.error(error);

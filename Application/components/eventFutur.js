@@ -44,8 +44,8 @@ class EventFutur extends Component {
 
   //on récupère les données sous forme de tableau qui sont envoyées par le fichier "restes.php" et on les met dans la variable data pour pouvoir les traiter.
   recuperationDonneeEventPerso = () => {
-
-    fetch('http://localhost:8878/ManagisApp/ManagisApp/evenements/EventFutur.php', {
+    fetch('https://managis.be/GestionApp/EventFutur.php', {
+    //fetch('http://localhost:8878/ManagisApp/ManagisApp/evenements/EventFutur.php', {
       method: 'POST',
       header: {
         'Accept': 'application/json',

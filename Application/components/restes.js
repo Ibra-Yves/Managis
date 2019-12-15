@@ -12,7 +12,6 @@ import {
   AsyncStorage,
   FlatList,
   SafeAreaView,
-  Searchbar,
   TextInput
 } from 'react-native';
 
@@ -24,8 +23,10 @@ class Restes extends Component {
     super(props)
     this.state = {
       UserId: [],
-      data: [],
+      searchData: [],
       refreshing: true,
+      data: [],
+      arrayholder: []
     }
   }
 
@@ -44,11 +45,14 @@ class Restes extends Component {
     this.recuperationDonneeAnnonce()
   }
 
+
+
+
   //on récupère les données sous forme de tableau qui sont envoyées par le fichier "restes.php" et on les met dans la variable data pour pouvoir les traiter.
   recuperationDonneeAnnonce = () => {
 
-    //  fetch('https://managis.be/GestionApp/restes.php', {
-    fetch('http://localhost:8878/ManagisApp/ManagisApp/DBRestes/restes.php', {
+    fetch('https://managis.be/GestionApp/restes.php', {
+    //fetch('http://localhost:8878/ManagisApp/ManagisApp/DBRestes/restes.php', {
       method: 'POST',
       header: {
         'Accept': 'application/json',
@@ -63,12 +67,13 @@ class Restes extends Component {
       .then((responseJson) => {
         this.setState({ refreshing: false });
         this.setState({ data: responseJson });
-        this.arrayholder = this.state.data
       })
       .catch((error) => {
         console.error(error);
       });
   }
+
+  
 
   onRefresh() {
     //Clear old data of the list
@@ -77,19 +82,6 @@ class Restes extends Component {
     this.recuperationDonneeAnnonce();
   }
 
-  arrayholder = [];
-
-  searchFilterFunction = text => {    
-    const newData = this.arrayholder.filter(item => {      
-      const itemData = `${item.nomReste} ${item.adresse}`;
-      
-       const textData = text;
-        
-       return itemData.indexOf(textData) > -1;    
-    });
-    
-    this.setState({ data: newData });  
-  };
 
 
   render() {
@@ -113,7 +105,7 @@ class Restes extends Component {
             />
           }>
           <View style={styles.containerTitre}>
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
             </View>
             <View style={{ flex: 6, justifyContent: 'center' }}>
               <Text style={styles.titrePage}>Liste des restes</Text>
@@ -129,13 +121,7 @@ class Restes extends Component {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{alignItems: 'center'}}>
-            <TextInput
-              onChangeText={text => this.searchFilterFunction(text)}
-              placeholder='Rechercher des annonces'
-              style={styles.inputBox}
-              />
-          </View>
+          
           <View>
             <FlatList
               data={this.state.data}
