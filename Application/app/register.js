@@ -44,8 +44,8 @@ export default class register extends Component {
     }
     else {
 
-      //fetch('https://managis.be/GestionApp/user_registration.php', {
-        fetch('http://localhost:8878/ManagisApp/ManagisApp/inscription/user_registration.php',{
+      fetch('https://managis.be/GestionApp/user_registration.php', {
+        //fetch('http://localhost:8878/ManagisApp/ManagisApp/inscription/user_registration.php',{
         method: 'post',
         header: {
           'Accept': 'application/json',
@@ -60,7 +60,7 @@ export default class register extends Component {
       })
         .then((response) => response.json())
         .then((responseJson) => {
-          alert(responseJson);
+          alert('Le compte a bien été créé.');
         })
         .catch((error) => {
           console.error(error);

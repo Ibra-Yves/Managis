@@ -56,8 +56,8 @@ class Profile extends Component {
 
   modifMotDePasse = () => {
     
-
-    fetch('http://localhost:8878/ManagisApp/ManagisApp/profile/motDePasse.php', {
+    fetch('https://managis.be/GestionApp/motDePasse.php', {
+    //fetch('http://localhost:8878/ManagisApp/ManagisApp/profile/motDePasse.php', {
       method: 'POST',
       header: {
         'Accept': 'application/json',

@@ -43,8 +43,8 @@ export default class login extends Component {
 		}
 		else {
 
-				//fetch('https://managis.be/GestionApp/User_Login.php', {
-				fetch('http://localhost:8878/ManagisApp/ManagisApp/connexion/User_login.php',{
+				fetch('https://managis.be/GestionApp/User_Login.php', {
+				//fetch('http://localhost:8878/ManagisApp/ManagisApp/connexion/User_login.php',{
 				method: 'POST',
 				header: {
 					'Accept': 'application/json',
@@ -111,7 +111,7 @@ export default class login extends Component {
 
 					<TextInput
 						style={styles.inputBox}
-						placeholder="Email"
+						placeholder="Pseudo"
 						underlineColorAndroid="transparent"
 						onChangeText={UserEmail => this.setState({ UserEmail })}
 						placeholderTextColor='#FFFFFF'
