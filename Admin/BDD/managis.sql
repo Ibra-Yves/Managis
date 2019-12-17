@@ -1,6 +1,16 @@
 CREATE database managis;
 USE managis;
 
+
+CREATE TABLE IF NOT EXISTS commentaires (
+  idEvent int(11) NOT NULL,
+  commentaire varchar(255) NOT NULL,
+  idUser int(11) NOT NULL,
+  KEY fk_eventComm (idEvent)
+  KEY fk_userId (idUser)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 CREATE TABLE IF NOT EXISTS evenement (
   idEvent int(11) NOT NULL AUTO_INCREMENT,
   nomEvent varchar(100) NOT NULL,
@@ -66,6 +76,7 @@ CREATE TABLE IF NOT EXISTS reste (
 
 ALTER TABLE commentaires
   ADD CONSTRAINT fk_eventComm FOREIGN KEY (idEvent) REFERENCES evenement (idEvent) ON DELETE NO ACTION ON UPDATE NO ACTION;
+   ADD CONSTRAINT fk_userId FOREIGN KEY (idUser) REFERENCES users (idUser) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 
@@ -87,6 +98,7 @@ ALTER TABLE reste
 COMMIT;
 
 delimiter / 
+
 CREATE PROCEDURE ajoutAnnonce (IN idUserr INT, IN nomRestee VARCHAR(255), IN quantiteRestee INT, IN descriptionRestee VARCHAR(255), IN adressee VARCHAR(255))  BEGIN
 insert into reste (idReste, idUser, nomReste, quantiteReste, description, adresse) 
 values (NULL, idUserr,  nomRestee, quantiteRestee,  descriptionRestee, adressee);
@@ -129,6 +141,12 @@ delimiter /
 CREATE  PROCEDURE ajoutCommentaire (IN idEvent INT, IN userId INT, IN commentaire VARCHAR(255))  BEGIN
 insert into commentaires (idEvent, idUser, commentaire) values (idEvent, userId,  commentaire);
 END; 
+=======
+CREATE  PROCEDURE ajoutCommentaire (IN idEvent INT, IN commentaire VARCHAR(255), IN userId INT)
+BEGIN
+insert into commentaires (idEvent, commentaire, idUser) values (idEvent, commentaire, userId);
+END;
+
 /
 
 delimiter / 
@@ -204,7 +222,10 @@ END;
 
 delimiter / 
 CREATE  PROCEDURE listeCommentaire (IN idEvent INT)  BEGIN
+
 select pseudo,  commentaire from commentaires
+select users.pseudo as pseudo, commentaire from commentaires
+
 natural join users
 where idEvent = commentaires.idEvent;
 END; 
