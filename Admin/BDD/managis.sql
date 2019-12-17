@@ -99,10 +99,11 @@ BEGIN
 DELETE FROM reste WHERE reste.idReste = idReste;
 END;
 /
-
 delimiter / 
-CREATE PROCEDURE marcheRestes (IN userId INT)  BEGIN
-select * from reste 
+CREATE PROCEDURE marcheRestes (IN userId INT)  
+BEGIN
+select *, users.email from reste
+JOIN users on reste.idUser = users.idUser
 where userId != reste.idUser;
 END;
 /
