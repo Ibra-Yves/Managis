@@ -67,7 +67,7 @@ export default class CreateAnnonce extends Component {x
       })
         .then((response) => response.json())
         .then((responseJson) => {
-          alert("L'annonce a bien été créé.");
+          alert("L'annonce a bien été créée.");
         })
         .catch((error) => {
           console.error(error);
