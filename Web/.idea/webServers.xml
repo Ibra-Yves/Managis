@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="4d607b45-43e3-4648-adb9-a28d17a56853" name="Managis" url="https://managis.be">
-        <fileTransfer host="85.201.34.220" port="1028" rootFolder="/home/pi/managis" accessType="SFTP">
+        <fileTransfer host="85.201.34.220" port="1028" rootFolder="/home/dominik/managis" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

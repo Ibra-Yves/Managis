@@ -773,7 +773,7 @@ class Events
         }
         //Sinon on ajoute le commentaire à la liste et on l'affiche
         else {
-
+            $this->db->procCall('ajoutCommentaire', [$_SESSION['idEvent'], $_SESSION['user']['idUser'], $commentaire]);
             $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
 
             $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
