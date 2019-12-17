@@ -45,7 +45,8 @@ class Events
         'modifEvent',
         'suppEvent',
         'formModifEvent',
-        'privacy'
+        'privacy',
+        'downloadAppli'
     ];
 
     public function __construct()
@@ -110,6 +111,14 @@ class Events
     }
 
     /**
+     * Telechargement de l'application
+     */
+
+    private function downloadAppli(){
+        $this->action->ajouterAction('downloadAppli', 'TEST.rar');
+    }
+
+    /**
      * Renvoie la page de modification d'event
      */
     private function modifEvent(){
@@ -163,6 +172,7 @@ class Events
      */
     private function contactForm(){
         mail('contact.managis@gmail.com', 'Contact de '.$_POST['name'],'Mail de contact '.$_POST['email']. ' Message: '. $_POST['message']);
+        $this->action->ajouterAction('successMail', 'Nous avons reçu votre demande, nous essayeront de vous répondre le plus vite possible! ');
     }
 
     /**
@@ -205,8 +215,8 @@ class Events
             } //Si on ne cooche pas captcha
             else if (empty($rep)) {
                 $this->action->ajouterAction('errorUser', 'Veuillez valider le reCAPTCHA');
-                //$this->action->ajouterAction('test', $decode);
-            } //On verifie si les deux champs de mot de passe existe
+            }
+            //On verifie si les deux champs de mot de passe existe
             else if ($_POST['mdp'] != $_POST['confirmationMdp']) {
                 $this->action->affichageDefaut('.intro-text', $this->lectureForm('inscription'));
                 $this->action->ajouterAction('errorPass', 'Les deux mots de passes ne sont pas identiques');
@@ -450,7 +460,6 @@ class Events
             $nombreParticipant =  $this->db->procCall('nombreParticipant', [$id]);
 
             $afficheInv =  $this->db->procCall('listeInvites', [$id]);
-
             $verif = array_intersect([$afficheInv[0]['pseudo']], [$_SESSION['user']['pseudo']]);
 
             $afficherSuppr = array_intersect([$afficheInv[0]['pseudo']], [$_SESSION['user']['pseudo']]);
@@ -662,7 +671,6 @@ class Events
             $pseudos = $this->db->procCall('tousLesUsers', ['']);
             $mailInv = $this->db->procCall('mailInv', [$user[0]['idUser']]);
             $mail= $mailInv[0]['email'];
-            $this->action->ajouterAction('test', $resultatAvecEspaces);
 
             $this->action->affichageDefaut('#listeInvites', $this->lectureForm('listeInvites'));
             $this->action->affichageDefaut('#nombreInvFourComm', $this->lectureForm('infoSup'));
@@ -765,7 +773,7 @@ class Events
         }
         //Sinon on ajoute le commentaire à la liste et on l'affiche
         else {
-            $this->db->procCall('ajoutCommentaire', [$_SESSION['idEvent'], $commentaire, $_SESSION['user']['idUser']]);
+
             $this->action->affichageDefaut('#fournitures', $this->lectureForm('listeFourniture'));
 
             $listeComm = $this->db->procCall('listeCommentaire', [$_SESSION['idEvent']]);
@@ -896,7 +904,7 @@ class Events
         $nombreFour = $this->db->procCall('nombreFour', [$_SESSION['idEvent']]);
         $afficherSuppr = array_intersect([$verifInvite[0]['pseudo']], [$_SESSION['user']['pseudo']]);
         $requeteInv = [];
-        $this->action->ajouterAction('test', $req);
+
         foreach ($req as $key => $value){
             $requeteInv = $value;
         }

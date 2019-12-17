@@ -1,6 +1,7 @@
 CREATE database managis;
 USE managis;
 
+
 CREATE TABLE IF NOT EXISTS commentaires (
   idEvent int(11) NOT NULL,
   commentaire varchar(255) NOT NULL,
@@ -21,7 +22,7 @@ CREATE TABLE IF NOT EXISTS evenement (
   KEY fk_nomEvent (nomEvent),
   KEY fk_hote (hote),
   KEY fk_eventComm (idEvent)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE IF NOT EXISTS fournitures (
@@ -51,12 +52,32 @@ CREATE TABLE IF NOT EXISTS users (
   PRIMARY KEY (idUser),
   KEY fk_pseudo (pseudo),
   KEY fk_hote (pseudo)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS commentaires (
+  idEvent int(11) NOT NULL,
+  idUser int(11) NOT NULL,
+  commentaire varchar(255) NOT NULL,
+  KEY fk_eventComm (idEvent),
+  KEY fk_userId (idUser)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS reste (
+  idReste int(11) NOT NULL AUTO_INCREMENT,
+  idUser int(11) NOT NULL,
+  nomReste varchar(255) CHARACTER SET latin1 NOT NULL,
+  quantiteReste int(255) NOT NULL,
+  description varchar(255) CHARACTER SET latin1 NOT NULL,
+  adresse varchar(255) CHARACTER SET latin1 NOT NULL,
+  PRIMARY KEY (idReste),
+  KEY fk_foreign_reste_user (idUser)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 ALTER TABLE commentaires
   ADD CONSTRAINT fk_eventComm FOREIGN KEY (idEvent) REFERENCES evenement (idEvent) ON DELETE NO ACTION ON UPDATE NO ACTION;
    ADD CONSTRAINT fk_userId FOREIGN KEY (idUser) REFERENCES users (idUser) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 
 
 ALTER TABLE evenement
@@ -70,13 +91,62 @@ ALTER TABLE fournitures
 ALTER TABLE invite
   ADD CONSTRAINT fk_nomEvent FOREIGN KEY (idEvent) REFERENCES evenement (idEvent) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT fk_pseudo FOREIGN KEY (idUser) REFERENCES users (idUser) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  
+ALTER TABLE reste
+ ADD CONSTRAINT fk_foreign_reste_user FOREIGN KEY (idUser) REFERENCES users (idUser) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
 COMMIT;
 
 delimiter / 
+
+CREATE PROCEDURE ajoutAnnonce (IN idUserr INT, IN nomRestee VARCHAR(255), IN quantiteRestee INT, IN descriptionRestee VARCHAR(255), IN adressee VARCHAR(255))  BEGIN
+insert into reste (idReste, idUser, nomReste, quantiteReste, description, adresse) 
+values (NULL, idUserr,  nomRestee, quantiteRestee,  descriptionRestee, adressee);
+END; 
+/
+
+delimiter / 
+CREATE PROCEDURE deleteAnnonce (IN idReste INT) 
+BEGIN 
+DELETE FROM reste WHERE reste.idReste = idReste;
+END;
+/
+delimiter / 
+CREATE PROCEDURE marcheRestes (IN userId INT)  
+BEGIN
+select *, users.email from reste
+JOIN users on reste.idUser = users.idUser
+where userId != reste.idUser;
+END;
+/
+
+delimiter / 
+CREATE PROCEDURE mesAnnoncesMarche (IN userId INT)  BEGIN
+select * from reste
+where userId = reste.idUser;
+END;
+/
+
+delimiter / 
+CREATE PROCEDURE modifAnnonce (IN idReste INT, IN nomReste VARCHAR(255), IN quantiteReste INT, IN description VARCHAR(255), IN adresse VARCHAR(255), IN idUser INT)  NO SQL
+BEGIN 
+update reste set reste.nomReste = nomReste,reste.quantiteReste = quantiteReste, reste.adresse = adresse, reste.description = description, reste.idUser = idUser
+where reste.idReste = idReste;
+END;
+/
+
+
+
+delimiter / 
+CREATE  PROCEDURE ajoutCommentaire (IN idEvent INT, IN userId INT, IN commentaire VARCHAR(255))  BEGIN
+insert into commentaires (idEvent, idUser, commentaire) values (idEvent, userId,  commentaire);
+END; 
+=======
 CREATE  PROCEDURE ajoutCommentaire (IN idEvent INT, IN commentaire VARCHAR(255), IN userId INT)
 BEGIN
 insert into commentaires (idEvent, commentaire, idUser) values (idEvent, commentaire, userId);
 END;
+
 /
 
 delimiter / 
@@ -113,10 +183,11 @@ END;
 
 delimiter / 
 CREATE  PROCEDURE connexionUser (IN psd VARCHAR(255), IN pswd VARCHAR(255))  BEGIN
-select idUser, pseudo  from users
+select idUser, email, pseudo  from users
 where psd = users.pseudo AND pswd = users.passwd;
 END; 
 /
+
 
 delimiter / 
 CREATE  PROCEDURE creationUser (IN psd VARCHAR(50), IN mail VARCHAR(255), IN pswd VARCHAR(255))  BEGIN
@@ -127,8 +198,8 @@ END;
 delimiter / 
 CREATE  PROCEDURE creerEvent (IN nomEvent VARCHAR(100), IN hote VARCHAR(50), IN adresse VARCHAR(100), IN dateEvent VARCHAR(50), IN heureEvent VARCHAR(50))  BEGIN
 INSERT into evenement (nomEvent, hote, adresse, dateEvent, heure) values (nomEvent, hote, adresse, dateEvent, heureEvent);
-insert into invite (idUser, idEvent) 
-(select idUser, MAX(idEvent) from users
+insert into invite (idUser, idEvent, participe) 
+(select idUser, MAX(idEvent), 1 from users
 join evenement on users.pseudo = evenement.hote
 where hote = users.pseudo
 group by idUser);
@@ -151,7 +222,10 @@ END;
 
 delimiter / 
 CREATE  PROCEDURE listeCommentaire (IN idEvent INT)  BEGIN
+
+select pseudo,  commentaire from commentaires
 select users.pseudo as pseudo, commentaire from commentaires
+
 natural join users
 where idEvent = commentaires.idEvent;
 END; 
@@ -334,7 +408,7 @@ END;
 /
 
 delimiter / 
-CREATE DEFINER=`admin`@`%` PROCEDURE `infoPopUp`(IN idUser INT)
+CREATE PROCEDURE infoPopUp(IN idUser INT)
 BEGIN
 select count(participe) as invitations from invite
 where idUser = invite.idUser AND participe=0;
@@ -342,15 +416,18 @@ END;
 /
 
 delimiter /
-CREATE DEFINER=`admin`@`%` PROCEDURE `mailInv`(IN idUser INT)
+CREATE PROCEDURE mailInv(IN idUser INT)
 BEGIN
 select email from users 
 where idUser = users.idUser;
 END;
 /
 
+delete from mysql.user where user = 'root';
 CREATE USER 'root'@'%' IDENTIFIED BY '4TujbpbjXV6FK6h2';
 CREATE USER 'admin'@'%' IDENTIFIED BY 'yVLsgfgsQa3R4HRP';
+CREATE USER 'admin'@'localhost' IDENTIFIED BY '5UeW3qMmh8pFcLDa';
 GRANT ALL PRIVILEGES ON * . * TO 'admin'@'%';
 GRANT ALL PRIVILEGES ON * . * TO 'root'@'%';
+GRANT ALL PRIVILEGES ON * . * TO 'admin'@'localhost';
 FLUSH PRIVILEGES;

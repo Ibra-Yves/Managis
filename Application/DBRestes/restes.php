@@ -1,27 +1,11 @@
 <?php
-include 'dbconfig.php';
-$conn = new mysqli($HostName, $HostUser, $HostPass, $DatabaseName);
+include 'dbAccess.php';
+//include '../DBAccess/dbAccess.php';
+$db = new dbAccess();
+$json = file_get_contents('php://input');
+$obj = json_decode($json,true);
+$user = $obj['userId']; //Met l id de user connecte que tu as dans ton JS en JSON
+$marche = $db->procCall('marcheRestes', [$user]);
+//Faites un foreach ou quoi pour pas avoir de problèmes ... je le fais au cas ou
+echo json_encode($marche); //Decode le en JS
 
-if ($conn->connect_error) {
-
- die("Connection failed: " . $conn->connect_error);
-}
-
-$sql = "SELECT * FROM gestionrestes";
-
-$result = $conn->query($sql);
-
-if ($result->num_rows >0) {
-
-
- while($row[] = $result->fetch_assoc()) {
- $tem = $row;
- $json = json_encode($tem);
- }
-
-} else {
- echo "No Results Found.";
-}
- echo $json;
-$conn->close();
-?>

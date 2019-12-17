@@ -5,11 +5,12 @@ $(function(){
 //On effecute les requetes
 function requetes(event){
     event.preventDefault();//On reste sur la meme page
-
-    $.ajaxSetup({
+    $.ajaxSetup(
+        {
         processData: false,
         contentType: false
-    });
+    }
+    );
 
     let request = 'noRequest';
     let envoyerData = new FormData(); //Creation du nouveau formulaire
@@ -60,6 +61,9 @@ function gererDonnes(retour){
                             },
                         }).html("Vous avez été invité à <strong> "+ actionDatas+ "</strong> événement(s)");
                      break;
+                case 'downloadAppli' :
+                    window.location.href = actionDatas;
+                    break;
 
                 case 'cgu' :
                     $('#cgu-priv').dialog({
@@ -70,7 +74,8 @@ function gererDonnes(retour){
 
                     }).html(actionDatas['text']);
                     break;
-                                case 'espaceMembre' : //Espace memebre affiché
+
+                    case 'espaceMembre' : //Espace memebre affiché
                     let content = '';
                     actionDatas.forEach(function(data){
                         content+=
@@ -245,18 +250,17 @@ function gererDonnes(retour){
                         '<tr> \n' +
                         '<div> \n' +
                             '<th scope="row" id="'+ o++ +'">'+ j++ +'</th>\n' +
-                            '<td class="taillePolice" align="center" id="'+ p++ +'">'+data['pseudo']+'</td> \n' +
-                            '<td class="taillePolice" align="center"><a id="' + q++ +'" href="'+data['pseudo']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
+                            '<td class="taillePolice" align="center" id="pseudoo'+ p++ +'">'+data['pseudo']+'</td> \n' +
+                            '<td class="taillePolice" align="center"><a id="pseudo' + q++ +'" href="'+data['pseudo']+'" class="btn btn-primary boutonEvent" style="display: none">-</a></td> \n' +
                             '<td class="taillePolice" align="center" id="'+ data['pseudo'] +'"></td> \n' +
                         '</div>'
                         '</tr>';
 
                     });
-
                     $('#invites').html(tableInvites); //Affichage des invités sous le forme de tableau
                     $('#0').remove(); // On n'affiche pas lé premier invité car c'est un hote et si on le supprime faudra remodifier dans la BDD
-                    $('#1').remove();
-                    $('#2').remove();
+                    $('#pseudoo1').remove();
+                    $('#pseudo2').remove();
 
                     evenements('#invites');
                     break;
@@ -323,6 +327,8 @@ function gererDonnes(retour){
                     $('a').show();
                     $('#formInv').show();
                     $('#suppr').show();
+                    $('#pseudo2').remove();
+                    $('#pseudoo1').remove();
                     $('#modifier').show();
                     $('#supprimer').show();
                     $('#modifierr').show();
@@ -366,7 +372,9 @@ function gererDonnes(retour){
                 case 'errorComm' :
                     $('#errorFormmm').html('<div class="alert alert-danger" role="alert">'+actionDatas);
                     break;
-
+                case 'successMail':
+                    $('#successMail').html('<div class="alert alert-success" role="alert">'+actionDatas);
+                    break;
                 default :
                    console.log('Action inconnue '+ actionName); //Affichage des actions inconnues
            }

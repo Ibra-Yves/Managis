@@ -1,75 +1,115 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
+import { Text, TouchableOpacity, View, StyleSheet, ScrollView, Image, SafeAreaView } from 'react-native'
 
+export default class ResteItem extends Component {
+    reste = this.props.navigation.state.params.reste
+    render() {
+        return (
+            <SafeAreaView style={{ flex: 1 }}>
+                <ScrollView>
+                    <View style={styles.containerTitre}>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <TouchableOpacity
+                                onPress={() => this.props.navigation.goBack()}>
+                                <Image
+                                    style={styles.icon}
+                                    source={require('../image/icons8-gauche-50.png')}
+                                />
+                            </TouchableOpacity>
 
+                        </View>
+                        <View style={{ flex: 6, justifyContent: 'center' }}>
+                            <Text style={styles.titrePage}>Détails de l'annonce</Text>
+                        </View>
+                        <View style={{ flex: 1 }}>
 
-class EventItem extends React.Component {
-  render() {
-    const reste = this.props.reste
+                        </View>
+                    </View>
+                    <View style={{ alignItems: 'center' }}>
 
-
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.openDrawer('Event')}
-          style={styles.event}>
-          <View style={{flex: 1}}>
-            <View style={styles.header}>
-              <View style={{flex: 2}}>
-                <Text style={styles.textTitle}>{reste.name}</Text>
-              </View>
-              <View style={{flex: 1}}>
-                <Text style={styles.textDate}>{reste.quantity}</Text>
-              </View>
-            </View>
-            <View style={styles.footer}>
-              <Text style={styles.textPlace}>{reste.description}</Text>
-            </View>
-          </View>
-        </TouchableOpacity>
-      </View>
-    )
-  }
+                        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={{ color: '#3A4750', marginTop: 10, marginBottom: 8 }}>Nom de l'annonce</Text>
+                        </View>
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.inputBox}> {this.reste.nomReste} </Text>
+                        </View>
+                        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={{ color: '#3A4750', marginTop: 10, marginBottom: 8 }}>Quantité</Text>
+                        </View>
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.inputBox}>{this.reste.quantiteReste}</Text>
+                        </View>
+                        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={{ color: '#3A4750', marginTop: 10, marginBottom: 8 }}>Description</Text>
+                        </View>
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.inputBox}> {this.reste.description} </Text>
+                        </View>
+                        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={{ color: '#3A4750', marginTop: 10, marginBottom: 8 }}>Adresse</Text>
+                        </View>
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.inputBox}> {this.reste.adresse} </Text>
+                        </View>
+                        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={{ color: '#3A4750', marginTop: 10, marginBottom: 8 }}>Adresse email de l'annonceur</Text>
+                        </View>
+                        <View style={styles.inputContainer}>
+                            <Text style={styles.inputBox}> {this.reste.email} </Text>
+                        </View>
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
+        )
+    }
 }
+const styles = StyleSheet.create({
+    inputBox: {
+        width: 300,
+        backgroundColor: '#3A4750',
+        borderRadius: 25,
+        paddingVertical: 12,
+        fontSize: 16,
+        color: '#FFFFFF',
+        textAlign: 'center',
+        marginVertical: 10
+    },
+    submitButton: {
+        backgroundColor: '#3A4750',
+        width: 100,
+        borderRadius: 25,
+        marginVertical: 10,
+        paddingVertical: 13,
+        textAlign: 'center',
+        color: '#FFFFFF'
+    },
+    submitContainer: {
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+    },
+    inputContainer: {
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        borderColor: "#000000",
+        borderRadius: 50,
+        backgroundColor: '#3A4750',
+        width: 350
 
-const styles= StyleSheet.create({
-  container: {
-    height: 100,
-    padding: 12,
-    paddingBottom: 3
-  },
-  event: {
-    flex: 1,
-    backgroundColor: '#3A4750'
-  },
-  header: {
-    flexDirection: 'row',
-    flex: 1
-  },
-  footer: {
-    flex: 1,
-    justifyContent: 'center',
-    marginLeft: 5
-  },
-  textTitle: {
-    color: '#FFFFFF',
-    fontSize: 22,
-    margin: 5,
-    marginTop: 2
-  },
-  textDate: {
-    color: '#FFFFFF',
-    fontSize: 12,
-    margin: 5,
-    marginTop: 10
-  },
-  textPlace: {
-    color: '#FFFFFF',
-    fontSize: 16,
-
-  }
+    },
+    titrePage: {
+        color: '#FFFFFF',
+        fontSize: 18,
+        textAlign: 'center'
+    },
+    containerTitre: {
+        backgroundColor: '#3A4750',
+        flexDirection: 'row',
+        height: 60
+    },
+    icon: {
+        height: 30,
+        width: 30
+    },
 
 })
-
-export default EventItem
