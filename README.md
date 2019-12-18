@@ -1,4 +1,15 @@
 # Managis
+## Introduction :
+
+Dans le rapport qui suit vous allez découvrir un projet mis en place par un groupe de 7 étudiants en Bachelier Informatique à l’EPHEC de Louvain-La-Neuve entre septembre et décembre 2019. 
+
+Celui-ci se déroule dans le cadre de notre cours de projet d’intégration; il a pour but d’être innovant et d’intégrer plusieurs domaines informatiques. Ceci nous permet de mettre en pratique des aspects vus durant nos années d’études ou d’en apprendre de nouveaux.
+
+Avant même la création et la mise en place de ce travail, nous sommes 7 jeunes qui passent la plupart de leurs journées de cours et qui partagent beaucoup de moments ensemble. C’est donc naturellement que nous nous sommes unis afin de commencer et mener à bien ce projet.
+
+Après avoir reçu les consignes , nous nous sommes vite mis d’accord sur le fait de travailler sur un thème qui nous concerne et qui pourrait nous servir dans notre quotidien. Durant la préparation, l’organisation et le déroulement de notre voyage de fin d’études à Malte, nous trouvions qu’il nous manquait un outil informatique afin d’en coordonner l’aspect logistique. C’est donc durant ce séjour que l’idée de créer une plateforme d’aide à la création et gestion d’événements à été retenue à l’unanimité. 
+
+Nous avons décidé de l’appeler “Managis” qui vient de “Manage” en anglais. 
 
 ## Notre projet :
 
