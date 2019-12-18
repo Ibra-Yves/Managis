@@ -11,8 +11,6 @@ Après avoir reçu les consignes , nous nous sommes vite mis d’accord sur le f
 
 Nous avons décidé de l’appeler “Managis” qui vient de “Manage” en anglais. 
 
-## Notre projet :
-
 ### Présentation du projet et de ses fonctionnalités
 Notre plateforme accompagne ses utilisateurs lors de la création, le déroulement et la clôture d’événements. 
 
